@@ -3,3 +3,5 @@ plugins {
 }
 rootProject.name = "autoeval"
 
+include("unit-picker")
+include("unit-checker")
