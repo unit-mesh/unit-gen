@@ -1,10 +1,25 @@
 # Unit Picker
 
-Code Scene
+## by Code Scene
 
 - Inline Completion
 - Test by framework
 - History Code
+
+AI Assistant Type
+
+- In-Line Completion by Git History
+- In-Block Completion by Git History
+- After-Block Completion by Git History
+
+## Context related
+
+Context related 
+
+- Inbound & Outbound 
+- Test Code
+
+## What is good code?
 
 Good Code
 
