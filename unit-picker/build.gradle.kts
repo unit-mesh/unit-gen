@@ -26,3 +26,21 @@ dependencies {
 tasks.test {
     useJUnitPlatform()
 }
+
+application {
+    mainClass.set("cc.unitmesh.eval.picker.MainKt")
+}
+
+tasks {
+    shadowJar {
+        manifest {
+            attributes(Pair("Main-Class", "cc.unitmesh.eval.picker.MainKt"))
+        }
+        // minimize()
+        dependencies {
+            exclude(dependency("org.junit.jupiter:.*:.*"))
+            exclude(dependency("org.junit:.*:.*"))
+            exclude(dependency("junit:.*:.*"))
+        }
+    }
+}
