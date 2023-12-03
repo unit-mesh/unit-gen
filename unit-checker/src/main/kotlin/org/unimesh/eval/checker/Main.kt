@@ -1,4 +1,4 @@
-package org.unimesh.eval.picker
+package org.unimesh.eval.checker
 
 import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.parameters.options.option
