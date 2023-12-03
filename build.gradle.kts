@@ -1,5 +1,6 @@
 plugins {
-    kotlin("jvm") version "1.9.0"
+    alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.serialization)
 }
 
 group = "org.unitmesh"
@@ -10,12 +11,18 @@ repositories {
 }
 
 dependencies {
-    testImplementation("org.jetbrains.kotlin:kotlin-test")
+    implementation(libs.javaparser)
+    implementation(libs.javaparser.serialization)
+    implementation(libs.javaparser.symbol.solver.core)
+
+    testImplementation(kotlin("test"))
+    testImplementation(libs.bundles.test)
 }
 
 tasks.test {
     useJUnitPlatform()
 }
+
 kotlin {
-    jvmToolchain(17)
+    jvmToolchain(11)
 }
