@@ -2,6 +2,7 @@ package org.unimesh.eval.picker.bs
 
 import chapi.ast.javaast.JavaAnalyser
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import java.io.File
 import java.nio.file.Paths
@@ -43,5 +44,37 @@ class BsAnalyserTest {
         assertEquals(1, results.size)
         assertEquals("MultipleIf.java", results[0].file)
         assertEquals(SmellType.SMELL_COMPLEX_CONDITION, results[0].bs)
+    }
+
+    @Test
+    fun shouldIdentifyLargeClass() {
+        val path = getAbsolutePath("bs/LargeClass.java")
+        val data = JavaAnalyser().analysis(File(path).readText(), "LargeClass.java").DataStructures
+        val results = BadsmellAnalyser(data).analysis()
+
+        assertEquals(1, results.size)
+        assertEquals("LargeClass.java", results[0].file)
+        assertEquals(SmellType.SMELL_LARGE_CLASS, results[0].bs)
+    }
+
+    @Test
+    @Disabled
+    fun shouldIdentifyGraphCall() {
+        val resource = this.javaClass.classLoader.getResource("bs/graphcall")
+        val path = Paths.get(resource!!.toURI())
+
+        val data = path.toFile().walk().mapNotNull {
+            if (it.isFile) {
+                JavaAnalyser().analysis(it.readText(), it.name).DataStructures
+            } else {
+                null
+            }
+        }.flatten().toList()
+
+        val results = BadsmellAnalyser(data).analysis()
+
+        assertEquals(1, results.size)
+        assertEquals("GraphCallA.java", results[0].file)
+        assertEquals(SmellType.SMELL_GARPH_CONNECTED_CALL, results[0].bs)
     }
 }
