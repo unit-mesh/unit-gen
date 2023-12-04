@@ -8,6 +8,9 @@ This repository designs evaluate the code quality of the AI code, which will use
 with [AutoDev](https://github.com/unit-mesh/auto-dev) IDE plugins.
 We use [Chocolate Factory](https://github.com/unit-mesh/chocolate-factory) to build the prompt engine.
 
+Related issue in Unit Mesh: Chocolate Factory [#9](https://github.com/unit-mesh/chocolate-factory/issues/9) and
+AutoDev [#54](https://github.com/unit-mesh/auto-dev/issues/56)
+
 ## How it works?
 
 ![Unit Eval Overview](https://unitmesh.cc/uniteval/overview.png)
@@ -24,10 +27,10 @@ We use [Chocolate Factory](https://github.com/unit-mesh/chocolate-factory) to bu
     - [ ] Incremental generate
 - [ ] Code quality analysis
     - [ ] Code quality metrics
-    - [ ] ArchGuard CodeDB metrics: [CodeDB](https://github.com/archguard/codedb) 
+    - [ ] ArchGuard CodeDB metrics: [CodeDB](https://github.com/archguard/codedb)
 - [ ] AST parser by [Chapi](https://github.com/phodal/chapi)
 
-## Code Eval
+### Code Eval
 
 > Code Eval is a tool that can evaluate the code quality of the AI code.
 
