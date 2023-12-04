@@ -15,7 +15,7 @@ data class TestBadSmell(
 )
 data class TbsResult(var results: Array<TestBadSmell>)
 
-class TbsAnalyser(val nodes: List<CodeDataStruct>) {
+class TestBadsmellAnalyser(val nodes: List<CodeDataStruct>) {
     fun analysis(): Array<TestBadSmell> {
         val tbsResult: TbsResult = TbsResult(arrayOf())
         val callMethodMap = buildCallMethodMap(nodes)

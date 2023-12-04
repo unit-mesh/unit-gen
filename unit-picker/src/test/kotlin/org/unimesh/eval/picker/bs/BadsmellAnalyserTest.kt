@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test
 import java.io.File
 import java.nio.file.Paths
 
-class BsAnalyserTest {
+class BadsmellAnalyserTest {
     private fun getAbsolutePath(path: String): String {
         val resource = this.javaClass.classLoader.getResource(path)
         return Paths.get(resource!!.toURI()).toFile().absolutePath

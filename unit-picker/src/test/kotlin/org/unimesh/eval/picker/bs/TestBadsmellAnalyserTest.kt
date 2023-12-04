@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test
 import java.io.File
 import java.nio.file.Paths
 
-class TbsAnalyserTest {
+class TestBadsmellAnalyserTest {
     private fun getAbsolutePath(path: String): String {
         val resource = this.javaClass.classLoader.getResource(path)
         return Paths.get(resource!!.toURI()).toFile().absolutePath
@@ -16,7 +16,7 @@ class TbsAnalyserTest {
     internal fun shouldIdentifyJavaEmptyTest() {
         val path = getAbsolutePath("tbs/usecases/EmptyTest.java")
         val data = JavaAnalyser().analysis(File(path).readText(), "EmptyTest.java").DataStructures
-        val results = TbsAnalyser(data).analysis()
+        val results = TestBadsmellAnalyser(data).analysis()
 
         assertEquals(results[0].FileName, "EmptyTest.java")
         assertEquals(results[0].Line, 8)
@@ -27,7 +27,7 @@ class TbsAnalyserTest {
     internal fun shouldIdentifyJavaIgnoreTest() {
         val path = getAbsolutePath("tbs/usecases/IgnoreTest.java")
         val data = JavaAnalyser().analysis(File(path).readText(), path).DataStructures
-        val results = TbsAnalyser(data).analysis()
+        val results = TestBadsmellAnalyser(data).analysis()
 
         assertEquals(results[0].Line, 7)
         assertEquals(results[0].Type, "IgnoreTest")
@@ -37,7 +37,7 @@ class TbsAnalyserTest {
     internal fun shouldIdentifyJavaRedundantPrintTest() {
         val path = getAbsolutePath("tbs/usecases/RedundantPrintTest.java")
         val data = JavaAnalyser().analysis(File(path).readText(), path).DataStructures
-        val results = TbsAnalyser(data).analysis()
+        val results = TestBadsmellAnalyser(data).analysis()
 
         assertEquals(results[0].Line, 9)
         assertEquals(results[0].Type, "RedundantPrintTest")
@@ -47,7 +47,7 @@ class TbsAnalyserTest {
     internal fun shouldIdentifyJavaSleepyTest() {
         val path = getAbsolutePath("tbs/usecases/SleepyTest.java")
         val data = JavaAnalyser().analysis(File(path).readText(), path).DataStructures
-        val results = TbsAnalyser(data).analysis()
+        val results = TestBadsmellAnalyser(data).analysis()
 
         assertEquals(results[0].Line, 8)
         assertEquals(results[0].Type, "SleepyTest")
@@ -57,7 +57,7 @@ class TbsAnalyserTest {
     internal fun shouldIdentifyRedundantAssertionTest() {
         val path = getAbsolutePath("tbs/usecases/RedundantAssertionTest.java")
         val data = JavaAnalyser().analysis(File(path).readText(), path).DataStructures
-        val results = TbsAnalyser(data).analysis()
+        val results = TestBadsmellAnalyser(data).analysis()
 
         assertEquals(results[0].Line, 14)
         assertEquals(results[0].Type, "RedundantAssertionTest")
@@ -67,7 +67,7 @@ class TbsAnalyserTest {
     internal fun shouldIdentifyUnknownTest() {
         val path = getAbsolutePath("tbs/usecases/UnknownTest.java")
         val data = JavaAnalyser().analysis(File(path).readText(), path).DataStructures
-        val results = TbsAnalyser(data).analysis()
+        val results = TestBadsmellAnalyser(data).analysis()
 
         assertEquals(results[0].Line, 7)
         assertEquals(results[0].Type, "EmptyTest")
@@ -79,7 +79,7 @@ class TbsAnalyserTest {
     internal fun shouldIdentifyDuplicateAssertTest() {
         val path = getAbsolutePath("tbs/usecases/DuplicateAssertTest.java")
         val data = JavaAnalyser().analysis(File(path).readText(), path).DataStructures
-        val results = TbsAnalyser(data).analysis()
+        val results = TestBadsmellAnalyser(data).analysis()
 
         assertEquals(results[0].Line, 9)
         assertEquals(results[0].Type, "DuplicateAssertTest")
@@ -89,7 +89,7 @@ class TbsAnalyserTest {
     internal fun shouldReturnEmptyWhenIsCreator() {
         val path = getAbsolutePath("regression/CreatorNotUnknownTest.java")
         val data = JavaAnalyser().analysis(File(path).readText(), path).DataStructures
-        val results = TbsAnalyser(data).analysis()
+        val results = TestBadsmellAnalyser(data).analysis()
 
         assertEquals(results.size, 0)
     }
@@ -98,7 +98,7 @@ class TbsAnalyserTest {
     internal fun shouldReturnEmptyWhenCallAssertInClassTests() {
         val path = getAbsolutePath("regression/CallAssertInClassTests.java")
         val data = JavaAnalyser().analysis(File(path).readText(), path).DataStructures
-        val results = TbsAnalyser(data).analysis()
+        val results = TestBadsmellAnalyser(data).analysis()
 
         assertEquals(results.size, 0)
     }
@@ -107,7 +107,7 @@ class TbsAnalyserTest {
     internal fun shouldReturnEmptyWhenCall() {
         val path = getAbsolutePath("regression/EnvironmentSystemIntegrationTests.java")
         val data = JavaAnalyser().analysis(File(path).readText(), path).DataStructures
-        val results = TbsAnalyser(data).analysis()
+        val results = TestBadsmellAnalyser(data).analysis()
 
         assertEquals(results.size, 0)
     }
@@ -116,7 +116,7 @@ class TbsAnalyserTest {
     internal fun shouldReturnMultipleResults() {
         val path = getAbsolutePath("regression/I18NTest.java")
         val data = JavaAnalyser().analysis(File(path).readText(), path).DataStructures
-        val results = TbsAnalyser(data).analysis()
+        val results = TestBadsmellAnalyser(data).analysis()
 
         assertEquals(results.size, 4)
     }

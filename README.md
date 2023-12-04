@@ -29,9 +29,11 @@ AutoDev [#54](https://github.com/unit-mesh/auto-dev/issues/56)
     - [ ] Code quality metrics
     - [ ] ArchGuard CodeDB metrics: [CodeDB](https://github.com/archguard/codedb)
 - [ ] AST parser by [Chapi](https://github.com/phodal/chapi)
-- [ ] Good code 
+- [ ] Good code
     - [x] Test BadSmell from [Coca](https://github.com/phodal/coca)
     - [ ] BadSmell from [Coca](https://github.com/phodal/coca)
+        - [x] Long Parameters, Long Method, LARGE_CLASS
+        - [ ] Todo: Rewrite If, Switch logic
     - [ ] Estimation from [ArchGuard](https://github.com/archguard/archguard)
 
 ### Code Eval

@@ -53,11 +53,14 @@ class BadsmellAnalyser(val data: List<CodeDataStruct>, val bsConfig: BsConfig = 
                 }
 
                 checkLongParameterList(method, node, badSmellList)
-                checkRepeatedSwitches(method, node, badSmellList)
+                // Todo: Custom with new API
+                //  checkRepeatedSwitches(method, node, badSmellList)
+                // Todo: Custom with new API
                 checkComplexIf(method, node, badSmellList)
             }
 
             checkDataClass(onlyHaveGetterAndSetter, node, badSmellList)
+            // Todo: Custom with new API
             checkRefusedBequest(node, badSmellList)
             checkLargeClass(node, badSmellList)
         }
