@@ -1,4 +1,8 @@
-# Unit Eval framework
+# UnitEval
+
+> Leveraging LLM benchmark/evaluation tools with fine-tuning data engineering specifically tailored for Unit Mesh tools
+> such as AutoDev, Studio B3, and DevOps Genius. The brilliance lies in the UnitEval functionality, which automatically
+> selects and evaluates code within real projects.
 
 This repository designs evaluate the code quality of the AI code, which will use
 with [AutoDev](https://github.com/unit-mesh/auto-dev) IDE plugins.
