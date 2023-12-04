@@ -15,6 +15,8 @@ slf4j = "2.0.9"
 
 clikt = "4.2.1"
 
+chocolate-factory="0.4.3"
+
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
@@ -43,6 +45,9 @@ test-junit-engine = { group = "org.junit.jupiter", name = "junit-jupiter-engine"
 test-kotlintest-assertions = { module = "io.kotest:kotest-assertions-core", version.ref = "kotest" }
 test-mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
 test-assertj = { group = "org.assertj", name = "assertj-core", version.ref = "assertj" }
+
+# cf => chocolate-factory
+cf-language = { group = "cc.unitmesh", name = "code-language", version.ref = "chocolate-factory" }
 
 [bundles]
 test = ["test-junit-params", "test-kotlintest-assertions", "test-mockk", "test-assertj"]

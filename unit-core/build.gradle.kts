@@ -12,6 +12,8 @@ dependencies {
     implementation(libs.clikt)
     implementation(libs.serialization.json)
 
+    implementation(libs.cf.language)
+
     // Logging
     implementation(libs.logging.slf4j.api)
     implementation(libs.logging.logback.classic)
