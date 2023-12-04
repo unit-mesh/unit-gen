@@ -2,7 +2,7 @@ package org.unimesh.eval.picker.bs
 
 import chapi.domain.core.CodeDataStruct
 
-class BadsmellChecker(val data: List<CodeDataStruct>) {
+class BadsmellAnalyser(val data: List<CodeDataStruct>) {
     fun check() {
 
     }

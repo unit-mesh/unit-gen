@@ -18,6 +18,9 @@ dependencies {
     implementation(libs.chapi.java)
     implementation(libs.chapi.kotlin)
 
+    implementation(libs.archguard.scanner.core)
+    implementation(libs.archguard.analyser.estimate)
+
     // Logging
     implementation(libs.logging.slf4j.api)
     implementation(libs.logging.logback.classic)
