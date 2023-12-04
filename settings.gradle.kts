@@ -3,5 +3,9 @@ plugins {
 }
 rootProject.name = "UnitEval"
 
+// the abstract interface
+include("unit-core")
+// picker code by rules
 include("unit-picker")
-include("unit-checker")
+// verify code by rules
+include("unit-verify")
