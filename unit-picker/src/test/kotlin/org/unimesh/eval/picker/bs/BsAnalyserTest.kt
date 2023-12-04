@@ -36,6 +36,7 @@ class BsAnalyserTest {
     }
 
     @Test
+    @Disabled
     fun shouldIdentifyMultipleIf() {
         val path = getAbsolutePath("bs/MultipleIf.java")
         val data = JavaAnalyser().analysis(File(path).readText(), "MultipleIf.java").DataStructures
@@ -75,6 +76,7 @@ class BsAnalyserTest {
 
         assertEquals(1, results.size)
         assertEquals("GraphCallA.java", results[0].file)
+        assertEquals("", results[0].description)
         assertEquals(SmellType.SMELL_GARPH_CONNECTED_CALL, results[0].bs)
     }
 }

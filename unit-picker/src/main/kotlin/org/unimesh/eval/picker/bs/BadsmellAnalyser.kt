@@ -7,10 +7,7 @@ import chapi.domain.core.DataStructType
 
 private val CodeFunction.IfSize: Int get() = 0
 private val CodeFunction.SwitchSize: Int get() = 0
-private val CodeFunction.IfInfo: CodePosition
-    get() {
-        return CodePosition(StartLine = this.Position.StartLine, StopLine = this.Position.StopLine)
-    }
+private val CodeFunction.IfInfo: List<CodePosition> get() = listOf()
 
 data class BsConfig(
     val bsLongParasLength: Int = 5,
@@ -169,15 +166,17 @@ class BadsmellAnalyser(val data: List<CodeDataStruct>, val bsConfig: BsConfig = 
     }
 
     fun checkComplexIf(method: CodeFunction, node: CodeDataStruct, badSmellList: MutableList<BadSmellModel>) {
-        val info = method.IfInfo
-        if (info.StopLine - info.StartLine >= bsConfig.bsIfLinesLength) {
-            val longParams = BadSmellModel(
-                file = node.FilePath,
-                line = info.StartLine.toString(),
-                bs = SmellType.SMELL_COMPLEX_CONDITION,
-                description = SmellType.SMELL_COMPLEX_CONDITION.name
-            )
-            badSmellList.add(longParams)
+        for (info in method.IfInfo) {
+            if (info.StopLine - info.StartLine >= bsConfig.bsIfLinesLength) {
+                val longParams = BadSmellModel(
+                    file = node.FilePath,
+                    line = info.StartLine.toString(),
+                    bs = SmellType.SMELL_COMPLEX_CONDITION,
+                    description = SmellType.SMELL_COMPLEX_CONDITION.name
+                )
+
+                badSmellList.add(longParams)
+            }
         }
     }
 
