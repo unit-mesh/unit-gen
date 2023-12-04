@@ -39,8 +39,4 @@ class BadSmellGraphCall {
             getPath(startNode, nodes, currentPath + currentNode, node, endNode)
         }
     }
-
-    private fun contains(list: List<String>, element: String): Boolean {
-        return list.contains(element)
-    }
 }
