@@ -1,0 +1,22 @@
+Complete ${context.lang} code, return rest code, no explaining
+## check by controler,service, model
+#set($isController = $!{MvcUtil.isController($fileName, $lang)})
+#set($isService = $!{MvcUtil.isService($fileName, $lang)})
+
+#if ($isController)
+    #set($spec = $!{CustomPromptConfig.load().spec["controller"]})
+    #if (!$spec.isEmpty())
+        #set($additionContext = "requirements: \n$spec")
+    #end
+    #set($additionContext = "$additionContext$mvcContextService.controllerPrompt($file)")
+    ## get service and model code by imports ?
+#elseif ($isService)
+    #set($spec = $!{CustomPromptConfig.load().spec["service"]})
+    #if (!$spec.isEmpty())
+        #set($additionContext = "requirements: \n$spec")
+    #end
+    #set($additionContext = "$additionContext$mvcContextService.servicePrompt($file)")
+    ## get service and model code by imports ?
+#else
+    #set($additionContext = $!{SimilarChunksWithPaths.createQuery($file)})
+#end
