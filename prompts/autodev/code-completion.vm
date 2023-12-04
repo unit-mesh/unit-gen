@@ -1,22 +1,22 @@
 Complete ${context.lang} code, return rest code, no explaining
 ## check by controler,service, model
-#set($isController = $!{MvcUtil.isController($fileName, $lang)})
-#set($isService = $!{MvcUtil.isService($fileName, $lang)})
+#set($isController = $!{ArchUtil.isController(${context.fileName}, ${context.lang})})
+#set($isService = $!{ArchUtil.isService(${context.fileName}, ${context.lang})})
 
 #if ($isController)
-    #set($spec = $!{CustomPromptConfig.load().spec["controller"]})
+    #set($spec = $!{PromptConfig.load().spec["controller"]})
     #if (!$spec.isEmpty())
         #set($additionContext = "requirements: \n$spec")
     #end
     #set($additionContext = "$additionContext$mvcContextService.controllerPrompt($file)")
     ## get service and model code by imports ?
 #elseif ($isService)
-    #set($spec = $!{CustomPromptConfig.load().spec["service"]})
+    #set($spec = $!{PromptConfig.load().spec["service"]})
     #if (!$spec.isEmpty())
         #set($additionContext = "requirements: \n$spec")
     #end
-    #set($additionContext = "$additionContext$mvcContextService.servicePrompt($file)")
+    #set($additionContext = "${context.servicePrompt($file)}")
     ## get service and model code by imports ?
 #else
-    #set($additionContext = $!{SimilarChunksWithPaths.createQuery($file)})
+    #set($additionContext = $!{Smart.simliarChunk($file)})
 #end
