@@ -2,7 +2,7 @@ package cc.unitmesh.core.intelli
 
 import cc.unitmesh.language.LanguageService;
 
-class LangService {
+class CommentService {
     private val langService = LanguageService();
 
     fun lineComment(lang: String): String {
@@ -10,10 +10,10 @@ class LangService {
     }
 
     companion object {
-        private var instance: LangService? = null
-        fun getInstance(): LangService {
+        private var instance: CommentService? = null
+        fun getInstance(): CommentService {
             if (instance == null) {
-                instance = LangService()
+                instance = CommentService()
             }
             return instance!!
         }
