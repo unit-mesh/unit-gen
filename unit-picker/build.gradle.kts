@@ -14,6 +14,12 @@ dependencies {
     implementation(libs.clikt)
     implementation(libs.serialization.json)
 
+    implementation(libs.chapi.domain)
+    implementation(libs.chapi.java)
+    implementation(libs.chapi.kotlin)
+
+    implementation(libs.archguard.analyser.estimate)
+
     // Logging
     implementation(libs.logging.slf4j.api)
     implementation(libs.logging.logback.classic)
