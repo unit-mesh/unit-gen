@@ -7,5 +7,5 @@ rootProject.name = "UnitEval"
 include("unit-core")
 // picker code by rules
 include("unit-picker")
-// verify code by rules
-include("unit-verify")
+// eval output by rules
+include("unit-eval")
