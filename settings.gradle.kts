@@ -2,7 +2,7 @@
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
-rootProject.name = "UnitEval"
+rootProject.name = "UnitMeshEval"
 
 plugins {
     id("org.gradle.toolchains.foojay-resolver-convention") version "0.5.0"
@@ -11,6 +11,7 @@ plugins {
 include(
     "unit-core",
     "unit-picker",
+    "unit-eval",
 
     "code-quality"
 )
