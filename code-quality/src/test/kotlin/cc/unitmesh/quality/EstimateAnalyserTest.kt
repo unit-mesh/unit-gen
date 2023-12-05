@@ -1,4 +1,4 @@
-package org.unimesh.eval.picker.bs;
+package cc.unitmesh.quality;
 
 import cc.unitmesh.quality.EstimateAnalyser
 import org.junit.jupiter.api.Test
@@ -22,7 +22,8 @@ class EstimateAnalyserTest {
         val summary = EstimateAnalyser.getInstance().analysisByContent(content, file)!!
 
         // then
-        println(summary)
         assertEquals("Go", summary.name)
+        assertEquals(6, summary.lines)
+        assertEquals(5, summary.code)
     }
 }

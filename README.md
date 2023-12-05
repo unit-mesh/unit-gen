@@ -17,6 +17,16 @@ AutoDev [#54](https://github.com/unit-mesh/auto-dev/issues/56)
 
 ## Module
 
+### Code Quality
+
+- [x] Test BadSmell from [Coca](https://github.com/phodal/coca)
+- [ ] BadSmell from [Coca](https://github.com/phodal/coca)
+    - [x] Long Parameters, Long Method, LARGE_CLASS
+    - [ ] Todo: Rewrite If, Switch logic
+- [x] Estimation from [ArchGuard](https://github.com/archguard/archguard)
+- [ ] ArchGuard CodeDB metrics: [CodeDB](https://github.com/archguard/codedb)
+
+
 ### Code Picker
 
 > Code Picker is a tool that can pick the code from the real project, will generate the code unit, and then it will be
@@ -26,13 +36,6 @@ AutoDev [#54](https://github.com/unit-mesh/auto-dev/issues/56)
     - [ ] Git history parser
     - [ ] Incremental generate
 - [ ] AST parser by [Chapi](https://github.com/phodal/chapi)
-- [ ] Code quality
-    - [x] Test BadSmell from [Coca](https://github.com/phodal/coca)
-    - [ ] BadSmell from [Coca](https://github.com/phodal/coca)
-        - [x] Long Parameters, Long Method, LARGE_CLASS
-        - [ ] Todo: Rewrite If, Switch logic
-    - [x] Estimation from [ArchGuard](https://github.com/archguard/archguard)
-    - [ ] ArchGuard CodeDB metrics: [CodeDB](https://github.com/archguard/codedb)
 
 ### Code Eval
 
