@@ -29,7 +29,7 @@ class JavaFileWorker : AbstractWorker() {
         // 3. build full project trees
     }
 
-    // check by history ?
+    // check by history?
     suspend fun startWithHistory(filePath: String) = coroutineScope {
         // 1. read directory to a collection of files for FileJob
 
