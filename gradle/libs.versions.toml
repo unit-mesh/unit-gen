@@ -68,6 +68,7 @@ archguard-rule-webapi = { group = "org.archguard.scanner", name = "rule-webapi",
 archguard-rule-test = { group = "org.archguard.scanner", name = "rule-test", version.ref = "archguard" }
 
 codedb-checkout = { group = "org.archguard.codedb", name = "checkout", version.ref = "codedb" }
+codedb-action-toolkit = { group = "org.archguard.codedb", name = "action-toolkit", version.ref = "codedb" }
 
 # cf => chocolate-factory
 cf-language = { group = "cc.unitmesh", name = "code-language", version.ref = "chocolate-factory" }

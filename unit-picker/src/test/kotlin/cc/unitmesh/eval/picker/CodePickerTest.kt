@@ -55,4 +55,15 @@ class CodePickerTest {
             CodePicker.gitUrlToPath("https://bitbucket.org/zzzeek/alembic_moved_from_hg_to_git")
         )
     }
+
+    @Test
+    fun shouldCheckoutTestCode() {
+        val picker = CodePicker(
+            PickerConfig(
+                url = "https://github.com/unit-mesh/unit-eval-testing"
+            )
+        )
+
+        picker.run()
+    }
 }

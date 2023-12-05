@@ -26,6 +26,7 @@ dependencies {
 
     // checkout
     implementation(libs.codedb.checkout)
+    implementation(libs.codedb.action.toolkit)
 
     // Logging
     implementation(libs.logging.slf4j.api)

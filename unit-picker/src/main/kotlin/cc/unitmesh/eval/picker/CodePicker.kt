@@ -1,22 +1,40 @@
 package cc.unitmesh.eval.picker
 
+import org.archguard.action.checkout.GitSourceSettings
+import org.archguard.action.checkout.executeGitCheckout
+import org.jetbrains.annotations.TestOnly
+import java.nio.file.Path
+
 class CodePicker(val config: PickerConfig) {
 
     fun run() {
         // 1. check config.url is a valid url or path
-        checkoutCode(config.url)
+        checkoutCode(config.url, config.branch, config.baseDir)
 
         // 2. select files to tree
 
         // 3. generate tree to jsonl
     }
 
-    private fun checkoutCode(url: String) {
-        if (gitUrlRegex.matches(url)) {
-            // git clone
-        } else {
-            // copy
+    @TestOnly
+    fun checkoutCode(url: String, branch: String, baseDir: String) {
+        if (!gitUrlRegex.matches(url)) {
+            return
         }
+
+        val gitDir = gitUrlToPath(url)
+        val targetDir = Path.of(baseDir, gitDir)
+        if (targetDir.toFile().exists()) {
+            return
+        }
+
+        val settings = GitSourceSettings.fromArgs(arrayOf("--repository", url, "--branch", branch))
+        executeGitCheckout(settings)
+
+        // mv settings.repository to targetDir
+        targetDir.toFile().mkdirs()
+        val repositoryPath = Path.of(settings.repository)
+        repositoryPath.toFile().renameTo(targetDir.toFile())
     }
 
     companion object {
