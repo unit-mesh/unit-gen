@@ -1,6 +1,6 @@
 package org.unimesh.eval.picker.bs;
 
-import org.junit.jupiter.api.Assertions.assertNull
+import cc.unitmesh.quality.EstimateAnalyser
 import org.junit.jupiter.api.Test
 import java.io.File
 import kotlin.test.assertEquals

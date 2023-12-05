@@ -5,6 +5,7 @@ import com.github.ajalt.clikt.parameters.options.option
 
 class Hello : CliktCommand() {
     val name by option(help = "your name")
+
     override fun run() {
         echo("Hello, $name!")
     }

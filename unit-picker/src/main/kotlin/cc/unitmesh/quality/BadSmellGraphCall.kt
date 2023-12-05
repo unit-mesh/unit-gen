@@ -1,4 +1,4 @@
-package org.unimesh.eval.picker.bs
+package cc.unitmesh.quality
 
 class BadSmellGraphCall {
     companion object {

@@ -19,6 +19,7 @@ chocolate-factory="0.4.3"
 
 chapi = "2.1.3"
 archguard="2.0.7"
+codedb="0.1.2"
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
@@ -60,6 +61,8 @@ archguard-scanner-core = { group = "org.archguard.scanner", name = "scanner_core
 archguard-lang-kotlin = { group = "org.archguard.scanner", name = "lang_kotlin", version.ref = "archguard" }
 archguard-rule-core = { group = "org.archguard.scanner", name = "rule_core", version.ref = "archguard" }
 archguard-analyser-estimate = { group = "org.archguard.scanner", name = "analyser_estimate", version.ref = "archguard" }
+
+codedb-checkout = { group = "org.archguard.codedb", name = "checkout", version.ref = "codedb" }
 
 # cf => chocolate-factory
 cf-language = { group = "cc.unitmesh", name = "code-language", version.ref = "chocolate-factory" }

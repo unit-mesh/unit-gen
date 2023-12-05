@@ -1,5 +1,7 @@
 package org.unimesh.eval.picker.bs
 
+import cc.unitmesh.quality.BadsmellAnalyser
+import cc.unitmesh.quality.SmellType
 import chapi.ast.javaast.JavaAnalyser
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Disabled

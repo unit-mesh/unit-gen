@@ -5,6 +5,10 @@ rootProject.name = "UnitEval"
 
 // the abstract interface
 include("unit-core")
+
+// the code quality analysis codes
+include("code-quality")
+
 // picker code by rules
 include("unit-picker")
 // eval output by rules

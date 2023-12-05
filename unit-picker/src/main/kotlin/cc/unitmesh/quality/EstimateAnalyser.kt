@@ -1,4 +1,4 @@
-package org.unimesh.eval.picker.bs
+package cc.unitmesh.quality
 
 import org.archguard.scanner.analyser.count.FileJob
 import org.archguard.scanner.analyser.count.LanguageSummary

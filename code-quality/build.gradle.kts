@@ -1,9 +1,7 @@
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     alias(libs.plugins.kotlin.jvm)
-    alias(libs.plugins.shadow)
     alias(libs.plugins.serialization)
-    application
 }
 
 repositories {
@@ -11,7 +9,6 @@ repositories {
 }
 
 dependencies {
-    implementation(libs.clikt)
     implementation(libs.serialization.json)
 
     implementation(libs.chapi.domain)
@@ -35,22 +32,4 @@ dependencies {
 
 tasks.test {
     useJUnitPlatform()
-}
-
-application {
-    mainClass.set("cc.unitmesh.eval.picker.MainKt")
-}
-
-tasks {
-    shadowJar {
-        manifest {
-            attributes(Pair("Main-Class", "cc.unitmesh.eval.picker.MainKt"))
-        }
-        // minimize()
-        dependencies {
-            exclude(dependency("org.junit.jupiter:.*:.*"))
-            exclude(dependency("org.junit:.*:.*"))
-            exclude(dependency("junit:.*:.*"))
-        }
-    }
 }

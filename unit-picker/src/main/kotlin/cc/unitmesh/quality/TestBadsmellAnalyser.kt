@@ -1,4 +1,4 @@
-package org.unimesh.eval.picker.bs
+package cc.unitmesh.quality
 
 import chapi.domain.core.CodeAnnotation
 import chapi.domain.core.CodeCall
