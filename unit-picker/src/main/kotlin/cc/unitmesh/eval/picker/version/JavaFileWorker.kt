@@ -1,4 +1,4 @@
-package org.unimesh.eval.picker.version
+package cc.unitmesh.eval.picker.version
 
 import kotlinx.coroutines.coroutineScope
 import org.archguard.scanner.analyser.count.FileJob
