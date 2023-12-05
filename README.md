@@ -24,8 +24,10 @@ AutoDev [#54](https://github.com/unit-mesh/auto-dev/issues/56)
     - [x] Long Parameters, Long Method, LARGE_CLASS
     - [ ] Todo: Rewrite If, Switch logic
 - [x] Estimation from [ArchGuard](https://github.com/archguard/archguard)
-- [ ] ArchGuard CodeDB metrics: [CodeDB](https://github.com/archguard/codedb)
-
+- [ ] ArchGuard Governance: [Rule Linter](https://archguard.org/governance)
+    - [ ] SQL
+    - [ ] Test SQL
+  - [ ] ArchGuard CodeDB OO Metrics: [CodeDB](https://github.com/archguard/codedb)
 
 ### Code Picker
 

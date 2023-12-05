@@ -15,11 +15,11 @@ slf4j = "2.0.9"
 
 clikt = "4.2.1"
 
-chocolate-factory="0.4.3"
+chocolate-factory = "0.4.3"
 
 chapi = "2.1.3"
-archguard="2.0.7"
-codedb="0.1.2"
+archguard = "2.0.7"
+codedb = "0.1.2"
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
@@ -59,8 +59,13 @@ chapi-kotlin = { group = "com.phodal.chapi", name = "chapi-ast-kotlin", version.
 # ArchGurad
 archguard-scanner-core = { group = "org.archguard.scanner", name = "scanner_core", version.ref = "archguard" }
 archguard-lang-kotlin = { group = "org.archguard.scanner", name = "lang_kotlin", version.ref = "archguard" }
-archguard-rule-core = { group = "org.archguard.scanner", name = "rule_core", version.ref = "archguard" }
 archguard-analyser-estimate = { group = "org.archguard.scanner", name = "analyser_estimate", version.ref = "archguard" }
+
+# ArchGuard Rule Linter
+archguard-rule-core = { group = "org.archguard.scanner", name = "rule-core", version.ref = "archguard" }
+archguard-rule-sql = { group = "org.archguard.scanner", name = "rule-sql", version.ref = "archguard" }
+archguard-rule-webapi = { group = "org.archguard.scanner", name = "rule-webapi", version.ref = "archguard" }
+archguard-rule-test = { group = "org.archguard.scanner", name = "rule-test", version.ref = "archguard" }
 
 codedb-checkout = { group = "org.archguard.codedb", name = "checkout", version.ref = "codedb" }
 

@@ -18,6 +18,9 @@ dependencies {
     implementation(libs.archguard.scanner.core)
     implementation(libs.archguard.analyser.estimate)
 
+    implementation(libs.archguard.rule.sql)
+    implementation(libs.archguard.rule.webapi)
+
     // checkout
     implementation(libs.codedb.checkout)
 
