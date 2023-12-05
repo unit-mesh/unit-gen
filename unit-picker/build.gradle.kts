@@ -11,6 +11,9 @@ repositories {
 }
 
 dependencies {
+    implementation(projects.unitCore)
+    implementation(projects.codeQuality)
+
     implementation(libs.clikt)
     implementation(libs.serialization.json)
 
