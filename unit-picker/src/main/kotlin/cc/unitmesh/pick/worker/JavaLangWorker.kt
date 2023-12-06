@@ -1,6 +1,8 @@
 package cc.unitmesh.pick.worker
 
 import cc.unitmesh.pick.picker.PickJob
+import chapi.ast.antlr.JavaParser
+import chapi.ast.javaast.JavaAnalyser
 import kotlinx.coroutines.coroutineScope
 import org.archguard.scanner.analyser.count.FileJob
 
@@ -19,25 +21,31 @@ import org.archguard.scanner.analyser.count.FileJob
  * - by Vertical (with History Change):
  */
 class JavaLangWorker : LangWorker() {
-    val jobs: MutableList<PickJob> = mutableListOf()
-    val packageTree: MutableMap<String, PickJob> = mutableMapOf()
+    private val jobs: MutableList<PickJob> = mutableListOf()
+    private val packageTree: MutableMap<String, PickJob> = mutableMapOf()
 
-    val packageRegex = Regex("package\\s+([a-zA-Z0-9_\\.]+);")
-    val extLength = ".java".length
+    private val packageRegex = Regex("package\\s+([a-zA-Z0-9_\\.]+);")
+    private val extLength = ".java".length
 
     override fun addJob(job: PickJob) {
         this.jobs.add(job)
-        val packageMatch = packageRegex.find(job.content.decodeToString())
+        val code = job.content.decodeToString()
+        val packageMatch = packageRegex.find(code)
         if (packageMatch != null) {
             val packageName = packageMatch.groupValues[1]
             val className = job.filename.substring(0, job.filename.length - extLength)
             val fullClassName = "$packageName.$className"
             packageTree[fullClassName] = job
         }
+
+        job.container = JavaAnalyser().analysis(code, job.location)
     }
 
-    override suspend fun start() = coroutineScope {
+    override suspend fun start(): Unit = coroutineScope {
         // 1. read directory to a collection of files for FileJob
+        jobs.map {
+            println(it.container)
+        }
 
         // 2. check package information from line 1?
 
@@ -60,5 +68,4 @@ class JavaLangWorker : LangWorker() {
         // TODO: split methods with comments
         return listOf()
     }
-
 }
