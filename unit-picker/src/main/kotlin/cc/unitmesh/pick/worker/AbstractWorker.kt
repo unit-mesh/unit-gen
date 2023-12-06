@@ -1,5 +1,5 @@
 package cc.unitmesh.pick.worker
 
 abstract class AbstractWorker {
-    abstract suspend fun start(filePath: String)
+    abstract suspend fun start()
 }

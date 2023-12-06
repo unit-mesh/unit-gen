@@ -1,5 +1,6 @@
 package cc.unitmesh.pick.worker
 
+import cc.unitmesh.pick.picker.PickJob
 import kotlinx.coroutines.coroutineScope
 import org.archguard.scanner.analyser.count.FileJob
 
@@ -17,11 +18,11 @@ import org.archguard.scanner.analyser.count.FileJob
  * - by Horizontal (with Import File):
  * - by Vertical (with History Change):
  */
-class JavaFileWorker : AbstractWorker() {
+class JavaFileWorker(val job: PickJob) : AbstractWorker() {
     val packageTree: Map<String, FileJob> = mapOf()
     /// [Coco](https://github.com/inherd/coco) high change and long line, means is important file, and need to be checked.
 
-    override suspend fun start(filePath: String) = coroutineScope {
+    override suspend fun start() = coroutineScope {
         // 1. read directory to a collection of files for FileJob
 
         // 2. check package information from line 1?

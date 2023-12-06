@@ -1,15 +1,14 @@
 package cc.unitmesh.pick.picker
 
+import cc.unitmesh.pick.worker.WorkerDispatch
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import org.archguard.action.checkout.GitSourceSettings
 import org.archguard.action.checkout.executeGitCheckout
 import java.nio.file.Files
 import java.nio.file.Path
-import kotlin.coroutines.coroutineContext
 
 class CodePicker(val config: PickerConfig) {
     private val logger = org.slf4j.LoggerFactory.getLogger(javaClass)
@@ -31,13 +30,13 @@ class CodePicker(val config: PickerConfig) {
                 }
                 launch {
                     for (fileJob in walkdirChannel) {
-                        // todo call by language worker
-                        println(fileJob)
+                        WorkerDispatch.worker(fileJob)
                     }
                 }
             }
 
             logger.info("stop picker")
+
             // 3. generate tree to jsonl
         }
     }
