@@ -2,6 +2,7 @@ package cc.unitmesh.pick.picker
 
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
+import org.archguard.scanner.analyser.count.FileJob
 import org.archguard.scanner.analyser.count.LanguageWorker
 import org.archguard.scanner.analyser.ignore.Gitignore
 import org.archguard.scanner.analyser.ignore.IgnoreMatcher
@@ -18,7 +19,7 @@ class DirectoryJob(
 val PathDenyList: List<String> = listOf(".git", ".hg", ".svn")
 
 class PickDirectoryWalker(
-    val output: Channel<PickJob>,
+    val output: Channel<FileJob>,
     val excludes: List<Regex> = listOf()
 ) {
     val logger = org.slf4j.LoggerFactory.getLogger(javaClass)
@@ -34,7 +35,7 @@ class PickDirectoryWalker(
         if (!file.isDirectory) {
             launch {
                 LanguageWorker.createFileJob(file).let {
-                    output.send(PickJob.from(it))
+                    output.send(it)
                 }
             }
         } else {
@@ -113,7 +114,7 @@ class PickDirectoryWalker(
             if (!isDir) {
                 LanguageWorker.createFileJob(file).let {
                     launch {
-                        output.send(PickJob.from(it))
+                        output.send(it)
                     }
                 }
             } else {

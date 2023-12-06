@@ -18,11 +18,25 @@ import org.archguard.scanner.analyser.count.FileJob
  * - by Horizontal (with Import File):
  * - by Vertical (with History Change):
  */
-class JavaFileWorker : AbstractWorker() {
-    val packageTree: Map<String, FileJob> = mapOf()
-    /// [Coco](https://github.com/inherd/coco) high change and long line, means is important file, and need to be checked.
+class JavaLangWorker : LangWorker() {
+    val jobs: MutableList<PickJob> = mutableListOf()
+    val packageTree: MutableMap<String, PickJob> = mutableMapOf()
 
-    override suspend fun start(job: PickJob) = coroutineScope {
+    val packageRegex = Regex("package\\s+([a-zA-Z0-9_\\.]+);")
+    val extLength = ".java".length
+
+    override fun addJob(job: PickJob) {
+        this.jobs.add(job)
+        val packageMatch = packageRegex.find(job.content.decodeToString())
+        if (packageMatch != null) {
+            val packageName = packageMatch.groupValues[1]
+            val className = job.filename.substring(0, job.filename.length - extLength)
+            val fullClassName = "$packageName.$className"
+            packageTree[fullClassName] = job
+        }
+    }
+
+    override suspend fun start() = coroutineScope {
         // 1. read directory to a collection of files for FileJob
 
         // 2. check package information from line 1?

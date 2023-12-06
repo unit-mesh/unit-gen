@@ -1,9 +1,11 @@
 package cc.unitmesh.pick.picker
 
+import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
 import org.archguard.scanner.analyser.count.FileJob
 import java.security.MessageDigest
 
+@Serializable
 class PickJob(
     var language: String = "",
     var possibleLanguages: List<String> = listOf(),

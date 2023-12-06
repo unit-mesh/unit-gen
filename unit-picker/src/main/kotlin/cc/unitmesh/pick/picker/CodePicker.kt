@@ -1,6 +1,6 @@
 package cc.unitmesh.pick.picker
 
-import cc.unitmesh.pick.worker.WorkerDispatch
+import cc.unitmesh.pick.worker.WorkerManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.launch
@@ -8,6 +8,8 @@ import kotlinx.coroutines.runBlocking
 import org.archguard.action.checkout.GitSourceSettings
 import org.archguard.action.checkout.executeGitCheckout
 import org.archguard.rule.common.Language
+import org.archguard.scanner.analyser.count.FileJob
+import org.archguard.scanner.analyser.count.LanguageWorker
 import java.nio.file.Files
 import java.nio.file.Path
 
@@ -22,7 +24,9 @@ class CodePicker(private val config: PickerConfig) {
 
             logger.info("start picker")
 
-            val walkdirChannel = Channel<PickJob>()
+            val languageWorker = LanguageWorker()
+            val workerManager = WorkerManager()
+            val walkdirChannel = Channel<FileJob>()
 
             launch {
                 launch {
@@ -31,10 +35,14 @@ class CodePicker(private val config: PickerConfig) {
                 }
                 launch {
                     for (fileJob in walkdirChannel) {
-                        val lang: Language? = fileJob.language.toSupportLanguage()
+                        languageWorker.processFile(fileJob)?.let {
+                            workerManager.addJob(PickJob.from(it))
+                        }
                     }
+
+                    workerManager.runAll()
                 }
-            }
+            }.join()
 
             logger.info("stop picker")
 
@@ -108,15 +116,3 @@ class CodePicker(private val config: PickerConfig) {
     }
 }
 
-private fun String.toSupportLanguage(): Language? {
-    return when (this.lowercase()) {
-        "java" -> Language.JAVA
-        "kotlin" -> Language.KOTLIN
-        "csharp", "c#" -> Language.CSHARP
-        "python" -> Language.PYTHON
-        "go" -> Language.GO
-        "typescript" -> Language.TYPESCRIPT
-        "javascript" -> Language.JAVASCRIPT
-        else -> null
-    }
-}
