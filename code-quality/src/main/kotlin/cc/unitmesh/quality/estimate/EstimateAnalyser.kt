@@ -1,4 +1,4 @@
-package cc.unitmesh.quality
+package cc.unitmesh.quality.estimate
 
 import org.archguard.scanner.analyser.count.FileJob
 import org.archguard.scanner.analyser.count.LanguageSummary

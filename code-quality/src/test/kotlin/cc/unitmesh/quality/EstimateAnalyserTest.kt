@@ -1,6 +1,6 @@
 package cc.unitmesh.quality;
 
-import cc.unitmesh.quality.EstimateAnalyser
+import cc.unitmesh.quality.estimate.EstimateAnalyser
 import org.junit.jupiter.api.Test
 import java.io.File
 import kotlin.test.assertEquals

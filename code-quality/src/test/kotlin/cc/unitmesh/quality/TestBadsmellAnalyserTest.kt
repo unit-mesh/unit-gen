@@ -1,5 +1,6 @@
 package cc.unitmesh.quality
 
+import cc.unitmesh.quality.testbadsmell.TestBadsmellAnalyser
 import chapi.ast.javaast.JavaAnalyser
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
