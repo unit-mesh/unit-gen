@@ -6,9 +6,8 @@ import kotlin.test.assertEquals
 class CodePickerTest {
     @Test
     fun should_return_unique_path() {
-        // based on: https://www.debuggex.com/r/fFggA8Uc4YYKjl34
         assertEquals(
-            "github.com/unit-mesh/unit-pick",
+            "github.com/unit-mesh/unit-eval",
             CodePicker.gitUrlToPath("https://github.com/unit-mesh/unit-eval")
         )
         assertEquals(
@@ -64,6 +63,6 @@ class CodePickerTest {
             )
         )
 
-        picker.run()
+        picker.execute()
     }
 }

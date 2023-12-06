@@ -11,7 +11,7 @@ class CodePicker(val config: PickerConfig) {
     private val logger = org.slf4j.LoggerFactory.getLogger(javaClass)
     private val languageService = LanguageService()
 
-    fun run() {
+    fun execute() {
         // 1. check config.url is a valid url or path
         val codeDir = checkoutCode(config.url, config.branch, config.baseDir)
 

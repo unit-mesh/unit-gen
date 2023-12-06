@@ -11,7 +11,7 @@ class Picker : CliktCommand() {
 
     override fun run() {
         val config = PickerConfig(url = url)
-        val worker = CodePicker(config)
+        CodePicker(config).execute()
     }
 }
 
