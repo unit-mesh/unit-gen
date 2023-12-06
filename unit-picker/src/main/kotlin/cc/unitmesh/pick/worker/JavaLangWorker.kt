@@ -1,5 +1,6 @@
 package cc.unitmesh.pick.worker
 
+import cc.unitmesh.pick.output.Instruction
 import cc.unitmesh.pick.picker.PickJob
 import chapi.ast.antlr.JavaParser
 import chapi.ast.javaast.JavaAnalyser
@@ -41,7 +42,7 @@ class JavaLangWorker : LangWorker() {
         job.container = JavaAnalyser().analysis(code, job.location)
     }
 
-    override suspend fun start(): Unit = coroutineScope {
+    override suspend fun start(): List<Instruction> = coroutineScope {
         // 1. read directory to a collection of files for FileJob
         jobs.map {
             println(it.container)
@@ -50,6 +51,7 @@ class JavaLangWorker : LangWorker() {
         // 2. check package information from line 1?
 
         // 3. build full project trees
+        return@coroutineScope listOf()
     }
 
     // check by history?

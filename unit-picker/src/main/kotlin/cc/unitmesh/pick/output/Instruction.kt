@@ -1,28 +1,42 @@
 package cc.unitmesh.pick.output
 
-enum class InstructionType {
-    INLINE_CODE_COMPLETION,
-    IN_BLOCK_CODE_COMPLETION,
-    AFTER_BLOCK_CODE_COMPLETION,
-    RELATED_CODE_COMPLETION,
-//    CODE_DIFF,
-//    REFACTOR,
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.SerializationException
+import kotlinx.serialization.descriptors.PrimitiveKind
+import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
+import kotlin.reflect.KClass
+
+@Serializable(InstructionTypeSerializer::class)
+enum class InstructionType(val contentClass: KClass<out Instruction>) {
+    INLINE_COMPLETION(InlineCodeCompletion::class),
+    IN_BLOCK_COMPLETION(InBlockCodeCompletion::class),
+    AFTER_BLOCK_COMPLETION(AfterBlockCodeCompletion::class),
+    /**
+     * the AutoDev with pre-build context
+     */
+    RELATED_CODE_COMPLETION(RelatedCodeCompletion::class)
+    ;
+
+    val type: String get() = name.lowercase()
 }
 
-sealed class Instruction(
-    val instructionType: InstructionType,
-    val instruction: String,
-    val output: String,
-) {
-    abstract fun input(): String
+sealed interface Instruction {
+    val output: String
+    val instruction: String
+    fun input(): String
 }
 
-class InlineCodeCompletion(
-    instruction: String,
-    output: String,
+@Serializable
+data class InlineCodeCompletion(
+    override val instruction: String,
+    override val output: String,
     val language: String,
     val beforeCursorCode: String,
-) : Instruction(InstructionType.INLINE_CODE_COMPLETION, instruction, output) {
+) : Instruction {
     override fun input(): String {
         return """```$language
             |$beforeCursorCode
@@ -30,13 +44,14 @@ class InlineCodeCompletion(
     }
 }
 
-class InBlockCodeCompletion(
-    instruction: String,
-    output: String,
+@Serializable
+data class InBlockCodeCompletion(
+    override val instruction: String,
+    override val output: String,
     val language: String,
     val beforeCursorCode: String,
     val afterCursorCode: String,
-) : Instruction(InstructionType.IN_BLOCK_CODE_COMPLETION, instruction, output) {
+) : Instruction {
     override fun input(): String {
         return """```$language
             |$beforeCursorCode
@@ -46,12 +61,12 @@ class InBlockCodeCompletion(
 }
 
 class AfterBlockCodeCompletion(
-    instruction: String,
-    output: String,
+    override val instruction: String,
+    override val output: String,
     val language: String,
     val beforeCursorCode: String,
     val afterCursorCode: String,
-) : Instruction(InstructionType.AFTER_BLOCK_CODE_COMPLETION, instruction, output) {
+) : Instruction {
     override fun input(): String {
         return """```$language
             |$beforeCursorCode
@@ -60,13 +75,14 @@ class AfterBlockCodeCompletion(
     }
 }
 
-class RelatedCodeCompletion(
-    instruction: String,
-    output: String,
+@Serializable
+data class RelatedCodeCompletion(
+    override val instruction: String,
+    override val output: String,
     val language: String,
     val beforeCursorCode: String,
     val relatedCode: String,
-) : Instruction(InstructionType.RELATED_CODE_COMPLETION, instruction, output) {
+) : Instruction {
     override fun input(): String {
         return """
             | Compare this snippet:
@@ -79,4 +95,28 @@ class RelatedCodeCompletion(
             |```""".trimMargin()
     }
 }
+
+object InstructionTypeSerializer : KSerializer<InstructionType> {
+    private val cache: MutableMap<String, InstructionType> = hashMapOf()
+
+    private fun getMessageType(type: String): InstructionType {
+        return cache.computeIfAbsent(type) { newType ->
+            InstructionType.values().firstOrNull { it.type == newType }
+                ?: throw SerializationException("Unknown message type: $newType")
+        }
+    }
+
+    override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor(
+        InstructionType::class.qualifiedName!!, PrimitiveKind.STRING
+    )
+
+    override fun deserialize(decoder: Decoder): InstructionType {
+        return getMessageType(decoder.decodeString())
+    }
+
+    override fun serialize(encoder: Encoder, value: InstructionType) {
+        encoder.encodeString(value.type)
+    }
+}
+
 
