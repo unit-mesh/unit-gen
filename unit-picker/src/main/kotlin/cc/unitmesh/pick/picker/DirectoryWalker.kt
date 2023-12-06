@@ -70,9 +70,14 @@ class PickDirectoryWalker(
     }
 
     private suspend fun walk(workdir: String) = coroutineScope {
-        val dirents = readDir(workdir) ?: return@coroutineScope
+        val files = readDir(workdir)
+        if (files == null) {
+            logger.error("Failed to read directory: $workdir")
+            return@coroutineScope
+        }
+        val directoryContents = files.toList()
 
-        dirents.map {
+        directoryContents.map {
             val name = it.name
 
             if (name == ".gitignore" || it.name == ".ignore") {
@@ -82,11 +87,10 @@ class PickDirectoryWalker(
             }
         }
 
-        dirents.forEach { file ->
+        directoryContents.forEach { file ->
             val name = file.name
             val path = file.toString()
             val isDir = file.isDirectory
-
 
             for (deny in PathDenyList) {
                 if (path.contains(deny)) {
@@ -117,7 +121,7 @@ class PickDirectoryWalker(
             }
         }
 
-        if(dirChannels.size >= 1) {
+        if (dirChannels.isNotEmpty()) {
             dirChannels.removeAt(0).close()
         }
     }

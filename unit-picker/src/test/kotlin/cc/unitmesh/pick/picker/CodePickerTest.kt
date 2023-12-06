@@ -64,8 +64,6 @@ class CodePickerTest {
             PickerConfig(url = "https://github.com/unit-mesh/unit-eval-testing")
         )
 
-//        CoroutineScope(Dispatchers.IO).launch {
-//            picker.execute()
-//        }
+        picker.execute()
     }
 }

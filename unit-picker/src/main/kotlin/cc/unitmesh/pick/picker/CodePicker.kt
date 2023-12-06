@@ -4,6 +4,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import org.archguard.action.checkout.GitSourceSettings
 import org.archguard.action.checkout.executeGitCheckout
 import java.nio.file.Files
@@ -13,7 +14,7 @@ import kotlin.coroutines.coroutineContext
 class CodePicker(val config: PickerConfig) {
     private val logger = org.slf4j.LoggerFactory.getLogger(javaClass)
 
-    suspend fun execute() {
+    fun execute()  = runBlocking {
         val scope = CoroutineScope(coroutineContext)
         scope.launch {
             val codeDir = checkoutCode(config.url, config.branch, config.baseDir)
@@ -24,12 +25,19 @@ class CodePicker(val config: PickerConfig) {
             logger.info("start picker")
 
             launch {
-                PickDirectoryWalker(walkdirChannel).start(codeDir.toString())
-                walkdirChannel.close()
+                launch {
+                    PickDirectoryWalker(walkdirChannel).start(codeDir.toString())
+                    walkdirChannel.close()
+                }
+                launch {
+                    for (fileJob in walkdirChannel) {
+                        // todo call by language worker
+                        println(fileJob)
+                    }
+                }
             }
 
             logger.info("stop picker")
-
             // 3. generate tree to jsonl
         }
     }
