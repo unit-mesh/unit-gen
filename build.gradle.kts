@@ -111,8 +111,8 @@ configure(allprojects) {
                         }
                     }
                     scm {
-                        connection.set("scm:git:git://github.com/unit-mesh/unit-eval.git")
-                        developerConnection.set("scm:git:ssh://github.com/unit-mesh/unit-eval.git")
+                        connection.set("scm:git:git://github.com/unit-mesh/unit-pick.git")
+                        developerConnection.set("scm:git:ssh://github.com/unit-mesh/unit-pick.git")
                         url.set("https://github.com/unit-mesh/unit-eval/")
                     }
                 }

@@ -1,4 +1,4 @@
-package cc.unitmesh.eval.picker.worker
+package cc.unitmesh.pick.worker
 
 abstract class AbstractWorker {
     abstract suspend fun start(filePath: String)

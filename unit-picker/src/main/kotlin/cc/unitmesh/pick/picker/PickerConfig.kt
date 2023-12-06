@@ -1,4 +1,4 @@
-package cc.unitmesh.eval.picker
+package cc.unitmesh.pick.picker
 
 data class PickerConfig(
     val url: String,

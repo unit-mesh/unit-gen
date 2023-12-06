@@ -1,4 +1,4 @@
-package cc.unitmesh.eval.picker;
+package cc.unitmesh.pick.picker;
 
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
@@ -8,7 +8,7 @@ class CodePickerTest {
     fun should_return_unique_path() {
         // based on: https://www.debuggex.com/r/fFggA8Uc4YYKjl34
         assertEquals(
-            "github.com/unit-mesh/unit-eval",
+            "github.com/unit-mesh/unit-pick",
             CodePicker.gitUrlToPath("https://github.com/unit-mesh/unit-eval")
         )
         assertEquals(

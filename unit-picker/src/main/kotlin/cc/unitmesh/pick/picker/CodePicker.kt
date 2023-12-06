@@ -1,4 +1,4 @@
-package cc.unitmesh.eval.picker
+package cc.unitmesh.pick.picker
 
 import org.archguard.action.checkout.GitSourceSettings
 import org.archguard.action.checkout.executeGitCheckout
@@ -68,10 +68,10 @@ class CodePicker(val config: PickerConfig) {
          *
          * for example:
          *
-         * - `https://github.com/unit-mesh/unit-eval` tobe `github.com/unit-mesh/unit-eval`
-         * - `git://github.com/unit-mesh/unit-eval` tobe `github.com/unit-mesh/unit-eval`
-         * - `git://github.com/unit-mesh/unit-eval.git` tobe `github.com/unit-mesh/unit-eval`
-         * - `http://github.com/unit-mesh/unit-eval` tobe `github.com/unit-mesh/unit-eval`
+         * - `https://github.com/unit-mesh/unit-pick` tobe `github.com/unit-mesh/unit-pick`
+         * - `git://github.com/unit-mesh/unit-pick` tobe `github.com/unit-mesh/unit-pick`
+         * - `git://github.com/unit-mesh/unit-pick.git` tobe `github.com/unit-mesh/unit-pick`
+         * - `http://github.com/unit-mesh/unit-pick` tobe `github.com/unit-mesh/unit-pick`
          *
          */
         fun gitUrlToPath(url: String): String {

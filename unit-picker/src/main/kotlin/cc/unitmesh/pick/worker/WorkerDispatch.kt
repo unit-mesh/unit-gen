@@ -1,4 +1,4 @@
-package cc.unitmesh.eval.picker.worker
+package cc.unitmesh.pick.worker
 
 object WorkerDispatch {
     /**

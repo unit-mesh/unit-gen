@@ -1,4 +1,4 @@
-package cc.unitmesh.eval.picker.worker
+package cc.unitmesh.pick.worker
 
 import kotlinx.coroutines.coroutineScope
 import org.archguard.scanner.analyser.count.FileJob
@@ -12,7 +12,7 @@ import org.archguard.scanner.analyser.count.FileJob
  * | b05d38f6   | 1           | 1        | 1          | 1           |
  * | 99ac469e   | 1           | 1        | 1          | 1           |
  *
- * We have different strategies to build the eval datasets.
+ * We have different strategies to build the pick datasets.
  *
  * - by Horizontal (with Import File):
  * - by Vertical (with History Change):
