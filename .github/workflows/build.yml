@@ -6,7 +6,9 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [ macos-latest, ubuntu-latest, windows-latest ]
+#        os: [ macos-latest, ubuntu-latest, windows-latest ]
+#        Windows offers timeouts: https://github.com/unit-mesh/unit-eval/actions/runs/7101623294/job/19331414199
+        os: [ macos-latest, ubuntu-latest ]
     runs-on: ${{ matrix.os }}
 
     steps:
