@@ -25,9 +25,12 @@ AutoDev [#54](https://github.com/unit-mesh/auto-dev/issues/56)
     - [ ] Todo: Rewrite If, Switch logic
 - [x] Estimation from [ArchGuard](https://github.com/archguard/archguard)
 - [ ] MVC architecture Governance: [Rule Linter](https://archguard.org/governance)
-    - [ ] Controller -> API Rule + Bad Smell
+    - [ ] Controller -> ArchGuard API Rule + Bad Smell
     - [ ] Service -> Service Rule + Bad Smell
     - [ ] Repository -> HTTP API Rule
+    - [ ] Model -> Model Rule
+    - [ ] Exception -> Exception Rule
+    - [ ] Security -> Security Rule
   - [ ] ArchGuard CodeDB OO Metrics: [CodeDB](https://github.com/archguard/codedb)
 
 ### Code Picker
