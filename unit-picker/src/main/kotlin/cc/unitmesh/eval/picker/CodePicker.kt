@@ -3,13 +3,15 @@ package cc.unitmesh.eval.picker
 import org.archguard.action.checkout.GitSourceSettings
 import org.archguard.action.checkout.executeGitCheckout
 import org.jetbrains.annotations.TestOnly
+import java.nio.file.Files
 import java.nio.file.Path
 
 class CodePicker(val config: PickerConfig) {
+    private val logger = org.slf4j.LoggerFactory.getLogger(javaClass)
 
     fun run() {
         // 1. check config.url is a valid url or path
-        checkoutCode(config.url, config.branch, config.baseDir)
+        val codeDir = checkoutCode(config.url, config.branch, config.baseDir)
 
         // 2. select files to tree
 
@@ -17,24 +19,42 @@ class CodePicker(val config: PickerConfig) {
     }
 
     @TestOnly
-    fun checkoutCode(url: String, branch: String, baseDir: String) {
+    fun checkoutCode(url: String, branch: String, baseDir: String): Path {
         if (!gitUrlRegex.matches(url)) {
-            return
+            return Path.of(url)
         }
 
         val gitDir = gitUrlToPath(url)
         val targetDir = Path.of(baseDir, gitDir)
+        logger.info("targetDir: $targetDir")
         if (targetDir.toFile().exists()) {
-            return
+            logger.info("targetDir exists: $targetDir")
+            return targetDir
         }
 
         val settings = GitSourceSettings.fromArgs(arrayOf("--repository", url, "--branch", branch))
         executeGitCheckout(settings)
 
         // mv settings.repository to targetDir
-        targetDir.toFile().mkdirs()
-        val repositoryPath = Path.of(settings.repository)
-        repositoryPath.toFile().renameTo(targetDir.toFile())
+        val sourceRepoDir = Path.of(settings.repositoryPath)
+        try {
+            Files.createDirectories(targetDir.parent)
+        } catch (e: Exception) {
+            logger.info("create dir failed: ${targetDir.parent}")
+        }
+
+        logger.info("targetDir: $targetDir")
+        moveRepository(sourceRepoDir, targetDir)
+        return targetDir
+    }
+
+    private fun moveRepository(sourceDir: Path, targetDir: Path) {
+        try {
+            Files.move(sourceDir, targetDir)
+        } catch (e: Exception) {
+            // Handle the exception appropriately (e.g., log or throw)
+            e.printStackTrace()
+        }
     }
 
     companion object {
