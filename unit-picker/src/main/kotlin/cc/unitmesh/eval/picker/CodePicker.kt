@@ -2,18 +2,20 @@ package cc.unitmesh.eval.picker
 
 import org.archguard.action.checkout.GitSourceSettings
 import org.archguard.action.checkout.executeGitCheckout
+import org.archguard.scanner.analyser.count.LanguageService
 import org.jetbrains.annotations.TestOnly
 import java.nio.file.Files
 import java.nio.file.Path
 
 class CodePicker(val config: PickerConfig) {
     private val logger = org.slf4j.LoggerFactory.getLogger(javaClass)
+    private val languageService = LanguageService()
 
     fun run() {
         // 1. check config.url is a valid url or path
         val codeDir = checkoutCode(config.url, config.branch, config.baseDir)
 
-        // 2. select files to tree
+        // 2. walkdir select files to tree
 
         // 3. generate tree to jsonl
     }
