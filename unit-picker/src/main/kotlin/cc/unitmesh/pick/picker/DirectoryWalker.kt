@@ -17,10 +17,11 @@ class DirectoryJob(
 // ".git", ".hg", ".svn"
 val PathDenyList: List<String> = listOf(".git", ".hg", ".svn")
 
-class DirectoryWalker(
+class PickDirectoryWalker(
     val output: Channel<PickJob>,
     val excludes: List<Regex> = listOf()
 ) {
+    val logger = org.slf4j.LoggerFactory.getLogger(javaClass)
     private var root: String = ""
     private val ignores: MutableList<IgnoreMatcher> = mutableListOf()
     private val dirChannels = mutableListOf<Channel<DirectoryJob>>()

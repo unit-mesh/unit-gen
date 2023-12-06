@@ -1,26 +1,39 @@
 package cc.unitmesh.pick.picker
 
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 import org.archguard.action.checkout.GitSourceSettings
 import org.archguard.action.checkout.executeGitCheckout
-import org.archguard.scanner.analyser.count.LanguageService
-import org.jetbrains.annotations.TestOnly
 import java.nio.file.Files
 import java.nio.file.Path
+import kotlin.coroutines.coroutineContext
 
 class CodePicker(val config: PickerConfig) {
     private val logger = org.slf4j.LoggerFactory.getLogger(javaClass)
-    private val languageService = LanguageService()
 
-    fun execute() {
-        // 1. check config.url is a valid url or path
-        val codeDir = checkoutCode(config.url, config.branch, config.baseDir)
+    suspend fun execute() {
+        val scope = CoroutineScope(coroutineContext)
+        scope.launch {
+            val codeDir = checkoutCode(config.url, config.branch, config.baseDir)
+                .toFile().canonicalFile
 
-        // 2. walkdir select files to tree
+            val walkdirChannel = Channel<PickJob>()
 
-        // 3. generate tree to jsonl
+            logger.info("start picker")
+
+            launch {
+                PickDirectoryWalker(walkdirChannel).start(codeDir.toString())
+                walkdirChannel.close()
+            }
+
+            logger.info("stop picker")
+
+            // 3. generate tree to jsonl
+        }
     }
 
-    @TestOnly
     fun checkoutCode(url: String, branch: String, baseDir: String): Path {
         if (!gitUrlRegex.matches(url)) {
             return Path.of(url)

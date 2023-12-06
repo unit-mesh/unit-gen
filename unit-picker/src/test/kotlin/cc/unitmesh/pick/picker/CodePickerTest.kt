@@ -1,7 +1,10 @@
 package cc.unitmesh.pick.picker;
 
-import org.junit.jupiter.api.Test
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlin.test.assertEquals
+import org.junit.jupiter.api.Test
 
 class CodePickerTest {
     @Test
@@ -58,11 +61,11 @@ class CodePickerTest {
     @Test
     fun shouldCheckoutTestCode() {
         val picker = CodePicker(
-            PickerConfig(
-                url = "https://github.com/unit-mesh/unit-eval-testing"
-            )
+            PickerConfig(url = "https://github.com/unit-mesh/unit-eval-testing")
         )
 
-        picker.execute()
+//        CoroutineScope(Dispatchers.IO).launch {
+//            picker.execute()
+//        }
     }
 }

@@ -21,6 +21,8 @@ chapi = "2.1.3"
 archguard = "2.0.7"
 codedb = "0.1.2"
 
+kotlinxCoroutines="1.7.3"
+
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
@@ -30,6 +32,8 @@ shadow = "com.github.johnrengelman.shadow:8.1.1"
 kotlin-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlin-plugin-dev = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 # a mighty tiny command line interface
+# Coroutines
+coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinxCoroutines" }
 
 clikt = { group = "com.github.ajalt.clikt", name = "clikt", version.ref = "clikt" }
 
