@@ -1,4 +1,4 @@
-package cc.unitmesh.quality
+package cc.unitmesh.quality.badsmell
 
 class BadSmellGraphCall {
     companion object {

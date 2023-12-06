@@ -1,4 +1,4 @@
-package cc.unitmesh.quality
+package cc.unitmesh.quality.badsmell
 
 import chapi.domain.core.CodeDataStruct
 import chapi.domain.core.CodeFunction
@@ -8,35 +8,6 @@ import chapi.domain.core.DataStructType
 private val CodeFunction.IfSize: Int get() = 0
 private val CodeFunction.SwitchSize: Int get() = 0
 private val CodeFunction.IfInfo: List<CodePosition> get() = listOf()
-
-data class BsConfig(
-    val bsLongParasLength: Int = 5,
-    val bsIfSwitchLength: Int = 8,
-    val bsLargeLength: Int = 20,
-    val bsMethodLength: Int = 30,
-    val bsIfLinesLength: Int = 3,
-)
-
-enum class SmellType {
-    SMELL_GARPH_CONNECTED_CALL,
-    SMELL_LAZY_ELEMENT,
-    SMELL_LONG_METHOD,
-    SMELL_DATA_CLASS,
-    SMELL_REFUSED_BEQUEST,
-    SMELL_LARGE_CLASS,
-    SMELL_COMPLEX_CONDITION,
-    SMELL_REPEATED_SWITCHES,
-    SMELL_LONG_PARAMETER_LIST
-}
-
-data class BadSmellModel(
-    val file: String? = null,
-    val line: String? = null,
-    val bs: SmellType? = null,
-    val description: String? = null,
-    val size: Int? = null,
-)
-
 
 class BadsmellAnalyser(val data: List<CodeDataStruct>, val bsConfig: BsConfig = BsConfig()) {
     fun analysis(): MutableList<BadSmellModel> {
