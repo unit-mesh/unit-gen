@@ -1,18 +1,16 @@
 package cc.unitmesh.pick.worker
 
 import cc.unitmesh.pick.picker.PickJob
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
 import org.archguard.rule.common.Language
 
 class WorkerManager {
     private val workers: Map<Language, LangWorker> = mapOf(
+        // todo: add more language support
         Language.JAVA to JavaLangWorker(),
     )
 
     fun addJob(job: PickJob) {
         val language = job.language.toSupportLanguage()
-//     print job serial
         val worker = workers[language]
         worker?.addJob(job)
     }
