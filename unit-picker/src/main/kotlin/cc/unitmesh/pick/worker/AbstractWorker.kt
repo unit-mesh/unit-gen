@@ -1,5 +1,10 @@
 package cc.unitmesh.pick.worker
 
+import cc.unitmesh.pick.picker.PickJob
+
 abstract class AbstractWorker {
-    abstract suspend fun start()
+    /**
+     * Start worker
+     */
+    abstract suspend fun start(job: PickJob)
 }

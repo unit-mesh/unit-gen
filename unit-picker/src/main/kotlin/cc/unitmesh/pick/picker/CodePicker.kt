@@ -7,21 +7,22 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import org.archguard.action.checkout.GitSourceSettings
 import org.archguard.action.checkout.executeGitCheckout
+import org.archguard.rule.common.Language
 import java.nio.file.Files
 import java.nio.file.Path
 
-class CodePicker(val config: PickerConfig) {
+class CodePicker(private val config: PickerConfig) {
     private val logger = org.slf4j.LoggerFactory.getLogger(javaClass)
 
-    fun execute()  = runBlocking {
+    fun execute() = runBlocking {
         val scope = CoroutineScope(coroutineContext)
         scope.launch {
             val codeDir = checkoutCode(config.url, config.branch, config.baseDir)
                 .toFile().canonicalFile
 
-            val walkdirChannel = Channel<PickJob>()
-
             logger.info("start picker")
+
+            val walkdirChannel = Channel<PickJob>()
 
             launch {
                 launch {
@@ -30,7 +31,7 @@ class CodePicker(val config: PickerConfig) {
                 }
                 launch {
                     for (fileJob in walkdirChannel) {
-                        WorkerDispatch.worker(fileJob)
+                        val lang: Language? = fileJob.language.toSupportLanguage()
                     }
                 }
             }
@@ -104,5 +105,18 @@ class CodePicker(val config: PickerConfig) {
 
             return "$host/$owner/$repo"
         }
+    }
+}
+
+private fun String.toSupportLanguage(): Language? {
+    return when (this.lowercase()) {
+        "java" -> Language.JAVA
+        "kotlin" -> Language.KOTLIN
+        "csharp", "c#" -> Language.CSHARP
+        "python" -> Language.PYTHON
+        "go" -> Language.GO
+        "typescript" -> Language.TYPESCRIPT
+        "javascript" -> Language.JAVASCRIPT
+        else -> null
     }
 }
