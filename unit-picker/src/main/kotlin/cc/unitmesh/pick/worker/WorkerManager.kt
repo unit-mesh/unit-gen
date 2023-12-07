@@ -10,7 +10,7 @@ class WorkerManager {
     )
 
     fun addJob(job: PickJob) {
-        val language = job.language.toSupportLanguage()
+        val language = job.fileSummary.language.toSupportLanguage()
         val worker = workers[language]
         worker?.addJob(job)
     }

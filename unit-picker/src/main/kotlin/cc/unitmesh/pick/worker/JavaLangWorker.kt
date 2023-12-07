@@ -30,16 +30,20 @@ class JavaLangWorker : LangWorker() {
 
     override fun addJob(job: PickJob) {
         this.jobs.add(job)
-        val code = job.content.decodeToString()
+        val code = job.fileSummary.content.decodeToString()
+        tryAddClassToTree(code, job)
+
+        job.container = JavaAnalyser().analysis(code, job.fileSummary.location)
+    }
+
+    private fun tryAddClassToTree(code: String, job: PickJob) {
         val packageMatch = packageRegex.find(code)
         if (packageMatch != null) {
             val packageName = packageMatch.groupValues[1]
-            val className = job.filename.substring(0, job.filename.length - extLength)
+            val className = job.fileSummary.filename.substring(0, job.fileSummary.filename.length - extLength)
             val fullClassName = "$packageName.$className"
             packageTree[fullClassName] = job
         }
-
-        job.container = JavaAnalyser().analysis(code, job.location)
     }
 
     override suspend fun start(): List<Instruction> = coroutineScope {
