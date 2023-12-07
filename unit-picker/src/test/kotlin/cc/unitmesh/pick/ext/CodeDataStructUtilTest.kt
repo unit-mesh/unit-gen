@@ -1,12 +1,12 @@
-package cc.unitmesh.pick.prompt.builder;
+package cc.unitmesh.pick.ext
 
 import chapi.domain.core.CodeDataStruct
 import chapi.domain.core.CodeField
 import chapi.domain.core.CodeFunction
-import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
-class CodeDataStructTest {
+class CodeDataStructUtilTest {
     @Test
     fun `toUml should return UML class representation for CodeDataStruct`() {
         // Given
@@ -38,6 +38,6 @@ class CodeDataStructTest {
             |// 
         """.trimMargin()
 
-        assertEquals(expectedUml, uml)
+        Assertions.assertEquals(expectedUml, uml)
     }
 }

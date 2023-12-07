@@ -1,10 +1,9 @@
 package cc.unitmesh.pick.prompt.builder
 
+import cc.unitmesh.pick.ext.toUml
 import cc.unitmesh.pick.prompt.Instruction
 import cc.unitmesh.pick.prompt.InstructionBuilder
 import cc.unitmesh.pick.prompt.InstructionContext
-import chapi.domain.core.CodeDataStruct
-import chapi.domain.core.CodePosition
 
 class RelatedCodeCompletionBuilder(private val context: InstructionContext) : InstructionBuilder {
     private val instruction: String = "";
@@ -24,6 +23,12 @@ class RelatedCodeCompletionBuilder(private val context: InstructionContext) : In
             it.toUml()
         }
 
+//        container.DataStructures.map {
+//            it.Functions.map {
+//                it.Name
+//            }
+//        }
+
         val element = Instruction(
             instruction,
             output = output,
@@ -41,52 +46,6 @@ class RelatedCodeCompletionBuilder(private val context: InstructionContext) : In
         )
 
         return listOf(element)
-    }
-}
-
-fun CodeDataStruct.toUml(): String {
-    val output = StringBuilder()
-
-    output.append("class $NodeName {\n")
-    Fields.forEach {
-        output.append("   ${it.TypeValue}: ${it.TypeType}\n")
-    }
-
-    var getterSetter: List<String> = listOf()
-    val methodsWithoutGetterSetter = Functions.filter { it.Name != NodeName }
-        .filter { it.Name !in listOf("toString", "hashCode", "equals") }
-        .filter {
-            val isGetter = it.Name.startsWith("get") && it.Parameters.isEmpty()
-            val isSetter = it.Name.startsWith("set") && it.Parameters.size == 1
-            if (isGetter || isSetter) {
-                getterSetter = listOf(it.Name)
-                return@filter false
-            }
-            return@filter true
-        }
-
-    if (getterSetter.isNotEmpty()) {
-        output.append("\n   'getter/setter: ${getterSetter.joinToString(", ")}\n")
-    }
-
-    val methodCodes = methodsWithoutGetterSetter
-        .joinToString("\n") { method ->
-            val params =
-                method.Parameters.joinToString("") { parameter -> "${parameter.TypeValue}: ${parameter.TypeType}" }
-            "   + ${method.Name}($params)" + if (method.ReturnType.isNotBlank()) ": ${method.ReturnType}" else ""
-        }
-
-    if (methodCodes.isNotBlank()) {
-        output.append("\n")
-        output.append(methodCodes)
-    }
-
-    output.append("\n")
-    output.append(" }\n")
-
-    // TODO: split output and add comments line
-    return output.split("\n").joinToString("\n") {
-        "// $it"
     }
 }
 
