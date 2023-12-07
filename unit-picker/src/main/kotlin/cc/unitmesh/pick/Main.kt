@@ -1,6 +1,6 @@
 package cc.unitmesh.pick
 
-import cc.unitmesh.pick.picker.CodePicker
+import cc.unitmesh.pick.picker.SimpleCodePicker
 import cc.unitmesh.pick.picker.PickerConfig
 import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.parameters.options.default
@@ -14,7 +14,7 @@ class Picker : CliktCommand() {
         val config = PickerConfig(url = url)
 
         runBlocking {
-            CodePicker(config).execute()
+            SimpleCodePicker(config).execute()
         }
     }
 }

@@ -1,4 +1,4 @@
-package cc.unitmesh.pick.picker
+package cc.unitmesh.pick.walker
 
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
