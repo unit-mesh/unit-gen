@@ -16,14 +16,14 @@ class RelatedCodeCompletionBuilder(val context: InstructionContext) : Instructio
             instruction,
             output = output,
             input = """
-                | Compare this snippet:
+                |Compare this snippet:
                 |```$language
                 |$relatedCode
                 |```
                 |Code:
                 |```$language
                 |$beforeCursorCode
-                |```""".trimIndent()
+                |```""".trimMargin()
         ))
     }
 
