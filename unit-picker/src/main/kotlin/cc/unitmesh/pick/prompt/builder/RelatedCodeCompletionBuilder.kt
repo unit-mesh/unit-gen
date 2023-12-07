@@ -4,6 +4,7 @@ import cc.unitmesh.pick.prompt.Instruction
 import cc.unitmesh.pick.prompt.InstructionBuilder
 import cc.unitmesh.pick.prompt.InstructionContext
 import chapi.domain.core.CodeDataStruct
+import chapi.domain.core.CodePosition
 
 class RelatedCodeCompletionBuilder(private val context: InstructionContext) : InstructionBuilder {
     private val instruction: String = "";
@@ -16,7 +17,7 @@ class RelatedCodeCompletionBuilder(private val context: InstructionContext) : In
         val container = context.job.container ?: return emptyList()
 
         val relatedDataStructure = container.Imports.mapNotNull {
-            context.fileTree[it.AsName]?.container?.DataStructures
+            context.fileTree[it.Source]?.container?.DataStructures
         }.flatten()
 
         val relatedCode = relatedDataStructure.joinToString("\n") {
