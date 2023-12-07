@@ -37,7 +37,7 @@ class CodePicker(private val config: PickerConfig) {
                 launch {
                     for (fileJob in walkdirChannel) {
                         languageWorker.processFile(fileJob)?.let {
-                            workerManager.addJob(PickJob.from(it))
+                            workerManager.addJob(InstructionJob.from(it))
                         }
                     }
 

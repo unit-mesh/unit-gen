@@ -1,7 +1,7 @@
 package cc.unitmesh.pick.worker
 
 import cc.unitmesh.pick.prompt.InstructionBuilder
-import cc.unitmesh.pick.picker.PickJob
+import cc.unitmesh.pick.picker.InstructionJob
 import chapi.ast.javaast.JavaAnalyser
 import kotlinx.coroutines.coroutineScope
 import org.archguard.scanner.analyser.count.FileJob
@@ -21,19 +21,19 @@ import org.archguard.scanner.analyser.count.FileJob
  * - by Vertical (with History Change):
  */
 class JavaLangWorker : LangWorker() {
-    private val jobs: MutableList<PickJob> = mutableListOf()
-    private val packageTree: MutableMap<String, PickJob> = mutableMapOf()
+    private val jobs: MutableList<InstructionJob> = mutableListOf()
+    private val packageTree: MutableMap<String, InstructionJob> = mutableMapOf()
 
     private val packageRegex = Regex("package\\s+([a-zA-Z0-9_.]+);")
     private val extLength = ".java".length
 
-    override fun addJob(job: PickJob) {
+    override fun addJob(job: InstructionJob) {
         this.jobs.add(job)
         tryAddClassToTree(job.code, job)
         job.container = JavaAnalyser().analysis(job.code, job.fileSummary.location)
     }
 
-    private fun tryAddClassToTree(code: String, job: PickJob) {
+    private fun tryAddClassToTree(code: String, job: InstructionJob) {
         val packageMatch = packageRegex.find(code)
         if (packageMatch != null) {
             val packageName = packageMatch.groupValues[1]
