@@ -31,7 +31,6 @@ class JavaLangWorker : LangWorker() {
         this.jobs.add(job)
         val code = job.fileSummary.content.decodeToString()
         tryAddClassToTree(code, job)
-
         job.container = JavaAnalyser().analysis(code, job.fileSummary.location)
     }
 
@@ -39,6 +38,7 @@ class JavaLangWorker : LangWorker() {
         val packageMatch = packageRegex.find(code)
         if (packageMatch != null) {
             val packageName = packageMatch.groupValues[1]
+            // in Java the filename is the class name
             val className = job.fileSummary.filename.substring(0, job.fileSummary.filename.length - extLength)
             val fullClassName = "$packageName.$className"
             packageTree[fullClassName] = job
@@ -48,7 +48,7 @@ class JavaLangWorker : LangWorker() {
     override suspend fun start(): List<Instruction> = coroutineScope {
         // 1. read directory to a collection of files for FileJob
         jobs.map {
-            println(it.container)
+
         }
 
         // 2. check package information from line 1?
