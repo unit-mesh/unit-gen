@@ -5,7 +5,6 @@ import org.archguard.rule.common.Language
 
 class WorkerManager {
     private val workers: Map<Language, LangWorker> = mapOf(
-        // todo: add more language support
         Language.JAVA to JavaLangWorker(),
     )
 

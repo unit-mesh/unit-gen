@@ -9,8 +9,8 @@ import org.archguard.scanner.core.sourcecode.CodeDatabaseRelation
 import org.archguard.scanner.core.sourcecode.ContainerService
 
 class ExtRuleAnalyser {
-    val webApiRuleSetProvider = WebApiRuleSetProvider()
-    val sqlRuleSetProvider = SqlRuleSetProvider()
+    private val webApiRuleSetProvider = WebApiRuleSetProvider()
+    private val sqlRuleSetProvider = SqlRuleSetProvider()
 
     fun checkApi(services: List<ContainerService>): List<Issue> {
         return WebApiRuleVisitor(services).visitor(listOf(webApiRuleSetProvider.get()))
