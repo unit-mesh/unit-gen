@@ -81,6 +81,7 @@ fun CodeDataStruct.toUml(): String {
         output.append(methodCodes)
     }
 
+    output.append("\n")
     output.append(" }\n")
 
     // TODO: split output and add comments line
