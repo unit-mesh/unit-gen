@@ -8,7 +8,7 @@ import com.github.ajalt.clikt.parameters.options.option
 import kotlinx.coroutines.runBlocking
 
 class Picker : CliktCommand() {
-    val url by option("-u", "--url", help = "url to pick code").default(".")
+    private val url by option("-u", "--url", help = "url to pick code").default(".")
 
     override fun run() {
         val config = PickerConfig(url = url)

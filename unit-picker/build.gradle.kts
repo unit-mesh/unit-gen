@@ -17,6 +17,7 @@ dependencies {
     implementation(libs.clikt)
     implementation(libs.serialization.json)
     implementation(libs.coroutines.core)
+    implementation(libs.kotlin.reflect)
 
     implementation(libs.chapi.domain)
     implementation(libs.chapi.java)

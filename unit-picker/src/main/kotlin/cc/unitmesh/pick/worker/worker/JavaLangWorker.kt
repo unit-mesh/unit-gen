@@ -25,7 +25,7 @@ import org.archguard.scanner.analyser.count.FileJob
  */
 class JavaLangWorker(val workerContext: WorkerContext) : LangWorker() {
     private val jobs: MutableList<InstructionJob> = mutableListOf()
-    private val packageTree: MutableMap<String, InstructionJob> = mutableMapOf()
+    private val fileTree: HashMap<String, InstructionJob> = hashMapOf()
 
     private val packageRegex = Regex("package\\s+([a-zA-Z0-9_.]+);")
     private val extLength = ".java".length
@@ -33,7 +33,15 @@ class JavaLangWorker(val workerContext: WorkerContext) : LangWorker() {
     override fun addJob(job: InstructionJob) {
         this.jobs.add(job)
         tryAddClassToTree(job.code, job)
-        job.container = JavaAnalyser().analysis(job.code, job.fileSummary.location)
+
+        // since the Java Analyser imports will be in data structures
+        val container = JavaAnalyser().analysis(job.code, job.fileSummary.location)
+        container.DataStructures.map {
+            it.Imports = container.Imports
+        }
+
+        job.container = container
+
     }
 
     private fun tryAddClassToTree(code: String, job: InstructionJob) {
@@ -43,13 +51,13 @@ class JavaLangWorker(val workerContext: WorkerContext) : LangWorker() {
             // in Java the filename is the class name
             val className = job.fileSummary.filename.substring(0, job.fileSummary.filename.length - extLength)
             val fullClassName = "$packageName.$className"
-            packageTree[fullClassName] = job
+            fileTree[fullClassName] = job
         }
     }
 
     override suspend fun start(): Collection<Instruction> = coroutineScope {
         return@coroutineScope jobs.map {
-            InstructionBuilder.build(workerContext.builderType, it)
+            InstructionBuilder.build(workerContext.builderType, fileTree, it)
         }.flatten()
     }
 
