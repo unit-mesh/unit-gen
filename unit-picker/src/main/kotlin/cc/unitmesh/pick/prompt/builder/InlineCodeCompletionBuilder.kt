@@ -5,20 +5,19 @@ import cc.unitmesh.pick.prompt.InstructionBuilder
 import cc.unitmesh.pick.prompt.InstructionContext
 import kotlinx.serialization.Serializable
 
-@Serializable
-class InlineCodeCompletionBuilder(
-    val instruction: String,
-    val output: String,
-    val language: String,
-    val beforeCursorCode: String,
-) : InstructionBuilder {
-    override fun build(context: InstructionContext): Instruction {
-        return Instruction(
+class InlineCodeCompletionBuilder(val context: InstructionContext) : InstructionBuilder {
+    val instruction: String = "";
+    val output: String = "";
+    val language: String = "";
+    val beforeCursorCode: String = "";
+
+    override fun build(): List<Instruction> {
+        return listOf(Instruction(
             instruction,
             output = output,
             input = """```$language
                 |$beforeCursorCode
                 |```""".trimMargin()
-        )
+        ))
     }
 }

@@ -9,17 +9,6 @@ import org.junit.jupiter.api.Test
 class InstructionBuilderTest {
     @Test
     fun shouldConvertInstructionToJson() {
-        val instruction = InlineCodeCompletionBuilder(
-            "Inline Code Completion",
-            "Input for inline code completion",
-            "java",
-            "import java.util.*;\n" +
-                    "\n" +
-                    "public class Main {\n" +
-                    "    public static void main(String[] args) {\n"
-        )
 
-        val output = Json.encodeToString(instruction)
-        println(output)
     }
 }

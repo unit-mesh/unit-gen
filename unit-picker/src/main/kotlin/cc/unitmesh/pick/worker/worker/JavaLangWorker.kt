@@ -48,11 +48,9 @@ class JavaLangWorker(val workerContext: WorkerContext) : LangWorker() {
     }
 
     override suspend fun start(): Collection<Instruction> = coroutineScope {
-        jobs.map {
-
-        }
-
-        return@coroutineScope listOf()
+        return@coroutineScope jobs.map {
+            InstructionBuilder.build(workerContext.builderType, it)
+        }.flatten()
     }
 
     // check by history?

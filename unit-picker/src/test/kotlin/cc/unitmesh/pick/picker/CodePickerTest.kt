@@ -1,10 +1,12 @@
 package cc.unitmesh.pick.picker;
 
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlin.test.assertEquals
+import cc.unitmesh.pick.prompt.Instruction
+import kotlinx.coroutines.runBlocking
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import org.junit.jupiter.api.Test
+import java.io.File
+import kotlin.test.assertEquals
 
 class CodePickerTest {
     @Test
@@ -64,6 +66,11 @@ class CodePickerTest {
             PickerConfig(url = "https://github.com/unit-mesh/unit-eval-testing")
         )
 
-        picker.execute()
+        runBlocking {
+            val output: MutableList<Instruction> = picker.execute()
+            File("test.jsonl").writeText(output.joinToString("\n") {
+                Json.encodeToString(it)
+            })
+        }
     }
 }

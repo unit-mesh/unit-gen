@@ -3,18 +3,16 @@ package cc.unitmesh.pick.prompt.builder
 import cc.unitmesh.pick.prompt.Instruction
 import cc.unitmesh.pick.prompt.InstructionBuilder
 import cc.unitmesh.pick.prompt.InstructionContext
-import kotlinx.serialization.Serializable
 
-@Serializable
-data class RelatedCodeCompletionBuilder(
-    val instruction: String,
-    val output: String,
-    val language: String,
-    val beforeCursorCode: String,
-    val relatedCode: String,
-) : InstructionBuilder {
-    override fun build(context: InstructionContext): Instruction {
-        return Instruction(
+class RelatedCodeCompletionBuilder(val context: InstructionContext) : InstructionBuilder {
+    val instruction: String = "";
+    val output: String = "";
+    val language: String = "";
+    val beforeCursorCode: String = "";
+    val relatedCode: String = "";
+
+    override fun build(): List<Instruction> {
+        return listOf(Instruction(
             instruction,
             output = output,
             input = """
@@ -25,9 +23,8 @@ data class RelatedCodeCompletionBuilder(
                 |Code:
                 |```$language
                 |$beforeCursorCode
-                |```""${'"'}.trimMargin()
-            """.trimIndent()
-        )
+                |```""".trimIndent()
+        ))
     }
 
 

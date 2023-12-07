@@ -25,6 +25,9 @@ enum class InstructionType(val contentClass: KClass<out InstructionBuilder>) {
     RELATED_CODE_COMPLETION(RelatedCodeCompletionBuilder::class);
 
     val type: String get() = name.lowercase()
+    fun builder(context: InstructionContext): InstructionBuilder {
+        return contentClass.constructors.first().call(context)
+    }
 }
 
 object InstructionTypeSerializer : KSerializer<InstructionType> {

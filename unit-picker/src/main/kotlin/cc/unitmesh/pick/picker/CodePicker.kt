@@ -6,6 +6,7 @@ import cc.unitmesh.pick.worker.WorkerContext
 import cc.unitmesh.pick.worker.WorkerManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import org.archguard.action.checkout.GitSourceSettings
@@ -18,40 +19,38 @@ import java.nio.file.Path
 class CodePicker(private val config: PickerConfig) {
     private val logger = org.slf4j.LoggerFactory.getLogger(javaClass)
 
-    fun execute() = runBlocking {
-        val scope = CoroutineScope(coroutineContext)
-        scope.launch {
-            val codeDir = checkoutCode(config.url, config.branch, config.baseDir)
-                .toFile().canonicalFile
+    suspend fun execute() = coroutineScope {
+        val codeDir = checkoutCode(config.url, config.branch, config.baseDir)
+            .toFile().canonicalFile
 
-            logger.info("start picker")
+        logger.info("start picker")
 
-            val languageWorker = LanguageWorker()
-            val workerManager = WorkerManager(WorkerContext(config.builderTypes))
-            val walkdirChannel = Channel<FileJob>()
-            val summary = mutableListOf<Instruction>()
+        val languageWorker = LanguageWorker()
+        val workerManager = WorkerManager(WorkerContext(config.builderTypes))
+        val walkdirChannel = Channel<FileJob>()
+        val summary = mutableListOf<Instruction>()
 
+        launch {
             launch {
-                launch {
-                    PickDirectoryWalker(walkdirChannel).start(codeDir.toString())
-                    walkdirChannel.close()
-                }
-                launch {
-                    for (fileJob in walkdirChannel) {
-                        languageWorker.processFile(fileJob)?.let {
-                            workerManager.addJob(InstructionJob.from(it))
-                        }
+                PickDirectoryWalker(walkdirChannel).start(codeDir.toString())
+                walkdirChannel.close()
+            }
+            launch {
+                for (fileJob in walkdirChannel) {
+                    languageWorker.processFile(fileJob)?.let {
+                        workerManager.addJob(InstructionJob.from(it))
                     }
-
-                    summary.addAll(workerManager.runAll())
                 }
 
-                // todo: add summary to jsonl
-            }.join()
+                summary.addAll(workerManager.runAll())
+            }
 
-            logger.info("stop picker")
-            // 3. generate tree to jsonl
-        }
+        }.join()
+
+        logger.info("stop picker")
+        // 3. generate tree to jsonl
+
+        return@coroutineScope summary
     }
 
     fun checkoutCode(url: String, branch: String, baseDir: String): Path {
