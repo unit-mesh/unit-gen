@@ -9,7 +9,9 @@ class InstructionJob(
     var fileSummary: FileJob,
     var code: String = "",
     var container: CodeContainer? = null,
+    var codeLines: List<String> = listOf()
 ) {
+
     companion object {
         fun from(fileJob: FileJob): InstructionJob {
             return InstructionJob(

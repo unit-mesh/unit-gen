@@ -1,5 +1,6 @@
 package cc.unitmesh.pick.worker.worker
 
+import cc.unitmesh.pick.ext.CodeDataStructUtil
 import cc.unitmesh.pick.prompt.InstructionBuilder
 import cc.unitmesh.pick.picker.InstructionJob
 import cc.unitmesh.pick.prompt.Instruction
@@ -36,12 +37,15 @@ class JavaLangWorker(val workerContext: WorkerContext) : LangWorker() {
 
         // since the Java Analyser imports will be in data structures
         val container = JavaAnalyser().analysis(job.code, job.fileSummary.location)
-        container.DataStructures.map {
-            it.Imports = container.Imports
+        job.codeLines = job.code.lines()
+        container.DataStructures.map { ds ->
+            ds.Imports = container.Imports
+
+            ds.Content = CodeDataStructUtil.contentByPosition(job.codeLines, ds.Position)
+            ds.Functions.map { it.apply { it.Content = CodeDataStructUtil.contentByPosition(job.codeLines, it.Position) } }
         }
 
         job.container = container
-
     }
 
     private fun tryAddClassToTree(code: String, job: InstructionJob) {
