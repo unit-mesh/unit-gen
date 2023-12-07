@@ -2,7 +2,6 @@ package cc.unitmesh.pick.worker
 
 import cc.unitmesh.pick.output.Instruction
 import cc.unitmesh.pick.picker.PickJob
-import chapi.ast.antlr.JavaParser
 import chapi.ast.javaast.JavaAnalyser
 import kotlinx.coroutines.coroutineScope
 import org.archguard.scanner.analyser.count.FileJob
@@ -25,7 +24,7 @@ class JavaLangWorker : LangWorker() {
     private val jobs: MutableList<PickJob> = mutableListOf()
     private val packageTree: MutableMap<String, PickJob> = mutableMapOf()
 
-    private val packageRegex = Regex("package\\s+([a-zA-Z0-9_\\.]+);")
+    private val packageRegex = Regex("package\\s+([a-zA-Z0-9_.]+);")
     private val extLength = ".java".length
 
     override fun addJob(job: PickJob) {
