@@ -1,5 +1,6 @@
 package cc.unitmesh.pick.worker
 
+import cc.unitmesh.pick.prompt.InstructionBuilder
 import cc.unitmesh.pick.picker.PickJob
 import org.archguard.rule.common.Language
 
@@ -14,10 +15,10 @@ class WorkerManager {
         worker?.addJob(job)
     }
 
-    suspend fun runAll() {
-        workers.forEach { (_, worker) ->
+    suspend fun runAll() : List<InstructionBuilder> {
+        return workers.map { (_, worker) ->
             worker.start()
-        }
+        }.flatten()
     }
 }
 

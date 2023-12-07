@@ -1,6 +1,6 @@
 package cc.unitmesh.pick.worker
 
-import cc.unitmesh.pick.output.Instruction
+import cc.unitmesh.pick.prompt.InstructionBuilder
 import cc.unitmesh.pick.picker.PickJob
 import chapi.ast.javaast.JavaAnalyser
 import kotlinx.coroutines.coroutineScope
@@ -29,9 +29,8 @@ class JavaLangWorker : LangWorker() {
 
     override fun addJob(job: PickJob) {
         this.jobs.add(job)
-        val code = job.fileSummary.content.decodeToString()
-        tryAddClassToTree(code, job)
-        job.container = JavaAnalyser().analysis(code, job.fileSummary.location)
+        tryAddClassToTree(job.code, job)
+        job.container = JavaAnalyser().analysis(job.code, job.fileSummary.location)
     }
 
     private fun tryAddClassToTree(code: String, job: PickJob) {
@@ -45,15 +44,11 @@ class JavaLangWorker : LangWorker() {
         }
     }
 
-    override suspend fun start(): List<Instruction> = coroutineScope {
-        // 1. read directory to a collection of files for FileJob
+    override suspend fun start(): List<InstructionBuilder> = coroutineScope {
         jobs.map {
 
         }
 
-        // 2. check package information from line 1?
-
-        // 3. build full project trees
         return@coroutineScope listOf()
     }
 

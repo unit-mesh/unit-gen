@@ -1,5 +1,6 @@
 package cc.unitmesh.pick.picker
 
+import cc.unitmesh.pick.prompt.InstructionBuilder
 import cc.unitmesh.pick.worker.WorkerManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.channels.Channel
@@ -7,7 +8,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import org.archguard.action.checkout.GitSourceSettings
 import org.archguard.action.checkout.executeGitCheckout
-import org.archguard.rule.common.Language
 import org.archguard.scanner.analyser.count.FileJob
 import org.archguard.scanner.analyser.count.LanguageWorker
 import java.nio.file.Files
@@ -27,6 +27,7 @@ class CodePicker(private val config: PickerConfig) {
             val languageWorker = LanguageWorker()
             val workerManager = WorkerManager()
             val walkdirChannel = Channel<FileJob>()
+            val summary = mutableListOf<InstructionBuilder>()
 
             launch {
                 launch {
@@ -40,11 +41,12 @@ class CodePicker(private val config: PickerConfig) {
                         }
                     }
 
-                    workerManager.runAll()
+                    summary.addAll(workerManager.runAll())
                 }
             }.join()
 
             logger.info("stop picker")
+
 
             // 3. generate tree to jsonl
         }

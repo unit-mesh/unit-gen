@@ -1,14 +1,14 @@
-package cc.unitmesh.pick.output;
+package cc.unitmesh.pick.prompt;
 
 
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import org.junit.jupiter.api.Test
 
-class InstructionTest {
+class InstructionBuilderTest {
     @Test
     fun shouldConvertInstructionToJson() {
-        val instruction = InlineCodeCompletion(
+        val instruction = InlineCodeCompletionBuilder(
             "Inline Code Completion",
             "Input for inline code completion",
             "java",

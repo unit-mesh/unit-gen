@@ -1,4 +1,4 @@
-package cc.unitmesh.pick.output
+package cc.unitmesh.pick.prompt
 
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
@@ -11,89 +11,112 @@ import kotlinx.serialization.encoding.Encoder
 import kotlin.reflect.KClass
 
 @Serializable(InstructionTypeSerializer::class)
-enum class InstructionType(val contentClass: KClass<out Instruction>) {
-    INLINE_COMPLETION(InlineCodeCompletion::class),
+enum class InstructionType(val contentClass: KClass<out InstructionBuilder>) {
+    INLINE_COMPLETION(InlineCodeCompletionBuilder::class),
     IN_BLOCK_COMPLETION(InBlockCodeCompletion::class),
     AFTER_BLOCK_COMPLETION(AfterBlockCodeCompletion::class),
     /**
      * the AutoDev with pre-build context
      */
-    RELATED_CODE_COMPLETION(RelatedCodeCompletion::class)
-    ;
+    RELATED_CODE_COMPLETION(RelatedCodeCompletion::class);
 
     val type: String get() = name.lowercase()
 }
 
-sealed interface Instruction {
-    val output: String
-    val instruction: String
-    fun input(): String
+interface InstructionBuilder {
+    fun build(): InstructionData
 }
 
+data class InstructionData(
+    val instruction: String,
+    val input: String,
+    val output: String,
+)
+
 @Serializable
-data class InlineCodeCompletion(
-    override val instruction: String,
-    override val output: String,
+data class InlineCodeCompletionBuilder(
+    val instruction: String,
+    val output: String,
     val language: String,
     val beforeCursorCode: String,
-) : Instruction {
-    override fun input(): String {
-        return """```$language
-            |$beforeCursorCode
-            |```""".trimMargin()
+) : InstructionBuilder {
+    override fun build(): InstructionData {
+        return InstructionData(
+            instruction,
+            output = output,
+            input = """```$language
+                |$beforeCursorCode
+                |```""".trimMargin()
+        )
     }
 }
 
 @Serializable
 data class InBlockCodeCompletion(
-    override val instruction: String,
-    override val output: String,
+    val instruction: String,
+    val output: String,
     val language: String,
     val beforeCursorCode: String,
     val afterCursorCode: String,
-) : Instruction {
-    override fun input(): String {
-        return """```$language
-            |$beforeCursorCode
-            |$afterCursorCode
-            |```""".trimMargin()
+) : InstructionBuilder {
+    override fun build(): InstructionData {
+        return InstructionData(
+            instruction,
+            output = output,
+            input = """```$language
+                |$beforeCursorCode
+                |$afterCursorCode
+                |```""".trimMargin()
+        )
     }
 }
 
 class AfterBlockCodeCompletion(
-    override val instruction: String,
-    override val output: String,
+    val instruction: String,
+    val output: String,
     val language: String,
     val beforeCursorCode: String,
     val afterCursorCode: String,
-) : Instruction {
-    override fun input(): String {
-        return """```$language
-            |$beforeCursorCode
-            |$afterCursorCode
-            |```""".trimMargin()
+) : InstructionBuilder {
+    override fun build(): InstructionData {
+        return InstructionData(
+            instruction,
+            output = output,
+            input = """```$language
+                |$beforeCursorCode
+                |$afterCursorCode
+                |```""".trimMargin()
+        )
     }
 }
 
+
 @Serializable
 data class RelatedCodeCompletion(
-    override val instruction: String,
-    override val output: String,
+    val instruction: String,
+    val output: String,
     val language: String,
     val beforeCursorCode: String,
     val relatedCode: String,
-) : Instruction {
-    override fun input(): String {
-        return """
-            | Compare this snippet:
-            |```$language
-            |$relatedCode
-            |```
-            |Code:
-            |```$language
-            |$beforeCursorCode
-            |```""".trimMargin()
+) : InstructionBuilder {
+    override fun build(): InstructionData {
+        return InstructionData(
+            instruction,
+            output = output,
+            input = """
+                | Compare this snippet:
+                |```$language
+                |$relatedCode
+                |```
+                |Code:
+                |```$language
+                |$beforeCursorCode
+                |```""${'"'}.trimMargin()
+            """.trimIndent()
+        )
     }
+
+
 }
 
 object InstructionTypeSerializer : KSerializer<InstructionType> {
