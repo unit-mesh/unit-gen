@@ -2,11 +2,13 @@ package cc.unitmesh.pick.worker
 
 import cc.unitmesh.pick.prompt.InstructionBuilder
 import cc.unitmesh.pick.picker.InstructionJob
+import cc.unitmesh.pick.prompt.Instruction
+import cc.unitmesh.pick.worker.worker.JavaLangWorker
 import org.archguard.rule.common.Language
 
-class WorkerManager {
+class WorkerManager(workerContext: WorkerContext) {
     private val workers: Map<Language, LangWorker> = mapOf(
-        Language.JAVA to JavaLangWorker(),
+        Language.JAVA to JavaLangWorker(workerContext),
     )
 
     fun addJob(job: InstructionJob) {
@@ -15,7 +17,7 @@ class WorkerManager {
         worker?.addJob(job)
     }
 
-    suspend fun runAll() : List<InstructionBuilder> {
+    suspend fun runAll() : List<Instruction> {
         return workers.map { (_, worker) ->
             worker.start()
         }.flatten()

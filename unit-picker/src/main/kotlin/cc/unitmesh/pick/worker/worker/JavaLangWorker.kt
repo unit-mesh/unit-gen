@@ -1,7 +1,10 @@
-package cc.unitmesh.pick.worker
+package cc.unitmesh.pick.worker.worker
 
 import cc.unitmesh.pick.prompt.InstructionBuilder
 import cc.unitmesh.pick.picker.InstructionJob
+import cc.unitmesh.pick.prompt.Instruction
+import cc.unitmesh.pick.worker.LangWorker
+import cc.unitmesh.pick.worker.WorkerContext
 import chapi.ast.javaast.JavaAnalyser
 import kotlinx.coroutines.coroutineScope
 import org.archguard.scanner.analyser.count.FileJob
@@ -20,7 +23,7 @@ import org.archguard.scanner.analyser.count.FileJob
  * - by Horizontal (with Import File):
  * - by Vertical (with History Change):
  */
-class JavaLangWorker : LangWorker() {
+class JavaLangWorker(val workerContext: WorkerContext) : LangWorker() {
     private val jobs: MutableList<InstructionJob> = mutableListOf()
     private val packageTree: MutableMap<String, InstructionJob> = mutableMapOf()
 
@@ -44,7 +47,7 @@ class JavaLangWorker : LangWorker() {
         }
     }
 
-    override suspend fun start(): List<InstructionBuilder> = coroutineScope {
+    override suspend fun start(): Collection<Instruction> = coroutineScope {
         jobs.map {
 
         }

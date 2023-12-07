@@ -1,6 +1,8 @@
 package cc.unitmesh.pick.picker
 
+import cc.unitmesh.pick.prompt.Instruction
 import cc.unitmesh.pick.prompt.InstructionBuilder
+import cc.unitmesh.pick.worker.WorkerContext
 import cc.unitmesh.pick.worker.WorkerManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.channels.Channel
@@ -25,9 +27,9 @@ class CodePicker(private val config: PickerConfig) {
             logger.info("start picker")
 
             val languageWorker = LanguageWorker()
-            val workerManager = WorkerManager()
+            val workerManager = WorkerManager(WorkerContext(config.builderTypes))
             val walkdirChannel = Channel<FileJob>()
-            val summary = mutableListOf<InstructionBuilder>()
+            val summary = mutableListOf<Instruction>()
 
             launch {
                 launch {
@@ -43,11 +45,11 @@ class CodePicker(private val config: PickerConfig) {
 
                     summary.addAll(workerManager.runAll())
                 }
+
+                // todo: add summary to jsonl
             }.join()
 
             logger.info("stop picker")
-
-
             // 3. generate tree to jsonl
         }
     }
