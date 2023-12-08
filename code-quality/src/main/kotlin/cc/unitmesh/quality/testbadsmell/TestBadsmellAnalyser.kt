@@ -1,13 +1,13 @@
 package cc.unitmesh.quality.testbadsmell
 
-import cc.unitmesh.quality.base.QualityAnalyser
+import cc.unitmesh.quality.QualityAnalyser
 import chapi.domain.core.CodeAnnotation
 import chapi.domain.core.CodeCall
 import chapi.domain.core.CodeDataStruct
 import chapi.domain.core.CodeFunction
 import org.archguard.rule.core.Issue
 
-class TestBadsmellAnalyser : QualityAnalyser {
+class TestBadsmellAnalyser(val thresholds: Map<String, Int> = mapOf()) : QualityAnalyser {
     override fun analysis(nodes: List<CodeDataStruct>): List<Issue> {
         val tbsResult = TbsResult(arrayOf())
         val callMethodMap = buildCallMethodMap(nodes)

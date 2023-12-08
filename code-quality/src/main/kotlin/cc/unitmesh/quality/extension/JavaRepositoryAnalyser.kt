@@ -1,6 +1,6 @@
 package cc.unitmesh.quality.extension
 
-import cc.unitmesh.quality.base.QualityAnalyser
+import cc.unitmesh.quality.QualityAnalyser
 import chapi.domain.core.CodeDataStruct
 import org.archguard.linter.rule.sql.DatamapRuleVisitor
 import org.archguard.linter.rule.sql.SqlRuleSetProvider
@@ -10,7 +10,7 @@ import org.archguard.rule.core.Issue
 import org.archguard.scanner.analyser.backend.JavaApiAnalyser
 import org.archguard.scanner.analyser.database.JvmSqlAnalyser
 
-class JavaRepositoryAnalyser: QualityAnalyser {
+class JavaRepositoryAnalyser(thresholds: Map<String, Int> = mapOf()) : QualityAnalyser {
     private val webApiRuleSetProvider = WebApiRuleSetProvider()
     private val sqlRuleSetProvider = SqlRuleSetProvider()
     private val sqlAnalyser = JvmSqlAnalyser()
@@ -30,19 +30,6 @@ class JavaRepositoryAnalyser: QualityAnalyser {
         }
 
         return DatamapRuleVisitor(relations).visitor(listOf(sqlRuleSetProvider.get()))
-    }
-
-    // Singleton
-    companion object {
-        private var instance: JavaRepositoryAnalyser? = null
-
-        fun getInstance(): JavaRepositoryAnalyser {
-            if (instance == null) {
-                instance = JavaRepositoryAnalyser()
-            }
-
-            return instance!!
-        }
     }
 
     override fun analysis(nodes: List<CodeDataStruct>): List<Issue> {

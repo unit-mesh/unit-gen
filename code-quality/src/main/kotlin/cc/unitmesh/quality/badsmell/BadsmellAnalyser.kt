@@ -1,6 +1,6 @@
 package cc.unitmesh.quality.badsmell
 
-import cc.unitmesh.quality.base.QualityAnalyser
+import cc.unitmesh.quality.QualityAnalyser
 import chapi.domain.core.CodeDataStruct
 import chapi.domain.core.CodeFunction
 import chapi.domain.core.CodePosition
@@ -11,7 +11,13 @@ private val CodeFunction.IfSize: Int get() = 0
 private val CodeFunction.SwitchSize: Int get() = 0
 private val CodeFunction.IfInfo: List<CodePosition> get() = listOf()
 
-class BadsmellAnalyser(private val bsConfig: BsConfig = BsConfig()) : QualityAnalyser {
+class BadsmellAnalyser : QualityAnalyser {
+    private var bsThresholds = BsThresholds()
+
+    constructor(thresholds: Map<String, Int> = BsThresholds().toThresholds()) {
+        this.bsThresholds = bsThresholds.from(thresholds)
+    }
+
     override fun analysis(nodes: List<CodeDataStruct>): List<Issue> {
         val badSmellList = mutableListOf<BadSmellModel>()
         for (node in nodes) {
@@ -84,7 +90,7 @@ class BadsmellAnalyser(private val bsConfig: BsConfig = BsConfig()) : QualityAna
     fun checkLongMethod(method: CodeFunction, node: CodeDataStruct, badSmellList: MutableList<BadSmellModel>) {
         val methodLength = method.Position.StopLine - method.Position.StartLine
 
-        if (methodLength > bsConfig.bsMethodLength) {
+        if (methodLength > bsThresholds.bsMethodLength) {
             val description = "method length: $methodLength"
             val longMethod = BadSmellModel(
                 file = node.FilePath,
@@ -128,7 +134,7 @@ class BadsmellAnalyser(private val bsConfig: BsConfig = BsConfig()) : QualityAna
 
     fun checkLargeClass(node: CodeDataStruct, badSmellList: MutableList<BadSmellModel>) {
         val normalClassLength = node.Functions.filter { !it.isGetterSetter() }.size
-        if (node.Type == DataStructType.CLASS && normalClassLength >= bsConfig.bsLargeLength) {
+        if (node.Type == DataStructType.CLASS && normalClassLength >= bsThresholds.bsLargeLength) {
             val description = "methods number (without getter/setter): $normalClassLength"
             badSmellList.add(
                 BadSmellModel(
@@ -143,7 +149,7 @@ class BadsmellAnalyser(private val bsConfig: BsConfig = BsConfig()) : QualityAna
 
     fun checkComplexIf(method: CodeFunction, node: CodeDataStruct, badSmellList: MutableList<BadSmellModel>) {
         for (info in method.IfInfo) {
-            if (info.StopLine - info.StartLine >= bsConfig.bsIfLinesLength) {
+            if (info.StopLine - info.StartLine >= bsThresholds.bsIfLinesLength) {
                 val longParams = BadSmellModel(
                     file = node.FilePath,
                     line = info.StartLine.toString(),
@@ -157,7 +163,7 @@ class BadsmellAnalyser(private val bsConfig: BsConfig = BsConfig()) : QualityAna
     }
 
     fun checkRepeatedSwitches(method: CodeFunction, node: CodeDataStruct, badSmellList: MutableList<BadSmellModel>) {
-        if (method.IfSize >= bsConfig.bsIfSwitchLength) {
+        if (method.IfSize >= bsThresholds.bsIfSwitchLength) {
             val longParams = BadSmellModel(
                 file = node.FilePath,
                 line = method.Position.StartLine.toString(),
@@ -168,7 +174,7 @@ class BadsmellAnalyser(private val bsConfig: BsConfig = BsConfig()) : QualityAna
             badSmellList.add(longParams)
         }
 
-        if (method.SwitchSize >= bsConfig.bsIfSwitchLength) {
+        if (method.SwitchSize >= bsThresholds.bsIfSwitchLength) {
             val longParams = BadSmellModel(
                 file = node.FilePath,
                 line = method.Position.StartLine.toString(),
@@ -181,7 +187,7 @@ class BadsmellAnalyser(private val bsConfig: BsConfig = BsConfig()) : QualityAna
     }
 
     fun checkLongParameterList(method: CodeFunction, node: CodeDataStruct, badSmellList: MutableList<BadSmellModel>) {
-        if (method.Parameters.size > bsConfig.bsLongParasLength) {
+        if (method.Parameters.size > bsThresholds.bsLongParasLength) {
             val paramsJson = method.Parameters.joinToString(", ")
             val longParams = BadSmellModel(
                 file = node.FilePath,
