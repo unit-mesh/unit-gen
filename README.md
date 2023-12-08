@@ -38,6 +38,10 @@ AutoDev [#54](https://github.com/unit-mesh/auto-dev/issues/56)
 > Code Picker is a tool that can pick the code from the real project, will generate the code unit, and then it will be
 > the datasets to Fine-tuning the model.
 
+- [ ] Basic Instruction
+  - [x] Related Code builder
+  - [ ] InBlock Code builder
+  - [ ] AfterBlock Code builder
 - [ ] by History analysis for incremental learning
     - [ ] Git history parser
     - [ ] Incremental generate
