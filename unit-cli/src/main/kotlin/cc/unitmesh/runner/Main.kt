@@ -51,7 +51,10 @@ class UnitCommand : CliktCommand() {
             }
         }
     }
+}
 
+// Since the network is not stable, we need to retry
+//
 //    private fun extracted(projects: List<SourceCode>, outputDir: File) {
 //        runBlocking {
 //            val deferredResults = projects.map {
@@ -66,8 +69,7 @@ class UnitCommand : CliktCommand() {
 //            }
 //        }
 //    }
-}
-
+//
 //suspend fun processProject(code: SourceCode): ProcessorResult {
 //    return withContext(Dispatchers.Default) {
 //        logger.info("Start to process ${code.repository}")
