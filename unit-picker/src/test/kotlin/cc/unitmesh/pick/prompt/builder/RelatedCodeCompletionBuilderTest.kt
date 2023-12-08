@@ -12,11 +12,6 @@ import org.junit.jupiter.api.Test
 import java.io.File
 
 class RelatedCodeCompletionBuilderTest {
-    private fun loadNodes(source: String): List<CodeDataStruct> {
-        return Json { ignoreUnknownKeys = true }.decodeFromString(
-            File(this.javaClass.classLoader.getResource(source)!!.file).readText()
-        )
-    }
 
     @Test
     fun shouldReturnEmptyWhenHasQualityIssue() {
@@ -86,5 +81,66 @@ public class HelloController {
         val result = builder.convert()
 
         assertEquals(1, result.size)
+    }
+
+    @Test
+    fun shouldReturnEmptyWhenNoImports() {
+        val model = File(this.javaClass.classLoader.getResource("related/BlogPost.java")!!.file).readText()
+        val modelContainer = JavaAnalyser().analysis(model, "BlogPost.java")
+        val repository = File(this.javaClass.classLoader.getResource("related/BlogRepository.java")!!.file).readText()
+        val repositoryContainer = JavaAnalyser().analysis(repository, "BlogRepository.java")
+        val service = File(this.javaClass.classLoader.getResource("related/BlogService.java")!!.file).readText()
+        val serviceContainer = JavaAnalyser().analysis(service, "BlogService.java")
+
+        val job = InstructionJob(
+            FileJob(
+            ),
+            codeLines = service.lines(),
+            code = service,
+            container = serviceContainer
+        )
+
+        val context = InstructionContext(
+            job = job,
+            qualityTypes = listOf(CodeQualityType.JavaController),
+            fileTree = hashMapOf(
+                "cc.unitmesh.testng.entity.BlogPost" to InstructionJob(
+                    FileJob(
+                    ),
+                    codeLines = model.lines(),
+                    code = model,
+                    container = modelContainer
+                ),
+                "cc.unitmesh.testng.repository.BlogRepository" to InstructionJob(
+                    FileJob(
+                    ),
+                    codeLines = repository.lines(),
+                    code = repository,
+                    container = repositoryContainer
+                ),
+                "cc.unitmesh.testng.service.BlogService" to job
+            )
+        )
+
+        val builder = RelatedCodeCompletionBuilder(context)
+        val result = builder.convert()
+
+        assertEquals(result.size, 4)
+        val first = result.first()
+
+        assertEquals(first.relatedCode, """// class BlogPost {
+//    : Long
+//    : String
+//    : String
+//    : String
+// 
+//    'getter/setter: setAuthor
+// 
+//  }
+// 
+// class BlogRepository {
+// 
+//  }
+// """)
     }
 }
