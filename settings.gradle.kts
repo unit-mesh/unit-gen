@@ -11,7 +11,7 @@ plugins {
 include(
     "unit-core",
     "unit-picker",
-    "unit-pick",
+    "unit-eval",
 
     "code-quality"
 )

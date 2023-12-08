@@ -22,7 +22,7 @@ AutoDev [#54](https://github.com/unit-mesh/auto-dev/issues/56)
 - [x] Test BadSmell from [Coca](https://github.com/phodal/coca)
 - [ ] BadSmell from [Coca](https://github.com/phodal/coca)
     - [x] Long Parameters, Long Method, LARGE_CLASS
-    - [ ] Todo: Rewrite If, Switch logic
+    - [ ] Todos: Complex-if, Switch logic
 - [x] Estimation from [ArchGuard](https://github.com/archguard/archguard)
 - [ ] MVC architecture Governance: [Rule Linter](https://archguard.org/governance)
     - [ ] Controller -> ArchGuard API Rule + Bad Smell
@@ -31,7 +31,7 @@ AutoDev [#54](https://github.com/unit-mesh/auto-dev/issues/56)
     - [ ] Model -> Model Rule
     - [ ] Exception -> Exception Rule
     - [ ] Security -> Security Rule
-  - [ ] ArchGuard CodeDB OO Metrics: [CodeDB](https://github.com/archguard/codedb)
+- ArchGuard CodeDB OO Metrics: [CodeDB](https://github.com/archguard/codedb)
 
 ### Code Picker
 
@@ -39,9 +39,9 @@ AutoDev [#54](https://github.com/unit-mesh/auto-dev/issues/56)
 > the datasets to Fine-tuning the model.
 
 - [ ] Basic Instruction
-  - [x] Related Code builder
-  - [ ] InBlock Code builder
-  - [ ] AfterBlock Code builder
+    - [x] Related Code builder
+    - [ ] InBlock Code builder
+    - [ ] AfterBlock Code builder
 - [ ] by History analysis for incremental learning
     - [ ] Git history parser
     - [ ] Incremental generate

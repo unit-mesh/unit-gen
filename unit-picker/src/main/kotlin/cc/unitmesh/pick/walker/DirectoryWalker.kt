@@ -12,17 +12,13 @@ import java.io.File
 class DirectoryJob(
     val root: String,
     val path: String,
-    val ignores: List<IgnoreMatcher>
+    val ignores: List<IgnoreMatcher>,
 )
 
-// ".git", ".hg", ".svn"
 val PathDenyList: List<String> = listOf(".git", ".hg", ".svn")
 
-class PickDirectoryWalker(
-    val output: Channel<FileJob>,
-    val excludes: List<Regex> = listOf()
-) {
-    val logger = org.slf4j.LoggerFactory.getLogger(javaClass)
+class PickDirectoryWalker(private val output: Channel<FileJob>, private val excludes: List<Regex> = listOf()) {
+    private val logger = org.slf4j.LoggerFactory.getLogger(javaClass)
     private var root: String = ""
     private val ignores: MutableList<IgnoreMatcher> = mutableListOf()
     private val dirChannels = mutableListOf<Channel<DirectoryJob>>()
@@ -43,7 +39,7 @@ class PickDirectoryWalker(
         }
     }
 
-    fun readDir(path: String): Array<out File>? {
+    private fun readDir(path: String): Array<out File>? {
         val file = File(path)
         if (!file.exists()) {
             throw Exception("failed to open $path")

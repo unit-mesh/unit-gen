@@ -23,6 +23,8 @@ codedb = "0.1.2"
 
 kotlinxCoroutines="1.7.3"
 
+kaml="0.55.0"
+
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
@@ -78,6 +80,8 @@ codedb-action-toolkit = { group = "org.archguard.codedb", name = "action-toolkit
 
 # cf => chocolate-factory
 cf-language = { group = "cc.unitmesh", name = "code-language", version.ref = "chocolate-factory" }
+
+kaml = { group = "com.charleskorn.kaml", name = "kaml", version.ref = "kaml" }
 
 [bundles]
 test = ["test-junit-params", "test-kotlintest-assertions", "test-mockk", "test-assertj"]
