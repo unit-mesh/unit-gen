@@ -15,6 +15,7 @@ dependencies {
     implementation(projects.unitPicker)
 
     implementation(libs.clikt)
+    implementation(libs.kaml)
     implementation(libs.serialization.json)
     implementation(libs.coroutines.core)
 

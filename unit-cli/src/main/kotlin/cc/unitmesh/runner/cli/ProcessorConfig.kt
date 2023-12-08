@@ -1,4 +1,4 @@
-package cc.unitmesh.core.cli
+package cc.unitmesh.runner.cli
 
 import kotlinx.serialization.Serializable
 
