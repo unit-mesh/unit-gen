@@ -143,14 +143,14 @@ class SimpleCodePicker(private val config: PickerConfig) : CodePicker {
                 branch = branch,
                 workdir = baseDir.absolutePathString(),
             )
-            executeGitCheckout(settings)
-
             val sourceRepoDir = baseDir.resolve(settings.repositoryPath)
             try {
                 Files.createDirectories(targetDir.parent)
             } catch (e: Exception) {
                 logger.info("create dir failed: ${targetDir.parent}")
             }
+
+            executeGitCheckout(settings)
 
             logger.info("targetDir: $targetDir")
             simpleCodePicker.moveRepository(sourceRepoDir, targetDir)

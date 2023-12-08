@@ -38,7 +38,6 @@ class PickDirectoryWalker(private val output: Channel<FileJob>, private val excl
                 }
             }
         } else {
-            println("start walk: $workdir")
             createDirJob(workdir, workdir)
         }
     }
