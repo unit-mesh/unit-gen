@@ -1,9 +1,6 @@
 package cc.unitmesh.pick.prompt
 
-import cc.unitmesh.pick.prompt.builder.AfterBlockCodeCompletionBuilder
-import cc.unitmesh.pick.prompt.builder.InBlockCodeCompletionBuilder
-import cc.unitmesh.pick.prompt.builder.InlineCodeCompletionBuilder
-import cc.unitmesh.pick.prompt.builder.RelatedCodeCompletionBuilder
+import cc.unitmesh.pick.prompt.builder.*
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerializationException
@@ -15,18 +12,23 @@ import kotlinx.serialization.encoding.Encoder
 import kotlin.reflect.KClass
 
 @Serializable(InstructionTypeSerializer::class)
-enum class InstructionType(val contentClass: KClass<out InstructionBuilder>) {
-    INLINE_COMPLETION(InlineCodeCompletionBuilder::class),
-    IN_BLOCK_COMPLETION(InBlockCodeCompletionBuilder::class),
-    AFTER_BLOCK_COMPLETION(AfterBlockCodeCompletionBuilder::class),
+enum class InstructionType() {
+    INLINE_COMPLETION(),
+    IN_BLOCK_COMPLETION(),
+    AFTER_BLOCK_COMPLETION(),
     /**
      * the AutoDev with pre-build context
      */
-    RELATED_CODE_COMPLETION(RelatedCodeCompletionBuilder::class);
+    RELATED_CODE_COMPLETION();
 
     val type: String get() = name.lowercase()
-    fun builder(context: InstructionContext): InstructionBuilder {
-        return contentClass.constructors.first().call(context)
+    fun builder(context: InstructionContext): InstructionBuilder<out Any> {
+        return mapOf(
+            INLINE_COMPLETION to InlineCodeCompletionBuilder(context),
+            IN_BLOCK_COMPLETION to InBlockCodeCompletionBuilder(context),
+            AFTER_BLOCK_COMPLETION to AfterBlockCodeCompletionBuilder(context),
+            RELATED_CODE_COMPLETION to RelatedCodeCompletionBuilder(context),
+        )[this] ?: throw SerializationException("Unknown message type: $this")
     }
 }
 

@@ -10,20 +10,16 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class RelatedCodeCompletionIns(
     val language: String,
-    val beforeCursorCode: String,
+    val beforeCursor: String,
     val relatedCode: String,
     val output: String,
 )
 
 class RelatedCodeCompletionBuilder(private val context: InstructionContext) :
     InstructionBuilder<RelatedCodeCompletionIns> {
-    private var language: String = ""
-    override fun convert(): RelatedCodeCompletionIns {
-        TODO("Not yet implemented")
-    }
 
-    override fun build(): List<Instruction> {
-        language = context.job.fileSummary.language
+    override fun convert(): List<RelatedCodeCompletionIns> {
+        val language = context.job.fileSummary.language
         val container = context.job.container ?: return emptyList()
 
         // 1. collection all related data structure by imports if exists in a file tree
@@ -34,7 +30,7 @@ class RelatedCodeCompletionBuilder(private val context: InstructionContext) :
         // 2. convert all related data structure to uml
         val relatedCode = relatedDataStructure.joinToString("\n", transform = CodeDataStruct::toUml)
 
-        val map = container.DataStructures.map { ds ->
+        return container.DataStructures.map { ds ->
             ds.Functions.map {
                 val position = it.Position
                 val beforeCursor = context.job.codeLines.subList(0, position.StartLine).joinToString("\n")
@@ -47,25 +43,33 @@ class RelatedCodeCompletionBuilder(private val context: InstructionContext) :
 
                 val afterCursor = context.job.codeLines.subList(position.StartLine, stopLine).joinToString("\n")
 
-                Instruction(
-                    instruction = "Complete $language code, return rest code, no explaining",
-                    output = afterCursor,
-                    input = """
-                |```$language
-                |$relatedCode
+
+                RelatedCodeCompletionIns(
+                    language = language,
+                    beforeCursor = beforeCursor,
+                    relatedCode = relatedCode,
+                    output = afterCursor
+                )
+            }
+        }.flatten()
+    }
+
+    override fun build(): List<Instruction> {
+        return this.convert().map {
+            Instruction(
+                instruction = "Complete ${it.language} code, return rest code, no explaining",
+                output = it.output,
+                input = """
+                |```${it.language}
+                |${it.relatedCode}
                 |```
                 |
                 |Code:
-                |```$language
-                |$beforeCursor
+                |```${it.language}
+                |${it.beforeCursor}
                 |```""".trimMargin()
-                )
-            }
+            )
         }
-
-        // convert completion for template to instruction
-
-        return map.flatten()
     }
 }
 

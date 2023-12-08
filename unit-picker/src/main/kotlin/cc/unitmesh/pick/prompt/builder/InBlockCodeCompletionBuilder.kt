@@ -21,7 +21,7 @@ class InBlockCodeCompletionBuilder(val context: InstructionContext) : Instructio
     private val beforeCursorCode: String = "";
     private val afterCursorCode: String = "";
 
-    override fun convert(): InBlockCodeCompletionIns {
+    override fun convert(): List<InBlockCodeCompletionIns> {
         TODO("Not yet implemented")
     }
 

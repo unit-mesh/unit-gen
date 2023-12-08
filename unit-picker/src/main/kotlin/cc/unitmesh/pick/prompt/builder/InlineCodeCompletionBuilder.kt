@@ -17,7 +17,7 @@ class InlineCodeCompletionBuilder(val context: InstructionContext) : Instruction
     val output: String = "";
     val language: String = "";
     val beforeCursorCode: String = "";
-    override fun convert(): InlineCodeCompletionIns {
+    override fun convert(): List<InlineCodeCompletionIns> {
         TODO("Not yet implemented")
     }
 
