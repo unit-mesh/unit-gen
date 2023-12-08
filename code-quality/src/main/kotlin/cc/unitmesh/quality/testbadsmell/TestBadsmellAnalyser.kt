@@ -1,13 +1,15 @@
 package cc.unitmesh.quality.testbadsmell
 
+import cc.unitmesh.quality.base.QualityAnalyser
 import chapi.domain.core.CodeAnnotation
 import chapi.domain.core.CodeCall
 import chapi.domain.core.CodeDataStruct
 import chapi.domain.core.CodeFunction
+import org.archguard.rule.core.Issue
 
-class TestBadsmellAnalyser(val nodes: List<CodeDataStruct>) {
-    fun analysis(): Array<TestBadSmell> {
-        val tbsResult: TbsResult = TbsResult(arrayOf())
+class TestBadsmellAnalyser : QualityAnalyser {
+    override fun analysis(nodes: List<CodeDataStruct>): List<Issue> {
+        val tbsResult = TbsResult(arrayOf())
         val callMethodMap = buildCallMethodMap(nodes)
 
         for (node in nodes) {
@@ -54,13 +56,13 @@ class TestBadsmellAnalyser(val nodes: List<CodeDataStruct>) {
             }
         }
 
-        return tbsResult.results
+        return tbsResult.results.map { it.toIssue() }.toMutableList()
     }
 
     private fun addExtractAssertMethodCall(
         method: CodeFunction,
         node: CodeDataStruct,
-        callMethodMap: MutableMap<String, CodeFunction>
+        callMethodMap: MutableMap<String, CodeFunction>,
     ): List<CodeCall> {
         var methodCalls = method.FunctionCalls
         for (methodCall in methodCalls) {
@@ -77,7 +79,7 @@ class TestBadsmellAnalyser(val nodes: List<CodeDataStruct>) {
 
     private fun updateMethodCallMap(
         funcCall: CodeCall,
-        methodCallMap: HashMap<String, Array<CodeCall>>
+        methodCallMap: HashMap<String, Array<CodeCall>>,
     ) {
         var calls: Array<CodeCall> = arrayOf()
         val buildFullMethodName = funcCall.buildFullMethodName()
@@ -92,7 +94,7 @@ class TestBadsmellAnalyser(val nodes: List<CodeDataStruct>) {
         node: CodeDataStruct,
         method: CodeFunction,
         methodCallMap: MutableMap<String, Array<CodeCall>>,
-        tbsResult: TbsResult
+        tbsResult: TbsResult,
     ) {
         var isDuplicateTest = false
         for (entry in methodCallMap) {
@@ -131,7 +133,7 @@ class TestBadsmellAnalyser(val nodes: List<CodeDataStruct>) {
     private fun checkRedundantAssertionTest(
         filePath: String,
         funcCall: CodeCall,
-        tbsResult: TbsResult
+        tbsResult: TbsResult,
     ) {
         val assertParametersSize = 2
         if (funcCall.Parameters.size == assertParametersSize) {
@@ -178,7 +180,7 @@ class TestBadsmellAnalyser(val nodes: List<CodeDataStruct>) {
         filePath: String,
         annotation: CodeAnnotation,
         tbsResult: TbsResult,
-        method: CodeFunction
+        method: CodeFunction,
     ) {
         if (annotation.isIgnore()) {
             val testBadSmell = TestBadSmell(
@@ -196,7 +198,7 @@ class TestBadsmellAnalyser(val nodes: List<CodeDataStruct>) {
         filePath: String,
         annotation: CodeAnnotation,
         tbsResult: TbsResult,
-        method: CodeFunction
+        method: CodeFunction,
     ) {
         val isJavaTest = filePath.endsWith(".java") && annotation.isTest()
         val isGoTest = filePath.endsWith("_test.go")

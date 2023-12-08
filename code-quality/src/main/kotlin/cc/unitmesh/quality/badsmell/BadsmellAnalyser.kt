@@ -1,18 +1,20 @@
 package cc.unitmesh.quality.badsmell
 
+import cc.unitmesh.quality.base.QualityAnalyser
 import chapi.domain.core.CodeDataStruct
 import chapi.domain.core.CodeFunction
 import chapi.domain.core.CodePosition
 import chapi.domain.core.DataStructType
+import org.archguard.rule.core.Issue
 
 private val CodeFunction.IfSize: Int get() = 0
 private val CodeFunction.SwitchSize: Int get() = 0
 private val CodeFunction.IfInfo: List<CodePosition> get() = listOf()
 
-class BadsmellAnalyser(val data: List<CodeDataStruct>, private val bsConfig: BsConfig = BsConfig()) {
-    fun analysis(): MutableList<BadSmellModel> {
+class BadsmellAnalyser(private val bsConfig: BsConfig = BsConfig()) : QualityAnalyser {
+    override fun analysis(nodes: List<CodeDataStruct>): List<Issue> {
         val badSmellList = mutableListOf<BadSmellModel>()
-        for (node in data) {
+        for (node in nodes) {
             checkLazyElement(node, badSmellList)
 
             var onlyHaveGetterAndSetter = true
@@ -36,8 +38,8 @@ class BadsmellAnalyser(val data: List<CodeDataStruct>, private val bsConfig: BsC
             checkLargeClass(node, badSmellList)
         }
 
-        checkConnectedGraphCall(data, badSmellList)
-        return badSmellList
+        checkConnectedGraphCall(nodes, badSmellList)
+        return badSmellList.map { it.toIssue() }.toMutableList()
     }
 
     fun checkConnectedGraphCall(nodes: List<CodeDataStruct>, badSmellList: MutableList<BadSmellModel>) {
