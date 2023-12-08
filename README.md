@@ -1,5 +1,7 @@
 # UnitEval
 
+[![CI](https://github.com/unit-mesh/unit-eval/actions/workflows/build.yml/badge.svg)](https://github.com/unit-mesh/unit-eval/actions/workflows/build.yml)
+
 > Leveraging LLM benchmark/evaluation tools with fine-tuning data engineering specifically tailored for Unit Mesh tools
 > such as AutoDev, Studio B3, and DevOps Genius. The brilliance lies in the UnitEval functionality, which automatically
 > selects and evaluates code within real projects.
@@ -25,13 +27,12 @@ AutoDev [#54](https://github.com/unit-mesh/auto-dev/issues/56)
     - [ ] Todos: Complex-if, Switch logic
 - [x] Estimation from [ArchGuard](https://github.com/archguard/archguard)
 - [ ] MVC architecture Governance: [Rule Linter](https://archguard.org/governance)
-    - [ ] Controller -> ArchGuard API Rule + Bad Smell
-    - [ ] Service -> Service Rule + Bad Smell
+    - [x] Controller -> ArchGuard API Rule + Bad Smell
+    - [x] Service -> Service Rule + Bad Smell
     - [ ] Repository -> HTTP API Rule
     - [ ] Model -> Model Rule
     - [ ] Exception -> Exception Rule
     - [ ] Security -> Security Rule
-- ArchGuard CodeDB OO Metrics: [CodeDB](https://github.com/archguard/codedb)
 
 ### Code Picker
 
@@ -45,7 +46,13 @@ AutoDev [#54](https://github.com/unit-mesh/auto-dev/issues/56)
 - [ ] by History analysis for incremental learning
     - [ ] Git history parser
     - [ ] Incremental generate
-- [ ] AST parser by [Chapi](https://github.com/phodal/chapi)
+- [x] AST parser by [Chapi](https://github.com/phodal/chapi)
+- [ ] Language support by [Chapi](https://github.com/phodal/chapi)
+    - [x] Java
+    - [ ] Kotlin
+    - [ ] TypeScript/JavaScript
+    - [ ] Python
+    - [ ] Golang
 
 ### Code Eval
 
@@ -54,16 +61,8 @@ AutoDev [#54](https://github.com/unit-mesh/auto-dev/issues/56)
 - [ ] Code eval
     - [ ] EvalScript based on PromptScript
     - [ ] Auto LLM Test by Chocolate Factory
-- [ ] Eval Units
-- [ ] Language support by [Chapi](https://github.com/phodal/chapi)
-  and [ArchGuard](https://github.com/archguard/archguard) API
-    - [ ] Java
-    - [ ] Kotlin
-    - [ ] TypeScript/JavaScript
-    - [ ] Python
-    - [ ] Golang
-- [ ] Language support by TreeSitter
-    - [ ] C/C++ ?
+- Language support by TreeSitter
+    - spike C/C++ ?
 
 ## LICENSE
 
