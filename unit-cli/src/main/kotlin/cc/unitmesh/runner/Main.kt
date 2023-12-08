@@ -31,34 +31,58 @@ class UnitCommand : CliktCommand() {
         val projects = evalConfig.projects
 
         runBlocking {
-            val deferredResults = projects.map {
-                async { processProject(it) }
-            }
+            projects.map { code ->
+                logger.info("Start to process ${code.repository}")
+                val pickerConfig = PickerConfig(
+                    url = code.repository,
+                    branch = code.branch,
+                    language = code.language
+                )
 
-            deferredResults.forEach { deferred ->
-                val result = deferred.await()
+                val content = SimpleCodePicker(pickerConfig).execute()
+                ProcessorResult(
+                    repository = code.repository,
+                    content = content
+                )
+            }.forEach { result ->
                 val outputFile = File(outputDir, result.repository.split("/").last() + ".json")
                 val json = Json { prettyPrint = true }
                 outputFile.writeText(json.encodeToString(result.content))
             }
         }
     }
+
+//    private fun extracted(projects: List<SourceCode>, outputDir: File) {
+//        runBlocking {
+//            val deferredResults = projects.map {
+//                async { processProject(it) }
+//            }
+//
+//            deferredResults.forEach { deferred ->
+//                val result = deferred.await()
+//                val outputFile = File(outputDir, result.repository.split("/").last() + ".json")
+//                val json = Json { prettyPrint = true }
+//                outputFile.writeText(json.encodeToString(result.content))
+//            }
+//        }
+//    }
 }
 
-suspend fun processProject(code: SourceCode): ProcessorResult {
-    return withContext(Dispatchers.Default) {
-        logger.info("Start to process ${code.repository}")
-        val pickerConfig = PickerConfig(
-            url = code.repository,
-            branch = code.branch,
-            language = code.language
-        )
-
-        ProcessorResult(
-            repository = code.repository,
-            content = SimpleCodePicker(pickerConfig).execute()
-        )
-    }
-}
+//suspend fun processProject(code: SourceCode): ProcessorResult {
+//    return withContext(Dispatchers.Default) {
+//        logger.info("Start to process ${code.repository}")
+//        val pickerConfig = PickerConfig(
+//            url = code.repository,
+//            branch = code.branch,
+//            language = code.language
+//        )
+//
+//        val content = SimpleCodePicker(pickerConfig).execute()
+//        ProcessorResult(
+//            repository = code.repository,
+//            content = content
+//        )
+//    }
+//}
 
 fun main(args: Array<String>) = UnitCommand().main(args)
