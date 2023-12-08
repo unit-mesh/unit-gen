@@ -19,7 +19,7 @@ chocolate-factory = "0.4.3"
 
 chapi = "2.1.3"
 archguard = "2.0.7"
-codedb = "0.1.3"
+codedb = "0.1.2"
 
 kotlinxCoroutines="1.7.3"
 
