@@ -39,14 +39,15 @@ AutoDev [#54](https://github.com/unit-mesh/auto-dev/issues/56)
 > Code Picker is a tool that can pick the code from the real project, will generate the code unit, and then it will be
 > the datasets to Fine-tuning the model.
 
+![Code Quality Workflow](https://unitmesh.cc/uniteval/code-quality-workflow.png)
+
 - [ ] Basic Instruction
     - [x] Related Code builder
     - [ ] InBlock Code builder
     - [ ] AfterBlock Code builder
-- [ ] by History analysis for incremental learning
-    - [ ] Git history parser
-    - [ ] Incremental generate
+- [x] Filter by Code Quality
 - [x] AST parser by [Chapi](https://github.com/phodal/chapi)
+- [ ] by History analysis for incremental learning
 - [ ] Language support by [Chapi](https://github.com/phodal/chapi)
     - [x] Java
     - [ ] Kotlin

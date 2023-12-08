@@ -14,9 +14,9 @@ data class InlineCodeCompletionIns(
 
 class InlineCodeCompletionBuilder(val context: InstructionContext) : InstructionBuilder<InlineCodeCompletionIns> {
     val instruction: String = "";
-    val output: String = "";
-    val language: String = "";
-    val beforeCursorCode: String = "";
+    private val output: String = "";
+    private val language: String = "";
+    private val beforeCursorCode: String = "";
     override fun convert(): List<InlineCodeCompletionIns> {
         TODO("Not yet implemented")
     }
