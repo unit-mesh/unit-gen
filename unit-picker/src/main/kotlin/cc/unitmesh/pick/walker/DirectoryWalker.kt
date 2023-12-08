@@ -26,7 +26,10 @@ class PickDirectoryWalker(private val output: Channel<FileJob>, private val excl
     suspend fun start(workdir: String) = coroutineScope {
         root = workdir
         val file = File(workdir)
-        if (!file.exists()) throw Exception("failed to open $workdir")
+        if (!file.exists()) {
+            logger.error("failed to open $workdir")
+            return@coroutineScope
+        }
 
         if (!file.isDirectory) {
             launch {
