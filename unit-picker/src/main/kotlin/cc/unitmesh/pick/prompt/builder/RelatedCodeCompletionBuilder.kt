@@ -28,14 +28,19 @@ class RelatedCodeCompletionBuilder(private val context: InstructionContext) :
                 context.fileTree[it.Source]?.container?.DataStructures
             }
             .flatten()
-            .filter {
-                hasIssue(it, context.qualityTypes)
-            }
 
         // 2. convert all related data structure to uml
         val relatedCode = relatedDataStructure.joinToString("\n", transform = CodeDataStruct::toUml)
 
-        return container.DataStructures.map { ds ->
+        val dataStructs = container.DataStructures.filter {
+            hasIssue(it, context.qualityTypes)
+        }
+
+        if (dataStructs.isEmpty()) {
+            return emptyList()
+        }
+
+        return dataStructs.map { ds ->
             ds.Functions.map {
                 val position = it.Position
                 val beforeCursor = context.job.codeLines.subList(0, position.StartLine).joinToString("\n")

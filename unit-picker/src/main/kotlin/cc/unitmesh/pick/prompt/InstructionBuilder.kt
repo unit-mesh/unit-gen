@@ -60,8 +60,8 @@ interface InstructionBuilder<T> {
 
     fun hasIssue(node: CodeDataStruct, types: List<CodeQualityType>): Boolean {
         return QualityAnalyser.create(types).map { analyser ->
-            analyser.analysis(listOf(node)).isNotEmpty()
-        }.any { it }
+            analyser.analysis(listOf(node))
+        }.flatten().isEmpty()
     }
 
     companion object {
