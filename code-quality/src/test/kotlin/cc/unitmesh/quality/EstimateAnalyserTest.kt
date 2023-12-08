@@ -19,7 +19,7 @@ class EstimateAnalyserTest {
         val file = File("sample.txt").canonicalPath
 
         // when
-        val summary = EstimateAnalyser.getInstance().analysisByContent(content, file)!!
+        val summary = EstimateAnalyser.getInstance().analysisByContent(content, file, "Go")!!
 
         // then
         assertEquals("Go", summary.name)

@@ -11,7 +11,7 @@ class EstimateAnalyser {
     private var languageWorker = LanguageWorker()
 
     fun analysisByNode(node: CodeDataStruct): LanguageSummary? {
-        val summary = analysisByContent(node.Content, Path.of(node.FilePath).fileName.toString())
+        val summary = analysisByContent(node.Content, Path.of(node.FilePath).fileName.toString(), "Go")
         return summary?.complexity?.let {
             if (it > 0) {
                 summary
@@ -21,10 +21,10 @@ class EstimateAnalyser {
         }
     }
 
-    fun analysisByContent(content: String, filename: String): LanguageSummary? {
+    fun analysisByContent(content: String, filename: String, lang: String): LanguageSummary? {
         val fileContent = content.toByteArray()
         val fileJob = FileJob(
-            language = "Go",
+            language = lang,
             content = fileContent,
             filename = filename,
             bytes = fileContent.size.toLong(),
@@ -43,16 +43,5 @@ class EstimateAnalyser {
             weightedComplexity = countStats.weightedComplexity,
             bytes = countStats.bytes,
         )
-    }
-
-    companion object {
-        private var instance: EstimateAnalyser? = null
-        fun getInstance(): EstimateAnalyser {
-            if (instance == null) {
-                instance = EstimateAnalyser()
-            }
-
-            return instance!!
-        }
     }
 }

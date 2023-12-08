@@ -1,6 +1,7 @@
 package cc.unitmesh.pick.picker
 
 import cc.unitmesh.pick.prompt.InstructionType
+import cc.unitmesh.quality.CodeQualityType
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -15,8 +16,3 @@ data class PickerConfig(
     val codeQualityTypes: List<CodeQualityType> = listOf()
 )
 
-@Serializable
-enum class CodeQualityType {
-    BadSmell,
-    TestBadSmell
-}
