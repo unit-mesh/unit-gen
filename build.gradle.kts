@@ -17,12 +17,6 @@ jacoco {
     toolVersion = "0.8.8"
 }
 
-repositories {
-    mavenCentral()
-    mavenLocal()
-    google()
-}
-
 allprojects {
     apply(plugin = "java")
     apply(plugin = "jacoco")
@@ -30,6 +24,7 @@ allprojects {
     repositories {
         mavenCentral()
         mavenLocal()
+        google()
     }
 
     group = "cc.unitmesh"
