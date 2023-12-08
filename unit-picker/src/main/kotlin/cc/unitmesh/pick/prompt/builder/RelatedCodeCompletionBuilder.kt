@@ -19,7 +19,7 @@ class RelatedCodeCompletionBuilder(private val context: InstructionContext) :
     InstructionBuilder<RelatedCodeCompletionIns> {
 
     override fun convert(): List<RelatedCodeCompletionIns> {
-        val language = context.job.fileSummary.language
+        val language = context.job.fileSummary.language.lowercase()
         val container = context.job.container ?: return emptyList()
 
         // 1. collection all related data structure by imports if exists in a file tree
