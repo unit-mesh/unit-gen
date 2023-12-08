@@ -10,8 +10,8 @@ class EstimateAnalyser {
 
     private var languageWorker = LanguageWorker()
 
-    fun analysisByNode(node: CodeDataStruct): LanguageSummary? {
-        val summary = analysisByContent(node.Content, Path.of(node.FilePath).fileName.toString(), "Go")
+    fun analysisByNode(node: CodeDataStruct, lang: String): LanguageSummary? {
+        val summary = analysisByContent(node.Content, Path.of(node.FilePath).fileName.toString(), lang)
         return summary?.complexity?.let {
             if (it > 0) {
                 summary
