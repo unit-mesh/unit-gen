@@ -75,6 +75,11 @@ archguard-rule-sql = { group = "org.archguard.scanner", name = "rule-sql", versi
 archguard-rule-webapi = { group = "org.archguard.scanner", name = "rule-webapi", version.ref = "archguard" }
 archguard-rule-test = { group = "org.archguard.scanner", name = "rule-test", version.ref = "archguard" }
 
+# implementation("org.archguard.scanner:feat_apicalls:2.0.7")
+archguard-feat-apicalls = { group = "org.archguard.scanner", name = "feat_apicalls", version.ref = "archguard" }
+# feat_datamap
+archguard-feat-datamap = { group = "org.archguard.scanner", name = "feat_datamap", version.ref = "archguard" }
+
 codedb-checkout = { group = "org.archguard.codedb", name = "checkout", version.ref = "codedb" }
 codedb-action-toolkit = { group = "org.archguard.codedb", name = "action-toolkit", version.ref = "codedb" }
 

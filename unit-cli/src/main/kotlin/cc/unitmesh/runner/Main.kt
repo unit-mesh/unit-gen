@@ -26,7 +26,6 @@ class UnitCommand : CliktCommand() {
 
         logger.info("Runner started: ${outputDir.absolutePath}")
 
-
         val evalConfig = ProcessorUtils.loadConfig()
         val projects = evalConfig.projects
 

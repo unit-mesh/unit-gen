@@ -12,4 +12,11 @@ data class PickerConfig(
     val builderTypes: List<InstructionType> = listOf(
         InstructionType.RELATED_CODE_COMPLETION
     ),
+    val codeQualityTypes: List<CodeQualityType> = listOf()
 )
+
+@Serializable
+enum class CodeQualityType {
+    BadSmell,
+    TestBadSmell
+}

@@ -5,17 +5,7 @@ import org.archguard.scanner.analyser.count.LanguageSummary
 import org.archguard.scanner.analyser.count.LanguageWorker
 import java.nio.file.Path
 
-class EstimateAnalyser() {
-    companion object {
-        private var instance: EstimateAnalyser? = null
-        fun getInstance(): EstimateAnalyser {
-            if (instance == null) {
-                instance = EstimateAnalyser()
-            }
-
-            return instance!!
-        }
-    }
+class EstimateAnalyser {
 
     private var languageWorker = LanguageWorker()
 
@@ -48,5 +38,16 @@ class EstimateAnalyser() {
             weightedComplexity = countStats.weightedComplexity,
             bytes = countStats.bytes,
         )
+    }
+
+    companion object {
+        private var instance: EstimateAnalyser? = null
+        fun getInstance(): EstimateAnalyser {
+            if (instance == null) {
+                instance = EstimateAnalyser()
+            }
+
+            return instance!!
+        }
     }
 }

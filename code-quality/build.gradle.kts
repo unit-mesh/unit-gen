@@ -17,6 +17,9 @@ dependencies {
     implementation(libs.archguard.rule.sql)
     implementation(libs.archguard.rule.webapi)
 
+    implementation(libs.archguard.feat.apicalls)
+    implementation(libs.archguard.feat.datamap)
+
     // checkout
     implementation(libs.codedb.checkout)
 
