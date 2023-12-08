@@ -2,37 +2,21 @@ package cc.unitmesh.quality.extension
 
 import cc.unitmesh.quality.QualityAnalyser
 import chapi.domain.core.CodeDataStruct
-import org.archguard.linter.rule.sql.DatamapRuleVisitor
-import org.archguard.linter.rule.sql.SqlRuleSetProvider
 import org.archguard.linter.rule.webapi.WebApiRuleSetProvider
 import org.archguard.linter.rule.webapi.WebApiRuleVisitor
 import org.archguard.rule.core.Issue
 import org.archguard.scanner.analyser.backend.JavaApiAnalyser
-import org.archguard.scanner.analyser.database.JvmSqlAnalyser
 
 class JavaRepositoryAnalyser(thresholds: Map<String, Int> = mapOf()) : QualityAnalyser {
     private val webApiRuleSetProvider = WebApiRuleSetProvider()
-    private val sqlRuleSetProvider = SqlRuleSetProvider()
-    private val sqlAnalyser = JvmSqlAnalyser()
-    private val apiAnalyser = JavaApiAnalyser()
-
-    fun checkApi(input: List<CodeDataStruct>): List<Issue> {
-        input.forEach { data ->
-            apiAnalyser.analysisByNode(data, "")
-        }
-        val services = apiAnalyser.toContainerServices()
-        return WebApiRuleVisitor(services).visitor(listOf(webApiRuleSetProvider.get()))
-    }
-
-    fun checkSql(input: List<CodeDataStruct>): List<Issue> {
-        val relations = input.flatMap { data ->
-            sqlAnalyser.analysisByNode(data, "")
-        }
-
-        return DatamapRuleVisitor(relations).visitor(listOf(sqlRuleSetProvider.get()))
-    }
 
     override fun analysis(nodes: List<CodeDataStruct>): List<Issue> {
-        TODO("Not yet implemented")
+        val apiAnalyser = JavaApiAnalyser()
+        nodes.forEach { data ->
+            apiAnalyser.analysisByNode(data, "")
+        }
+
+        val services = apiAnalyser.toContainerServices()
+        return WebApiRuleVisitor(services).visitor(listOf(webApiRuleSetProvider.get()))
     }
 }

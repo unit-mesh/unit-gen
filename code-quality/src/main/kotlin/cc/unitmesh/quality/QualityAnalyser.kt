@@ -1,9 +1,9 @@
 package cc.unitmesh.quality
 
 import cc.unitmesh.quality.badsmell.BadsmellAnalyser
-import cc.unitmesh.quality.extension.JavaControllerAnalyser
-import cc.unitmesh.quality.extension.JavaRepositoryAnalyser
 import cc.unitmesh.quality.extension.JavaServiceAnalyser
+import cc.unitmesh.quality.extension.JavaRepositoryAnalyser
+import cc.unitmesh.quality.extension.JavaControllerAnalyser
 import cc.unitmesh.quality.testbadsmell.TestBadsmellAnalyser
 
 import chapi.domain.core.CodeDataStruct
@@ -25,9 +25,9 @@ interface QualityAnalyser {
                 when (type) {
                     CodeQualityType.BadSmell -> BadsmellAnalyser(thresholds)
                     CodeQualityType.TestBadSmell -> TestBadsmellAnalyser(thresholds)
-                    CodeQualityType.JavaController -> JavaControllerAnalyser(thresholds)
-                    CodeQualityType.JavaRepository -> JavaRepositoryAnalyser(thresholds)
-                    CodeQualityType.JavaService -> JavaServiceAnalyser(thresholds)
+                    CodeQualityType.JavaController -> JavaRepositoryAnalyser(thresholds)
+                    CodeQualityType.JavaRepository -> JavaServiceAnalyser(thresholds)
+                    CodeQualityType.JavaService -> JavaControllerAnalyser(thresholds)
                 }
             }
         }
