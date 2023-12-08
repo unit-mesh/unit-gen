@@ -7,7 +7,8 @@ data class InstructionContext(
     val fileTree: HashMap<String, InstructionJob>,
 )
 
-interface InstructionBuilder {
+interface InstructionBuilder<T> {
+    fun convert(): T
     fun build(): List<Instruction>
 
     companion object {

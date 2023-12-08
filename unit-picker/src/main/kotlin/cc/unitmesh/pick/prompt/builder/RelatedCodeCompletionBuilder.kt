@@ -1,14 +1,26 @@
 package cc.unitmesh.pick.prompt.builder
 
-import cc.unitmesh.pick.ext.CodeDataStructUtil
 import cc.unitmesh.pick.ext.toUml
 import cc.unitmesh.pick.prompt.Instruction
 import cc.unitmesh.pick.prompt.InstructionBuilder
 import cc.unitmesh.pick.prompt.InstructionContext
 import chapi.domain.core.CodeDataStruct
+import kotlinx.serialization.Serializable
 
-class RelatedCodeCompletionBuilder(private val context: InstructionContext) : InstructionBuilder {
+@Serializable
+data class RelatedCodeCompletionIns(
+    val language: String,
+    val beforeCursorCode: String,
+    val relatedCode: String,
+    val output: String,
+)
+
+class RelatedCodeCompletionBuilder(private val context: InstructionContext) :
+    InstructionBuilder<RelatedCodeCompletionIns> {
     private var language: String = ""
+    override fun convert(): RelatedCodeCompletionIns {
+        TODO("Not yet implemented")
+    }
 
     override fun build(): List<Instruction> {
         language = context.job.fileSummary.language

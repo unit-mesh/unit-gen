@@ -3,13 +3,27 @@ package cc.unitmesh.pick.prompt.builder
 import cc.unitmesh.pick.prompt.Instruction
 import cc.unitmesh.pick.prompt.InstructionBuilder
 import cc.unitmesh.pick.prompt.InstructionContext
+import kotlinx.serialization.Serializable
 
-class AfterBlockCodeCompletionBuilder(val context: InstructionContext) : InstructionBuilder {
+
+@Serializable
+data class AfterBlockCodeCompletionIns(
+    val language: String,
+    val beforeCursorCode: String,
+    val afterCursorCode: String,
+    val output: String,
+)
+
+class AfterBlockCodeCompletionBuilder(val context: InstructionContext) : InstructionBuilder<AfterBlockCodeCompletionIns> {
     val instruction: String = ""
-    val output: String = ""
-    val language: String = ""
-    val beforeCursorCode: String = ""
-    val afterCursorCode: String = ""
+    private val output: String = ""
+    private val language: String = ""
+    private val beforeCursorCode: String = ""
+    private val afterCursorCode: String = ""
+
+    override fun convert(): AfterBlockCodeCompletionIns {
+        TODO("Not yet implemented")
+    }
 
     override fun build(): List<Instruction> {
         return listOf(Instruction(
