@@ -8,7 +8,7 @@ import kotlin.system.exitProcess
 object ProcessorUtils {
     private val logger: Logger = org.slf4j.LoggerFactory.getLogger(ProcessorUtils::class.java)
 
-    fun loadConfig(): PreProcessorConfig {
+    fun loadConfig(): UnitEvalConfig {
         val file = File("processor.yml").let {
             if (!it.exists()) {
                 logger.error("Config file not found: ${it.absolutePath}")
@@ -19,7 +19,7 @@ object ProcessorUtils {
         }
 
         val content = file.readText()
-        return Yaml.default.decodeFromString(deserializer = PreProcessorConfig.serializer(), content)
+        return Yaml.default.decodeFromString(deserializer = UnitEvalConfig.serializer(), content)
     }
 
 }

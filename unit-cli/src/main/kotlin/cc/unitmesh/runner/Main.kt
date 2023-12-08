@@ -2,21 +2,55 @@ package cc.unitmesh.runner
 
 import cc.unitmesh.pick.picker.PickerConfig
 import cc.unitmesh.pick.picker.SimpleCodePicker
+import cc.unitmesh.runner.cli.ProcessorResult
 import com.github.ajalt.clikt.core.CliktCommand
-import com.github.ajalt.clikt.parameters.options.default
-import com.github.ajalt.clikt.parameters.options.option
 import kotlinx.coroutines.runBlocking
+import cc.unitmesh.runner.cli.ProcessorUtils
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
+import java.io.File
 
-class Picker : CliktCommand() {
-    private val url by option("-u", "--url", help = "url to pick code").default(".")
+class UnitCommand : CliktCommand() {
+    private val logger = org.slf4j.LoggerFactory.getLogger(javaClass)
 
     override fun run() {
-        val config = PickerConfig(url = url)
+        val outputDir = File("datasets" + File.separator + "origin")
+        if (!outputDir.exists()) {
+            outputDir.mkdirs()
+        }
+
+        logger.info("Runner started: ${outputDir.absolutePath}")
+
+
+        val evalConfig = ProcessorUtils.loadConfig()
+        val projects = evalConfig.projects
 
         runBlocking {
-            SimpleCodePicker(config).execute()
+            val jobs = projects.map {
+                async(Dispatchers.IO) {
+                    val pickerConfig = PickerConfig(
+                        url = it.repository,
+                        branch = it.branch,
+                        language = it.language
+                    )
+
+                    ProcessorResult(
+                        repository = it.repository,
+                        content = SimpleCodePicker(pickerConfig).execute()
+                    )
+                }
+            }
+
+            jobs.awaitAll().forEach {
+                val outputFile = File(outputDir, it.repository.split("/").last() + ".json")
+                val json = Json { prettyPrint = true }
+                outputFile.writeText(json.encodeToString(it.content))
+            }
         }
     }
 }
 
-fun main(args: Array<String>) = Picker().main(args)
+fun main(args: Array<String>) = UnitCommand().main(args)

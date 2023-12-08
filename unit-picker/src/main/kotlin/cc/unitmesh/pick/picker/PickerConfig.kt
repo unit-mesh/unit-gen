@@ -7,7 +7,8 @@ import kotlinx.serialization.Serializable
 data class PickerConfig(
     val url: String,
     val branch: String = "master",
-    val baseDir: String = ".",
+    val language: String = "java",
+    val baseDir: String = "datasets",
     val builderTypes: List<InstructionType> = listOf(
         InstructionType.RELATED_CODE_COMPLETION
     ),
