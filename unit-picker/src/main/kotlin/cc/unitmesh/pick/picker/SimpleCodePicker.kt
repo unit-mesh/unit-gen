@@ -13,6 +13,7 @@ import org.archguard.scanner.analyser.count.FileJob
 import org.archguard.scanner.analyser.count.LanguageWorker
 import java.nio.file.Files
 import java.nio.file.Path
+import kotlin.io.path.absolutePathString
 
 interface CodePicker
 
@@ -51,7 +52,12 @@ class SimpleCodePicker(private val config: PickerConfig) : CodePicker {
      * @throws IOException if an I/O error occurs during code checkout or processing.
      */
     suspend fun execute() = coroutineScope {
-        val codeDir = checkoutCode(this@SimpleCodePicker, config.url, config.branch, config.baseDir)
+        val tempGitDir = Path.of(config.baseDir, ".tmp")
+        if (!tempGitDir.toFile().exists()) {
+            Files.createDirectories(tempGitDir)
+        }
+
+        val codeDir = checkoutCode(this@SimpleCodePicker, config.url, config.branch, tempGitDir)
             .toFile().canonicalFile
 
         logger.info("start picker")
@@ -118,13 +124,13 @@ class SimpleCodePicker(private val config: PickerConfig) : CodePicker {
             return "$host/$owner/$repo"
         }
 
-        fun checkoutCode(simpleCodePicker: SimpleCodePicker, url: String, branch: String, baseDir: String): Path {
+        fun checkoutCode(simpleCodePicker: SimpleCodePicker, url: String, branch: String, baseDir: Path): Path {
             if (!gitUrlRegex.matches(url)) {
                 return Path.of(url)
             }
 
             val gitDir = gitUrlToPath(url)
-            val targetDir = Path.of(baseDir, gitDir)
+            val targetDir = baseDir.resolve(gitDir)
             logger.info("targetDir: $targetDir")
             if (targetDir.toFile().exists()) {
                 logger.info("targetDir exists: $targetDir")
@@ -132,11 +138,14 @@ class SimpleCodePicker(private val config: PickerConfig) : CodePicker {
                 return targetDir
             }
 
-            val settings = GitSourceSettings.fromArgs(arrayOf("--repository", url, "--branch", branch))
+            val settings = GitSourceSettings(
+                repository = url,
+                branch = branch,
+                workdir = baseDir.absolutePathString(),
+            )
             executeGitCheckout(settings)
 
-            // mv settings.repository to targetDir
-            val sourceRepoDir = Path.of(settings.repositoryPath)
+            val sourceRepoDir = baseDir.resolve(settings.repositoryPath)
             try {
                 Files.createDirectories(targetDir.parent)
             } catch (e: Exception) {
