@@ -1,9 +1,13 @@
 package cc.unitmesh.pick.prompt
 
 import cc.unitmesh.pick.picker.InstructionJob
+import cc.unitmesh.quality.CodeQualityType
+import cc.unitmesh.quality.QualityAnalyser
+import chapi.domain.core.CodeDataStruct
 
 data class InstructionContext(
     val job: InstructionJob,
+    val qualityTypes: List<CodeQualityType>,
     val fileTree: HashMap<String, InstructionJob>,
 )
 
@@ -54,15 +58,22 @@ interface InstructionBuilder<T> {
      */
     fun build(): List<Instruction>
 
+    fun hasIssue(node: CodeDataStruct, types: List<CodeQualityType>): Boolean {
+        return QualityAnalyser.create(types).map { analyser ->
+            analyser.analysis(listOf(node)).isNotEmpty()
+        }.any { it }
+    }
+
     companion object {
         fun build(
-            types: List<InstructionType>,
+            instructionTypes: List<InstructionType>,
+            qualityTypes: List<CodeQualityType>,
             fileTree: HashMap<String, InstructionJob>,
             job: InstructionJob,
         ): Collection<Instruction> {
-            val instructionContext = InstructionContext(job, fileTree)
+            val instructionContext = InstructionContext(job, qualityTypes, fileTree)
 
-            return types.map { type ->
+            return instructionTypes.map { type ->
                 type.builder(instructionContext).build()
             }.flatten()
         }

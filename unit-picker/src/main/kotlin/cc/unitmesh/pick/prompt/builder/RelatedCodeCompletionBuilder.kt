@@ -23,9 +23,14 @@ class RelatedCodeCompletionBuilder(private val context: InstructionContext) :
         val container = context.job.container ?: return emptyList()
 
         // 1. collection all related data structure by imports if exists in a file tree
-        val relatedDataStructure = container.Imports.mapNotNull {
-            context.fileTree[it.Source]?.container?.DataStructures
-        }.flatten()
+        val relatedDataStructure = container.Imports
+            .mapNotNull {
+                context.fileTree[it.Source]?.container?.DataStructures
+            }
+            .flatten()
+            .filter {
+                hasIssue(it, context.qualityTypes)
+            }
 
         // 2. convert all related data structure to uml
         val relatedCode = relatedDataStructure.joinToString("\n", transform = CodeDataStruct::toUml)

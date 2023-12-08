@@ -61,7 +61,7 @@ class JavaLangWorker(val workerContext: WorkerContext) : LangWorker() {
 
     override suspend fun start(): Collection<Instruction> = coroutineScope {
         return@coroutineScope jobs.map {
-            InstructionBuilder.build(workerContext.builderType, fileTree, it)
+            InstructionBuilder.build(workerContext.builderTypes, workerContext.qualityTypes, fileTree, it)
         }.flatten()
     }
 
