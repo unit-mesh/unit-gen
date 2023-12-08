@@ -6,10 +6,6 @@ plugins {
     application
 }
 
-repositories {
-    mavenCentral()
-}
-
 dependencies {
     implementation(projects.unitCore)
     implementation(projects.unitPicker)

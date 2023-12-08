@@ -6,10 +6,6 @@ plugins {
     application
 }
 
-repositories {
-    mavenCentral()
-}
-
 dependencies {
     implementation(libs.clikt)
     implementation(libs.serialization.json)

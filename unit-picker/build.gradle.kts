@@ -4,10 +4,6 @@ plugins {
     alias(libs.plugins.serialization)
 }
 
-repositories {
-    mavenCentral()
-}
-
 dependencies {
     implementation(projects.unitCore)
     implementation(projects.codeQuality)

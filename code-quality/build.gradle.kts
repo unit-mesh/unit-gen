@@ -4,10 +4,6 @@ plugins {
     alias(libs.plugins.serialization)
 }
 
-repositories {
-    mavenCentral()
-}
-
 dependencies {
     implementation(libs.serialization.json)
 
