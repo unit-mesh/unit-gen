@@ -1,7 +1,9 @@
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.shadow)
     alias(libs.plugins.serialization)
+    application
 }
 
 repositories {
@@ -10,23 +12,11 @@ repositories {
 
 dependencies {
     implementation(projects.unitCore)
-    implementation(projects.codeQuality)
+    implementation(projects.unitPicker)
 
     implementation(libs.clikt)
     implementation(libs.serialization.json)
     implementation(libs.coroutines.core)
-    implementation(libs.kotlin.reflect)
-
-    implementation(libs.chapi.domain)
-    implementation(libs.chapi.java)
-    implementation(libs.chapi.kotlin)
-
-    implementation(libs.archguard.scanner.core)
-    implementation(libs.archguard.analyser.estimate)
-
-    // checkout
-    implementation(libs.codedb.checkout)
-    implementation(libs.codedb.action.toolkit)
 
     // Logging
     implementation(libs.logging.slf4j.api)
@@ -39,4 +29,23 @@ dependencies {
 
 tasks.test {
     useJUnitPlatform()
+}
+
+
+application {
+    mainClass.set("cc.unitmesh.runner.MainKt")
+}
+
+tasks {
+    shadowJar {
+        manifest {
+            attributes(Pair("Main-Class", "cc.unitmesh.runner.MainKt"))
+        }
+        // minimize()
+        dependencies {
+            exclude(dependency("org.junit.jupiter:.*:.*"))
+            exclude(dependency("org.junit:.*:.*"))
+            exclude(dependency("junit:.*:.*"))
+        }
+    }
 }

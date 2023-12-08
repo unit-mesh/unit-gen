@@ -12,6 +12,7 @@ include(
     "unit-core",
     "unit-picker",
     "unit-eval",
+    "unit-cli",
 
     "code-quality"
 )

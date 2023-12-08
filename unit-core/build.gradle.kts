@@ -13,6 +13,7 @@ dependencies {
     implementation(libs.serialization.json)
 
     implementation(libs.cf.language)
+    implementation(libs.kaml)
 
     // Logging
     implementation(libs.logging.slf4j.api)

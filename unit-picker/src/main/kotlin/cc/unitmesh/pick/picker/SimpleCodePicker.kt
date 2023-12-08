@@ -128,6 +128,7 @@ class SimpleCodePicker(private val config: PickerConfig) : CodePicker {
             logger.info("targetDir: $targetDir")
             if (targetDir.toFile().exists()) {
                 logger.info("targetDir exists: $targetDir")
+                // todo: if exists pull rebase code
                 return targetDir
             }
 
