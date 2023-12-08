@@ -9,7 +9,7 @@ private val CodeFunction.IfSize: Int get() = 0
 private val CodeFunction.SwitchSize: Int get() = 0
 private val CodeFunction.IfInfo: List<CodePosition> get() = listOf()
 
-class BadsmellAnalyser(val data: List<CodeDataStruct>, val bsConfig: BsConfig = BsConfig()) {
+class BadsmellAnalyser(val data: List<CodeDataStruct>, private val bsConfig: BsConfig = BsConfig()) {
     fun analysis(): MutableList<BadSmellModel> {
         val badSmellList = mutableListOf<BadSmellModel>()
         for (node in data) {

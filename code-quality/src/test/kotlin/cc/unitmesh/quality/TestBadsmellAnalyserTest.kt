@@ -19,9 +19,9 @@ class TestBadsmellAnalyserTest {
         val data = JavaAnalyser().analysis(File(path).readText(), "EmptyTest.java").DataStructures
         val results = TestBadsmellAnalyser(data).analysis()
 
-        assertEquals(results[0].FileName, "EmptyTest.java")
-        assertEquals(results[0].Line, 8)
-        assertEquals(results[0].Type, "EmptyTest")
+        assertEquals(results[0].fileName, "EmptyTest.java")
+        assertEquals(results[0].line, 8)
+        assertEquals(results[0].type, "EmptyTest")
     }
 
     @Test
@@ -30,8 +30,8 @@ class TestBadsmellAnalyserTest {
         val data = JavaAnalyser().analysis(File(path).readText(), path).DataStructures
         val results = TestBadsmellAnalyser(data).analysis()
 
-        assertEquals(results[0].Line, 7)
-        assertEquals(results[0].Type, "IgnoreTest")
+        assertEquals(results[0].line, 7)
+        assertEquals(results[0].type, "IgnoreTest")
     }
 
     @Test
@@ -40,8 +40,8 @@ class TestBadsmellAnalyserTest {
         val data = JavaAnalyser().analysis(File(path).readText(), path).DataStructures
         val results = TestBadsmellAnalyser(data).analysis()
 
-        assertEquals(results[0].Line, 9)
-        assertEquals(results[0].Type, "RedundantPrintTest")
+        assertEquals(results[0].line, 9)
+        assertEquals(results[0].type, "RedundantPrintTest")
     }
 
     @Test
@@ -50,8 +50,8 @@ class TestBadsmellAnalyserTest {
         val data = JavaAnalyser().analysis(File(path).readText(), path).DataStructures
         val results = TestBadsmellAnalyser(data).analysis()
 
-        assertEquals(results[0].Line, 8)
-        assertEquals(results[0].Type, "SleepyTest")
+        assertEquals(results[0].line, 8)
+        assertEquals(results[0].type, "SleepyTest")
     }
 
     @Test
@@ -60,8 +60,8 @@ class TestBadsmellAnalyserTest {
         val data = JavaAnalyser().analysis(File(path).readText(), path).DataStructures
         val results = TestBadsmellAnalyser(data).analysis()
 
-        assertEquals(results[0].Line, 14)
-        assertEquals(results[0].Type, "RedundantAssertionTest")
+        assertEquals(results[0].line, 14)
+        assertEquals(results[0].type, "RedundantAssertionTest")
     }
 
     @Test
@@ -70,10 +70,10 @@ class TestBadsmellAnalyserTest {
         val data = JavaAnalyser().analysis(File(path).readText(), path).DataStructures
         val results = TestBadsmellAnalyser(data).analysis()
 
-        assertEquals(results[0].Line, 7)
-        assertEquals(results[0].Type, "EmptyTest")
-        assertEquals(results[1].Line, 7)
-        assertEquals(results[1].Type, "UnknownTest")
+        assertEquals(results[0].line, 7)
+        assertEquals(results[0].type, "EmptyTest")
+        assertEquals(results[1].line, 7)
+        assertEquals(results[1].type, "UnknownTest")
     }
 
     @Test
@@ -82,8 +82,8 @@ class TestBadsmellAnalyserTest {
         val data = JavaAnalyser().analysis(File(path).readText(), path).DataStructures
         val results = TestBadsmellAnalyser(data).analysis()
 
-        assertEquals(results[0].Line, 9)
-        assertEquals(results[0].Type, "DuplicateAssertTest")
+        assertEquals(results[0].line, 9)
+        assertEquals(results[0].type, "DuplicateAssertTest")
     }
 
     @Test

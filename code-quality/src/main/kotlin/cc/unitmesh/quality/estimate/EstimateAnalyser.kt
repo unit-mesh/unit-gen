@@ -1,5 +1,6 @@
 package cc.unitmesh.quality.estimate
 
+import chapi.domain.core.CodeDataStruct
 import org.archguard.scanner.analyser.count.FileJob
 import org.archguard.scanner.analyser.count.LanguageSummary
 import org.archguard.scanner.analyser.count.LanguageWorker
@@ -9,11 +10,15 @@ class EstimateAnalyser {
 
     private var languageWorker = LanguageWorker()
 
-    fun analysisByPath(path: Path): LanguageSummary? {
-        val file = path.toFile()
-        val content = file.readText()
-
-        return analysisByContent(content, file.name)
+    fun analysisByNode(node: CodeDataStruct): LanguageSummary? {
+        val summary = analysisByContent(node.Content, Path.of(node.FilePath).fileName.toString())
+        return summary?.complexity?.let {
+            if (it > 0) {
+                summary
+            } else {
+                null
+            }
+        }
     }
 
     fun analysisByContent(content: String, filename: String): LanguageSummary? {
