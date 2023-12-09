@@ -23,8 +23,6 @@ permalink: /
 > LLM benchmark/evaluation tools with fine-tuning data engineering, specifically tailored for Unit Mesh tools such as
 > AutoDev, Studio B3, and DevOps Genius.
 
-![Unit Eval Overview](https://unitmesh.cc/uniteval/overview.png)
-
 Based on:
 
 - abstract syntax tree: [Chapi](https://github.com/phodal/chapi). Used features: multiple language to same data
@@ -34,8 +32,70 @@ Based on:
   Used features: Estimation, Rule Lint (API, SQL)
 - code database [CodeDB](https://github.com/archguard/codedb). Used features: Code analysis pipeline
 
-**Features**:
 
-- Integrated use of fine-tuning, evaluation, and tooling.
+## Design Philosophy
+
+- Unique prompt. Integrated use of fine-tuning, evaluation, and tooling.
 - High-quality code pipeline construction.
 - Customizable quality evaluation metrics.
+
+### Unique Prompt
+
+![Unit Eval Overview](https://unitmesh.cc/uniteval/overview.png)
+
+Keep the same prompt: AutoDev <-> Unit Picker <-> Unit Eval
+
+#### AutoDev prompt
+
+AutoDev prompt template example:
+
+    Write unit test for following code.
+    
+    ${context.coc}
+    
+    ${context.framework}
+    
+    ${context.related_model}
+    
+    ```${context.language}
+    ${context.selection}
+    ```
+
+#### Unit Picker prompt
+
+Unit Picker prompt should keep the same structure as the AutoDev prompt. Prompt example:
+
+```kotlin
+Instruction(
+    instruction = "Complete ${it.language} code, return rest code, no explaining",
+    output = it.output,
+    input = """
+    |```${it.language}
+    |${it.relatedCode}
+    |```
+    |
+    |Code:
+    |```${it.language}
+    |${it.beforeCursor}
+    |```""".trimMargin()
+)
+```
+
+#### Unit Eval prompt
+
+Unit Eval prompt should keep the same structure as the AutoDev prompt. Prompt example:
+
+    Complete ${language} code, return rest code, no explaining
+    
+    ```${language}
+    ${relatedCode}
+    ```
+    
+    Code:
+    ```${language}
+    ${beforeCursor}
+    ```
+
+### Code quality pipeline
+
+![Code Quality Workflow](https://unitmesh.cc/uniteval/code-quality-workflow.png)

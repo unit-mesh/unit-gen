@@ -17,97 +17,72 @@
 
 Docs: [https://eval.unitmesh.cc/](https://eval.unitmesh.cc/)
 
-Based on:
+## Design Philosophy
 
-- abstract syntax tree: [Chapi](https://github.com/phodal/chapi). Used features: multiple language to same data
-  structure.
-- legacy system analysis: [Coca](https://github.com/phodal/coca). Inspired: Bad Smell, Test Bad Smell
-- architecture governance tool: [ArchGuard](https://github.com/archguard/archguard).
-  Used features: Estimation, Rule Lint (API, SQL)
-- code database [CodeDB](https://github.com/archguard/codedb). Used features: Code analysis pipeline
-
-**Features**:
-
-- Integrated use of fine-tuning, evaluation, and tooling.
+- Unique prompt. Integrated use of fine-tuning, evaluation, and tooling.
 - High-quality code pipeline construction.
 - Customizable quality evaluation metrics.
 
-## Examples
+### Unique Prompt
 
-for examples, see: [examples](examples/) folder
+![Unit Eval Overview](https://unitmesh.cc/uniteval/overview.png)
 
-output example: [code-completion.jsonl](examples/config-examples/fixtures/code-completion.jsonl)
+Keep the same prompt: AutoDev <-> Unit Picker <-> Unit Eval
 
-## Usage
+#### AutoDev prompt
 
-### use CLI
+AutoDev prompt template example:
 
-see in [config-examples](examples/config-examples/)
+    Write unit test for following code.
+    
+    ${context.coc}
+    
+    ${context.framework}
+    
+    ${context.related_model}
+    
+    ```${context.language}
+    ${context.selection}
+    ```
 
-download the latest version from [GitHub Release](https://github.com/unit-mesh/unit-eval/releases)
+#### Unit Picker prompt
 
-#### Step 1. Generate Instructions
+Unit Picker prompt should keep the same structure as the AutoDev prompt. Prompt example:
 
-1. config project by `processor.yml`
-2. run picker: `java -jar unit-cli.jar`
-
-#### Step 2. run Evaluate CLI (Optional)
-
-1.config the `unit-eval.yml` file and `connection.yml`
-
-2.run eval: `java -jar unit-eval.jar`
-
-PS：Connection
-config: [https://framework.unitmesh.cc/prompt-script/connection-config](https://framework.unitmesh.cc/prompt-script/connection-config)
-
-### use Java API
-
-see in [config-example](examples/project-example/)
-
-1.add dependency
-
-```groovy
-dependencies {
-    implementation("cc.unitmesh:unit-picker:0.1.2")
-    implementation("cc.unitmesh:code-quality:0.1.2")
-}
+```kotlin
+Instruction(
+    instruction = "Complete ${it.language} code, return rest code, no explaining",
+    output = it.output,
+    input = """
+    |```${it.language}
+    |${it.relatedCode}
+    |```
+    |
+    |Code:
+    |```${it.language}
+    |${it.beforeCursor}
+    |```""".trimMargin()
+)
 ```
 
-2.config the `unit-eval.yml` file and `connection.yml`
+#### Unit Eval prompt
 
-3.write code
+Unit Eval prompt should keep the same structure as the AutoDev prompt. Prompt example:
 
-```java
-public class App {
-    public static void main(String[] args) {
-        List<InstructionType> builderTypes = new ArrayList<>();
-        builderTypes.add(InstructionType.RELATED_CODE_COMPLETION);
+    Complete ${language} code, return rest code, no explaining
+    
+    ```${language}
+    ${relatedCode}
+    ```
+    
+    Code:
+    ```${language}
+    ${beforeCursor}
+    ```
 
-        List<CodeQualityType> codeQualityTypes = new ArrayList<>();
-        codeQualityTypes.add(CodeQualityType.BadSmell);
-        codeQualityTypes.add(CodeQualityType.JavaService);
+### Code quality pipeline
 
-        PickerOption pickerOption = new PickerOption(
-                "https://github.com/unit-mesh/unit-eval-testing", "master", "java",
-                ".", builderTypes, codeQualityTypes, new BuilderConfig()
-        );
-
-        SimpleCodePicker simpleCodePicker = new SimpleCodePicker(pickerOption);
-        List<Instruction> output = simpleCodePicker.blockingExecute();
-
-        // handle output in here
-    }
-} 
-```
-
-## Resource
-
-This repository designs evaluate the code quality of the AI code, which will use
-with [AutoDev](https://github.com/unit-mesh/auto-dev) IDE plugins.
-We use [Chocolate Factory](https://github.com/unit-mesh/chocolate-factory) to build the prompt engine.
-
-Related issue in Unit Mesh: Chocolate Factory [#9](https://github.com/unit-mesh/chocolate-factory/issues/9) and
-AutoDev [#54](https://github.com/unit-mesh/auto-dev/issues/56)
+![Code Quality Workflow](https://unitmesh.cc/uniteval/code-quality-workflow.png)
 
 ## LICENSE
 
