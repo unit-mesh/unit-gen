@@ -4,24 +4,18 @@ description: "A sample of unit mehs"
 jobs:
   prompt-evaluate: # job name should be unique for each job
     description: "Evaluate prompt with different parameters"
-    connection: connection.yml
-    template: code-complete.open-ai.vm # auto choice template by extension
+    connection: openai-connection.yml
+    template: fixtures/code-completion.vm
     template-datasource:
       - type: file
-        value: datasource.json
+        value: fixtures/code-completion.jsonl
 
     strategy:
       - type: connection
         value:
           - type: range
             key: temperature
-            range: 0.7~1.0
+            range: 0.8~0.8
             step: 0.1
       - type: repeat
-        value: 3
-
-    validate: # optional
-      - type: json-path
-        value: $.id
-      - type: string
-        value: output.length > 300
+        value: 1

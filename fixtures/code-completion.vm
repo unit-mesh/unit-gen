@@ -1,0 +1,10 @@
+Complete ${context.lang} code, return rest code, no explaining
+
+```${context.language}
+${context.relatedCode}
+```
+
+Code:
+```${context.language}
+${context.beforeCursor}
+```

@@ -2,13 +2,14 @@ package cc.unitmesh.eval
 
 import cc.unitmesh.prompt.executor.ScriptExecutor
 import com.github.ajalt.clikt.core.CliktCommand
+import com.github.ajalt.clikt.parameters.options.default
 import com.github.ajalt.clikt.parameters.options.option
 import com.github.ajalt.clikt.parameters.options.required
 import org.slf4j.Logger
 import java.io.File
 
 class EvalCli : CliktCommand() {
-    private val input by option(help = "prompt script config file").required()
+    private val input by option(help = "prompt script config file").default("unit-eval.yml")
 
     override fun run() {
         // check is yaml file
@@ -23,7 +24,7 @@ class EvalCli : CliktCommand() {
         }
 
         // execute script
-        val executor = ScriptExecutor(file)
+        val executor = ScriptExecutor(file.absoluteFile)
         executor.execute()
 
         logger.debug("execute script success: $input")
