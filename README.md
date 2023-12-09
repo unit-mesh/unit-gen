@@ -18,16 +18,13 @@
 
 docs: [https://eval.unitmesh.cc/](https://eval.unitmesh.cc/)
 
-This repository designs evaluate the code quality of the AI code, which will use
-with [AutoDev](https://github.com/unit-mesh/auto-dev) IDE plugins.
-We use [Chocolate Factory](https://github.com/unit-mesh/chocolate-factory) to build the prompt engine.
-
-Related issue in Unit Mesh: Chocolate Factory [#9](https://github.com/unit-mesh/chocolate-factory/issues/9) and
-AutoDev [#54](https://github.com/unit-mesh/auto-dev/issues/56)
-
-## Usage
+## Examples
 
 for examples, see: [examples](examples/) folder
+
+output example: [code-completion.jsonl](examples/config-examples/fixtures/code-completion.jsonl)
+
+## Usage
 
 ### use CLI
 
@@ -86,6 +83,15 @@ public class App {
   }
 } 
 ```
+
+## Resource
+
+This repository designs evaluate the code quality of the AI code, which will use
+with [AutoDev](https://github.com/unit-mesh/auto-dev) IDE plugins.
+We use [Chocolate Factory](https://github.com/unit-mesh/chocolate-factory) to build the prompt engine.
+
+Related issue in Unit Mesh: Chocolate Factory [#9](https://github.com/unit-mesh/chocolate-factory/issues/9) and
+AutoDev [#54](https://github.com/unit-mesh/auto-dev/issues/56)
 
 ## LICENSE
 

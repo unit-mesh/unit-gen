@@ -6,17 +6,33 @@ nav_order: 1
 permalink: /instruction/related-code-completion
 ---
 
-The code completion is based on the following:
+Implement class: RelatedCodeCompletionBuilder
 
-1. Collect all related data structures: This step collects all related data structures by checking the imports in the
-   file tree. The data structures are extracted from the containers associated with the source files specified in
-   container.Imports.
-2. Convert to UML: All related data structures are converted to UML format code.
-3. Check rules: The function applies the rules specified in the configuration to filter the data structures that have
-   issues.
-4. Build the code completion instructions: For each data structure with issues, the function iterates through its
-   associated functions. It extracts the code before and after the cursor position based on the function's position in
-   the code. Then, it creates a RelatedCodeCompletionIns object with the related code, language type, code before the
-   cursor, and code after the cursor. The object is added to the list of code completion instructions.
-5. Return the code completion instructions: The function returns the list of code completion instructions that have been
-   built.
+Logic:
+
+```
+// 1. Collect all related data structures by imports if they exist in a file tree
+relatedDataStructure = []
+for each import in container.Imports:
+    if context.fileTree[import.Source] exists:
+        dataStructures = context.fileTree[import.Source].container.DataStructures
+        relatedDataStructure.append(dataStructures)
+
+// Flatten the list of related data structures
+relatedDataStructure = flatten(relatedDataStructure)
+
+// 2. Convert all related data structures to UML
+relatedCode = ""
+for each dataStructure in relatedDataStructure:
+    umlCode = dataStructure.toUml()
+    relatedCode += umlCode + "\n"
+
+// 3. Check with rules specified in the config
+dataStructs = []
+for each dataStructure in container.DataStructures:
+    if hasIssue(dataStructure, context.qualityTypes):
+        dataStructs.append(dataStructure)
+        
+// 4. Build the code completion instructions        
+```
+
