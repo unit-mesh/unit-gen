@@ -1,4 +1,4 @@
-# UnitEval
+<h1 align="center">Unit Eval</h1>
 
 <p align="center">
   <a href="https://github.com/unit-mesh/unit-eval/actions/workflows/build.yml">
@@ -12,9 +12,8 @@
   </a>
 </p>
 
-> Leveraging LLM benchmark/evaluation tools with fine-tuning data engineering specifically tailored for Unit Mesh tools
-> such as AutoDev, Studio B3, and DevOps Genius. The brilliance lies in the UnitEval functionality, which automatically
-> selects and evaluates code within real projects.
+> LLM benchmark/evaluation tools with fine-tuning data engineering, specifically tailored for Unit Mesh tools such as
+> AutoDev, Studio B3, and DevOps Genius.
 
 Docs: [https://eval.unitmesh.cc/](https://eval.unitmesh.cc/)
 
@@ -58,7 +57,8 @@ download the latest version from [GitHub Release](https://github.com/unit-mesh/u
 
 2.run eval: `java -jar unit-eval.jar`
 
-PS：Connection config: [https://framework.unitmesh.cc/prompt-script/connection-config](https://framework.unitmesh.cc/prompt-script/connection-config)
+PS：Connection
+config: [https://framework.unitmesh.cc/prompt-script/connection-config](https://framework.unitmesh.cc/prompt-script/connection-config)
 
 ### use Java API
 
@@ -76,26 +76,27 @@ dependencies {
 2.config the `unit-eval.yml` file and `connection.yml`
 
 3.write code
+
 ```java
 public class App {
-  public static void main(String[] args) {
-    List<InstructionType> builderTypes = new ArrayList<>();
-    builderTypes.add(InstructionType.RELATED_CODE_COMPLETION);
+    public static void main(String[] args) {
+        List<InstructionType> builderTypes = new ArrayList<>();
+        builderTypes.add(InstructionType.RELATED_CODE_COMPLETION);
 
-    List<CodeQualityType> codeQualityTypes = new ArrayList<>();
-    codeQualityTypes.add(CodeQualityType.BadSmell);
-    codeQualityTypes.add(CodeQualityType.JavaService);
+        List<CodeQualityType> codeQualityTypes = new ArrayList<>();
+        codeQualityTypes.add(CodeQualityType.BadSmell);
+        codeQualityTypes.add(CodeQualityType.JavaService);
 
-    PickerOption pickerOption = new PickerOption(
-            "https://github.com/unit-mesh/unit-eval-testing", "master", "java",
-            ".", builderTypes, codeQualityTypes, new BuilderConfig()
-    );
+        PickerOption pickerOption = new PickerOption(
+                "https://github.com/unit-mesh/unit-eval-testing", "master", "java",
+                ".", builderTypes, codeQualityTypes, new BuilderConfig()
+        );
 
-    SimpleCodePicker simpleCodePicker = new SimpleCodePicker(pickerOption);
-    List<Instruction> output = simpleCodePicker.blockingExecute();
+        SimpleCodePicker simpleCodePicker = new SimpleCodePicker(pickerOption);
+        List<Instruction> output = simpleCodePicker.blockingExecute();
 
-    // handle output in here
-  }
+        // handle output in here
+    }
 } 
 ```
 

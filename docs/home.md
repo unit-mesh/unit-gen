@@ -20,9 +20,8 @@ permalink: /
   </a>
 </p>
 
-> Leveraging LLM benchmark/evaluation tools with fine-tuning data engineering specifically tailored for Unit Mesh tools
-> such as AutoDev, Studio B3, and DevOps Genius. The brilliance lies in the UnitEval functionality, which automatically
-> selects and evaluates code within real projects.
+> LLM benchmark/evaluation tools with fine-tuning data engineering, specifically tailored for Unit Mesh tools such as
+> AutoDev, Studio B3, and DevOps Genius.
 
 ![Unit Eval Overview](https://unitmesh.cc/uniteval/overview.png)
 
