@@ -2,6 +2,7 @@ package cc.unitmesh.runner
 
 import cc.unitmesh.pick.config.PickerConfig
 import cc.unitmesh.pick.SimpleCodePicker
+import cc.unitmesh.pick.prompt.Instruction
 import cc.unitmesh.runner.cli.ProcessorResult
 import cc.unitmesh.runner.cli.ProcessorUtils
 import com.github.ajalt.clikt.core.CliktCommand
@@ -26,6 +27,7 @@ class UnitCommand : CliktCommand() {
         val projects = evalConfig.projects
 
         runBlocking {
+            val finalResult: MutableList<Instruction> = mutableListOf()
             projects.map { code ->
                 logger.info("Start to process ${code.repository}")
                 val pickerConfig = PickerConfig(
@@ -40,10 +42,15 @@ class UnitCommand : CliktCommand() {
                     content = content
                 )
             }.forEach { result ->
+                finalResult.addAll(result.content)
                 val outputFile = File(outputDir, result.repository.split("/").last() + ".json")
                 val json = Json { prettyPrint = true }
                 outputFile.writeText(json.encodeToString(result.content))
             }
+
+            val outputFile = File(outputDir, "summary.json")
+            val json = Json { prettyPrint = true }
+            outputFile.writeText(json.encodeToString(finalResult))
         }
     }
 }

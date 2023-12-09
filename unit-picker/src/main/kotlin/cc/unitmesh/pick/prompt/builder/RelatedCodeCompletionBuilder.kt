@@ -40,7 +40,7 @@ class RelatedCodeCompletionBuilder(private val context: InstructionContext) :
             return emptyList()
         }
 
-        return dataStructs.map { ds ->
+        val codeCompletionIns = dataStructs.map { ds ->
             ds.Functions.map {
                 val position = it.Position
                 val beforeCursor = context.job.codeLines.subList(0, position.StartLine).joinToString("\n")
@@ -62,6 +62,10 @@ class RelatedCodeCompletionBuilder(private val context: InstructionContext) :
                 )
             }
         }.flatten()
+
+
+
+        return codeCompletionIns
     }
 
     override fun build(): List<Instruction> {
