@@ -28,7 +28,6 @@ tasks.test {
     useJUnitPlatform()
 }
 
-
 application {
     mainClass.set("cc.unitmesh.runner.PickerKt")
 }

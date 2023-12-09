@@ -1,6 +1,16 @@
 # UnitEval
 
-[![CI](https://github.com/unit-mesh/unit-eval/actions/workflows/build.yml/badge.svg)](https://github.com/unit-mesh/unit-eval/actions/workflows/build.yml)
+<p align="center">
+  <a href="https://github.com/unit-mesh/unit-eval/actions/workflows/build.yml">
+    <img src="https://github.com/unit-mesh/unit-eval/actions/workflows/build.yml/badge.svg" alt="CI/CD" />
+  </a>
+  <a href="https://github.com/unit-mesh/chocolate-factory">
+    <img src="https://img.shields.io/badge/powered_by-chocolate_factory-blue?logo=kotlin&logoColor=fff" alt="Powered By" />
+  </a>
+  <a href="https://github.com/unit-mesh/unit-eval/releases">
+    <img alt="GitHub release (with filter)" src="https://img.shields.io/github/v/release/unit-mesh/unit-eval">
+  </a>
+</p>
 
 > Leveraging LLM benchmark/evaluation tools with fine-tuning data engineering specifically tailored for Unit Mesh tools
 > such as AutoDev, Studio B3, and DevOps Genius. The brilliance lies in the UnitEval functionality, which automatically
@@ -27,9 +37,9 @@ AutoDev [#54](https://github.com/unit-mesh/auto-dev/issues/56)
     - [ ] Todos: Complex-if, Switch logic
 - [x] Estimation from [ArchGuard](https://github.com/archguard/archguard)
 - [ ] MVC architecture Governance: [Rule Linter](https://archguard.org/governance)
-    - [x] Controller -> ArchGuard API Rule + Bad Smell
+    - [x] Controller -> ArchGuard [HTTP API Rule](https://archguard.org/governance/web-api)
     - [x] Service -> Service Rule + Bad Smell
-    - [ ] Repository -> HTTP API Rule
+    - [x] Repository -> ArchGuard [SQL Rule](https://archguard.org/governance/sql)
     - [ ] Model -> Model Rule
     - [ ] Exception -> Exception Rule
     - [ ] Security -> Security Rule
@@ -61,7 +71,8 @@ AutoDev [#54](https://github.com/unit-mesh/auto-dev/issues/56)
 
 - [x] Code eval
     - [x] EvalScript based on PromptScript
-- [ ] Auto LLM Test by Chocolate Factory
+- [x] Auto LLM Test by Chocolate Factory
+- [ ] Eval Results
 - Language support by TreeSitter
     - spike C/C++ ?
 
