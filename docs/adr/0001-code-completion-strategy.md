@@ -1,3 +1,10 @@
+---
+layout: default
+title: ADR
+parent: ADR
+nav_order: 1
+---
+
 # 1. code-completion-strategy.md
 
 日期: 2023-12-05
