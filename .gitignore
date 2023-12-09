@@ -41,8 +41,6 @@ bin/
 ### Mac OS ###
 .DS_Store
 .idea
-processor.yml
 datasets
-openai-connection.yml
 prompt-log-*.txt
 prompt-evaluate-*.txt

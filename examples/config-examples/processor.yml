@@ -1,0 +1,4 @@
+projects:
+  - repository: https://github.com/domain-driven-design/ddd-lite-example
+    branch: main
+    language: java

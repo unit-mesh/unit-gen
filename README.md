@@ -29,13 +29,25 @@ for examples, see: [examples](examples/) folder
 
 ### use CLI
 
-1. download the latest version from [GitHub Release](https://github.com/unit-mesh/unit-eval/releases)
-2. config the `unit-eval.yml` file and `connection.yml`
-3. run picker: `java -jar unit-cli.jar`
+see in [config-examples](examples/config-examples/)
+
+download the latest version from [GitHub Release](https://github.com/unit-mesh/unit-eval/releases)
+
+#### Step 1. Generate Instructions
+
+1. config project by `processor.yml`
+2. run picker: `java -jar unit-cli.jar`
+
+#### Step 2. run Evaluate CLI (Optional)
+
+1.config the `unit-eval.yml` file and `connection.yml`
+2.run eval: `java -jar unit-eval.jar`
 
 Connection config: [https://framework.unitmesh.cc/prompt-script/connection-config](https://framework.unitmesh.cc/prompt-script/connection-config)
 
 ### use Java API
+
+see in [config-example](examples/project-example/)
 
 1.add dependency
 
@@ -67,7 +79,7 @@ public class App {
     SimpleCodePicker simpleCodePicker = new SimpleCodePicker(pickerOption);
     List<Instruction> output = simpleCodePicker.blockingExecute();
 
-    System.out.println(output);
+    // handle output in here
   }
 } 
 ```

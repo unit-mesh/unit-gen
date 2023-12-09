@@ -1,0 +1,6 @@
+name: open_ai_connection
+type: OpenAI
+configs:
+  api-host: https://api.aios.chat/ # if you are using aios.chat
+secrets:
+  api-key: sk-xxx # your api key

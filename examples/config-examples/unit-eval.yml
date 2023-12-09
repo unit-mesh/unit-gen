@@ -2,9 +2,9 @@ name: "Eval Units"
 description: "A sample of unit eval"
 
 jobs:
-  prompt-evaluate: # job name should be unique for each job
+  prompt-evaluate:
     description: "Evaluate prompt with different parameters"
-    connection: mock-connection.yml
+    connection: mock-connection.yml # 根据你的实际情况修改
     template: fixtures/code-completion.vm
     log-path: logs/
     template-datasource:

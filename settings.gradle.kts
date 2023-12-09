@@ -15,5 +15,6 @@ include(
     "unit-cli",
 
     "code-quality",
-    "examples",
+
+    "examples:project-example",
 )
