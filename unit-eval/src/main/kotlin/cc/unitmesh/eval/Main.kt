@@ -1,4 +1,4 @@
-package org.unimesh.eval
+package cc.unitmesh.eval
 
 import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.parameters.options.option

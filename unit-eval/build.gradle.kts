@@ -25,13 +25,13 @@ tasks.test {
 
 
 application {
-    mainClass.set("cc.unitmesh.pick.checker.MainKt")
+    mainClass.set("cc.unitmesh.eval.MainKt")
 }
 
 tasks {
     shadowJar {
         manifest {
-            attributes(Pair("Main-Class", "cc.unitmesh.pick.checker.MainKt"))
+            attributes(Pair("Main-Class", "cc.unitmesh.eval.MainKt"))
         }
         // minimize()
         dependencies {
