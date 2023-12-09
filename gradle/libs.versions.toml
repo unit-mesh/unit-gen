@@ -85,6 +85,10 @@ codedb-action-toolkit = { group = "org.archguard.codedb", name = "action-toolkit
 
 # cf => chocolate-factory
 cf-language = { group = "cc.unitmesh", name = "code-language", version.ref = "chocolate-factory" }
+cf-connection = { group = "cc.unitmesh", name = "connection", version.ref = "chocolate-factory" }
+cf-openai = { group = "cc.unitmesh", name = "openai", version.ref = "chocolate-factory" }
+cf-rag-script = { group = "cc.unitmesh", name = "rag-script", version.ref = "chocolate-factory" }
+cf-prompt-script = { group = "cc.unitmesh", name = "prompt-script", version.ref = "chocolate-factory" }
 
 kaml = { group = "com.charleskorn.kaml", name = "kaml", version.ref = "kaml" }
 

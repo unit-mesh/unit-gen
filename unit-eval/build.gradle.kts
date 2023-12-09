@@ -14,6 +14,8 @@ dependencies {
     implementation(libs.logging.slf4j.api)
     implementation(libs.logging.logback.classic)
 
+    implementation(libs.cf.prompt.script)
+
     testImplementation(kotlin("test"))
 
     testImplementation(libs.bundles.test)
@@ -33,7 +35,6 @@ tasks {
         manifest {
             attributes(Pair("Main-Class", "cc.unitmesh.eval.MainKt"))
         }
-        // minimize()
         dependencies {
             exclude(dependency("org.junit.jupiter:.*:.*"))
             exclude(dependency("org.junit:.*:.*"))

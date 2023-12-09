@@ -43,3 +43,4 @@ bin/
 .idea
 processor.yml
 datasets
+openai-connection.yml
