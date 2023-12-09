@@ -15,7 +15,7 @@ slf4j = "2.0.9"
 
 clikt = "4.2.1"
 
-chocolate-factory = "0.4.3"
+chocolate-factory = "0.4.4"
 
 chapi = "2.1.3"
 archguard = "2.0.7"

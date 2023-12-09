@@ -44,3 +44,4 @@ bin/
 processor.yml
 datasets
 openai-connection.yml
+prompt-log-*.txt
