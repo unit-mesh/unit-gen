@@ -11,8 +11,8 @@ jobs:
     strategy:
       matrix:
         assets:
-          - unit-cli/build/libs/server-*.jar
-          - unit-eval/build/libs/prompt-script-*-all.jar
+          - unit-cli/build/libs/unit-cli-*-all.jar
+          - unit-eval/build/libs/unit-eval-*-all.jar
 
     permissions:
       contents: write
