@@ -11,10 +11,9 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import java.io.File
 
-private val logger = org.slf4j.LoggerFactory.getLogger(UnitCommand::class.java)
+private val logger = org.slf4j.LoggerFactory.getLogger(PickerCommand::class.java)
 
-class UnitCommand : CliktCommand() {
-
+class PickerCommand : CliktCommand() {
     override fun run() {
         val outputDir = File("datasets" + File.separator + "origin")
         if (!outputDir.exists()) {
@@ -89,4 +88,4 @@ class UnitCommand : CliktCommand() {
 //    }
 //}
 
-fun main(args: Array<String>) = UnitCommand().main(args)
+fun main(args: Array<String>) = PickerCommand().main(args)

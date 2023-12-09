@@ -4,11 +4,10 @@ import cc.unitmesh.prompt.executor.ScriptExecutor
 import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.parameters.options.default
 import com.github.ajalt.clikt.parameters.options.option
-import com.github.ajalt.clikt.parameters.options.required
 import org.slf4j.Logger
 import java.io.File
 
-class EvalCli : CliktCommand() {
+class EvalCommand : CliktCommand() {
     private val input by option(help = "prompt script config file").default("unit-eval.yml")
 
     override fun run() {
@@ -31,8 +30,8 @@ class EvalCli : CliktCommand() {
     }
 
     companion object {
-        val logger: Logger = org.slf4j.LoggerFactory.getLogger(EvalCli::class.java)
+        val logger: Logger = org.slf4j.LoggerFactory.getLogger(EvalCommand::class.java)
     }
 }
 
-fun main(args: Array<String>) = EvalCli().main(args)
+fun main(args: Array<String>) = EvalCommand().main(args)

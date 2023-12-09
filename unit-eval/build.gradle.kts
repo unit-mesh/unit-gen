@@ -27,13 +27,13 @@ tasks.test {
 
 
 application {
-    mainClass.set("cc.unitmesh.eval.MainKt")
+    mainClass.set("cc.unitmesh.eval.EvalKt")
 }
 
 tasks {
     shadowJar {
         manifest {
-            attributes(Pair("Main-Class", "cc.unitmesh.eval.MainKt"))
+            attributes(Pair("Main-Class", "cc.unitmesh.eval.EvalKt"))
         }
         dependencies {
             exclude(dependency("org.junit.jupiter:.*:.*"))
