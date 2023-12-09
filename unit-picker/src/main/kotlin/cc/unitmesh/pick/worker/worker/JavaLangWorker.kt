@@ -24,7 +24,7 @@ import org.archguard.scanner.analyser.count.FileJob
  * - by Horizontal (with Import File):
  * - by Vertical (with History Change):
  */
-class JavaLangWorker(val workerContext: WorkerContext) : LangWorker() {
+class JavaLangWorker(val context: WorkerContext) : LangWorker() {
     private val jobs: MutableList<InstructionJob> = mutableListOf()
     private val fileTree: HashMap<String, InstructionJob> = hashMapOf()
 
@@ -61,7 +61,9 @@ class JavaLangWorker(val workerContext: WorkerContext) : LangWorker() {
 
     override suspend fun start(): Collection<Instruction> = coroutineScope {
         return@coroutineScope jobs.map {
-            InstructionBuilder.build(workerContext.builderTypes, workerContext.qualityTypes, fileTree, it)
+            InstructionBuilder.build(
+                context.builderTypes, context.qualityTypes, fileTree, it, context.builderConfig
+            )
         }.flatten()
     }
 

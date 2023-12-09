@@ -1,6 +1,5 @@
 package cc.unitmesh.pick.worker
 
-import cc.unitmesh.pick.prompt.InstructionBuilder
 import cc.unitmesh.pick.picker.InstructionJob
 import cc.unitmesh.pick.prompt.Instruction
 import cc.unitmesh.pick.worker.worker.JavaLangWorker

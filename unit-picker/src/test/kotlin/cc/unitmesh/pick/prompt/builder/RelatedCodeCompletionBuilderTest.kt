@@ -1,11 +1,10 @@
 package cc.unitmesh.pick.prompt.builder
 
+import cc.unitmesh.pick.picker.BuilderConfig
 import cc.unitmesh.pick.picker.InstructionJob
 import cc.unitmesh.pick.prompt.InstructionContext
 import cc.unitmesh.quality.CodeQualityType
 import chapi.ast.javaast.JavaAnalyser
-import chapi.domain.core.CodeDataStruct
-import kotlinx.serialization.json.Json
 import org.archguard.scanner.analyser.count.FileJob
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
@@ -40,7 +39,8 @@ public class HelloController {
         val context = InstructionContext(
             job = job,
             qualityTypes = listOf(CodeQualityType.JavaController),
-            fileTree = hashMapOf("" to job)
+            fileTree = hashMapOf("" to job),
+            builderConfig = BuilderConfig()
         )
         val builder = RelatedCodeCompletionBuilder(context)
         val result = builder.convert()
@@ -75,7 +75,8 @@ public class HelloController {
         val context = InstructionContext(
             job = job,
             qualityTypes = listOf(CodeQualityType.JavaController),
-            fileTree = hashMapOf("" to job)
+            fileTree = hashMapOf("" to job),
+            builderConfig = BuilderConfig()
         )
         val builder = RelatedCodeCompletionBuilder(context)
         val result = builder.convert()
@@ -119,7 +120,8 @@ public class HelloController {
                     container = repositoryContainer
                 ),
                 "cc.unitmesh.testng.service.BlogService" to job
-            )
+            ),
+            builderConfig = BuilderConfig()
         )
 
         val builder = RelatedCodeCompletionBuilder(context)
@@ -128,7 +130,8 @@ public class HelloController {
         assertEquals(result.size, 4)
         val first = result.first()
 
-        assertEquals(first.relatedCode, """// class BlogPost {
+        assertEquals(
+            first.relatedCode, """// class BlogPost {
 //    : Long
 //    : String
 //    : String
@@ -141,6 +144,7 @@ public class HelloController {
 // class BlogRepository {
 // 
 //  }
-// """)
+// """
+        )
     }
 }

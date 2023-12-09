@@ -13,6 +13,15 @@ data class PickerConfig(
     val builderTypes: List<InstructionType> = listOf(
         InstructionType.RELATED_CODE_COMPLETION
     ),
-    val codeQualityTypes: List<CodeQualityType> = listOf()
+    val codeQualityTypes: List<CodeQualityType> = listOf(),
+    val builderConfig: BuilderConfig = BuilderConfig(),
 )
 
+/**
+ * For different generic data in [cc.unitmesh.pick.prompt.InstructionBuilder]
+ */
+@Serializable
+data class BuilderConfig(
+    val withGenTempData: Boolean = true,
+    val mergeFinalOutput: Boolean = true,
+)

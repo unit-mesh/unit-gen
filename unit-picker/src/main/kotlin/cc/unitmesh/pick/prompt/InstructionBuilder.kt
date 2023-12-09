@@ -1,5 +1,6 @@
 package cc.unitmesh.pick.prompt
 
+import cc.unitmesh.pick.picker.BuilderConfig
 import cc.unitmesh.pick.picker.InstructionJob
 import cc.unitmesh.quality.CodeQualityType
 import cc.unitmesh.quality.QualityAnalyser
@@ -9,6 +10,7 @@ data class InstructionContext(
     val job: InstructionJob,
     val qualityTypes: List<CodeQualityType>,
     val fileTree: HashMap<String, InstructionJob>,
+    val builderConfig: BuilderConfig,
 )
 
 /**
@@ -70,8 +72,9 @@ interface InstructionBuilder<T> {
             qualityTypes: List<CodeQualityType>,
             fileTree: HashMap<String, InstructionJob>,
             job: InstructionJob,
+            builderConfig: BuilderConfig,
         ): Collection<Instruction> {
-            val instructionContext = InstructionContext(job, qualityTypes, fileTree)
+            val instructionContext = InstructionContext(job, qualityTypes, fileTree, builderConfig)
 
             return instructionTypes.map { type ->
                 type.builder(instructionContext).build()
