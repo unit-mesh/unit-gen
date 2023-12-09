@@ -23,6 +23,56 @@ We use [Chocolate Factory](https://github.com/unit-mesh/chocolate-factory) to bu
 Related issue in Unit Mesh: Chocolate Factory [#9](https://github.com/unit-mesh/chocolate-factory/issues/9) and
 AutoDev [#54](https://github.com/unit-mesh/auto-dev/issues/56)
 
+## Usage
+
+for examples, see: [examples](examples/) folder
+
+### use CLI
+
+1. download the latest version from [GitHub Release](https://github.com/unit-mesh/unit-eval/releases)
+2. config the `unit-eval.yml` file and `connection.yml`
+3. run picker: `java -jar unit-cli.jar`
+
+Connection config: [https://framework.unitmesh.cc/prompt-script/connection-config](https://framework.unitmesh.cc/prompt-script/connection-config)
+
+### use Java API
+
+1.add dependency
+
+```groovy
+dependencies {
+    implementation("cc.unitmesh:unit-picker:0.1.2")
+    implementation("cc.unitmesh:code-quality:0.1.2")
+}
+```
+
+2.config the `unit-eval.yml` file and `connection.yml`
+
+3.write code
+```java
+public class App {
+  public static void main(String[] args) {
+    List<InstructionType> builderTypes = new ArrayList<>();
+    builderTypes.add(InstructionType.RELATED_CODE_COMPLETION);
+
+    List<CodeQualityType> codeQualityTypes = new ArrayList<>();
+    codeQualityTypes.add(CodeQualityType.BadSmell);
+    codeQualityTypes.add(CodeQualityType.JavaService);
+
+    PickerOption pickerOption = new PickerOption(
+            "https://github.com/unit-mesh/unit-eval-testing", "master", "java",
+            ".", builderTypes, codeQualityTypes, new BuilderConfig()
+    );
+
+    SimpleCodePicker simpleCodePicker = new SimpleCodePicker(pickerOption);
+    List<Instruction> output = simpleCodePicker.blockingExecute();
+
+    System.out.println(output);
+  }
+} 
+```
+
+
 ## How it works?
 
 ![Unit Eval Overview](https://unitmesh.cc/uniteval/overview.png)
