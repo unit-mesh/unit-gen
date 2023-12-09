@@ -41,9 +41,10 @@ download the latest version from [GitHub Release](https://github.com/unit-mesh/u
 #### Step 2. run Evaluate CLI (Optional)
 
 1.config the `unit-eval.yml` file and `connection.yml`
+
 2.run eval: `java -jar unit-eval.jar`
 
-Connection config: [https://framework.unitmesh.cc/prompt-script/connection-config](https://framework.unitmesh.cc/prompt-script/connection-config)
+PS：Connection config: [https://framework.unitmesh.cc/prompt-script/connection-config](https://framework.unitmesh.cc/prompt-script/connection-config)
 
 ### use Java API
 
