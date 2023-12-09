@@ -5,7 +5,7 @@ import cc.unitmesh.quality.CodeQualityType
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class PickerConfig(
+data class PickerOption(
     val url: String,
     val branch: String = "master",
     val language: String = "java",
@@ -15,4 +15,8 @@ data class PickerConfig(
     ),
     val codeQualityTypes: List<CodeQualityType> = listOf(),
     val builderConfig: BuilderConfig = BuilderConfig(),
-)
+) {
+    fun pureDataFileName(): String {
+        return "${url.replace("/", "_")}_${branch}_${language}" + ".json"
+    }
+}

@@ -1,7 +1,7 @@
 package cc.unitmesh.pick.prompt.builder
 
 import cc.unitmesh.pick.config.BuilderConfig
-import cc.unitmesh.pick.config.InstructionJob
+import cc.unitmesh.pick.config.SingleFileInstructionJob
 import cc.unitmesh.pick.prompt.InstructionContext
 import cc.unitmesh.quality.CodeQualityType
 import chapi.ast.javaast.JavaAnalyser
@@ -29,7 +29,7 @@ public class HelloController {
 
 }"""
         val container = JavaAnalyser().analysis(code, "HelloController.java")
-        val job = InstructionJob(
+        val job = SingleFileInstructionJob(
             FileJob(
             ),
             codeLines = code.lines(),
@@ -65,7 +65,7 @@ public class HelloController {
 
 }"""
         val container = JavaAnalyser().analysis(code, "HelloController.java")
-        val job = InstructionJob(
+        val job = SingleFileInstructionJob(
             FileJob(
             ),
             codeLines = code.lines(),
@@ -93,7 +93,7 @@ public class HelloController {
         val service = File(this.javaClass.classLoader.getResource("related/BlogService.java")!!.file).readText()
         val serviceContainer = JavaAnalyser().analysis(service, "BlogService.java")
 
-        val job = InstructionJob(
+        val job = SingleFileInstructionJob(
             FileJob(
             ),
             codeLines = service.lines(),
@@ -105,14 +105,14 @@ public class HelloController {
             job = job,
             qualityTypes = listOf(CodeQualityType.JavaController),
             fileTree = hashMapOf(
-                "cc.unitmesh.testng.entity.BlogPost" to InstructionJob(
+                "cc.unitmesh.testng.entity.BlogPost" to SingleFileInstructionJob(
                     FileJob(
                     ),
                     codeLines = model.lines(),
                     code = model,
                     container = modelContainer
                 ),
-                "cc.unitmesh.testng.repository.BlogRepository" to InstructionJob(
+                "cc.unitmesh.testng.repository.BlogRepository" to SingleFileInstructionJob(
                     FileJob(
                     ),
                     codeLines = repository.lines(),

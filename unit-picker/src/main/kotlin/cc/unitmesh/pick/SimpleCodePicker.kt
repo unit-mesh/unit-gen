@@ -1,7 +1,7 @@
 package cc.unitmesh.pick
 
-import cc.unitmesh.pick.config.InstructionJob
-import cc.unitmesh.pick.config.PickerConfig
+import cc.unitmesh.pick.config.SingleFileInstructionJob
+import cc.unitmesh.pick.config.PickerOption
 import cc.unitmesh.pick.prompt.Instruction
 import cc.unitmesh.pick.walker.PickDirectoryWalker
 import cc.unitmesh.pick.worker.WorkerContext
@@ -19,7 +19,7 @@ import kotlin.io.path.absolutePathString
 
 interface CodePicker
 
-class SimpleCodePicker(private val config: PickerConfig) : CodePicker {
+class SimpleCodePicker(private val config: PickerOption) : CodePicker {
     /**
      * Executes the code config with the provided configuration.
      *
@@ -77,7 +77,7 @@ class SimpleCodePicker(private val config: PickerConfig) : CodePicker {
             launch {
                 for (fileJob in walkdirChannel) {
                     languageWorker.processFile(fileJob)?.let {
-                        workerManager.addJob(InstructionJob.from(it))
+                        workerManager.addJob(SingleFileInstructionJob.from(it))
                     }
                 }
 

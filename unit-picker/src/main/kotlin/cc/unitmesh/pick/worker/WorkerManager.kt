@@ -1,6 +1,6 @@
 package cc.unitmesh.pick.worker
 
-import cc.unitmesh.pick.config.InstructionJob
+import cc.unitmesh.pick.config.SingleFileInstructionJob
 import cc.unitmesh.pick.prompt.Instruction
 import cc.unitmesh.pick.worker.worker.JavaLangWorker
 import org.archguard.rule.common.Language
@@ -10,7 +10,7 @@ class WorkerManager(workerContext: WorkerContext) {
         Language.JAVA to JavaLangWorker(workerContext),
     )
 
-    fun addJob(job: InstructionJob) {
+    fun addJob(job: SingleFileInstructionJob) {
         val language = job.fileSummary.language.toSupportLanguage()
         val worker = workers[language]
         worker?.addJob(job)

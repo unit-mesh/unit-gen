@@ -1,6 +1,6 @@
 package cc.unitmesh.runner
 
-import cc.unitmesh.pick.config.PickerConfig
+import cc.unitmesh.pick.config.PickerOption
 import cc.unitmesh.pick.SimpleCodePicker
 import cc.unitmesh.pick.prompt.Instruction
 import cc.unitmesh.runner.cli.ProcessorResult
@@ -30,13 +30,13 @@ class UnitCommand : CliktCommand() {
             val finalResult: MutableList<Instruction> = mutableListOf()
             projects.map { code ->
                 logger.info("Start to process ${code.repository}")
-                val pickerConfig = PickerConfig(
+                val pickerOption = PickerOption(
                     url = code.repository,
                     branch = code.branch,
                     language = code.language
                 )
 
-                val content = SimpleCodePicker(pickerConfig).execute()
+                val content = SimpleCodePicker(pickerOption).execute()
                 ProcessorResult(
                     repository = code.repository,
                     content = content

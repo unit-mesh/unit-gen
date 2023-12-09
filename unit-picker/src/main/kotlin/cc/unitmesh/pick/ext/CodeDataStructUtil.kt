@@ -49,52 +49,6 @@ fun CodeDataStruct.toUml(): String {
     }
 }
 
-fun contentByPosition(lines: List<String>, position: CodePosition): String {
-    val startLine = if (position.StartLine == 0) {
-        0
-    } else {
-        position.StartLine - 1
-    }
-    val endLine = if (position.StopLine == 0) {
-        0
-    } else {
-        position.StopLine - 1
-    }
-
-    val startLineContent = lines[startLine]
-    val endLineContent = lines[endLine]
-
-    val startColumn = if (position.StartLinePosition > startLineContent.length) {
-        if (startLineContent.isBlank()) {
-            0
-        } else {
-            startLineContent.length - 1
-        }
-    } else {
-        position.StartLinePosition
-    }
-
-    val endColumn = if (position.StopLinePosition > endLineContent.length) {
-        if (endLineContent.isBlank()) {
-            0
-        } else {
-            endLineContent.length - 1
-        }
-    } else {
-        position.StopLinePosition
-    }
-
-    val start = startLineContent.substring(startColumn)
-    val end = endLineContent.substring(0, endColumn)
-
-    // start + ... + end
-    return if (startLine == endLine) {
-        start
-    } else {
-        start + lines.subList(startLine + 1, endLine).joinToString("") + end
-    }
-}
-
 object CodeDataStructUtil {
     fun contentByPosition(lines: List<String>, position: CodePosition): String {
         val startLine = if (position.StartLine == 0) {

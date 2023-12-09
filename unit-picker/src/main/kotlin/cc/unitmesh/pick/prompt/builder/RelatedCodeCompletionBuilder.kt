@@ -32,6 +32,7 @@ class RelatedCodeCompletionBuilder(private val context: InstructionContext) :
         // 2. convert all related data structure to uml
         val relatedCode = relatedDataStructure.joinToString("\n", transform = CodeDataStruct::toUml)
 
+        // 3. checks with rule specified in config
         val dataStructs = container.DataStructures.filter {
             hasIssue(it, context.qualityTypes)
         }
@@ -62,8 +63,6 @@ class RelatedCodeCompletionBuilder(private val context: InstructionContext) :
                 )
             }
         }.flatten()
-
-
 
         return codeCompletionIns
     }

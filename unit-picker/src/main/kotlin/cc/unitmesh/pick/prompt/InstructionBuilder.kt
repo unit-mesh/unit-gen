@@ -1,15 +1,15 @@
 package cc.unitmesh.pick.prompt
 
 import cc.unitmesh.pick.config.BuilderConfig
-import cc.unitmesh.pick.config.InstructionJob
+import cc.unitmesh.pick.config.SingleFileInstructionJob
 import cc.unitmesh.quality.CodeQualityType
 import cc.unitmesh.quality.QualityAnalyser
 import chapi.domain.core.CodeDataStruct
 
 data class InstructionContext(
-    val job: InstructionJob,
+    val job: SingleFileInstructionJob,
     val qualityTypes: List<CodeQualityType>,
-    val fileTree: HashMap<String, InstructionJob>,
+    val fileTree: HashMap<String, SingleFileInstructionJob>,
     val builderConfig: BuilderConfig,
 )
 
@@ -70,8 +70,8 @@ interface InstructionBuilder<T> {
         fun build(
             instructionTypes: List<InstructionType>,
             qualityTypes: List<CodeQualityType>,
-            fileTree: HashMap<String, InstructionJob>,
-            job: InstructionJob,
+            fileTree: HashMap<String, SingleFileInstructionJob>,
+            job: SingleFileInstructionJob,
             builderConfig: BuilderConfig,
         ): Collection<Instruction> {
             val instructionContext = InstructionContext(job, qualityTypes, fileTree, builderConfig)

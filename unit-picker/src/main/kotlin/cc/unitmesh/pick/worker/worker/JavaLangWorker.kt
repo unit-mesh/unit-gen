@@ -2,7 +2,7 @@ package cc.unitmesh.pick.worker.worker
 
 import cc.unitmesh.pick.ext.CodeDataStructUtil
 import cc.unitmesh.pick.prompt.InstructionBuilder
-import cc.unitmesh.pick.config.InstructionJob
+import cc.unitmesh.pick.config.SingleFileInstructionJob
 import cc.unitmesh.pick.prompt.Instruction
 import cc.unitmesh.pick.worker.LangWorker
 import cc.unitmesh.pick.worker.WorkerContext
@@ -25,13 +25,13 @@ import org.archguard.scanner.analyser.count.FileJob
  * - by Vertical (with History Change):
  */
 class JavaLangWorker(val context: WorkerContext) : LangWorker() {
-    private val jobs: MutableList<InstructionJob> = mutableListOf()
-    private val fileTree: HashMap<String, InstructionJob> = hashMapOf()
+    private val jobs: MutableList<SingleFileInstructionJob> = mutableListOf()
+    private val fileTree: HashMap<String, SingleFileInstructionJob> = hashMapOf()
 
     private val packageRegex = Regex("package\\s+([a-zA-Z0-9_.]+);")
     private val extLength = ".java".length
 
-    override fun addJob(job: InstructionJob) {
+    override fun addJob(job: SingleFileInstructionJob) {
         this.jobs.add(job)
         tryAddClassToTree(job.code, job)
 
@@ -48,7 +48,7 @@ class JavaLangWorker(val context: WorkerContext) : LangWorker() {
         job.container = container
     }
 
-    private fun tryAddClassToTree(code: String, job: InstructionJob) {
+    private fun tryAddClassToTree(code: String, job: SingleFileInstructionJob) {
         val packageMatch = packageRegex.find(code)
         if (packageMatch != null) {
             val packageName = packageMatch.groupValues[1]
