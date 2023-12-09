@@ -94,6 +94,8 @@ public class App {
 
 ### Code Quality
 
+![Code Quality Workflow](https://unitmesh.cc/uniteval/code-quality-workflow.png)
+
 - [x] Test BadSmell from [Coca](https://github.com/phodal/coca)
 - [ ] BadSmell from [Coca](https://github.com/phodal/coca)
     - [x] Long Parameters, Long Method, LARGE_CLASS
@@ -111,8 +113,6 @@ public class App {
 
 > Code Picker is a tool that can pick the code from the real project, will generate the code unit, and then it will be
 > the datasets to Fine-tuning the model.
-
-![Code Quality Workflow](https://unitmesh.cc/uniteval/code-quality-workflow.png)
 
 - [ ] Basic Instruction
     - [x] Related Code builder
