@@ -13,6 +13,8 @@ import java.io.File
 
 private val logger = org.slf4j.LoggerFactory.getLogger(PickerCommand::class.java)
 
+fun main(args: Array<String>) = PickerCommand().main(args)
+
 class PickerCommand : CliktCommand() {
     override fun run() {
         val outputDir = File("datasets" + File.separator + "origin")
@@ -88,4 +90,3 @@ class PickerCommand : CliktCommand() {
 //    }
 //}
 
-fun main(args: Array<String>) = PickerCommand().main(args)

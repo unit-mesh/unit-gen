@@ -144,18 +144,18 @@ class SimpleCodePicker(private val config: PickerOption) : CodePicker {
             val gitDir = gitUrlToPath(url)
             val targetDir = baseDir.resolve(gitDir)
             logger.info("targetDir: $targetDir")
+
             if (targetDir.toFile().exists()) {
                 logger.info("targetDir exists: $targetDir")
-                // todo: if exists pull rebase code
                 return targetDir
             }
 
             val settings = GitSourceSettings(
                 repository = url,
                 branch = branch,
-                workdir = baseDir.absolutePathString(),
+                workdir = targetDir.absolutePathString(),
             )
-            val sourceRepoDir = baseDir.resolve(settings.repositoryPath)
+
             try {
                 Files.createDirectories(targetDir.parent)
             } catch (e: Exception) {
@@ -163,9 +163,6 @@ class SimpleCodePicker(private val config: PickerOption) : CodePicker {
             }
 
             executeGitCheckout(settings)
-
-            logger.info("targetDir: $targetDir")
-            simpleCodePicker.moveRepository(sourceRepoDir, targetDir)
             return targetDir
         }
     }
