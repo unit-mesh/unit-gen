@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Rule Extension
-parent: Extensions
+parent: Quality
 nav_order: 1
 permalink: /quality/rule
 ---
