@@ -14,5 +14,6 @@ include(
     "unit-eval",
     "unit-cli",
 
-    "code-quality"
+    "code-quality",
+    "examples",
 )

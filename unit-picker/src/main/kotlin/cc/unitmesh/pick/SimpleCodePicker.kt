@@ -9,6 +9,7 @@ import cc.unitmesh.pick.worker.WorkerManager
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import org.archguard.action.checkout.GitSourceSettings
 import org.archguard.action.checkout.executeGitCheckout
 import org.archguard.scanner.analyser.count.FileJob
@@ -92,6 +93,10 @@ class SimpleCodePicker(private val config: PickerOption) : CodePicker {
         }.join()
 
         return@coroutineScope summary
+    }
+
+    fun blockingExecute() = runBlocking {
+        return@runBlocking execute()
     }
 
     private fun moveRepository(sourceDir: Path, targetDir: Path) {
