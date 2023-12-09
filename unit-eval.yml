@@ -11,7 +11,7 @@ jobs:
         value: fixtures/code-completion.jsonl
 
     strategy:
-      - type: collection
+      - type: datasource-collection
         value:
           - temperature: 0.3
             max_tokens: 1000
