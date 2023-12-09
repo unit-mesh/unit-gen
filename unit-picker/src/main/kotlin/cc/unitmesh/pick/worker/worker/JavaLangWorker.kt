@@ -8,7 +8,6 @@ import cc.unitmesh.pick.worker.LangWorker
 import cc.unitmesh.pick.worker.WorkerContext
 import chapi.ast.javaast.JavaAnalyser
 import kotlinx.coroutines.coroutineScope
-import org.archguard.scanner.analyser.count.FileJob
 
 /**
  * A repository will be like this:
@@ -86,11 +85,5 @@ class JavaLangWorker(val context: WorkerContext) : LangWorker() {
         // 3. build full project trees
 
         // 4. check history
-    }
-
-    // split methods with comments
-    fun splitMethods(fileJob: FileJob): List<FileJob> {
-        // TODO: split methods with comments
-        return listOf()
     }
 }
