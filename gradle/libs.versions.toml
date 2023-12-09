@@ -62,6 +62,7 @@ test-assertj = { group = "org.assertj", name = "assertj-core", version.ref = "as
 chapi-domain = { group = "com.phodal.chapi", name = "chapi-domain", version.ref = "chapi" }
 chapi-java = { group = "com.phodal.chapi", name = "chapi-ast-java", version.ref = "chapi" }
 chapi-kotlin = { group = "com.phodal.chapi", name = "chapi-ast-kotlin", version.ref = "chapi" }
+chapi-typescript = { group = "com.phodal.chapi", name = "chapi-ast-typescript", version.ref = "chapi" }
 
 
 # ArchGurad

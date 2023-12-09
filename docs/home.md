@@ -6,7 +6,7 @@ nav_order: 1
 permalink: /
 ---
 
-# UnitEval
+<h1 align="center">Unit Eval</h1>
 
 <p align="center">
   <a href="https://github.com/unit-mesh/unit-eval/actions/workflows/build.yml">

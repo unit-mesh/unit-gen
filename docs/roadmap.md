@@ -37,7 +37,7 @@ permalink: /roadmap
 - [ ] Language support by [Chapi](https://github.com/phodal/chapi)
     - [x] Java
     - [ ] Kotlin
-    - [ ] TypeScript/JavaScript
+    - [x] TypeScript/JavaScript
     - [ ] Python
     - [ ] Golang
 

@@ -24,7 +24,7 @@ import java.io.File
  * - by Horizontal (with Import File):
  * - by Vertical (with History Change):
  */
-class JavaLangWorker(private val context: WorkerContext) : LangWorker() {
+class JavaWorker(private val context: WorkerContext) : LangWorker() {
     private val jobs: MutableList<InstructionFileJob> = mutableListOf()
     private val fileTree: HashMap<String, InstructionFileJob> = hashMapOf()
 
@@ -64,7 +64,7 @@ class JavaLangWorker(private val context: WorkerContext) : LangWorker() {
     }
 
     override suspend fun start(): Collection<Instruction> = coroutineScope {
-        val file: File = File(context.pureDataFileName)
+        val file = File(context.pureDataFileName)
         if (!file.exists()) {
             file.createNewFile()
         }

@@ -8,7 +8,7 @@ permalink: /instruction
 
 # InstructionType
 
-InstructionType is a enum class that defines the type of instruction. It is used to determine which builder to use to
+InstructionType is an enum class that defines the type of instruction. It is used to determine which builder to use to
 build the instruction.
 
 ```kotlin

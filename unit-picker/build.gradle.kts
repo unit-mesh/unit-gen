@@ -16,6 +16,7 @@ dependencies {
     implementation(libs.chapi.domain)
     implementation(libs.chapi.java)
     implementation(libs.chapi.kotlin)
+    implementation(libs.chapi.typescript)
 
     implementation(libs.archguard.scanner.core)
     implementation(libs.archguard.analyser.estimate)
