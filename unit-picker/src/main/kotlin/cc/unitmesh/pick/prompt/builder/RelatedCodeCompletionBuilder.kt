@@ -59,6 +59,9 @@ class RelatedCodeCompletionBuilder(private val context: InstructionContext) :
 
                 val afterCursor = context.job.codeLines.subList(position.StartLine, stopLine).joinToString("\n")
 
+                if (afterCursor.isBlank() || beforeCursor.isBlank()) {
+                    return@map null
+                }
 
                 RelatedCodeCompletionIns(
                     language = language,
@@ -66,14 +69,14 @@ class RelatedCodeCompletionBuilder(private val context: InstructionContext) :
                     relatedCode = relatedCode,
                     output = afterCursor
                 )
-            }
+            }.filterNotNull()
         }.flatten()
 
         return codeCompletionIns
     }
 
-    override fun unique(nodes: List<RelatedCodeCompletionIns>): List<Instruction> {
-        return nodes.map {
+    override fun unique(list: List<RelatedCodeCompletionIns>): List<Instruction> {
+        return list.map {
             Instruction(
                 instruction = "Complete ${it.language} code, return rest code, no explaining",
                 output = it.output,
