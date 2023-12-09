@@ -4,10 +4,10 @@ description: "A sample of unit mehs"
 jobs:
   prompt-evaluate: # job name should be unique for each job
     description: "Evaluate prompt with different parameters"
-    connection: openai-connection.yml
+    connection: mock-connection.yml
     template: fixtures/code-completion.vm
     template-datasource:
-      - type: file
+      - type: jsonl
         value: fixtures/code-completion.jsonl
 
     strategy:
