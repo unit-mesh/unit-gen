@@ -1,13 +1,14 @@
 name: "Eval Units"
-description: "A sample of unit mehs"
+description: "A sample of unit eval"
 
 jobs:
   prompt-evaluate: # job name should be unique for each job
     description: "Evaluate prompt with different parameters"
     connection: mock-connection.yml
     template: fixtures/code-completion.vm
+    log-path: logs/
     template-datasource:
-      - type: jsonl
+      - type: file
         value: fixtures/code-completion.jsonl
 
     strategy:

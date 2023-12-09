@@ -45,3 +45,4 @@ processor.yml
 datasets
 openai-connection.yml
 prompt-log-*.txt
+prompt-evaluate-*.txt

@@ -59,9 +59,9 @@ AutoDev [#54](https://github.com/unit-mesh/auto-dev/issues/56)
 
 > Code Eval is a tool that can evaluate the code quality of the AI code.
 
-- [ ] Code eval
-    - [ ] EvalScript based on PromptScript
-    - [ ] Auto LLM Test by Chocolate Factory
+- [x] Code eval
+    - [x] EvalScript based on PromptScript
+- [ ] Auto LLM Test by Chocolate Factory
 - Language support by TreeSitter
     - spike C/C++ ?
 
