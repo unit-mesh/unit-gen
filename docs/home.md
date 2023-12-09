@@ -25,3 +25,18 @@ permalink: /
 > selects and evaluates code within real projects.
 
 ![Unit Eval Overview](https://unitmesh.cc/uniteval/overview.png)
+
+Based on:
+
+- abstract syntax tree: [Chapi](https://github.com/phodal/chapi). Used features: multiple language to same data
+  structure.
+- legacy system analysis: [Coca](https://github.com/phodal/coca). Inspired: Bad Smell, Test Bad Smell
+- architecture governance tool: [ArchGuard](https://github.com/archguard/archguard).
+  Used features: Estimation, Rule Lint (API, SQL)
+- code database [CodeDB](https://github.com/archguard/codedb). Used features: Code analysis pipeline
+
+**Features**:
+
+- Integrated use of fine-tuning, evaluation, and tooling.
+- High-quality code pipeline construction.
+- Customizable quality evaluation metrics.

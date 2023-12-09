@@ -18,6 +18,12 @@
 
 docs: [https://eval.unitmesh.cc/](https://eval.unitmesh.cc/)
 
+**Features**:
+
+- Integrated use of fine-tuning, evaluation, and tooling. 
+- High-quality code pipeline construction
+- Customizable quality evaluation metrics
+
 ## Examples
 
 for examples, see: [examples](examples/) folder
