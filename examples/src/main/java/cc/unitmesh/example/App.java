@@ -14,16 +14,14 @@ public class App {
         List<InstructionType> builderTypes = new ArrayList<>();
         builderTypes.add(InstructionType.RELATED_CODE_COMPLETION);
 
-        BuilderConfig builderConfig = new BuilderConfig();
-
         PickerOption pickerOption = new PickerOption(
                 "https://github.com/unit-mesh/unit-eval-testing", "master", "java",
-                ".", builderTypes, new ArrayList<>(), builderConfig
+                ".", builderTypes, new ArrayList<>(), new BuilderConfig()
         );
 
-//        SimpleCodePicker simpleCodePicker = new SimpleCodePicker(pickerOption);
-//        List<Instruction> output = simpleCodePicker.execute()
+        SimpleCodePicker simpleCodePicker = new SimpleCodePicker(pickerOption);
+        List<Instruction> output = simpleCodePicker.blockingExecute();
 
-        System.out.println(pickerOption);
+        System.out.println(output);
     }
 }
