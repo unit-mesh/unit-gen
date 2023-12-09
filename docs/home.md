@@ -6,6 +6,8 @@ nav_order: 1
 permalink: /
 ---
 
+# UnitEval
+
 <p align="center">
   <a href="https://github.com/unit-mesh/unit-eval/actions/workflows/build.yml">
     <img src="https://github.com/unit-mesh/unit-eval/actions/workflows/build.yml/badge.svg" alt="CI/CD" />
@@ -22,12 +24,7 @@ permalink: /
 > such as AutoDev, Studio B3, and DevOps Genius. The brilliance lies in the UnitEval functionality, which automatically
 > selects and evaluates code within real projects.
 
-This repository designs evaluate the code quality of the AI code, which will use
-with [AutoDev](https://github.com/unit-mesh/auto-dev) IDE plugins.
-We use [Chocolate Factory](https://github.com/unit-mesh/chocolate-factory) to build the prompt engine.
-
-Related issue in Unit Mesh: Chocolate Factory [#9](https://github.com/unit-mesh/chocolate-factory/issues/9) and
-AutoDev [#54](https://github.com/unit-mesh/auto-dev/issues/56)
+![Unit Eval Overview](https://unitmesh.cc/uniteval/overview.png)
 
 ## Usage
 

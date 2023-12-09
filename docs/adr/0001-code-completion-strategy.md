@@ -1,8 +1,8 @@
 ---
 layout: default
-title: ADR
+title: Code Completion Strategy
 parent: ADR
-nav_order: 1
+nav_order: 98
 ---
 
 # 1. code-completion-strategy.md

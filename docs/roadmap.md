@@ -1,19 +1,13 @@
 ---
 layout: default
-title: How it works!
+title: Roadmap
 nav_order: 99
-permalink: /how-it-works
+permalink: /roadmap
 ---
 
-# How it works?
+# Roadmap
 
-![Unit Eval Overview](https://unitmesh.cc/uniteval/overview.png)
-
-## Module
-
-### Code Quality
-
-![Code Quality Workflow](https://unitmesh.cc/uniteval/code-quality-workflow.png)
+## Code Quality
 
 - [x] Test BadSmell from [Coca](https://github.com/phodal/coca)
 - [ ] BadSmell from [Coca](https://github.com/phodal/coca)
@@ -28,7 +22,7 @@ permalink: /how-it-works
     - [ ] Exception -> Exception Rule
     - [ ] Security -> Security Rule
 
-### Code Picker
+## Code Picker
 
 > Code Picker is a tool that can pick the code from the real project, will generate the code unit, and then it will be
 > the datasets to Fine-tuning the model.
@@ -47,7 +41,7 @@ permalink: /how-it-works
     - [ ] Python
     - [ ] Golang
 
-### Code Eval
+## Code Eval
 
 > Code Eval is a tool that can evaluate the code quality of the AI code.
 
