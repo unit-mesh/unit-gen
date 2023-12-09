@@ -18,6 +18,8 @@ data class PickerOption(
     val builderConfig: BuilderConfig = BuilderConfig(),
 ) {
     fun pureDataFileName(): String {
-        return baseDir + File.separator + "${url.replace("/", "_")}_${branch}_${language}" + ".jsonl"
+        return baseDir + File.separator + repoFileName() + ".jsonl"
     }
+
+    fun repoFileName() = "${url.replace("/", "_")}_${branch}_${language}.json"
 }

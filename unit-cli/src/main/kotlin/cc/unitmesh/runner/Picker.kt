@@ -40,13 +40,14 @@ class PickerCommand : CliktCommand() {
                 val content = SimpleCodePicker(pickerOption).execute()
                 ProcessorResult(
                     repository = code.repository,
-                    content = content
+                    content = content,
+                    outputName = pickerOption.repoFileName()
                 )
             }.forEach { result ->
                 finalResult.addAll(result.content)
-                val outputFile = File(outputDir, result.repository.split("/").last() + ".json")
+
                 val json = Json { prettyPrint = true }
-                outputFile.writeText(json.encodeToString(result.content))
+                File(outputDir, result.outputName).writeText(json.encodeToString(result.content))
             }
 
             val outputFile = File(outputDir, "summary.json")
