@@ -3,6 +3,7 @@ package cc.unitmesh.pick.config
 import cc.unitmesh.pick.prompt.InstructionType
 import cc.unitmesh.quality.CodeQualityType
 import kotlinx.serialization.Serializable
+import java.io.File
 
 @Serializable
 data class PickerOption(
@@ -17,6 +18,6 @@ data class PickerOption(
     val builderConfig: BuilderConfig = BuilderConfig(),
 ) {
     fun pureDataFileName(): String {
-        return "${url.replace("/", "_")}_${branch}_${language}" + ".json"
+        return baseDir + File.separator + "${url.replace("/", "_")}_${branch}_${language}" + ".jsonl"
     }
 }

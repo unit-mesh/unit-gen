@@ -8,4 +8,5 @@ data class WorkerContext(
     val instructionTypes: List<InstructionType>,
     val qualityTypes: List<CodeQualityType>,
     val builderConfig: BuilderConfig,
+    val pureDataFileName: String,
 )

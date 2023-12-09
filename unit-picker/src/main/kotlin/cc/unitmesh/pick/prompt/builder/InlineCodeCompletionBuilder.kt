@@ -4,13 +4,18 @@ import cc.unitmesh.pick.prompt.Instruction
 import cc.unitmesh.pick.prompt.InstructionBuilder
 import cc.unitmesh.pick.prompt.InstructionContext
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.Json
 
 @Serializable
 data class InlineCodeCompletionIns(
     val language: String,
     val beforeCursorCode: String,
     val output: String,
-)
+) {
+    override fun toString(): String {
+        return Json.encodeToString(serializer(), this)
+    }
+}
 
 class InlineCodeCompletionBuilder(val context: InstructionContext) : InstructionBuilder<InlineCodeCompletionIns> {
     val instruction: String = "";

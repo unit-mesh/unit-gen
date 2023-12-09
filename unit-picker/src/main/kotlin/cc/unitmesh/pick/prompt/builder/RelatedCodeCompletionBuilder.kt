@@ -6,6 +6,7 @@ import cc.unitmesh.pick.prompt.InstructionBuilder
 import cc.unitmesh.pick.prompt.InstructionContext
 import chapi.domain.core.CodeDataStruct
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.Json
 
 @Serializable
 data class RelatedCodeCompletionIns(
@@ -13,7 +14,11 @@ data class RelatedCodeCompletionIns(
     val beforeCursor: String,
     val relatedCode: String,
     val output: String,
-)
+) {
+    override fun toString(): String {
+        return Json.encodeToString(serializer(), this)
+    }
+}
 
 class RelatedCodeCompletionBuilder(private val context: InstructionContext) :
     InstructionBuilder<RelatedCodeCompletionIns> {

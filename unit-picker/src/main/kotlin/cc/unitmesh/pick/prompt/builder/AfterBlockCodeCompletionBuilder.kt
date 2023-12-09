@@ -4,6 +4,7 @@ import cc.unitmesh.pick.prompt.Instruction
 import cc.unitmesh.pick.prompt.InstructionBuilder
 import cc.unitmesh.pick.prompt.InstructionContext
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.Json
 
 
 @Serializable
@@ -12,9 +13,14 @@ data class AfterBlockCodeCompletionIns(
     val beforeCursorCode: String,
     val afterCursorCode: String,
     val output: String,
-)
+) {
+    override fun toString(): String {
+        return Json.encodeToString(serializer(), this)
+    }
+}
 
-class AfterBlockCodeCompletionBuilder(val context: InstructionContext) : InstructionBuilder<AfterBlockCodeCompletionIns> {
+class AfterBlockCodeCompletionBuilder(val context: InstructionContext) :
+    InstructionBuilder<AfterBlockCodeCompletionIns> {
     val instruction: String = ""
     private val output: String = ""
     private val language: String = ""
@@ -26,13 +32,15 @@ class AfterBlockCodeCompletionBuilder(val context: InstructionContext) : Instruc
     }
 
     override fun unique(list: List<AfterBlockCodeCompletionIns>): List<Instruction> {
-        return listOf(Instruction(
-            instruction,
-            output = output,
-            input = """```$language
+        return listOf(
+            Instruction(
+                instruction,
+                output = output,
+                input = """```$language
                 |$beforeCursorCode
                 |$afterCursorCode
                 |```""".trimMargin()
-        ))
+            )
+        )
     }
 }

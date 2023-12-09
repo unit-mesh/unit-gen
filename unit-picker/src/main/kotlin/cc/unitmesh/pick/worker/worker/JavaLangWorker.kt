@@ -8,6 +8,7 @@ import cc.unitmesh.pick.worker.LangWorker
 import cc.unitmesh.pick.worker.WorkerContext
 import chapi.ast.javaast.JavaAnalyser
 import kotlinx.coroutines.coroutineScope
+import java.io.File
 
 /**
  * A repository will be like this:
@@ -23,7 +24,7 @@ import kotlinx.coroutines.coroutineScope
  * - by Horizontal (with Import File):
  * - by Vertical (with History Change):
  */
-class JavaLangWorker(val context: WorkerContext) : LangWorker() {
+class JavaLangWorker(private val context: WorkerContext) : LangWorker() {
     private val jobs: MutableList<InstructionFileJob> = mutableListOf()
     private val fileTree: HashMap<String, InstructionFileJob> = hashMapOf()
 
@@ -63,12 +64,20 @@ class JavaLangWorker(val context: WorkerContext) : LangWorker() {
     }
 
     override suspend fun start(): Collection<Instruction> = coroutineScope {
+        val file: File = File(context.pureDataFileName)
+        if (!file.exists()) {
+            file.createNewFile()
+        }
+
         val lists = jobs.map { job ->
             val instructionContext = InstructionContext(job, context.qualityTypes, fileTree, context.builderConfig)
 
             context.instructionTypes.map { type ->
                 val instructionBuilder = type.builder(instructionContext)
                 val list = instructionBuilder.build()
+                list.map {
+                    file.appendText(it.toString() + "\n")
+                }
                 instructionBuilder.unique(list as List<Nothing>)
             }.flatten()
         }.flatten()
