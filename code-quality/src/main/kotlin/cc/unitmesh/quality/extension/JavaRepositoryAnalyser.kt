@@ -2,9 +2,13 @@ package cc.unitmesh.quality.extension
 
 import cc.unitmesh.quality.QualityAnalyser
 import chapi.domain.core.CodeDataStruct
+import org.archguard.linter.rule.sql.rules.UnknownColumnSizeRule
+import org.archguard.linter.rule.sql.rules.create.LimitTableNameLengthRule
 import org.archguard.linter.rule.webapi.WebApiRuleSetProvider
 import org.archguard.linter.rule.webapi.WebApiRuleVisitor
 import org.archguard.rule.core.Issue
+import org.archguard.rule.core.RuleSet
+import org.archguard.rule.core.RuleType
 import org.archguard.scanner.analyser.backend.JavaApiAnalyser
 
 class JavaRepositoryAnalyser(thresholds: Map<String, Int> = mapOf()) : QualityAnalyser {

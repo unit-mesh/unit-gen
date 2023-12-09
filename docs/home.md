@@ -32,12 +32,11 @@ Based on:
   Used features: Estimation, Rule Lint (API, SQL)
 - code database [CodeDB](https://github.com/archguard/codedb). Used features: Code analysis pipeline
 
-
 ## Design Philosophy
 
 - Unique prompt. Integrated use of fine-tuning, evaluation, and tooling.
-- High-quality code pipeline construction.
-- Customizable quality evaluation metrics.
+- Code quality pipeline. With estimate with code complex, bad smell, test bad smell, and more rules.
+- Extendable customize quality thresholds. Custom rules, custom thresholds, custom quality type or more.
 
 ### Unique Prompt
 
@@ -99,3 +98,45 @@ Unit Eval prompt should keep the same structure as the AutoDev prompt. Prompt ex
 ### Code quality pipeline
 
 ![Code Quality Workflow](https://unitmesh.cc/uniteval/code-quality-workflow.png)
+
+### Extendable customize quality thresholds
+
+Optional quality type:
+
+```kotlin
+enum class CodeQualityType {
+    BadSmell,
+    TestBadSmell,
+    JavaController,
+    JavaRepository,
+    JavaService,
+}
+```
+
+Custom thresholds' config:
+
+```kotlin
+data class BsThresholds(
+    val bsLongParasLength: Int = 5,
+    val bsIfSwitchLength: Int = 8,
+    val bsLargeLength: Int = 20,
+    val bsMethodLength: Int = 30,
+    val bsIfLinesLength: Int = 3,
+)
+```
+
+Custom rules:
+
+```kotlin
+val apis = apiAnalyser.toContainerServices()
+val ruleset = RuleSet(
+    RuleType.SQL_SMELL,
+    "normal",
+    UnknownColumnSizeRule(),
+    LimitTableNameLengthRule()
+    // more rules
+)
+
+val issues = WebApiRuleVisitor(apis).visitor(listOf(ruleset))
+// if issues are not empty, then the code has bad smell
+```
