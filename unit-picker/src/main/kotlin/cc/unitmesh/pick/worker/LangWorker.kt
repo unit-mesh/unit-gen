@@ -1,6 +1,6 @@
 package cc.unitmesh.pick.worker
 
-import cc.unitmesh.pick.picker.InstructionJob
+import cc.unitmesh.pick.config.InstructionJob
 import cc.unitmesh.pick.prompt.Instruction
 
 abstract class LangWorker {

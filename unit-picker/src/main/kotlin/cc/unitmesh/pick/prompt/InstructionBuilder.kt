@@ -1,7 +1,7 @@
 package cc.unitmesh.pick.prompt
 
-import cc.unitmesh.pick.picker.BuilderConfig
-import cc.unitmesh.pick.picker.InstructionJob
+import cc.unitmesh.pick.config.BuilderConfig
+import cc.unitmesh.pick.config.InstructionJob
 import cc.unitmesh.quality.CodeQualityType
 import cc.unitmesh.quality.QualityAnalyser
 import chapi.domain.core.CodeDataStruct

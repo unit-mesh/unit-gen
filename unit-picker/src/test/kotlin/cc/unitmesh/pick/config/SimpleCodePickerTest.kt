@@ -1,5 +1,6 @@
-package cc.unitmesh.pick.picker;
+package cc.unitmesh.pick.config;
 
+import cc.unitmesh.pick.SimpleCodePicker
 import cc.unitmesh.pick.prompt.Instruction
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.encodeToString

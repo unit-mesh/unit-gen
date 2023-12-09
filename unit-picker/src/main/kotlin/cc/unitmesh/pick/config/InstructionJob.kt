@@ -1,4 +1,4 @@
-package cc.unitmesh.pick.picker
+package cc.unitmesh.pick.config
 
 import chapi.domain.core.CodeContainer
 import kotlinx.serialization.Serializable
@@ -9,9 +9,8 @@ class InstructionJob(
     var fileSummary: FileJob,
     var code: String = "",
     var container: CodeContainer? = null,
-    var codeLines: List<String> = listOf()
+    var codeLines: List<String> = listOf(),
 ) {
-
     companion object {
         fun from(fileJob: FileJob): InstructionJob {
             return InstructionJob(

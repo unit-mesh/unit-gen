@@ -1,7 +1,7 @@
 package cc.unitmesh.pick.prompt.builder
 
-import cc.unitmesh.pick.picker.BuilderConfig
-import cc.unitmesh.pick.picker.InstructionJob
+import cc.unitmesh.pick.config.BuilderConfig
+import cc.unitmesh.pick.config.InstructionJob
 import cc.unitmesh.pick.prompt.InstructionContext
 import cc.unitmesh.quality.CodeQualityType
 import chapi.ast.javaast.JavaAnalyser

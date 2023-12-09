@@ -1,6 +1,6 @@
 package cc.unitmesh.pick.worker
 
-import cc.unitmesh.pick.picker.BuilderConfig
+import cc.unitmesh.pick.config.BuilderConfig
 import cc.unitmesh.pick.prompt.InstructionType
 import cc.unitmesh.quality.CodeQualityType
 

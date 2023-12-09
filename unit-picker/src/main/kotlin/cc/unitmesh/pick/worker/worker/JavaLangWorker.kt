@@ -2,7 +2,7 @@ package cc.unitmesh.pick.worker.worker
 
 import cc.unitmesh.pick.ext.CodeDataStructUtil
 import cc.unitmesh.pick.prompt.InstructionBuilder
-import cc.unitmesh.pick.picker.InstructionJob
+import cc.unitmesh.pick.config.InstructionJob
 import cc.unitmesh.pick.prompt.Instruction
 import cc.unitmesh.pick.worker.LangWorker
 import cc.unitmesh.pick.worker.WorkerContext

@@ -1,5 +1,7 @@
-package cc.unitmesh.pick.picker
+package cc.unitmesh.pick
 
+import cc.unitmesh.pick.config.InstructionJob
+import cc.unitmesh.pick.config.PickerConfig
 import cc.unitmesh.pick.prompt.Instruction
 import cc.unitmesh.pick.walker.PickDirectoryWalker
 import cc.unitmesh.pick.worker.WorkerContext
@@ -19,7 +21,7 @@ interface CodePicker
 
 class SimpleCodePicker(private val config: PickerConfig) : CodePicker {
     /**
-     * Executes the code picker with the provided configuration.
+     * Executes the code config with the provided configuration.
      *
      * This method performs the following steps:
      *
@@ -60,7 +62,7 @@ class SimpleCodePicker(private val config: PickerConfig) : CodePicker {
         val codeDir = checkoutCode(this@SimpleCodePicker, config.url, config.branch, tempGitDir)
             .toFile().canonicalFile
 
-        logger.info("start picker")
+        logger.info("start config")
 
         val languageWorker = LanguageWorker()
         val workerManager = WorkerManager(WorkerContext(config.builderTypes, config.codeQualityTypes, config.builderConfig))

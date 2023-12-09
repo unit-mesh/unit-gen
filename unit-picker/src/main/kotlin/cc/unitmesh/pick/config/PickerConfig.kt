@@ -1,4 +1,4 @@
-package cc.unitmesh.pick.picker
+package cc.unitmesh.pick.config
 
 import cc.unitmesh.pick.prompt.InstructionType
 import cc.unitmesh.quality.CodeQualityType
@@ -15,13 +15,4 @@ data class PickerConfig(
     ),
     val codeQualityTypes: List<CodeQualityType> = listOf(),
     val builderConfig: BuilderConfig = BuilderConfig(),
-)
-
-/**
- * For different generic data in [cc.unitmesh.pick.prompt.InstructionBuilder]
- */
-@Serializable
-data class BuilderConfig(
-    val withGenTempData: Boolean = true,
-    val mergeFinalOutput: Boolean = true,
 )
