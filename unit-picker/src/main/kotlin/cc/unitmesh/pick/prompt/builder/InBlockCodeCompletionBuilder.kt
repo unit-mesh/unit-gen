@@ -21,11 +21,11 @@ class InBlockCodeCompletionBuilder(val context: InstructionContext) : Instructio
     private val beforeCursorCode: String = "";
     private val afterCursorCode: String = "";
 
-    override fun convert(): List<InBlockCodeCompletionIns> {
+    override fun build(): List<InBlockCodeCompletionIns> {
         TODO("Not yet implemented")
     }
 
-    override fun build(): List<Instruction> {
+    override fun unique(list: List<InBlockCodeCompletionIns>): List<Instruction> {
         return listOf(
             Instruction(
                 instruction,

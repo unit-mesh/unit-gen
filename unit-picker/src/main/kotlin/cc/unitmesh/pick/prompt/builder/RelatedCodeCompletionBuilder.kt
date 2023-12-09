@@ -18,7 +18,7 @@ data class RelatedCodeCompletionIns(
 class RelatedCodeCompletionBuilder(private val context: InstructionContext) :
     InstructionBuilder<RelatedCodeCompletionIns> {
 
-    override fun convert(): List<RelatedCodeCompletionIns> {
+    override fun build(): List<RelatedCodeCompletionIns> {
         val language = context.job.fileSummary.language.lowercase()
         val container = context.job.container ?: return emptyList()
 
@@ -67,8 +67,8 @@ class RelatedCodeCompletionBuilder(private val context: InstructionContext) :
         return codeCompletionIns
     }
 
-    override fun build(): List<Instruction> {
-        return this.convert().map {
+    override fun unique(nodes: List<RelatedCodeCompletionIns>): List<Instruction> {
+        return nodes.map {
             Instruction(
                 instruction = "Complete ${it.language} code, return rest code, no explaining",
                 output = it.output,

@@ -1,9 +1,9 @@
 package cc.unitmesh.pick.worker.worker
 
 import cc.unitmesh.pick.ext.CodeDataStructUtil
-import cc.unitmesh.pick.prompt.InstructionBuilder
-import cc.unitmesh.pick.config.SingleFileInstructionJob
+import cc.unitmesh.pick.config.InstructionFileJob
 import cc.unitmesh.pick.prompt.Instruction
+import cc.unitmesh.pick.prompt.InstructionContext
 import cc.unitmesh.pick.worker.LangWorker
 import cc.unitmesh.pick.worker.WorkerContext
 import chapi.ast.javaast.JavaAnalyser
@@ -25,13 +25,13 @@ import org.archguard.scanner.analyser.count.FileJob
  * - by Vertical (with History Change):
  */
 class JavaLangWorker(val context: WorkerContext) : LangWorker() {
-    private val jobs: MutableList<SingleFileInstructionJob> = mutableListOf()
-    private val fileTree: HashMap<String, SingleFileInstructionJob> = hashMapOf()
+    private val jobs: MutableList<InstructionFileJob> = mutableListOf()
+    private val fileTree: HashMap<String, InstructionFileJob> = hashMapOf()
 
     private val packageRegex = Regex("package\\s+([a-zA-Z0-9_.]+);")
     private val extLength = ".java".length
 
-    override fun addJob(job: SingleFileInstructionJob) {
+    override fun addJob(job: InstructionFileJob) {
         this.jobs.add(job)
         tryAddClassToTree(job.code, job)
 
@@ -42,13 +42,17 @@ class JavaLangWorker(val context: WorkerContext) : LangWorker() {
             ds.Imports = container.Imports
 
             ds.Content = CodeDataStructUtil.contentByPosition(job.codeLines, ds.Position)
-            ds.Functions.map { it.apply { it.Content = CodeDataStructUtil.contentByPosition(job.codeLines, it.Position) } }
+            ds.Functions.map {
+                it.apply {
+                    it.Content = CodeDataStructUtil.contentByPosition(job.codeLines, it.Position)
+                }
+            }
         }
 
         job.container = container
     }
 
-    private fun tryAddClassToTree(code: String, job: SingleFileInstructionJob) {
+    private fun tryAddClassToTree(code: String, job: InstructionFileJob) {
         val packageMatch = packageRegex.find(code)
         if (packageMatch != null) {
             val packageName = packageMatch.groupValues[1]
@@ -60,11 +64,17 @@ class JavaLangWorker(val context: WorkerContext) : LangWorker() {
     }
 
     override suspend fun start(): Collection<Instruction> = coroutineScope {
-        return@coroutineScope jobs.map {
-            InstructionBuilder.build(
-                context.builderTypes, context.qualityTypes, fileTree, it, context.builderConfig
-            )
+        val lists = jobs.map { job ->
+            val instructionContext = InstructionContext(job, context.qualityTypes, fileTree, context.builderConfig)
+
+            context.instructionTypes.map { type ->
+                val instructionBuilder = type.builder(instructionContext)
+                val list = instructionBuilder.build()
+                instructionBuilder.unique(list as List<Nothing>)
+            }.flatten()
         }.flatten()
+
+        return@coroutineScope lists
     }
 
     // check by history?

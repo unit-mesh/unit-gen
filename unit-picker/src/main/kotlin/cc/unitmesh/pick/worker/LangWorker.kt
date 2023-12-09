@@ -1,9 +1,9 @@
 package cc.unitmesh.pick.worker
 
-import cc.unitmesh.pick.config.SingleFileInstructionJob
+import cc.unitmesh.pick.config.InstructionFileJob
 import cc.unitmesh.pick.prompt.Instruction
 
 abstract class LangWorker {
-    abstract fun addJob(job: SingleFileInstructionJob)
+    abstract fun addJob(job: InstructionFileJob)
     abstract suspend fun start() : Collection<Instruction>
 }

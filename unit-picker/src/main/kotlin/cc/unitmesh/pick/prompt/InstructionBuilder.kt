@@ -1,15 +1,15 @@
 package cc.unitmesh.pick.prompt
 
 import cc.unitmesh.pick.config.BuilderConfig
-import cc.unitmesh.pick.config.SingleFileInstructionJob
+import cc.unitmesh.pick.config.InstructionFileJob
 import cc.unitmesh.quality.CodeQualityType
 import cc.unitmesh.quality.QualityAnalyser
 import chapi.domain.core.CodeDataStruct
 
 data class InstructionContext(
-    val job: SingleFileInstructionJob,
+    val job: InstructionFileJob,
     val qualityTypes: List<CodeQualityType>,
-    val fileTree: HashMap<String, SingleFileInstructionJob>,
+    val fileTree: HashMap<String, InstructionFileJob>,
     val builderConfig: BuilderConfig,
 )
 
@@ -53,33 +53,17 @@ interface InstructionBuilder<T> {
      *
      * In this case, the instruction data <T> should be included: `lang`, `relatedCode`, `beforeCursor`.
      */
-    fun convert(): List<T>
+    fun build(): List<T>
 
     /**
      * Build instruction from data <T>, and return a list of instructions.
      */
-    fun build(): List<Instruction>
+    fun unique(list: List<T>): List<Instruction>
 
     fun hasIssue(node: CodeDataStruct, types: List<CodeQualityType>): Boolean {
         return QualityAnalyser.create(types).map { analyser ->
             analyser.analysis(listOf(node))
         }.flatten().isEmpty()
-    }
-
-    companion object {
-        fun build(
-            instructionTypes: List<InstructionType>,
-            qualityTypes: List<CodeQualityType>,
-            fileTree: HashMap<String, SingleFileInstructionJob>,
-            job: SingleFileInstructionJob,
-            builderConfig: BuilderConfig,
-        ): Collection<Instruction> {
-            val instructionContext = InstructionContext(job, qualityTypes, fileTree, builderConfig)
-
-            return instructionTypes.map { type ->
-                type.builder(instructionContext).build()
-            }.flatten()
-        }
     }
 }
 

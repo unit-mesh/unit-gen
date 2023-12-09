@@ -1,6 +1,6 @@
 package cc.unitmesh.pick
 
-import cc.unitmesh.pick.config.SingleFileInstructionJob
+import cc.unitmesh.pick.config.InstructionFileJob
 import cc.unitmesh.pick.config.PickerOption
 import cc.unitmesh.pick.prompt.Instruction
 import cc.unitmesh.pick.walker.PickDirectoryWalker
@@ -77,7 +77,7 @@ class SimpleCodePicker(private val config: PickerOption) : CodePicker {
             launch {
                 for (fileJob in walkdirChannel) {
                     languageWorker.processFile(fileJob)?.let {
-                        workerManager.addJob(SingleFileInstructionJob.from(it))
+                        workerManager.addJob(InstructionFileJob.from(it))
                     }
                 }
 

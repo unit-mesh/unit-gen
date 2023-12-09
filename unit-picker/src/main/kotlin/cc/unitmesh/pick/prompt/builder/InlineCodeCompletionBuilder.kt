@@ -17,11 +17,11 @@ class InlineCodeCompletionBuilder(val context: InstructionContext) : Instruction
     private val output: String = "";
     private val language: String = "";
     private val beforeCursorCode: String = "";
-    override fun convert(): List<InlineCodeCompletionIns> {
+    override fun build(): List<InlineCodeCompletionIns> {
         TODO("Not yet implemented")
     }
 
-    override fun build(): List<Instruction> {
+    override fun unique(list: List<InlineCodeCompletionIns>): List<Instruction> {
         return listOf(Instruction(
             instruction,
             output = output,
