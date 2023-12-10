@@ -28,7 +28,7 @@ allprojects {
     }
 
     group = "cc.unitmesh"
-    version = "0.1.3"
+    version = "0.1.4"
 
     java.sourceCompatibility = JavaVersion.VERSION_11
     java.targetCompatibility = JavaVersion.VERSION_11
