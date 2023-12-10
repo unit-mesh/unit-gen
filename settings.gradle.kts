@@ -16,5 +16,5 @@ include(
 
     "code-quality",
 
-    "examples:project-example",
+//    "examples:project-example",
 )

@@ -25,9 +25,9 @@ interface QualityAnalyser {
                 when (type) {
                     CodeQualityType.BadSmell -> BadsmellAnalyser(thresholds)
                     CodeQualityType.TestBadSmell -> TestBadsmellAnalyser(thresholds)
-                    CodeQualityType.JavaController -> JavaRepositoryAnalyser(thresholds)
-                    CodeQualityType.JavaRepository -> JavaServiceAnalyser(thresholds)
-                    CodeQualityType.JavaService -> JavaControllerAnalyser(thresholds)
+                    CodeQualityType.JavaController -> JavaControllerAnalyser(thresholds)
+                    CodeQualityType.JavaRepository -> JavaRepositoryAnalyser(thresholds)
+                    CodeQualityType.JavaService -> JavaServiceAnalyser(thresholds)
                 }
             }
         }
