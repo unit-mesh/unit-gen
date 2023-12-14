@@ -2,22 +2,9 @@ package cc.unitmesh.core.intelli
 
 import java.io.File
 
-class SimilarChunksWithPaths(private var snippetLength: Int = 60, private var maxRelevantFiles: Int = 20) {
-    private fun similarChunksWithPaths(text: String): SimilarChunkContext {
-        TODO()
-    }
-
-    private fun extractChunks(mostRecentFiles: List<File>): List<List<String>> {
-//        return mostRecentFiles.mapNotNull { file ->
-//            psiFile?.text
-//                ?.split("\n", limit = snippetLength)
-//                ?.filter {
-//                    !it.trim().startsWith("import ") && !it.trim().startsWith("package ")
-//                }
-//                ?.chunked(snippetLength)?.flatten()
-//        }
-        return listOf()
-    }
+abstract class SimilarChunksWithPaths(private var snippetLength: Int = 60, private var maxRelevantFiles: Int = 20) {
+    abstract fun similarChunksWithPaths(text: String): SimilarChunkContext
+    abstract fun extractChunks(mostRecentFiles: List<File>): List<List<String>>
 
     private fun tokenLevelJaccardSimilarity(chunks: List<List<String>>, text: String): List<List<Double>> {
         val currentFileTokens: Set<String> = tokenize(text).toSet()
@@ -38,15 +25,6 @@ class SimilarChunksWithPaths(private var snippetLength: Int = 60, private var ma
         return chunk.split(Regex("[^a-zA-Z0-9]")).filter { it.isNotBlank() }
     }
 
-    /**
-     * ```kotlin
-     * fun calculateJaccardSimilarity(setA: Set<Any>, setB: Set<Any>): Double {
-     *     val intersectionSize = setA.intersect(setB).size.toDouble()
-     *     val unionSize = (setA union setB).size.toDouble()
-     *     return intersectionSize / unionSize
-     * }
-     * ```
-     */
     private fun similarityScore(set1: Set<String>, set2: Set<String>): Double {
         val intersectionSize: Int = (set1 intersect set2).size
         val unionSize: Int = (set1 union set2).size
