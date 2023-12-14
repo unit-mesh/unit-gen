@@ -50,57 +50,57 @@ temp dir:
 related code:
 
 ```plantuml
-// class AdminCriteria {
-// 
-//    + ofName(name: String): Specification<User>
-//  }
-// 
-// class ResetDbListener {
-// 
-//    'getter/setter: getOrder
-// 
-//    + beforeTestMethod(testContext: TestContext): void
-//    + afterTestMethod(testContext: TestContext): void
-//  }
-// 
-// class Authorize {
-//    id: String
-//    userId: String
-//    role: User
-//    expire: Long
-// 
-//    'getter/setter: setExpire
-// 
-//    + build(userId: String, role: User.Role): Authorize
-//  }
-// 
-// class AuthorizeService {
-//    repository: AuthorizeRepository
-//    bCryptPasswordEncoder: BCryptPasswordEncoder
-// 
-//    'getter/setter: getOperator
-// 
-//    + create(user: User, password: String): Authorize
-//    + delete(id: String): void
-//  }
-// 
-// class Status {
-//    id: String
-//    name: String
-//    email: String
-//    password: String
-//    createdAt: Instant
-//    updatedAt: Instant
-//    role: Role
-//    status: Status
-// 
-//    + build(name: String, email: String, password: String): User
-//  }
-// 
-// class UserRepository {
-// 
-//  }
-// 
+class AdminCriteria {
+
+   + ofName(name: String): Specification<User>
+ }
+
+class ResetDbListener {
+
+   'getter/setter: getOrder
+
+   + beforeTestMethod(testContext: TestContext): void
+   + afterTestMethod(testContext: TestContext): void
+ }
+
+class Authorize {
+   id: String
+   userId: String
+   role: User
+   expire: Long
+
+   'getter/setter: setExpire
+
+   + build(userId: String, role: User.Role): Authorize
+ }
+
+class AuthorizeService {
+   repository: AuthorizeRepository
+   bCryptPasswordEncoder: BCryptPasswordEncoder
+
+   'getter/setter: getOperator
+
+   + create(user: User, password: String): Authorize
+   + delete(id: String): void
+ }
+
+class Status {
+   id: String
+   name: String
+   email: String
+   password: String
+   createdAt: Instant
+   updatedAt: Instant
+   role: Role
+   status: Status
+
+   + build(name: String, email: String, password: String): User
+ }
+
+class UserRepository {
+
+ }
+
 ```
 
 example:
