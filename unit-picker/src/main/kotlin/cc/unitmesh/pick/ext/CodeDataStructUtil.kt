@@ -31,7 +31,7 @@ fun CodeDataStruct.toUml(): String {
     val methodCodes = methodsWithoutGetterSetter
         .joinToString("\n") { method ->
             val params =
-                method.Parameters.joinToString("") { parameter -> "${parameter.TypeValue}: ${parameter.TypeType}" }
+                method.Parameters.joinToString(",") { parameter -> "${parameter.TypeValue}: ${parameter.TypeType}" }
             "   + ${method.Name}($params)" + if (method.ReturnType.isNotBlank()) ": ${method.ReturnType}" else ""
         }
 
