@@ -33,4 +33,34 @@ abstract class SimilarChunksWithPaths(var snippetLength: Int = 60, private var m
         val unionSize: Int = (set1 union set2).size
         return intersectionSize.toDouble() / unionSize.toDouble()
     }
+
+    /**
+     * Tokenizes a given path string into a list of separate words.
+     *
+     * The path string represents a file path and is tokenized as follows:
+     * 1. The file extension is removed.
+     * 2. The path is split by forward slash (/) or hyphen (-) characters.
+     * 3. Empty strings are removed from the resulting list.
+     * 4. Numeric values are removed from the list.
+     * 5. Common words such as "src", "main", "kotlin", and "java" are removed.
+     * 6. Camel case splits words if present.
+     *
+     * @param path The path string to be tokenized.
+     * @return A list of individual words extracted from the given path string.
+     */
+    fun pathTokenize(path: String): List<String> {
+        return path
+            .substringBeforeLast(".") // remove file extension
+            .split(Regex("[/\\-]"))
+            .flatMap { it.split(File.separatorChar) }
+            .asSequence()
+            .filter { it.isNotBlank() && !it.matches(Regex(".*\\d.*")) && !COMMON_WORDS.contains(it.lowercase()) }
+            .flatMap { it.split("(?=[A-Z])".toRegex()) } // split by camel case
+            .filter { it.isNotBlank() }
+            .toList()
+    }
+
+    companion object {
+        val COMMON_WORDS = setOf("src", "main", "kotlin", "java")
+    }
 }

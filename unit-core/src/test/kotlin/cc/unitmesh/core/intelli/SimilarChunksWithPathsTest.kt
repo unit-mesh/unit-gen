@@ -67,4 +67,27 @@ class SimilarChunksWithPathsTest {
         val expected = 0.5
         assertEquals(expected, result)
     }
+
+    @Test
+    fun should_convert_path_to_list_of_strings() {
+        // Given
+        val path = "unit-picker/src/main/kotlin/cc/unitmesh/pick/related/JavaSimilarChunks.kt"
+
+        // When
+        val result = similarChunksWithPaths.pathTokenize(path)
+
+        // Then
+        val expected = listOf(
+            "unit",
+            "picker",
+            "cc",
+            "unitmesh",
+            "pick",
+            "related",
+            "Java",
+            "Similar",
+            "Chunks"
+        )
+        assertEquals(expected, result)
+    }
 }
