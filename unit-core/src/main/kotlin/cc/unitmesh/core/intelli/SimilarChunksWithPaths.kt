@@ -2,7 +2,7 @@ package cc.unitmesh.core.intelli
 
 import java.io.File
 
-abstract class SimilarChunksWithPaths(private var snippetLength: Int = 60, private var maxRelevantFiles: Int = 20) {
+abstract class SimilarChunksWithPaths(var snippetLength: Int = 60, private var maxRelevantFiles: Int = 20) {
     abstract fun similarChunksWithPaths(text: String): SimilarChunkContext
     abstract fun extractChunks(mostRecentFiles: List<File>): List<List<String>>
 
