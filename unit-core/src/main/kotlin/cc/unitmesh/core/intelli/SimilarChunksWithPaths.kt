@@ -60,6 +60,23 @@ abstract class SimilarChunksWithPaths(var snippetLength: Int = 60, private var m
             .toList()
     }
 
+    /**
+     * Calculates the path-level Jaccard similarity between a list of path chunks and a given text.
+     * 1. remove some prefix path like "src/main/kotlin"
+     * 2. run tokenize
+     */
+    fun pathLevelJaccardSimilarity(chunks: List<String>, text: String): List<Double> {
+        val cleanedChunks = chunks.map {
+            it.removePrefix("src/main/java")
+        }
+
+        val textTokens = pathTokenize(text)
+        return cleanedChunks.map {
+            val chunkTokens = pathTokenize(it)
+            similarityScore(textTokens.toSet(), chunkTokens.toSet())
+        }
+    }
+
     companion object {
         val COMMON_WORDS = setOf("src", "main", "kotlin", "java")
     }

@@ -90,4 +90,27 @@ class SimilarChunksWithPathsTest {
         )
         assertEquals(expected, result)
     }
+
+    @Test
+    fun should_return_path_level_Jaccard_similarity() {
+        // given
+        val chunks = listOf(
+            "src/main/java/com/example/BlogController.java",
+            "src/main/java/com/example/BlogRepository.java"
+        )
+
+        val text = "src/main/java/com/example/BlogService.java"
+
+        // when
+        val result = similarChunksWithPaths.pathLevelJaccardSimilarity(chunks, text)
+
+        // then
+        // assert the size of the result is equal to the size of chunks
+        assert(result.size == chunks.size)
+
+        // assert each similarity score in the result is between 0 and 1
+        result.forEach { similarityScore ->
+            assert(similarityScore >= 0 && similarityScore <= 1)
+        }
+    }
 }
