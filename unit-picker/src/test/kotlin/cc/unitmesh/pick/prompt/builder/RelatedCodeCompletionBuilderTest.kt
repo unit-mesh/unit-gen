@@ -132,10 +132,10 @@ public class HelloController {
 
         assertEquals(
             first.relatedCode, """// class BlogPost {
-//    : Long
-//    : String
-//    : String
-//    : String
+//    id: Long
+//    title: String
+//    content: String
+//    author: String
 // 
 //    'getter/setter: setAuthor
 // 

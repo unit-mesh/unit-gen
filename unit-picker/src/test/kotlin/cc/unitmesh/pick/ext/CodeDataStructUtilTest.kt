@@ -13,8 +13,8 @@ class CodeDataStructUtilTest {
         val codeDataStruct = CodeDataStruct(
             NodeName = "TestClass",
             Fields = listOf(
-                CodeField("Int", "id"),
-                CodeField("String", "name")
+                CodeField("Int", "", "id"),
+                CodeField("String", "", "name")
             ),
             Functions = listOf(
                 CodeFunction("getName", "", ""),
