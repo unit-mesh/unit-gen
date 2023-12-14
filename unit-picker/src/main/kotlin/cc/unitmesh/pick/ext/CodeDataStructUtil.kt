@@ -8,7 +8,7 @@ fun CodeDataStruct.toUml(): String {
 
     output.append("class $NodeName {\n")
     Fields.forEach {
-        output.append("   ${it.TypeValue}: ${it.TypeType}\n")
+        output.append("   ${it.TypeKey}: ${it.TypeType}\n")
     }
 
     var getterSetter: List<String> = listOf()
@@ -31,7 +31,9 @@ fun CodeDataStruct.toUml(): String {
     val methodCodes = methodsWithoutGetterSetter
         .joinToString("\n") { method ->
             val params =
-                method.Parameters.joinToString(",") { parameter -> "${parameter.TypeValue}: ${parameter.TypeType}" }
+                method.Parameters.joinToString(", ") { parameter ->
+                    "${parameter.TypeValue}: ${parameter.TypeType}"
+                }
             "   + ${method.Name}($params)" + if (method.ReturnType.isNotBlank()) ": ${method.ReturnType}" else ""
         }
 
