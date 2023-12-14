@@ -1,4 +1,25 @@
-# [](https://github.com/unit-mesh/unit-eval/compare/v0.1.2...v) (2023-12-09)
+# [](https://github.com/unit-mesh/unit-eval/compare/v0.1.6...v) (2023-12-14)
+
+
+
+## [0.1.6](https://github.com/unit-mesh/unit-eval/compare/v0.1.3...v0.1.6) (2023-12-14)
+
+
+### Bug Fixes
+
+* fix anming issue ([565c2ca](https://github.com/unit-mesh/unit-eval/commit/565c2ca3bb49b1250983b751e1c9489f8a855ff2))
+* fix data issues ([0e3e2d7](https://github.com/unit-mesh/unit-eval/commit/0e3e2d70fe7260d18b13685926dbff2a64dd81c2))
+* fix field issue ([a38182d](https://github.com/unit-mesh/unit-eval/commit/a38182da6edb68f999fab28491c961215253008f))
+* fix tests ([37ad4f3](https://github.com/unit-mesh/unit-eval/commit/37ad4f3fef10035e2925b7107fa893fcd8a8aca2))
+
+
+### Features
+
+* add simliar chunk context ([4b7918a](https://github.com/unit-mesh/unit-eval/commit/4b7918aaeaece8136769e7fc8956adeffddab33c))
+
+
+
+## [0.1.3](https://github.com/unit-mesh/unit-eval/compare/v0.1.2...v0.1.3) (2023-12-09)
 
 
 ### Features
