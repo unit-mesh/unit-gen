@@ -6,6 +6,8 @@ nav_order: 1
 permalink: /instruction/related-code-completion
 ---
 
+# Related Code Completion
+
 Implement class: `RelatedCodeCompletionBuilder`
 
 ## Core Logic

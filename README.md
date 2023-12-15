@@ -17,6 +17,12 @@
 
 Docs: [https://eval.unitmesh.cc/](https://eval.unitmesh.cc/)
 
+Features:
+
+- [x] [Related code completion](https://eval.unitmesh.cc/instruction/related-code-completion)
+- [x] [Similar Code Completion](https://eval.unitmesh.cc/instruction/similar-code-completion)
+- Others ???
+
 ## Design Philosophy
 
 - Unique prompt. Integrated use of fine-tuning, evaluation, and tooling.

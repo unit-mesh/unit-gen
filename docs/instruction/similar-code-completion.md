@@ -6,9 +6,11 @@ nav_order: 2
 permalink: /instruction/similar-code-completion
 ---
 
-Implement class: SimilarChunkCompletion
+# Similar Code Completion
 
-Logic:
+Implement class: SimilarChunksCompletionBuilder
+
+## Core Logic
 
 ```
 function calculate(text: String, canonicalName: String) -> SimilarChunkContext:
