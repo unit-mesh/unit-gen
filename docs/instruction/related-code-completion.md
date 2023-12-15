@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Related Code Completion
-parent: Instruction
+parent: Instruction Builder
 nav_order: 1
 permalink: /instruction/related-code-completion
 ---

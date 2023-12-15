@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Instruction
+title: Instruction Builder
 nav_order: 4
 has_children: true
 permalink: /instruction
