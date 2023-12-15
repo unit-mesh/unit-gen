@@ -6,9 +6,9 @@ nav_order: 1
 permalink: /instruction/related-code-completion
 ---
 
-Implement class: RelatedCodeCompletionBuilder
+Implement class: `RelatedCodeCompletionBuilder`
 
-Logic:
+## Core Logic
 
 ```
 // 1. Collect all related data structures by imports if they exist in a file tree
@@ -36,7 +36,7 @@ for each dataStructure in container.DataStructures:
 // 4. Build the code completion instructions        
 ```
 
-temp dir:
+## Template data
 
 ```json
 {
@@ -47,42 +47,84 @@ temp dir:
 }
 ```
 
-related code:
+### BeforeCursor code
+
+```
+package com.example;
+
+import com.example.admin.common.AdminCriteria;
+import com.example.config.ResetDbListener;
+import com.example.domain.iam.auth.model.Authorize;
+import com.example.domain.iam.auth.service.AuthorizeService;
+import com.example.domain.iam.user.model.User;
+import com.example.domain.iam.user.repository.UserRepository;
+import io.restassured.RestAssured;
+import org.junit.jupiter.api.BeforeEach;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.TestExecutionListeners;
+import org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener;
+import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
+
+import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
+
+@SpringBootTest(webEnvironment = RANDOM_PORT, classes = {AdminTestApplication.class})
+@TestExecutionListeners({
+        DependencyInjectionTestExecutionListener.class,
+        ResetDbListener.class,
+        SqlScriptsTestExecutionListener.class,
+})
+@AutoConfigureMockMvc
+@ActiveProfiles(\"test\")
+public abstract class TestBase {
+
+    @LocalServerPort
+    private int port;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private AuthorizeService authorizeService;
+
+    @BeforeEach
+    public void setUp() {
+```
+
+will analysis data for service
+
+### relatedCode
 
 ```plantuml
 class AdminCriteria {
-
    + ofName(name: String): Specification<User>
- }
+}
 
 class ResetDbListener {
-
    'getter/setter: getOrder
-
    + beforeTestMethod(testContext: TestContext): void
    + afterTestMethod(testContext: TestContext): void
- }
+}
 
 class Authorize {
    id: String
    userId: String
    role: User
    expire: Long
-
    'getter/setter: setExpire
-
    + build(userId: String, role: User.Role): Authorize
- }
+}
 
 class AuthorizeService {
    repository: AuthorizeRepository
    bCryptPasswordEncoder: BCryptPasswordEncoder
-
    'getter/setter: getOperator
-
    + create(user: User, password: String): Authorize
    + delete(id: String): void
- }
+}
 
 class Status {
    id: String
@@ -93,15 +135,15 @@ class Status {
    updatedAt: Instant
    role: Role
    status: Status
-
    + build(name: String, email: String, password: String): User
- }
+}
 
 class UserRepository {
 
- }
-
+}
 ```
+
+## Final Instruction example
 
 example:
 
