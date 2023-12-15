@@ -12,23 +12,37 @@ import cc.unitmesh.pick.config.InstructionFileJob
  * This class extends the SimilarChunksWithPaths class, providing additional functionality for handling Java code.
  */
 class JavaSimilarChunker(private val fileTree: HashMap<String, InstructionFileJob>) : SimilarChunker() {
+    companion object {
+        val logger = org.slf4j.LoggerFactory.getLogger(JavaSimilarChunker::class.java)
+    }
+
+    /**
+     * Calculates the similar code chunks based on the given text and canonical name.
+     *
+     * @param text The text in which the code chunks are present.
+     * @param canonicalName The canonical name of the code snippet.
+     * @return A SimilarChunkContext object containing information about related code paths and similar chunks of code.
+     */
     override fun calculate(text: String, canonicalName: String): SimilarChunkContext {
         val lines = text.split("\n")
         // take lines before the cursor which will select from the last line
         val beforeCursor = lines.takeLast(snippetLength).joinToString("\n")
 
-        val canonicalNames = fileTree.keys.toList()
+        val canonicalNames = fileTree.keys.filter { it != canonicalName }
         val relatedCodePath = packageNameLevelJaccardSimilarity(canonicalNames, canonicalName)
             .toList()
             .sortedByDescending { it.first }
             .take(maxRelevantFiles)
             .map { it.second }
 
+        logger.info("relatedCodePath: $relatedCodePath")
+
         val chunks = chunkedCode(beforeCursor)
         val allRelatedChunks = relatedCodePath
             .mapNotNull { fileTree[it] }
-            .map { chunkedCode(it.code) }
-            .flatten()
+            .map { chunkedCode(it.code).joinToString("\n") }
+
+        logger.info("allRelatedChunks: $allRelatedChunks")
 
         val similarChunks = allRelatedChunks.map {
             val score = similarityScore(tokenize(it).toSet(), chunks.toSet())
@@ -37,15 +51,26 @@ class JavaSimilarChunker(private val fileTree: HashMap<String, InstructionFileJo
             .take(maxRelevantFiles)
             .map { it.second }
 
-        return SimilarChunkContext("java", relatedCodePath, similarChunks.take(3))
+        // take the first 3 similar chunks or empty
+        val similarChunksText = if (similarChunks.size > 3) {
+            similarChunks.take(3)
+        } else {
+            similarChunks
+        }
+
+        return SimilarChunkContext("java", relatedCodePath, similarChunksText)
     }
 
     private fun packageNameLevelJaccardSimilarity(chunks: List<String>, text: String): Map<Double, String> {
         val packageName = packageNameTokenize(text)
-        return chunks.map { chunk ->
+        return chunks.mapNotNull { chunk ->
             val chunkPackageName = packageNameTokenize(chunk)
             val score = similarityScore(packageName.toSet(), chunkPackageName.toSet())
-            score to chunk
+            if (score > scoreThreshold) {
+                score to chunk
+            } else {
+                null
+            }
         }.toMap()
     }
 
@@ -82,7 +107,7 @@ class JavaSimilarChunker(private val fileTree: HashMap<String, InstructionFileJo
 
     fun chunkedCode(code: String): List<String> {
         return code
-            .split("\n", limit = snippetLength)
+            .split("\n")
             .filter {
                 val trim = it.trim()
                 !(trim.startsWith("import ") || trim.startsWith("package "))

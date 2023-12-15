@@ -12,7 +12,7 @@ data class PickerOption(
     val language: String = "java",
     val baseDir: String = "datasets",
     val builderTypes: List<InstructionType> = listOf(
-        InstructionType.RELATED_CODE_COMPLETION
+        InstructionType.SIMILAR_CHUNKS_COMPLETION
     ),
     val codeQualityTypes: List<CodeQualityType> = listOf(),
     val builderConfig: BuilderConfig = BuilderConfig(),

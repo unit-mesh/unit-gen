@@ -2,15 +2,15 @@ package cc.unitmesh.core.intelli
 
 import java.io.File
 
-val SNIPPET_LENGTH = 60
-
-val MAX_RELEVANT_FILES = 20
-
 /**
  * This class is used to find similar chunks with paths.
  * Should be implemented by each language
  */
-abstract class SimilarChunker(var snippetLength: Int = SNIPPET_LENGTH, var maxRelevantFiles: Int = MAX_RELEVANT_FILES) {
+abstract class SimilarChunker(
+    var snippetLength: Int = 60,
+    var maxRelevantFiles: Int = 20,
+    val scoreThreshold: Double = 0.5,
+) {
     /**
      * Returns a list of the most recently edited files in the project.
      */

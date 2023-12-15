@@ -58,7 +58,7 @@ class SimilarChunksCompletionBuilder(private val context: InstructionContext) :
                 // collection all similar chunk structures by imports if exists in a file tree
                 val similarChunks: List<String> = similarChunker.calculate(
                     beforeCursor,
-                    it.Package + "." + ds.NodeName,
+                    ds.Package + "." + ds.NodeName,
                 ).chunks ?: emptyList()
 
                 SimilarChunkCompletionIns(
