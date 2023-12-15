@@ -17,7 +17,6 @@ package cc.unitmesh.core.intelli
 enum class SimilarPathStrategy {
     FILE_IMPORTS,
     SIMILAR_FILE_NAME,
-
     // just to make sure the concept is clear
     RECENT_FILES,
 }

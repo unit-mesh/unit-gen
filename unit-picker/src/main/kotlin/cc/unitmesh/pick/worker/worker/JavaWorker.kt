@@ -31,6 +31,8 @@ class JavaWorker(private val context: WorkerContext) : LangWorker() {
     private val packageRegex = Regex("package\\s+([a-zA-Z0-9_.]+);")
     private val extLength = ".java".length
 
+    private var basePackage = ""
+
     override fun addJob(job: InstructionFileJob) {
         this.jobs.add(job)
         tryAddClassToTree(job.code, job)
