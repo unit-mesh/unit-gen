@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
 class JavaSimilarChunksTest {
-    val similarChunks = JavaSimilarChunks(context.fileTree)
+    val similarChunks = JavaSimilarChunks(hashMapOf())
 
     @Test
     fun should_return_empty_string_for_empty_input() {

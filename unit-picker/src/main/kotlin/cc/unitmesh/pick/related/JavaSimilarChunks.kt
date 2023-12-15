@@ -11,7 +11,7 @@ import cc.unitmesh.pick.config.InstructionFileJob
  *
  * This class extends the SimilarChunksWithPaths class, providing additional functionality for handling Java code.
  */
-class JavaSimilarChunks(fileTree: HashMap<String, InstructionFileJob>) : SimilarChunksWithPaths() {
+class JavaSimilarChunks(val fileTree: HashMap<String, InstructionFileJob>) : SimilarChunksWithPaths() {
     override fun calculate(text: String): SimilarChunkContext {
         TODO("Not yet implemented")
     }
