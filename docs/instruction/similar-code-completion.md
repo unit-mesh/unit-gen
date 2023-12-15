@@ -110,10 +110,10 @@ public class ResetDbService {
     List<String> tables() throws SQLException {
         Connection connection = dataSource.getConnection();
         DatabaseMetaData metaData = connection.getMetaData();
-        ResultSet tables = metaData.getTables(null, null, null, new String[]{\"TABLE\"});
+        ResultSet tables = metaData.getTables(null, null, null, new String[]{"TABLE"});
         ArrayList<String> tableNames = new ArrayList<>();
         while (tables.next()) {
-            String tableName = tables.getString(\"TABLE_NAME\");
+            String tableName = tables.getString("TABLE_NAME");
             tableNames.add(tableName);
         }
 

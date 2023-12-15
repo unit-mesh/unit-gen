@@ -35,14 +35,12 @@ class JavaSimilarChunker(private val fileTree: HashMap<String, InstructionFileJo
             .take(maxRelevantFiles)
             .map { it.second }
 
-        logger.info("relatedCodePath: $relatedCodePath")
+        logger.info("canonicalName: $canonicalName, relatedCodePath: $relatedCodePath")
 
         val chunks = chunkedCode(beforeCursor)
         val allRelatedChunks = relatedCodePath
             .mapNotNull { fileTree[it] }
             .map { chunkedCode(it.code).joinToString("\n") }
-
-        logger.info("allRelatedChunks: $allRelatedChunks")
 
         val similarChunks = allRelatedChunks.map {
             val score = similarityScore(tokenize(it).toSet(), chunks.toSet())
