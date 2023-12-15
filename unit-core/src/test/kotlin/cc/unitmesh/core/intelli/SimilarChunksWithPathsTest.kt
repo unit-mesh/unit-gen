@@ -10,10 +10,6 @@ class SimilarChunksWithPathsTest {
         override fun calculate(text: String): SimilarChunkContext {
             TODO()
         }
-
-        override fun extractChunks(mostRecentFiles: List<File>): List<List<String>> {
-            return mostRecentFiles.map { listOf("chunk1", "chunk2") }
-        }
     }
 
     private val similarChunksWithPaths: SimilarChunksWithPaths = TestingChunks()
