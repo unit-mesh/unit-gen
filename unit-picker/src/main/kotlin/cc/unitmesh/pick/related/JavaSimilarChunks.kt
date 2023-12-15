@@ -2,6 +2,7 @@ package cc.unitmesh.pick.related
 
 import cc.unitmesh.core.intelli.SimilarChunkContext
 import cc.unitmesh.core.intelli.SimilarChunksWithPaths
+import cc.unitmesh.pick.config.InstructionFileJob
 
 /**
  * This class is used to calculate the similar chunks of Java code.
@@ -10,7 +11,7 @@ import cc.unitmesh.core.intelli.SimilarChunksWithPaths
  *
  * This class extends the SimilarChunksWithPaths class, providing additional functionality for handling Java code.
  */
-class JavaSimilarChunks : SimilarChunksWithPaths() {
+class JavaSimilarChunks(fileTree: HashMap<String, InstructionFileJob>) : SimilarChunksWithPaths() {
     override fun calculate(text: String): SimilarChunkContext {
         TODO("Not yet implemented")
     }
