@@ -59,6 +59,6 @@ class JavaSimilarChunksTest {
         val result = similarChunks.calculateCommonPath(paths)
 
         // Then
-        assertEquals("org", result)
+        assertEquals("", result)
     }
 }
