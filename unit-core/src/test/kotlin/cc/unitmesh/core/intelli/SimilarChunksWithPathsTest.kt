@@ -7,7 +7,7 @@ import java.io.File
 class SimilarChunksWithPathsTest {
 
     class TestingChunks : SimilarChunksWithPaths() {
-        override fun similarChunksWithPaths(text: String): SimilarChunkContext {
+        override fun calculate(text: String): SimilarChunkContext {
             TODO()
         }
 

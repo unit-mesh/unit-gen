@@ -3,9 +3,15 @@ package cc.unitmesh.core.intelli
 import org.jetbrains.annotations.TestOnly
 import java.io.File
 
+/**
+ * This class is used to find similar chunks with paths.
+ * Should be implemented by each language
+ */
 abstract class SimilarChunksWithPaths(var snippetLength: Int = 60, private var maxRelevantFiles: Int = 20) {
-    abstract fun similarChunksWithPaths(text: String): SimilarChunkContext
-    abstract fun extractChunks(mostRecentFiles: List<File>): List<List<String>>
+    /**
+     * Returns a list of the most recently edited files in the project.
+     */
+    abstract fun calculate(text: String): SimilarChunkContext
 
     fun tokenLevelJaccardSimilarity(chunks: List<List<String>>, text: String): List<List<Double>> {
         val currentFileTokens: Set<String> = tokenize(text).toSet()

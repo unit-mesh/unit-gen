@@ -2,14 +2,9 @@ package cc.unitmesh.pick.related
 
 import cc.unitmesh.core.intelli.SimilarChunkContext
 import cc.unitmesh.core.intelli.SimilarChunksWithPaths
-import java.io.File
 
 class JavaSimilarChunks : SimilarChunksWithPaths() {
-    override fun similarChunksWithPaths(text: String): SimilarChunkContext {
-        TODO("Not yet implemented")
-    }
-
-    override fun extractChunks(mostRecentFiles: List<File>): List<List<String>> {
+    override fun calculate(text: String): SimilarChunkContext {
         TODO("Not yet implemented")
     }
 
