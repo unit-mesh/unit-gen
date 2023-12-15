@@ -90,7 +90,7 @@ import java.util.List;
 @Service
 public class ResetDbService {
 
-    public static final String ROOT_URL = \"build/resources/test/\";
+    public static final String ROOT_URL = "build/resources/test/";
     private static IDatabaseConnection conn;
 
     @Autowired

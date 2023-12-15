@@ -110,7 +110,7 @@ class JavaSimilarChunker(private val fileTree: HashMap<String, InstructionFileJo
             .split("\n")
             .filter {
                 val trim = it.trim()
-                !(trim.startsWith("import ") || trim.startsWith("package "))
+                !(trim.startsWith("import ") || trim.startsWith("package ") || trim == "\n")
             }
             .chunked(snippetLength)
             .flatten()
