@@ -18,7 +18,7 @@ abstract class SimilarChunksWithPaths(var snippetLength: Int = 60, private var m
     }
 
     /**
-     * since is slowly will tokenize, we revoke to same way will Copilot:
+     * since is slowly will tokenize, we revoke the same way will Copilot:
      * https://github.com/mengjian-github/copilot-analysis#promptelement%E4%B8%BB%E8%A6%81%E5%86%85%E5%AE%B9
      *
      */
@@ -62,12 +62,17 @@ abstract class SimilarChunksWithPaths(var snippetLength: Int = 60, private var m
 
     /**
      * Calculates the path-level Jaccard similarity between a list of path chunks and a given text.
-     * 1. remove some prefix path like "src/main/kotlin"
-     * 2. run tokenize
+     * 1. remove some prefix path like "src/main/kotlin" and "src/main/java"
+     * 2. run tokenizing
      */
     fun pathLevelJaccardSimilarity(chunks: List<String>, text: String): List<Double> {
         val cleanedChunks = chunks.map {
-            it.removePrefix("src/main/java")
+            it.replace("src/main/kotlin", "")
+                .replace("src/main/java", "")
+                .replace("src/main/resources", "")
+                .replace("src/test/kotlin", "")
+                .replace("src/test/java", "")
+                .replace("src/test/resources", "")
         }
 
         val textTokens = pathTokenize(text)
