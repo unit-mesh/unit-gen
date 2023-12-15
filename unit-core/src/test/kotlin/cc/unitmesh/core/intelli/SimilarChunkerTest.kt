@@ -2,17 +2,16 @@ package cc.unitmesh.core.intelli;
 
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
-import java.io.File
 
-class SimilarChunksWithPathsTest {
+class SimilarChunkerTest {
 
-    class TestingChunks : SimilarChunksWithPaths() {
-        override fun calculate(text: String): SimilarChunkContext {
+    class TestingChunks : SimilarChunker() {
+        override fun calculate(text: String, canonicalName: String): SimilarChunkContext {
             TODO()
         }
     }
 
-    private val similarChunksWithPaths: SimilarChunksWithPaths = TestingChunks()
+    private val similarChunker: SimilarChunker = TestingChunks()
 
     @Test
     fun should_return_jaccard_similarity_scores() {
@@ -25,7 +24,7 @@ class SimilarChunksWithPathsTest {
         val text = "some chunk1 with chunk4"
 
         // When
-        val result = similarChunksWithPaths.tokenLevelJaccardSimilarity(chunks, text)
+        val result = similarChunker.tokenLevelJaccardSimilarity(chunks, text)
 
         // Then
         val expected = listOf(
@@ -43,7 +42,7 @@ class SimilarChunksWithPathsTest {
         val chunk = "some chunk with words"
 
         // When
-        val result = similarChunksWithPaths.tokenize(chunk)
+        val result = similarChunker.tokenize(chunk)
 
         // Then
         val expected = listOf("some", "chunk", "with", "words")
@@ -57,7 +56,7 @@ class SimilarChunksWithPathsTest {
         val set2 = setOf("word2", "word3", "word4")
 
         // When
-        val result = similarChunksWithPaths.similarityScore(set1, set2)
+        val result = similarChunker.similarityScore(set1, set2)
 
         // Then
         val expected = 0.5
@@ -70,7 +69,7 @@ class SimilarChunksWithPathsTest {
         val path = "unit-picker/src/main/kotlin/cc/unitmesh/pick/related/JavaSimilarChunks.kt"
 
         // When
-        val result = similarChunksWithPaths.pathTokenize(path)
+        val result = similarChunker.pathTokenize(path)
 
         // Then
         val expected = listOf(
@@ -98,7 +97,7 @@ class SimilarChunksWithPathsTest {
         val text = "src/main/java/com/example/BlogService.java"
 
         // when
-        val result = similarChunksWithPaths.pathLevelJaccardSimilarity(chunks, text)
+        val result = similarChunker.pathLevelJaccardSimilarity(chunks, text)
 
         // then
         // assert the size of the result is equal to the size of chunks

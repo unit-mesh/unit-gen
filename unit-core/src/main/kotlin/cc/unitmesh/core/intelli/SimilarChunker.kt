@@ -2,15 +2,19 @@ package cc.unitmesh.core.intelli
 
 import java.io.File
 
+val SNIPPET_LENGTH = 60
+
+val MAX_RELEVANT_FILES = 20
+
 /**
  * This class is used to find similar chunks with paths.
  * Should be implemented by each language
  */
-abstract class SimilarChunksWithPaths(var snippetLength: Int = 60, private var maxRelevantFiles: Int = 20) {
+abstract class SimilarChunker(var snippetLength: Int = SNIPPET_LENGTH, var maxRelevantFiles: Int = MAX_RELEVANT_FILES) {
     /**
      * Returns a list of the most recently edited files in the project.
      */
-    abstract fun calculate(text: String): SimilarChunkContext
+    abstract fun calculate(text: String, canonicalName: String): SimilarChunkContext
 
     /**
      * Calculates the token-level Jaccard similarity between a list of chunks and a given text.
@@ -76,7 +80,7 @@ abstract class SimilarChunksWithPaths(var snippetLength: Int = 60, private var m
      */
     fun pathTokenize(path: String): List<String> {
         return path
-            .substringBeforeLast(".") // remove file extension
+            .substringBeforeLast(".")
             .split(Regex("[/\\-]"))
             .flatMap { it.split(File.separatorChar) }
             .asSequence()
@@ -112,6 +116,17 @@ abstract class SimilarChunksWithPaths(var snippetLength: Int = 60, private var m
             val chunkTokens = pathTokenize(it)
             similarityScore(textTokens.toSet(), chunkTokens.toSet())
         }
+    }
+
+    fun packageNameTokenize(packageName: String): List<String> {
+        return packageName
+            .split(".")
+            .flatMap { it.split(File.separatorChar) }
+            .asSequence()
+            .filter { it.isNotBlank() && !it.matches(Regex(".*\\d.*")) && !COMMON_WORDS.contains(it.lowercase()) }
+            .flatMap { it.split("(?=[A-Z])".toRegex()) } // split by camel case
+            .filter { it.isNotBlank() }
+            .toList()
     }
 
     companion object {

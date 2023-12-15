@@ -3,7 +3,7 @@ package cc.unitmesh.pick.prompt.builder
 import cc.unitmesh.pick.prompt.Instruction
 import cc.unitmesh.pick.prompt.InstructionBuilder
 import cc.unitmesh.pick.prompt.InstructionContext
-import cc.unitmesh.pick.related.JavaSimilarChunks
+import cc.unitmesh.pick.related.JavaSimilarChunker
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 
@@ -26,11 +26,7 @@ class SimilarChunksCompletionBuilder(private val context: InstructionContext) :
         val language = context.job.fileSummary.language.lowercase()
         val container = context.job.container ?: return emptyList()
 
-        // 1. collection all similar chunk structures by imports if exists in a file tree
-        val similarChunks: List<String> =
-            JavaSimilarChunks(context.fileTree).calculate(context.job.code).chunks ?: emptyList()
-
-        // 3. checks with rule specified in config
+        // 1. checks with rule specified in config
         val dataStructs = container.DataStructures.filter {
             hasIssue(it, context.qualityTypes)
         }
@@ -39,6 +35,9 @@ class SimilarChunksCompletionBuilder(private val context: InstructionContext) :
             return emptyList()
         }
 
+        val similarChunker = JavaSimilarChunker(context.fileTree)
+
+        // 2. collect all with related data structure
         val codeCompletionIns = dataStructs.map { ds ->
             ds.Functions.map {
                 val position = it.Position
@@ -55,6 +54,12 @@ class SimilarChunksCompletionBuilder(private val context: InstructionContext) :
                 if (afterCursor.isBlank() || beforeCursor.isBlank()) {
                     return@map null
                 }
+
+                // collection all similar chunk structures by imports if exists in a file tree
+                val similarChunks: List<String> = similarChunker.calculate(
+                    beforeCursor,
+                    it.Package + "." + ds.NodeName,
+                ).chunks ?: emptyList()
 
                 SimilarChunkCompletionIns(
                     language = language,

@@ -1,7 +1,7 @@
 package cc.unitmesh.pick.related
 
 import cc.unitmesh.core.intelli.SimilarChunkContext
-import cc.unitmesh.core.intelli.SimilarChunksWithPaths
+import cc.unitmesh.core.intelli.SimilarChunker
 import cc.unitmesh.pick.config.InstructionFileJob
 
 /**
@@ -11,10 +11,44 @@ import cc.unitmesh.pick.config.InstructionFileJob
  *
  * This class extends the SimilarChunksWithPaths class, providing additional functionality for handling Java code.
  */
-class JavaSimilarChunks(val fileTree: HashMap<String, InstructionFileJob>) : SimilarChunksWithPaths() {
-    override fun calculate(text: String): SimilarChunkContext {
-        TODO("Not yet implemented")
+class JavaSimilarChunker(private val fileTree: HashMap<String, InstructionFileJob>) : SimilarChunker() {
+    override fun calculate(text: String, canonicalName: String): SimilarChunkContext {
+        val lines = text.split("\n")
+        // take lines before the cursor which will select from the last line
+        val beforeCursor = lines.takeLast(snippetLength).joinToString("\n")
+
+        val canonicalNames = fileTree.keys.toList()
+        val relatedCodePath = packageNameLevelJaccardSimilarity(canonicalNames, canonicalName)
+            .toList()
+            .sortedByDescending { it.first }
+            .take(maxRelevantFiles)
+            .map { it.second }
+
+        val chunks = chunkedCode(beforeCursor)
+        val allRelatedChunks = relatedCodePath
+            .mapNotNull { fileTree[it] }
+            .map { chunkedCode(it.code) }
+            .flatten()
+
+        val similarChunks = allRelatedChunks.map {
+            val score = similarityScore(tokenize(it).toSet(), chunks.toSet())
+            score to it
+        }.sortedByDescending { it.first }
+            .take(maxRelevantFiles)
+            .map { it.second }
+
+        return SimilarChunkContext("java", relatedCodePath, similarChunks.take(3))
     }
+
+    private fun packageNameLevelJaccardSimilarity(chunks: List<String>, text: String): Map<Double, String> {
+        val packageName = packageNameTokenize(text)
+        return chunks.map { chunk ->
+            val chunkPackageName = packageNameTokenize(chunk)
+            val score = similarityScore(packageName.toSet(), chunkPackageName.toSet())
+            score to chunk
+        }.toMap()
+    }
+
 
     /**
      * Calculates the common path from a list of package names.
