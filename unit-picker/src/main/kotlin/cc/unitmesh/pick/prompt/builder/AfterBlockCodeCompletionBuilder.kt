@@ -8,6 +8,18 @@ import chapi.domain.core.CodeFunction
 
 class AfterBlockCodeCompletionBuilder(val context: JobContext) : InstructionBuilder {
     override fun build(function: CodeFunction): List<CodeCompletionIns> {
-        TODO("Not yet implemented")
+        val position = function.Position
+        val beforeCursor = context.job.codeLines.subList(0, position.StartLine).joinToString("\n")
+
+        // pick after lines
+        val stopLine = if (position.StopLine == 0) {
+            context.job.codeLines.size
+        } else {
+            position.StopLine
+        }
+
+        val afterCursor = context.job.codeLines.subList(position.StartLine, stopLine).joinToString("\n")
+
+        return listOf(CodeCompletionIns(beforeCursor, afterCursor))
     }
 }
