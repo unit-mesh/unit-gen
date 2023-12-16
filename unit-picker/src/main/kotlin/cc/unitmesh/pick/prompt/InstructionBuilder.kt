@@ -1,22 +1,21 @@
 package cc.unitmesh.pick.prompt
 
-import cc.unitmesh.quality.CodeQualityType
-import cc.unitmesh.quality.QualityAnalyser
-import chapi.domain.core.CodeDataStruct
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.Json
 
-interface InstructionBuilder<T> {
-    fun build(): List<T>
-
-    /**
-     * Build instruction from data <T>, and return a list of instructions.
-     */
-    fun unique(list: List<T>): List<Instruction>
-
-    fun hasIssue(node: CodeDataStruct, types: List<CodeQualityType>): Boolean {
-        return QualityAnalyser.create(types).map { analyser ->
-            analyser.analysis(listOf(node))
-        }.flatten().isEmpty()
+@Serializable
+data class CodeCompletionIns(
+    val language: String,
+    val beforeCursor: String,
+    val afterCursor: String,
+) {
+    override fun toString(): String {
+        return Json.encodeToString(serializer(), this)
     }
+}
+
+interface InstructionBuilder {
+    fun build(context: JobContext): List<CodeCompletionIns>
 }
 
 
