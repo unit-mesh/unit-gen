@@ -74,7 +74,7 @@ class JavaWorker(private val context: WorkerContext) : LangWorker() {
         val lists = jobs.map { job ->
             val instructionContext = InstructionContext(job, context.qualityTypes, fileTree, context.builderConfig)
 
-            context.relatedTypes.map { type ->
+            context.codeContextStrategies.map { type ->
                 val instructionBuilder = type.builder(instructionContext)
                 val list = instructionBuilder.build()
                 list.map {

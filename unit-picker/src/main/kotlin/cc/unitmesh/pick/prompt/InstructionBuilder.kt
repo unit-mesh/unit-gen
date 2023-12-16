@@ -11,6 +11,7 @@ data class InstructionContext(
     val qualityTypes: List<CodeQualityType>,
     val fileTree: HashMap<String, InstructionFileJob>,
     val builderConfig: BuilderConfig,
+    val completionType: List<CompletionType> = listOf(CompletionType.IN_BLOCK_COMPLETION)
 )
 
 /**
