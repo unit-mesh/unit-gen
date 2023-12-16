@@ -8,14 +8,18 @@ permalink: /instruction
 
 # InstructionType
 
-InstructionType is an enum class that defines the type of instruction. It is used to determine which builder to use to
-build the instruction.
-
 ```kotlin
+/**
+ * InstructionType is a enum class to define all supported instruction type.
+ *
+ * TODO: split strategy for different patterns.
+ *
+ */
 enum class InstructionType {
-    INLINE_COMPLETION,
-    IN_BLOCK_COMPLETION,
-    AFTER_BLOCK_COMPLETION,
+    /**
+     * the AutoDev with pre-build context for un-support language
+     */
+    SIMILAR_CHUNKS_COMPLETION,
 
     /**
      * the AutoDev with pre-build context
@@ -27,6 +31,7 @@ enum class InstructionType {
             INLINE_COMPLETION to InlineCodeCompletionBuilder(context),
             IN_BLOCK_COMPLETION to InBlockCodeCompletionBuilder(context),
             AFTER_BLOCK_COMPLETION to AfterBlockCodeCompletionBuilder(context),
+            SIMILAR_CHUNKS_COMPLETION to SimilarChunksCompletionBuilder(context),
             RELATED_CODE_COMPLETION to RelatedCodeCompletionBuilder(context),
         )[this] ?: throw SerializationException("Unknown message type: $this")
     }

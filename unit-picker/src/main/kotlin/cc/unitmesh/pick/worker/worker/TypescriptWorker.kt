@@ -43,7 +43,7 @@ class TypescriptWorker(private val context: WorkerContext) : LangWorker() {
         val lists = jobs.map { job ->
             val instructionContext = InstructionContext(job, context.qualityTypes, fileTree, context.builderConfig)
 
-            context.instructionTypes.map { type ->
+            context.relatedTypes.map { type ->
                 val instructionBuilder = type.builder(instructionContext)
                 val list = instructionBuilder.build()
                 list.map {

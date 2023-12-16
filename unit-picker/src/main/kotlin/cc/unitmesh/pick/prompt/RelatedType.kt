@@ -9,16 +9,7 @@ import kotlinx.serialization.SerializationException
  * TODO: split strategy for different patterns.
  *
  */
-enum class InstructionType {
-    // we can use a full-line model to complete.
-    INLINE_COMPLETION,
-
-    // TODO: maybe we don't need this
-    IN_BLOCK_COMPLETION,
-
-    // TODO: maybe we don't need this
-    AFTER_BLOCK_COMPLETION,
-
+enum class RelatedType {
     /**
      * the AutoDev with pre-build context for un-support language
      */
@@ -31,11 +22,22 @@ enum class InstructionType {
 
     fun builder(context: InstructionContext): InstructionBuilder<out Any> {
         return mapOf(
+            SIMILAR_CHUNKS_COMPLETION to SimilarChunksCompletionBuilder(context),
+            RELATED_CODE_COMPLETION to RelatedCodeCompletionBuilder(context),
+        )[this] ?: throw SerializationException("Unknown message type: $this")
+    }
+}
+
+enum class CompletionType {
+    INLINE_COMPLETION,
+    IN_BLOCK_COMPLETION,
+    AFTER_BLOCK_COMPLETION;
+
+    fun builder(context: InstructionContext) : InstructionBuilder<out Any> {
+        return mapOf(
             INLINE_COMPLETION to InlineCodeCompletionBuilder(context),
             IN_BLOCK_COMPLETION to InBlockCodeCompletionBuilder(context),
             AFTER_BLOCK_COMPLETION to AfterBlockCodeCompletionBuilder(context),
-            SIMILAR_CHUNKS_COMPLETION to SimilarChunksCompletionBuilder(context),
-            RELATED_CODE_COMPLETION to RelatedCodeCompletionBuilder(context),
         )[this] ?: throw SerializationException("Unknown message type: $this")
     }
 }

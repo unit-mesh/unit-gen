@@ -1,6 +1,6 @@
 package cc.unitmesh.pick.config
 
-import cc.unitmesh.pick.prompt.InstructionType
+import cc.unitmesh.pick.prompt.RelatedType
 import cc.unitmesh.quality.CodeQualityType
 import kotlinx.serialization.Serializable
 import java.io.File
@@ -11,8 +11,8 @@ data class PickerOption(
     val branch: String = "master",
     val language: String = "java",
     val baseDir: String = "datasets",
-    val builderTypes: List<InstructionType> = listOf(
-        InstructionType.SIMILAR_CHUNKS_COMPLETION
+    val builderTypes: List<RelatedType> = listOf(
+        RelatedType.SIMILAR_CHUNKS_COMPLETION
     ),
     val codeQualityTypes: List<CodeQualityType> = listOf(),
     val builderConfig: BuilderConfig = BuilderConfig(),
