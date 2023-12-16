@@ -6,7 +6,7 @@ import cc.unitmesh.pick.prompt.JobContext
 import chapi.domain.core.CodeFunction
 
 class InlineCodeCompletionBuilder(val context: JobContext) : InstructionBuilder {
-    override fun buildFun(function: CodeFunction): List<CodeCompletionIns> {
+    override fun build(function: CodeFunction): List<CodeCompletionIns> {
         TODO("Not yet implemented")
     }
 

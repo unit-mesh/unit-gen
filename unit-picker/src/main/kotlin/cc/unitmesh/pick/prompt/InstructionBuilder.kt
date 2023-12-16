@@ -17,11 +17,11 @@ data class CodeCompletionIns(
 }
 
 interface InstructionBuilder {
-    fun buildDataStruct(dataStruct: CodeDataStruct): List<CodeCompletionIns> {
+    fun build(dataStruct: CodeDataStruct): List<CodeCompletionIns> {
         return listOf()
     }
 
-    fun buildFun(function: CodeFunction): List<CodeCompletionIns>
+    fun build(function: CodeFunction): List<CodeCompletionIns>
 }
 
 
