@@ -1,4 +1,27 @@
-# [](https://github.com/unit-mesh/unit-eval/compare/v0.1.6...v) (2023-12-14)
+# [](https://github.com/unit-mesh/unit-eval/compare/v0.1.7...v) (2023-12-16)
+
+
+
+## [0.1.7](https://github.com/unit-mesh/unit-eval/compare/v0.1.6...v0.1.7) (2023-12-16)
+
+
+### Bug Fixes
+
+* fix test ([0718834](https://github.com/unit-mesh/unit-eval/commit/07188344011e4804d22dff816c20a9b61a385d9f))
+* fix tests ([15683a0](https://github.com/unit-mesh/unit-eval/commit/15683a05ea215f025fee2cf63da3d9514b863b39))
+* fix tests ([591eb71](https://github.com/unit-mesh/unit-eval/commit/591eb7173945db3ba161b009d18b76968225381f))
+* fix tests ([1f8b367](https://github.com/unit-mesh/unit-eval/commit/1f8b3677b0f1d6fc7a31c2dc69ec0abd04af50dc))
+
+
+### Features
+
+* add basic chunk split logic ([646ee3f](https://github.com/unit-mesh/unit-eval/commit/646ee3feaafaad639d0cb70ac66874e78529e21b))
+* add basic releated code for support ([8ab5824](https://github.com/unit-mesh/unit-eval/commit/8ab58243056d5611d886ffbfc68e53826c1e634f))
+* add first version chunker ([ffd6930](https://github.com/unit-mesh/unit-eval/commit/ffd69301c9a7b2122556b961cf232e8f26fc5479))
+* add inline code support ([5c784ab](https://github.com/unit-mesh/unit-eval/commit/5c784ab8a78b3cb57299e25816a89699ce3a636a))
+* add serach for path ([ac467ca](https://github.com/unit-mesh/unit-eval/commit/ac467ca3e3f1efcc90263d8aab6517f70e6a24ca))
+* make for sample ([684cc43](https://github.com/unit-mesh/unit-eval/commit/684cc43d09db4f8b39db975f57c2e00165717172))
+* make support for completion types ([fcf338a](https://github.com/unit-mesh/unit-eval/commit/fcf338aa8befb20a7706a02a0f036e5cf7cbb83b))
 
 
 
@@ -11,6 +34,7 @@
 * fix data issues ([0e3e2d7](https://github.com/unit-mesh/unit-eval/commit/0e3e2d70fe7260d18b13685926dbff2a64dd81c2))
 * fix field issue ([a38182d](https://github.com/unit-mesh/unit-eval/commit/a38182da6edb68f999fab28491c961215253008f))
 * fix tests ([37ad4f3](https://github.com/unit-mesh/unit-eval/commit/37ad4f3fef10035e2925b7107fa893fcd8a8aca2))
+* fxi test ([4bcde50](https://github.com/unit-mesh/unit-eval/commit/4bcde502c38ecf4f6ac4ba7ffb126aa76476d2d9))
 
 
 ### Features
