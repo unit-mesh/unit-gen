@@ -1,6 +1,6 @@
 package cc.unitmesh.runner
 
-import cc.unitmesh.pick.config.PickerOption
+import cc.unitmesh.pick.builder.PickerOption
 import cc.unitmesh.pick.SimpleCodePicker
 import cc.unitmesh.pick.prompt.Instruction
 import cc.unitmesh.runner.cli.ProcessorResult

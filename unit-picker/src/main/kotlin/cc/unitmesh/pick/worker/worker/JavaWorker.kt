@@ -1,7 +1,7 @@
 package cc.unitmesh.pick.worker.worker
 
 import cc.unitmesh.pick.ext.CodeDataStructUtil
-import cc.unitmesh.pick.config.InstructionFileJob
+import cc.unitmesh.pick.builder.InstructionFileJob
 import cc.unitmesh.pick.prompt.Instruction
 import cc.unitmesh.pick.prompt.InstructionContext
 import cc.unitmesh.pick.worker.LangWorker

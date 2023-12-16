@@ -1,4 +1,4 @@
-package cc.unitmesh.pick.config;
+package cc.unitmesh.pick.builder;
 
 import cc.unitmesh.pick.SimpleCodePicker
 import cc.unitmesh.pick.prompt.Instruction

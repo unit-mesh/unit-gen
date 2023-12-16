@@ -12,7 +12,7 @@ permalink: /instruction
 /**
  * InstructionType is a enum class to define all supported instruction type.
  *
- * TODO: split strategy for different patterns.
+ * TODO: split prompt for different patterns.
  *
  */
 enum class InstructionType {

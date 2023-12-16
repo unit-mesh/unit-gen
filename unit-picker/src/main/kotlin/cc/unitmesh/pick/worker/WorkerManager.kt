@@ -1,6 +1,6 @@
 package cc.unitmesh.pick.worker
 
-import cc.unitmesh.pick.config.InstructionFileJob
+import cc.unitmesh.pick.builder.InstructionFileJob
 import cc.unitmesh.pick.prompt.Instruction
 import cc.unitmesh.pick.worker.worker.JavaWorker
 import cc.unitmesh.pick.worker.worker.TypescriptWorker

@@ -2,11 +2,11 @@ package cc.unitmesh.pick.related
 
 import cc.unitmesh.core.intelli.SimilarChunkContext
 import cc.unitmesh.core.intelli.SimilarChunker
-import cc.unitmesh.pick.config.InstructionFileJob
+import cc.unitmesh.pick.builder.InstructionFileJob
 
 /**
  * This class is used to calculate the similar chunks of Java code.
- * With different strategies (recent file strategy and chunk strategy), this class can find and analyze similar chunks
+ * With different strategies (recent file prompt and chunk prompt), this class can find and analyze similar chunks
  * of code.
  *
  * This class extends the SimilarChunksWithPaths class, providing additional functionality for handling Java code.

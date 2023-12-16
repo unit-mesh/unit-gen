@@ -1,4 +1,4 @@
-package cc.unitmesh.pick.prompt.builder
+package cc.unitmesh.pick.prompt.strategy
 
 import cc.unitmesh.pick.prompt.Instruction
 import cc.unitmesh.pick.prompt.CodeContextBuilder

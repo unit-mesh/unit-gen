@@ -27,12 +27,14 @@ class InlineCodeCompletionBuilder(val context: InstructionContext) : CodeContext
     }
 
     override fun unique(list: List<InlineCodeCompletionIns>): List<Instruction> {
-        return listOf(Instruction(
+        return listOf(
+            Instruction(
             instruction,
             output = output,
             input = """```$language
                 |$beforeCursorCode
                 |```""".trimMargin()
-        ))
+        )
+        )
     }
 }
