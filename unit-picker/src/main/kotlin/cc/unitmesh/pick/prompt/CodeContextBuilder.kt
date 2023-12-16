@@ -32,7 +32,7 @@ data class InstructionContext(
  *
  * Note: The InstructionBuilder interface does not provide documentation for its methods as per the given requirements.
  */
-interface InstructionBuilder<T> {
+interface CodeContextBuilder<T> {
     /**
      * In AutoDev or ChocolateFactory, we use Apache Velocity to generate instruction from template. In different cases,
      * the template is different, so we use different builders to build instruction data, aka <T>.

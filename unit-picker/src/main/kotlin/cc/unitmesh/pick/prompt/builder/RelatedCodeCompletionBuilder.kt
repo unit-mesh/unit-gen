@@ -2,7 +2,7 @@ package cc.unitmesh.pick.prompt.builder
 
 import cc.unitmesh.pick.ext.toUml
 import cc.unitmesh.pick.prompt.Instruction
-import cc.unitmesh.pick.prompt.InstructionBuilder
+import cc.unitmesh.pick.prompt.CodeContextBuilder
 import cc.unitmesh.pick.prompt.InstructionContext
 import chapi.domain.core.CodeDataStruct
 import kotlinx.serialization.Serializable
@@ -13,6 +13,7 @@ data class RelatedCodeCompletionIns(
     val language: String,
     val beforeCursor: String,
     val relatedCode: String,
+    // the output aka afterCursor
     val output: String,
 ) {
     override fun toString(): String {
@@ -21,7 +22,7 @@ data class RelatedCodeCompletionIns(
 }
 
 class RelatedCodeCompletionBuilder(private val context: InstructionContext) :
-    InstructionBuilder<RelatedCodeCompletionIns> {
+    CodeContextBuilder<RelatedCodeCompletionIns> {
 
     override fun build(): List<RelatedCodeCompletionIns> {
         val language = context.job.fileSummary.language.lowercase()

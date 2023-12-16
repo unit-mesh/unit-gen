@@ -1,7 +1,7 @@
 package cc.unitmesh.pick.prompt.builder
 
 import cc.unitmesh.pick.prompt.Instruction
-import cc.unitmesh.pick.prompt.InstructionBuilder
+import cc.unitmesh.pick.prompt.CodeContextBuilder
 import cc.unitmesh.pick.prompt.InstructionContext
 import cc.unitmesh.pick.related.JavaSimilarChunker
 import kotlinx.serialization.Serializable
@@ -21,7 +21,7 @@ data class SimilarChunkCompletionIns(
 }
 
 class SimilarChunksCompletionBuilder(private val context: InstructionContext) :
-    InstructionBuilder<SimilarChunkCompletionIns> {
+    CodeContextBuilder<SimilarChunkCompletionIns> {
     override fun build(): List<SimilarChunkCompletionIns> {
         val language = context.job.fileSummary.language.lowercase()
         val container = context.job.container ?: return emptyList()

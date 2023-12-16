@@ -1,7 +1,7 @@
 package cc.unitmesh.pick.prompt.builder
 
 import cc.unitmesh.pick.prompt.Instruction
-import cc.unitmesh.pick.prompt.InstructionBuilder
+import cc.unitmesh.pick.prompt.CodeContextBuilder
 import cc.unitmesh.pick.prompt.InstructionContext
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
@@ -10,8 +10,8 @@ import kotlinx.serialization.json.Json
 @Serializable
 data class InBlockCodeCompletionIns(
     val language: String,
-    val beforeCursorCode: String,
-    val afterCursorCode: String,
+    val beforeCursor: String,
+    val afterCursor: String,
     val output: String,
 ) {
     override fun toString(): String {
@@ -19,7 +19,7 @@ data class InBlockCodeCompletionIns(
     }
 }
 
-class InBlockCodeCompletionBuilder(val context: InstructionContext) : InstructionBuilder<InBlockCodeCompletionIns> {
+class InBlockCodeCompletionBuilder(val context: InstructionContext) : CodeContextBuilder<InBlockCodeCompletionIns> {
     val instruction: String = "";
     private val output: String = "";
     private val language: String = "";
