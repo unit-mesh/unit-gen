@@ -1,8 +1,8 @@
 package cc.unitmesh.pick.prompt.builder
 
 import cc.unitmesh.pick.prompt.Instruction
-import cc.unitmesh.pick.prompt.CodeContextBuilder
-import cc.unitmesh.pick.prompt.InstructionContext
+import cc.unitmesh.pick.prompt.InstructionBuilder
+import cc.unitmesh.pick.prompt.JobContext
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 
@@ -19,7 +19,7 @@ data class InBlockCodeCompletionIns(
     }
 }
 
-class InBlockCodeCompletionBuilder(val context: InstructionContext) : CodeContextBuilder<InBlockCodeCompletionIns> {
+class InBlockCodeCompletionBuilder(val context: JobContext) : InstructionBuilder<InBlockCodeCompletionIns> {
     val instruction: String = "";
     private val output: String = "";
     private val language: String = "";

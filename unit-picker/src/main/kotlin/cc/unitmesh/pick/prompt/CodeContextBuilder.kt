@@ -1,18 +1,8 @@
 package cc.unitmesh.pick.prompt
 
-import cc.unitmesh.pick.builder.BuilderConfig
-import cc.unitmesh.pick.builder.InstructionFileJob
 import cc.unitmesh.quality.CodeQualityType
 import cc.unitmesh.quality.QualityAnalyser
 import chapi.domain.core.CodeDataStruct
-
-data class InstructionContext(
-    val job: InstructionFileJob,
-    val qualityTypes: List<CodeQualityType>,
-    val fileTree: HashMap<String, InstructionFileJob>,
-    val builderConfig: BuilderConfig,
-    val completionType: List<CompletionType> = listOf(CompletionType.IN_BLOCK_COMPLETION)
-)
 
 /**
  * The InstructionBuilder interface is used to build instructions from template data. It is a generic interface that

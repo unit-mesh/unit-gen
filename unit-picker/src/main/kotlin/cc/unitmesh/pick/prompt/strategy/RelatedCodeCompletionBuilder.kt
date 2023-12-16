@@ -3,7 +3,7 @@ package cc.unitmesh.pick.prompt.strategy
 import cc.unitmesh.pick.ext.toUml
 import cc.unitmesh.pick.prompt.Instruction
 import cc.unitmesh.pick.prompt.CodeContextBuilder
-import cc.unitmesh.pick.prompt.InstructionContext
+import cc.unitmesh.pick.prompt.JobContext
 import chapi.domain.core.CodeDataStruct
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
@@ -21,7 +21,7 @@ data class RelatedCodeCompletionIns(
     }
 }
 
-class RelatedCodeCompletionBuilder(private val context: InstructionContext) :
+class RelatedCodeCompletionBuilder(private val context: JobContext) :
     CodeContextBuilder<RelatedCodeCompletionIns> {
 
     override fun build(): List<RelatedCodeCompletionIns> {

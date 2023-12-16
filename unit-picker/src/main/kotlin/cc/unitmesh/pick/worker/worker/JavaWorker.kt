@@ -3,7 +3,7 @@ package cc.unitmesh.pick.worker.worker
 import cc.unitmesh.pick.ext.CodeDataStructUtil
 import cc.unitmesh.pick.builder.InstructionFileJob
 import cc.unitmesh.pick.prompt.Instruction
-import cc.unitmesh.pick.prompt.InstructionContext
+import cc.unitmesh.pick.prompt.JobContext
 import cc.unitmesh.pick.worker.LangWorker
 import cc.unitmesh.pick.worker.WorkerContext
 import chapi.ast.javaast.JavaAnalyser
@@ -72,10 +72,10 @@ class JavaWorker(private val context: WorkerContext) : LangWorker() {
         }
 
         val lists = jobs.map { job ->
-            val instructionContext = InstructionContext(job, context.qualityTypes, fileTree, context.builderConfig)
+            val jobContext = JobContext(job, context.qualityTypes, fileTree, context.builderConfig)
 
             context.codeContextStrategies.map { type ->
-                val instructionBuilder = type.builder(instructionContext)
+                val instructionBuilder = type.builder(jobContext)
                 val list = instructionBuilder.build()
                 list.map {
                     file.appendText(it.toString() + "\n")

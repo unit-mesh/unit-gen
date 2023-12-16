@@ -31,7 +31,7 @@ enum class CodeContextStrategy {
      */
     RELATED_CODE;
 
-    fun builder(context: InstructionContext): CodeContextBuilder<out Any> {
+    fun builder(context: JobContext): CodeContextBuilder<out Any> {
         return mapOf(
             SIMILAR_CHUNKS to SimilarChunksCompletionBuilder(context),
             RELATED_CODE to RelatedCodeCompletionBuilder(context),
@@ -47,7 +47,7 @@ enum class CompletionType {
     // TODO: support in future for this
     AFTER_BLOCK_COMPLETION;
 
-    fun builder(context: InstructionContext): CodeContextBuilder<out Any> {
+    fun builder(context: JobContext): CodeContextBuilder<out Any> {
         return mapOf(
             INLINE_COMPLETION to InlineCodeCompletionBuilder(context),
             IN_BLOCK_COMPLETION to InBlockCodeCompletionBuilder(context),

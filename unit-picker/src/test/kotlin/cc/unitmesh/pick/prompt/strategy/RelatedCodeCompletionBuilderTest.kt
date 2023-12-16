@@ -2,7 +2,7 @@ package cc.unitmesh.pick.prompt.strategy
 
 import cc.unitmesh.pick.builder.BuilderConfig
 import cc.unitmesh.pick.builder.InstructionFileJob
-import cc.unitmesh.pick.prompt.InstructionContext
+import cc.unitmesh.pick.prompt.JobContext
 import cc.unitmesh.quality.CodeQualityType
 import chapi.ast.javaast.JavaAnalyser
 import org.archguard.scanner.analyser.count.FileJob
@@ -36,7 +36,7 @@ public class HelloController {
             code = code,
             container = container
         )
-        val context = InstructionContext(
+        val context = JobContext(
             job = job,
             qualityTypes = listOf(CodeQualityType.JavaController),
             fileTree = hashMapOf("" to job),
@@ -72,7 +72,7 @@ public class HelloController {
             code = code,
             container = container
         )
-        val context = InstructionContext(
+        val context = JobContext(
             job = job,
             qualityTypes = listOf(CodeQualityType.JavaController),
             fileTree = hashMapOf("" to job),
@@ -101,7 +101,7 @@ public class HelloController {
             container = serviceContainer
         )
 
-        val context = InstructionContext(
+        val context = JobContext(
             job = job,
             qualityTypes = listOf(CodeQualityType.JavaController),
             fileTree = hashMapOf(
