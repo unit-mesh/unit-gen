@@ -38,10 +38,9 @@ class SimilarChunksCompletionBuilder(private val context: JobContext) :
 
         // 2. collect all with related data structure
         val codeCompletionIns = dataStructs.map { ds ->
-            ds.Functions.map {
-                builders.map { builder ->
-                    builder.build(it)
-                }.flatten()
+            ds.Functions.map { function ->
+                builders.map { it.build(function) }
+                    .flatten()
                     .filter {
                         it.afterCursor.isNotBlank() && it.beforeCursor.isNotBlank()
                     }.map {

@@ -4,6 +4,7 @@ import cc.unitmesh.pick.ext.toUml
 import cc.unitmesh.pick.prompt.Instruction
 import cc.unitmesh.pick.prompt.CodeContextBuilder
 import cc.unitmesh.pick.prompt.JobContext
+import cc.unitmesh.pick.prompt.completionBuilders
 import chapi.domain.core.CodeDataStruct
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
@@ -47,30 +48,23 @@ class RelatedCodeCompletionBuilder(private val context: JobContext) :
             return emptyList()
         }
 
+        val builders = completionBuilders(context.completionType, context)
+
         val codeCompletionIns = dataStructs.map { ds ->
-            ds.Functions.map {
-                val position = it.Position
-                val beforeCursor = context.job.codeLines.subList(0, position.StartLine).joinToString("\n")
-
-                val stopLine = if (position.StopLine == 0) {
-                    context.job.codeLines.size
-                } else {
-                    position.StopLine
-                }
-
-                val afterCursor = context.job.codeLines.subList(position.StartLine, stopLine).joinToString("\n")
-
-                if (afterCursor.isBlank() || beforeCursor.isBlank()) {
-                    return@map null
-                }
-
-                RelatedCodeCompletionIns(
-                    language = language,
-                    beforeCursor = beforeCursor,
-                    relatedCode = relatedCode,
-                    output = afterCursor
-                )
-            }.filterNotNull()
+            ds.Functions.map { function ->
+                builders.map { it.build(function) }
+                    .flatten()
+                    .filter {
+                        it.afterCursor.isNotBlank() && it.beforeCursor.isNotBlank()
+                    }.map {
+                        RelatedCodeCompletionIns(
+                            language = language,
+                            beforeCursor = it.beforeCursor,
+                            relatedCode = relatedCode,
+                            output = it.afterCursor
+                        )
+                    }
+            }.flatten()
         }.flatten()
 
         return codeCompletionIns
