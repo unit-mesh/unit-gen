@@ -19,9 +19,9 @@ Docs: [https://eval.unitmesh.cc/](https://eval.unitmesh.cc/)
 
 Features:
 
-- [x] [Related code completion](https://eval.unitmesh.cc/instruction/related-code-completion)
-- [x] [Similar Code Completion](https://eval.unitmesh.cc/instruction/similar-code-completion)
-- Others ???
+- Code context strategy: [Related code completion](https://eval.unitmesh.cc/instruction/related-code-completion), [Similar Code Completion](https://eval.unitmesh.cc/instruction/similar-code-completion)
+- Completion type: inline, block, after block
+- [Code quality](https://eval.unitmesh.cc/quality) filter and pipeline. Code smell, test smell, estimation nd more.
 
 ## Design Philosophy
 

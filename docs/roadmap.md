@@ -29,8 +29,8 @@ permalink: /roadmap
 
 - [ ] Basic Instruction
     - [x] Related Code builder
-    - [ ] InBlock Code builder
-    - [ ] AfterBlock Code builder
+    - [x] InBlock Code builder
+    - [x] AfterBlock Code builder
 - [x] Filter by Code Quality
 - [x] AST parser by [Chapi](https://github.com/phodal/chapi)
 - [ ] by History analysis for incremental learning
