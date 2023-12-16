@@ -67,10 +67,11 @@ class SimpleCodePicker(private val config: PickerOption) : CodePicker {
 
         val languageWorker = LanguageWorker()
         val workerManager = WorkerManager(WorkerContext(
-            config.builderTypes,
+            config.codeContextStrategies,
             config.codeQualityTypes,
             config.builderConfig,
             pureDataFileName = config.pureDataFileName(),
+            config.completionTypes
         ))
         val walkdirChannel = Channel<FileJob>()
         val summary = mutableListOf<Instruction>()

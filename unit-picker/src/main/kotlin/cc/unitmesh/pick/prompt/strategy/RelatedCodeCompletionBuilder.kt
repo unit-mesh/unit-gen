@@ -48,7 +48,7 @@ class RelatedCodeCompletionBuilder(private val context: JobContext) :
             return emptyList()
         }
 
-        val builders = completionBuilders(context.completionType, context)
+        val builders = completionBuilders(context.completionBuilderTypes, context)
 
         val codeCompletionIns = dataStructs.map { ds ->
             ds.Functions.map { function ->

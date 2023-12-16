@@ -34,7 +34,7 @@ class SimilarChunksCompletionBuilder(private val context: JobContext) :
         }
 
         val similarChunker = JavaSimilarChunker(context.fileTree)
-        val builders = completionBuilders(context.completionType, context)
+        val builders = completionBuilders(context.completionBuilderTypes, context)
 
         // 2. collect all with related data structure
         val codeCompletionIns = dataStructs.map { ds ->

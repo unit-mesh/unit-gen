@@ -1,6 +1,8 @@
 package cc.unitmesh.pick.builder
 
 import cc.unitmesh.pick.prompt.CodeContextStrategy
+import cc.unitmesh.pick.prompt.CompletionBuilderType
+import cc.unitmesh.pick.prompt.Instruction
 import cc.unitmesh.quality.CodeQualityType
 import kotlinx.serialization.Serializable
 import java.io.File
@@ -11,8 +13,12 @@ data class PickerOption(
     val branch: String = "master",
     val language: String = "java",
     val baseDir: String = "datasets",
-    val builderTypes: List<CodeContextStrategy> = listOf(
-        CodeContextStrategy.SIMILAR_CHUNKS
+    val codeContextStrategies: List<CodeContextStrategy> = listOf(
+        CodeContextStrategy.RELATED_CODE
+    ),
+    val completionTypes: List<CompletionBuilderType> = listOf(
+        CompletionBuilderType.AFTER_BLOCK_COMPLETION,
+        CompletionBuilderType.IN_BLOCK_COMPLETION,
     ),
     val codeQualityTypes: List<CodeQualityType> = listOf(),
     val builderConfig: BuilderConfig = BuilderConfig(),
