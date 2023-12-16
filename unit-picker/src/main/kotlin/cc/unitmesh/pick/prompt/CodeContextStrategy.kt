@@ -47,15 +47,15 @@ enum class CompletionType {
     // TODO: support in future for this
     AFTER_BLOCK_COMPLETION;
 
-    fun builder(context: JobContext): InstructionBuilder {
+    fun builder(context: JobContext): CompletionBuilder {
         return mapOf(
             INLINE_COMPLETION to InlineCodeCompletionBuilder(context),
             IN_BLOCK_COMPLETION to InBlockCodeCompletionBuilder(context),
             AFTER_BLOCK_COMPLETION to AfterBlockCodeCompletionBuilder(context),
         )[this] ?: throw SerializationException("Unknown message type: $this")
     }
+}
 
-    fun builders(types: List<CompletionType>, context: JobContext) : List<InstructionBuilder> {
-        return types.map { it.builder(context) }
-    }
+fun completionBuilders(types: List<CompletionType>, context: JobContext) : List<CompletionBuilder> {
+    return types.map { it.builder(context) }
 }

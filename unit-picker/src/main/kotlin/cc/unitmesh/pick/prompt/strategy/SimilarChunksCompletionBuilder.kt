@@ -1,9 +1,6 @@
 package cc.unitmesh.pick.prompt.strategy
 
-import cc.unitmesh.pick.prompt.Instruction
-import cc.unitmesh.pick.prompt.CodeContextBuilder
-import cc.unitmesh.pick.prompt.InstructionBuilder
-import cc.unitmesh.pick.prompt.JobContext
+import cc.unitmesh.pick.prompt.*
 import cc.unitmesh.pick.related.JavaSimilarChunker
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
@@ -37,39 +34,31 @@ class SimilarChunksCompletionBuilder(private val context: JobContext) :
         }
 
         val similarChunker = JavaSimilarChunker(context.fileTree)
+        val builders = completionBuilders(context.completionType, context)
 
         // 2. collect all with related data structure
         val codeCompletionIns = dataStructs.map { ds ->
             ds.Functions.map {
-                val position = it.Position
-                val beforeCursor = context.job.codeLines.subList(0, position.StartLine).joinToString("\n")
+                builders.map { builder ->
+                    builder.build(it)
+                }.flatten()
+                    .filter {
+                        it.afterCursor.isNotBlank() && it.beforeCursor.isNotBlank()
+                    }.map {
+                        val similarChunks: List<String> = similarChunker.calculate(
+                            it.beforeCursor,
+                            ds.Package + "." + ds.NodeName,
+                        ).chunks ?: emptyList()
 
-                val stopLine = if (position.StopLine == 0) {
-                    context.job.codeLines.size
-                } else {
-                    position.StopLine
-                }
-
-                val afterCursor = context.job.codeLines.subList(position.StartLine, stopLine).joinToString("\n")
-
-                if (afterCursor.isBlank() || beforeCursor.isBlank()) {
-                    return@map null
-                }
-
-                // collection all similar chunk structures by imports if exists in a file tree
-                val similarChunks: List<String> = similarChunker.calculate(
-                    beforeCursor,
-                    ds.Package + "." + ds.NodeName,
-                ).chunks ?: emptyList()
-
-                SimilarChunkCompletionIns(
-                    language = language,
-                    beforeCursor = beforeCursor,
-                    similarChunks = similarChunks,
-                    afterCursor = afterCursor,
-                    output = afterCursor
-                )
-            }.filterNotNull()
+                        SimilarChunkCompletionIns(
+                            language = language,
+                            beforeCursor = it.beforeCursor,
+                            similarChunks = similarChunks,
+                            afterCursor = it.afterCursor,
+                            output = it.afterCursor
+                        )
+                    }
+            }.flatten()
         }.flatten()
 
         return codeCompletionIns

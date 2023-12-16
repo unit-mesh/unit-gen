@@ -15,7 +15,7 @@ data class CodeCompletionIns(
     }
 }
 
-interface InstructionBuilder {
+interface CompletionBuilder {
     fun build(dataStruct: CodeDataStruct): List<CodeCompletionIns> {
         return listOf()
     }
