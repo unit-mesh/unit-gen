@@ -1,5 +1,7 @@
 package cc.unitmesh.pick.prompt
 
+import chapi.domain.core.CodeDataStruct
+import chapi.domain.core.CodeFunction
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 
@@ -15,7 +17,11 @@ data class CodeCompletionIns(
 }
 
 interface InstructionBuilder {
-    fun build(context: JobContext): List<CodeCompletionIns>
+    fun buildDataStruct(dataStruct: CodeDataStruct): List<CodeCompletionIns> {
+        return listOf()
+    }
+
+    fun buildFun(function: CodeFunction): List<CodeCompletionIns>
 }
 
 
