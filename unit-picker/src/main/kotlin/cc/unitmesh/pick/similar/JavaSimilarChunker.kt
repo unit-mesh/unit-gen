@@ -1,4 +1,4 @@
-package cc.unitmesh.pick.related
+package cc.unitmesh.pick.similar
 
 import cc.unitmesh.core.intelli.SimilarChunkContext
 import cc.unitmesh.core.intelli.SimilarChunker
@@ -21,7 +21,7 @@ class JavaSimilarChunker(private val fileTree: HashMap<String, InstructionFileJo
      *
      * @param text The text in which the code chunks are present.
      * @param canonicalName The canonical name of the code snippet.
-     * @return A SimilarChunkContext object containing information about related code paths and similar chunks of code.
+     * @return A SimilarChunkContext object containing information about similar code paths and similar chunks of code.
      */
     override fun calculate(text: String, canonicalName: String): SimilarChunkContext {
         val lines = text.split("\n")
@@ -103,7 +103,7 @@ class JavaSimilarChunker(private val fileTree: HashMap<String, InstructionFileJo
         return commonPathSegments.joinToString(".")
     }
 
-    fun chunkedCode(code: String): List<String> {
+    private fun chunkedCode(code: String): List<String> {
         return code
             .split("\n")
             .filter {

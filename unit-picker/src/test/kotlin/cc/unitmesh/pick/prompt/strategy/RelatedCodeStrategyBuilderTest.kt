@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import java.io.File
 
-class RelatedCodeCompletionBuilderTest {
+class RelatedCodeStrategyBuilderTest {
 
     @Test
     fun shouldReturnEmptyWhenHasQualityIssue() {
@@ -42,7 +42,7 @@ public class HelloController {
             fileTree = hashMapOf("" to job),
             builderConfig = BuilderConfig()
         )
-        val builder = RelatedCodeCompletionBuilder(context)
+        val builder = RelatedCodeStrategyBuilder(context)
         val result = builder.build()
 
         assertEquals(0, result.size)
@@ -78,7 +78,7 @@ public class HelloController {
             fileTree = hashMapOf("" to job),
             builderConfig = BuilderConfig()
         )
-        val builder = RelatedCodeCompletionBuilder(context)
+        val builder = RelatedCodeStrategyBuilder(context)
         val result = builder.build()
 
         assertEquals(1, result.size)
@@ -124,7 +124,7 @@ public class HelloController {
             builderConfig = BuilderConfig()
         )
 
-        val builder = RelatedCodeCompletionBuilder(context)
+        val builder = RelatedCodeStrategyBuilder(context)
         val result = builder.build()
 
         assertEquals(result.size, 4)

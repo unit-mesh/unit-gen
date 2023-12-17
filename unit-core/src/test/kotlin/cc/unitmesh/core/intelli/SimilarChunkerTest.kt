@@ -66,7 +66,7 @@ class SimilarChunkerTest {
     @Test
     fun should_convert_path_to_list_of_strings() {
         // Given
-        val path = "unit-picker/src/main/kotlin/cc/unitmesh/pick/related/JavaSimilarChunks.kt"
+        val path = "unit-picker/src/main/kotlin/cc/unitmesh/pick/similar/JavaSimilarChunks.kt"
 
         // When
         val result = similarChunker.pathTokenize(path)
@@ -78,7 +78,7 @@ class SimilarChunkerTest {
             "cc",
             "unitmesh",
             "pick",
-            "related",
+            "similar",
             "Java",
             "Similar",
             "Chunks"

@@ -1,7 +1,7 @@
 package cc.unitmesh.pick.prompt.strategy
 
 import cc.unitmesh.pick.prompt.*
-import cc.unitmesh.pick.related.JavaSimilarChunker
+import cc.unitmesh.pick.similar.JavaSimilarChunker
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 
@@ -18,8 +18,8 @@ data class SimilarChunkCompletionIns(
     }
 }
 
-class SimilarChunksCompletionBuilder(private val context: JobContext) :
-    CodeContextBuilder<SimilarChunkCompletionIns> {
+class SimilarChunksStrategyBuilder(private val context: JobContext) :
+    CodeStrategyBuilder<SimilarChunkCompletionIns> {
     override fun build(): List<SimilarChunkCompletionIns> {
         val language = context.job.fileSummary.language.lowercase()
         val container = context.job.container ?: return emptyList()
@@ -36,7 +36,7 @@ class SimilarChunksCompletionBuilder(private val context: JobContext) :
         val similarChunker = JavaSimilarChunker(context.fileTree)
         val builders = completionBuilders(context.completionBuilderTypes, context)
 
-        // 2. collect all with related data structure
+        // 2. collect all with similar data structure
         val codeCompletionIns = dataStructs.map { ds ->
             ds.Functions.map { function ->
                 builders.map { it.build(function) }

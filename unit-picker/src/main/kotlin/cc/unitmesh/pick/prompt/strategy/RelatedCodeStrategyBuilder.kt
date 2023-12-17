@@ -2,7 +2,7 @@ package cc.unitmesh.pick.prompt.strategy
 
 import cc.unitmesh.pick.ext.toUml
 import cc.unitmesh.pick.prompt.Instruction
-import cc.unitmesh.pick.prompt.CodeContextBuilder
+import cc.unitmesh.pick.prompt.CodeStrategyBuilder
 import cc.unitmesh.pick.prompt.JobContext
 import cc.unitmesh.pick.prompt.completionBuilders
 import chapi.domain.core.CodeDataStruct
@@ -22,21 +22,21 @@ data class RelatedCodeCompletionIns(
     }
 }
 
-class RelatedCodeCompletionBuilder(private val context: JobContext) :
-    CodeContextBuilder<RelatedCodeCompletionIns> {
+class RelatedCodeStrategyBuilder(private val context: JobContext) :
+    CodeStrategyBuilder<RelatedCodeCompletionIns> {
 
     override fun build(): List<RelatedCodeCompletionIns> {
         val language = context.job.fileSummary.language.lowercase()
         val container = context.job.container ?: return emptyList()
 
-        // 1. collection all related data structure by imports if exists in a file tree
+        // 1. collection all similar data structure by imports if exists in a file tree
         val relatedDataStructure = container.Imports
             .mapNotNull {
                 context.fileTree[it.Source]?.container?.DataStructures
             }
             .flatten()
 
-        // 2. convert all related data structure to uml
+        // 2. convert all similar data structure to uml
         val relatedCode = relatedDataStructure.joinToString("\n", transform = CodeDataStruct::toUml)
 
         // 3. checks with rule specified in config

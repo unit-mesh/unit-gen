@@ -1,4 +1,4 @@
-package cc.unitmesh.pick.related;
+package cc.unitmesh.pick.similar;
 
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals

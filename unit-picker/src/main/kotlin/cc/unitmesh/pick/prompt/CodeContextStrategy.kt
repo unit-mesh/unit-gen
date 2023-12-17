@@ -1,7 +1,7 @@
 package cc.unitmesh.pick.prompt
 
-import cc.unitmesh.pick.prompt.strategy.RelatedCodeCompletionBuilder
-import cc.unitmesh.pick.prompt.strategy.SimilarChunksCompletionBuilder
+import cc.unitmesh.pick.prompt.strategy.RelatedCodeStrategyBuilder
+import cc.unitmesh.pick.prompt.strategy.SimilarChunksStrategyBuilder
 import kotlinx.serialization.SerializationException
 
 /**
@@ -11,7 +11,7 @@ import kotlinx.serialization.SerializationException
  * 1. [CodeContextStrategy.SIMILAR_CHUNKS]: This prompt is used with pre-built context for unsupported languages.
  * It allows AutoDev to generate code context with similar code chunks builder.
  * 2. [CodeContextStrategy.RELATED_CODE]: This prompt is used with pre-built context. It allows AutoDev to
- * generate code context with related code builder.
+ * generate code context with similar code builder.
  *
  * The strategies are used through the `builder` function, which takes an `InstructionContext` parameter and returns an `InstructionBuilder` object.
  *
@@ -28,10 +28,10 @@ enum class CodeContextStrategy {
      */
     RELATED_CODE;
 
-    fun builder(context: JobContext): CodeContextBuilder<out Any> {
+    fun builder(context: JobContext): CodeStrategyBuilder<out Any> {
         return mapOf(
-            SIMILAR_CHUNKS to SimilarChunksCompletionBuilder(context),
-            RELATED_CODE to RelatedCodeCompletionBuilder(context),
+            SIMILAR_CHUNKS to SimilarChunksStrategyBuilder(context),
+            RELATED_CODE to RelatedCodeStrategyBuilder(context),
         )[this] ?: throw SerializationException("Unknown message type: $this")
     }
 }
