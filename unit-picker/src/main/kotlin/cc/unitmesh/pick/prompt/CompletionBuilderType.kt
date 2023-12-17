@@ -9,8 +9,6 @@ enum class CompletionBuilderType {
     // TODO: support in future for this
     INLINE_COMPLETION,
     IN_BLOCK_COMPLETION,
-
-    // TODO: support in future for this
     AFTER_BLOCK_COMPLETION;
 
     fun builder(context: JobContext): CompletionBuilder {

@@ -6,34 +6,47 @@ has_children: true
 permalink: /instruction
 ---
 
-# InstructionType
+Unit Eval with combined with CodeContextStrategy and CompletionBuilderType to build the instruction.
+
+# Context Strategy
 
 ```kotlin
-/**
- * InstructionType is a enum class to define all supported instruction type.
- *
- * TODO: split prompt for different patterns.
- *
- */
-enum class InstructionType {
+enum class CodeContextStrategy {
     /**
      * the AutoDev with pre-build context for un-support language
      */
-    SIMILAR_CHUNKS_COMPLETION,
+    SIMILAR_CHUNKS,
 
     /**
      * the AutoDev with pre-build context
      */
-    RELATED_CODE_COMPLETION;
+    RELATED_CODE;
 
-    fun builder(context: InstructionContext): InstructionBuilder<out Any> {
+    fun builder(context: JobContext): CodeContextBuilder<out Any> {
         return mapOf(
-            INLINE_COMPLETION to InlineCodeCompletionBuilder(context),
-            IN_BLOCK_COMPLETION to InBlockCodeCompletionBuilder(context),
-            AFTER_BLOCK_COMPLETION to AfterBlockCodeCompletionBuilder(context),
-            SIMILAR_CHUNKS_COMPLETION to SimilarChunksCompletionBuilder(context),
-            RELATED_CODE_COMPLETION to RelatedCodeCompletionBuilder(context),
+            SIMILAR_CHUNKS to SimilarChunksCompletionBuilder(context),
+            RELATED_CODE to RelatedCodeCompletionBuilder(context),
         )[this] ?: throw SerializationException("Unknown message type: $this")
     }
 }
 ```
+
+# Completion Type
+
+```
+enum class CompletionBuilderType {
+    // TODO: support in future for this
+    INLINE_COMPLETION,
+    IN_BLOCK_COMPLETION,
+    AFTER_BLOCK_COMPLETION;
+
+    fun builder(context: JobContext): CompletionBuilder {
+        return mapOf(
+            INLINE_COMPLETION to InlineCodeCompletionBuilder(context),
+            IN_BLOCK_COMPLETION to InBlockCodeCompletionBuilder(context),
+            AFTER_BLOCK_COMPLETION to AfterBlockCodeCompletionBuilder(context),
+        )[this] ?: throw SerializationException("Unknown message type: $this")
+    }
+}
+```
+
