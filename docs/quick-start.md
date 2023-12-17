@@ -53,7 +53,7 @@ public class App {
     List<CodeQualityType> codeQualityTypes = new ArrayList<>();
     codeQualityTypes.add(CodeQualityType.BadSmell);
     codeQualityTypes.add(CodeQualityType.JavaService);
-
+    
     PickerOption pickerOption = new PickerOption(
             "https://github.com/unit-mesh/unit-eval-testing", "master", "java",
             ".", builderTypes, codeQualityTypes, new BuilderConfig()

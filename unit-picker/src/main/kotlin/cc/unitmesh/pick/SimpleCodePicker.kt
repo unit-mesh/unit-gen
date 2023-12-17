@@ -20,6 +20,14 @@ import kotlin.io.path.absolutePathString
 
 interface CodePicker
 
+/**
+ * The `SimpleCodePicker` class is responsible for executing the `PickerOption` configuration and obtaining a list of
+ * instructions from processing a code directory. It implements the `CodePicker` interface.
+ *
+ * @property config The picker configuration options.
+ *
+ * @constructor Creates a `SimpleCodePicker` instance with the provided configuration.
+ */
 class SimpleCodePicker(private val config: PickerOption) : CodePicker {
     /**
      * Executes the code config with the provided configuration.
