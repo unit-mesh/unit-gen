@@ -8,12 +8,12 @@ permalink: /evaluation
 
 # Evaluation in Design
 
-- Layered Architecture / MVC / DDD
+- Layered Architecture/MVC/DDD [https://github.com/jkazama/ddd-java](https://github.com/jkazama/ddd-java)
     - Entity and DTO by file name
     - Controller for API design
     - Service
     - Repository for JPA by specifics
-- Inter Infrastructure (Built-in Spec)
+- Inter Infrastructure (Built-in Spec) [Low level design Questions](https://github.com/kumaransg/LLD)
     - Redis
     - Kafka
     - RabbitMQ
@@ -26,7 +26,7 @@ permalink: /evaluation
     - encapsulation
     - abstraction
     - ...
-- Design Patterns
+- Design Patterns [Java Design Pattern](https://github.com/iluwatar/java-design-patterns)
     - Singleton
     - Factory
     - Builder
