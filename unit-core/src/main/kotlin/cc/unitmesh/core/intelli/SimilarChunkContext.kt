@@ -13,7 +13,7 @@ class SimilarChunkContext(val language: String, val paths: List<String>?, val ch
         val queryBuilder = StringBuilder()
         for ((path, chunk) in filteredPairs) {
             val commentedCode = commentCode(chunk, commentPrefix)
-            queryBuilder.append("$commentPrefix Compare this snippet from $path:\n")
+            queryBuilder.append("$commentPrefix Compare this snippet from $path\n")
             queryBuilder.append(commentedCode).append("\n")
         }
 
@@ -23,8 +23,6 @@ class SimilarChunkContext(val language: String, val paths: List<String>?, val ch
     private fun commentCode(code: String, commentSymbol: String?): String {
         if (commentSymbol == null) return code
 
-        return code.split("\n").joinToString("\n") {
-            "$commentSymbol $it"
-        }
+        return code.split("\n").joinToString("\n") { "$commentSymbol $it" }
     }
 }

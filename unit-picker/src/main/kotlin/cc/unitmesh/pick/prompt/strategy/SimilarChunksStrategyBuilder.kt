@@ -10,7 +10,7 @@ data class SimilarChunkCompletionIns(
     val language: String,
     val beforeCursor: String,
     val afterCursor: String,
-    val similarChunks: List<String>,
+    val similarChunks: String,
     val output: String,
 ) {
     override fun toString(): String {
@@ -44,10 +44,10 @@ class SimilarChunksStrategyBuilder(private val context: JobContext) :
                     .filter {
                         it.afterCursor.isNotBlank() && it.beforeCursor.isNotBlank()
                     }.map {
-                        val similarChunks: List<String> = similarChunker.calculate(
+                        val similarChunks: String = similarChunker.calculate(
                             it.beforeCursor,
                             ds.Package + "." + ds.NodeName,
-                        ).chunks ?: emptyList()
+                        ).format() ?: ""
 
                         SimilarChunkCompletionIns(
                             language = language,
@@ -69,10 +69,7 @@ class SimilarChunksStrategyBuilder(private val context: JobContext) :
                 instruction = "Complete ${it.language} code, return rest code, no explaining",
                 output = it.output,
                 input = """
-                |```${it.language}
-                |${it.similarChunks.joinToString("\n")}
-                |```
-                |
+                |${it.similarChunks}              
                 |Code:
                 |```${it.language}
                 |${it.beforeCursor}

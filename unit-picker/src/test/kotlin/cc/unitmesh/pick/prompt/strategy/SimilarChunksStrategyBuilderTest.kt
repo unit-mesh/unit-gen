@@ -47,12 +47,12 @@ public class HelloController {
         val result = builder.build()
 
         val ins = result[0]
-        ins.similarChunks.size shouldBe 0
+        ins.similarChunks.length shouldBe 0
         ins.afterCursor shouldBe "		return \"Greetings from Spring Boot!\";\n\t}"
     }
 
     @Test
-    fun shouldBeSimiliarChunkByPackageName() {
+    fun shouldBeSimilarChunkByPackageName() {
         val model = File(this.javaClass.classLoader.getResource("related/BlogPost.java")!!.file).readText()
         val modelContainer = JavaAnalyser().analysis(model, "BlogPost.java")
         val repository = File(this.javaClass.classLoader.getResource("related/BlogRepository.java")!!.file).readText()
@@ -97,13 +97,14 @@ public class HelloController {
         Assertions.assertEquals(result.size, 4)
         val first = result.first()
 
-        Assertions.assertEquals(
-            first.similarChunks.joinToString("\n"), """
-@Repository
-public interface BlogRepository extends CrudRepository<BlogPost, Long> {
-
-}
-"""
-        )
+        first.similarChunks shouldBe """
+            // Compare this snippet from cc.unitmesh.testng.repository.BlogRepository   
+            // 
+            // @Repository
+            // public interface BlogRepository extends CrudRepository<BlogPost, Long> {
+            // 
+            // }
+            //
+            """.trimIndent()
     }
 }

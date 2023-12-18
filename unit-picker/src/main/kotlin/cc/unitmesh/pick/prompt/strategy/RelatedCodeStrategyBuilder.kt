@@ -62,7 +62,7 @@ class RelatedCodeStrategyBuilder(private val context: JobContext) :
         return codeCompletionIns
     }
 
-    fun findRelatedCode(container: CodeContainer): String {
+    private fun findRelatedCode(container: CodeContainer): String {
         // 1. collects all similar data structure by imports if exists in a file tree
         val byImports = container.Imports
             .mapNotNull {

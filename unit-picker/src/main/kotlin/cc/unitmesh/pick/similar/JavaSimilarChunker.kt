@@ -3,6 +3,7 @@ package cc.unitmesh.pick.similar
 import cc.unitmesh.core.intelli.SimilarChunkContext
 import cc.unitmesh.core.intelli.SimilarChunker
 import cc.unitmesh.pick.builder.InstructionFileJob
+import org.slf4j.Logger
 
 /**
  * This class is used to calculate the similar chunks of Java code.
@@ -13,7 +14,7 @@ import cc.unitmesh.pick.builder.InstructionFileJob
  */
 class JavaSimilarChunker(private val fileTree: HashMap<String, InstructionFileJob>) : SimilarChunker() {
     companion object {
-        val logger = org.slf4j.LoggerFactory.getLogger(JavaSimilarChunker::class.java)
+        val logger: Logger = org.slf4j.LoggerFactory.getLogger(JavaSimilarChunker::class.java)
     }
 
     /**
