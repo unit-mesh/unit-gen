@@ -67,20 +67,22 @@ class SimpleCodePicker(private val config: PickerOption) : CodePicker {
             Files.createDirectories(tempGitDir)
         }
 
-        val codeDir = checkoutCode(config.url, config.branch, tempGitDir)
+        val codeDir = checkoutCode(config.url, config.branch, tempGitDir, config.gitDepth)
             .toFile().canonicalFile
 
         logger.info("start config")
 
         val languageWorker = LanguageWorker()
-        val workerManager = WorkerManager(WorkerContext(
-            config.codeContextStrategies,
-            config.codeQualityTypes,
-            config.builderConfig,
-            pureDataFileName = config.pureDataFileName(),
-            config.completionTypes,
-            config.maxCompletionInOneFile
-        ))
+        val workerManager = WorkerManager(
+            WorkerContext(
+                config.codeContextStrategies,
+                config.codeQualityTypes,
+                config.builderConfig,
+                pureDataFileName = config.pureDataFileName(),
+                config.completionTypes,
+                config.maxCompletionInOneFile
+            )
+        )
         val walkdirChannel = Channel<FileJob>()
         val summary = mutableListOf<Instruction>()
 
@@ -132,7 +134,7 @@ class SimpleCodePicker(private val config: PickerOption) : CodePicker {
             return "$host/$owner/$repo"
         }
 
-        fun checkoutCode(url: String, branch: String, baseDir: Path): Path {
+        fun checkoutCode(url: String, branch: String, baseDir: Path, depth: Int): Path {
             if (!gitUrlRegex.matches(url)) {
                 return Path.of(url)
             }
@@ -150,6 +152,7 @@ class SimpleCodePicker(private val config: PickerOption) : CodePicker {
                 repository = url,
                 branch = branch,
                 workdir = targetDir.parent.absolutePathString(),
+                fetchDepth = depth
             )
 
             try {
