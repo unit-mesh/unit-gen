@@ -10,8 +10,8 @@ import org.slf4j.Logger
 class WorkerManager(workerContext: WorkerContext) {
     private val workers: Map<Language, LangWorker> = mapOf(
         Language.JAVA to JavaWorker(workerContext),
-        Language.TYPESCRIPT to TypescriptWorker(workerContext),
-        Language.JAVASCRIPT to TypescriptWorker(workerContext),
+//        Language.TYPESCRIPT to TypescriptWorker(workerContext),
+//        Language.JAVASCRIPT to TypescriptWorker(workerContext),
     )
 
     private val logger: Logger = org.slf4j.LoggerFactory.getLogger(WorkerManager::class.java)

@@ -18,20 +18,25 @@ class TypescriptWorker(private val context: WorkerContext) : LangWorker() {
         this.jobs.add(job)
 
         // since the Java Analyser imports will be in data structures
-        val container = TypeScriptAnalyser().analysis(job.code, job.fileSummary.location)
-        job.codeLines = job.code.lines()
-        container.DataStructures.map { ds ->
-            ds.Imports = container.Imports
+        try {
 
-            ds.Content = CodeDataStructUtil.contentByPosition(job.codeLines, ds.Position)
-            ds.Functions.map {
-                it.apply {
-                    it.Content = CodeDataStructUtil.contentByPosition(job.codeLines, it.Position)
+            val container = TypeScriptAnalyser().analysis(job.code, job.fileSummary.location)
+            job.codeLines = job.code.lines()
+            container.DataStructures.map { ds ->
+                ds.Imports = container.Imports
+
+                ds.Content = CodeDataStructUtil.contentByPosition(job.codeLines, ds.Position)
+                ds.Functions.map {
+                    it.apply {
+                        it.Content = CodeDataStructUtil.contentByPosition(job.codeLines, it.Position)
+                    }
                 }
             }
-        }
 
-        job.container = container
+            job.container = container
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
     override suspend fun start(): Collection<Instruction> = coroutineScope {
@@ -41,7 +46,8 @@ class TypescriptWorker(private val context: WorkerContext) : LangWorker() {
         }
 
         val lists = jobs.map { job ->
-            val jobContext = JobContext(job, context.qualityTypes, fileTree, context.builderConfig, context.completionTypes)
+            val jobContext =
+                JobContext(job, context.qualityTypes, fileTree, context.builderConfig, context.completionTypes)
 
             val instructions = context.codeContextStrategies.map { type ->
                 val instructionBuilder = type.builder(jobContext)
