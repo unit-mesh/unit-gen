@@ -148,7 +148,7 @@ class SimpleCodePicker(private val config: PickerOption) : CodePicker {
             val settings = GitSourceSettings(
                 repository = url,
                 branch = branch,
-                workdir = targetDir.absolutePathString(),
+                workdir = targetDir.parent.absolutePathString(),
             )
 
             try {
