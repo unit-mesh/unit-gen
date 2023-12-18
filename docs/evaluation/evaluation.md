@@ -20,13 +20,13 @@ permalink: /evaluation
     - MySQL
     - MongoDB
     - ...
-- OO Design
+- OO Design  [MarsRover](https://github.com/priyaaank/MarsRover)
     - inheritance
     - polymorphism
     - encapsulation
     - abstraction
     - ...
-- Design Patterns [Java Design Pattern](https://github.com/iluwatar/java-design-patterns)
+- Design Patterns [Java Design Pattern](https://github.com/iluwatar/java-design-patterns), [Design Patterns in Java](https://github.com/RefactoringGuru/design-patterns-java)
     - Singleton
     - Factory
     - Builder
@@ -40,3 +40,9 @@ permalink: /evaluation
     - Unit Test - Given-When-Then
     - API Test
     - Integration Test
+
+
+TypeScript:
+
+- [RefactoringGuru Design Patterns in TypeScript](https://github.com/RefactoringGuru/design-patterns-typescript/tree/main)
+- [Revisiting Design Patterns After 20](https://github.com/yanaga/revisiting-design-patterns/tree/main)

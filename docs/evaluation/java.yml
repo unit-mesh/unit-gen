@@ -1,0 +1,18 @@
+projects:
+  # Functional Programming
+  - repository: https://github.com/fpinjava/fpinjava
+    branch: master
+    language: java
+  - repository: https://github.com/functionaljava/functionaljava
+    branch: series/5.x
+    language: java
+  #  OO Design
+  - repository: https://github.com/RefactoringGuru/design-patterns-java
+    branch: main
+    language: java
+  - repository: https://github.com/iluwatar/java-design-patterns
+    branch: master
+    language: java
+  - repository: https://github.com/priyaaank/MarsRover
+    branch: master
+    language: java
