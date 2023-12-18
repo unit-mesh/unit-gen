@@ -14,6 +14,10 @@ class WorkerManager(workerContext: WorkerContext) {
     )
 
     fun addJob(job: InstructionFileJob) {
+        if (job.fileSummary.binary || job.fileSummary.generated || job.fileSummary.weightedComplexity > 1000) {
+            return
+        }
+
         val language = job.fileSummary.language.toSupportLanguage()
         val worker = workers[language]
         worker?.addJob(job)
