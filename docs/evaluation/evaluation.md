@@ -9,19 +9,34 @@ permalink: /evaluation
 # Evaluation in Design
 
 - Layered Architecture / MVC / DDD
-  - Entity and DTO by file name 
-  - Controller
-  - Service
-  - Repository for JPA by specifics
+    - Entity and DTO by file name
+    - Controller for API design
+    - Service
+    - Repository for JPA by specifics
 - Inter Infrastructure (Built-in Spec)
-  - Redis
-  - Kafka
-  - RabbitMQ
-  - MySQL
-  - MongoDB
-  - ...
+    - Redis
+    - Kafka
+    - RabbitMQ
+    - MySQL
+    - MongoDB
+    - ...
+- OO Design
+    - inheritance
+    - polymorphism
+    - encapsulation
+    - abstraction
+    - ...
 - Design Patterns
-  - Singleton
-  - Factory
-  - Builder
-  - ...
+    - Singleton
+    - Factory
+    - Builder
+    - State
+    - ...
+- Security & Cryptography
+    - JWT
+    - Spring Security
+    - MD5 //?
+- Test
+    - Unit Test - Given-When-Then
+    - API Test
+    - Integration Test
