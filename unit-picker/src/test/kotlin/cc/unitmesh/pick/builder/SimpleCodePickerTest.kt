@@ -62,6 +62,13 @@ class SimpleCodePickerTest {
     }
 
     @Test
+    fun shouldHandleDotInUrl() {
+        val url = "https://github.com/openmrs/openmrs-module-webservices.rest"
+        val gitUrlToPath = SimpleCodePicker.gitUrlToPath(url)
+        assertEquals("github.com/openmrs/openmrs-module-webservices.rest", gitUrlToPath)
+    }
+
+    @Test
     fun shouldCheckoutTestCode() {
         val picker = SimpleCodePicker(
             PickerOption(url = "https://github.com/unit-mesh/unit-eval-testing")

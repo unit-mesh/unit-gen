@@ -110,7 +110,8 @@ class SimpleCodePicker(private val config: PickerOption) : CodePicker {
         private val logger = org.slf4j.LoggerFactory.getLogger(javaClass)
 
         private val gitUrlRegex =
-            """(git@|http://|https://)((?<host>[\w\.@]+)(/|:))(?<owner>[\w,\-,\_]+)/(?<repo>[\w,\-,\_]+)(.git){0,1}((/){0,1})""".toRegex()
+            """(git@|http://|https://)((?<host>[\w\.@]+)(/|:))(?<owner>[\w,\-\_]+)/(?<repo>[\w,\-,._]+)"""
+                .toRegex()
 
         /**
          * Convert git url to path
@@ -125,6 +126,9 @@ class SimpleCodePicker(private val config: PickerOption) : CodePicker {
          */
         fun gitUrlToPath(url: String): String {
             val trimmedUrl = url.trim()
+                .removeSuffix("/")
+                .removeSuffix(".git")
+
             val matchResult = gitUrlRegex.find(trimmedUrl) ?: throw IllegalArgumentException("invalid git url: $url")
 
             val host = matchResult.groups["host"]!!.value
