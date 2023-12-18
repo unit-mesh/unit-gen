@@ -52,30 +52,35 @@ dependencies {
     implementation("cc.unitmesh:code-quality:0.1.5")
 }
 ```
-
-2.config the `unit-eval.yml` file and `connection.yml`
-
-3.write code
+2.write code
 ```java
 public class App {
-  public static void main(String[] args) {
-    List<InstructionType> builderTypes = new ArrayList<>();
-    builderTypes.add(InstructionType.RELATED_CODE_COMPLETION);
+    public static void main(String[] args) {
+        List<CodeContextStrategy> instructionTypes = new ArrayList<>();
+        instructionTypes.add(CodeContextStrategy.RELATED_CODE);
 
-    List<CodeQualityType> codeQualityTypes = new ArrayList<>();
-    codeQualityTypes.add(CodeQualityType.BadSmell);
-    codeQualityTypes.add(CodeQualityType.JavaService);
-    
-    PickerOption pickerOption = new PickerOption(
-            "https://github.com/unit-mesh/unit-eval-testing", "master", "java",
-            ".", builderTypes, codeQualityTypes, new BuilderConfig()
-    );
+        // config your code quality types
+        List<CodeQualityType> codeQualityTypes = new ArrayList<>();
+        codeQualityTypes.add(CodeQualityType.BadSmell);
+        codeQualityTypes.add(CodeQualityType.JavaService);
 
-    SimpleCodePicker simpleCodePicker = new SimpleCodePicker(pickerOption);
-    List<Instruction> output = simpleCodePicker.blockingExecute();
+        BuilderConfig builderConfig = new BuilderConfig();
 
-    // handle output in here
-  }
-} 
+        List<CompletionBuilderType> completionTypes = new ArrayList<>();
+        completionTypes.add(CompletionBuilderType.IN_BLOCK_COMPLETION);
+        completionTypes.add(CompletionBuilderType.AFTER_BLOCK_COMPLETION);
+
+        PickerOption pickerOption = new PickerOption(
+                "https://github.com/unit-mesh/unit-eval-testing", "master", "java",
+                ".", instructionTypes, completionTypes, codeQualityTypes, builderConfig
+        );
+
+        SimpleCodePicker simpleCodePicker = new SimpleCodePicker(pickerOption);
+        List<Instruction> output = simpleCodePicker.blockingExecute();
+
+        // handle output
+        System.out.println(output);
+    }
+}
 ```
 
