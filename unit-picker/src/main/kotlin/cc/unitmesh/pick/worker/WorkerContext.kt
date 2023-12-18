@@ -11,4 +11,5 @@ data class WorkerContext(
     val builderConfig: BuilderConfig,
     val pureDataFileName: String,
     val completionTypes: List<CompletionBuilderType>,
+    val maxCompletionInOneFile: Int,
 )

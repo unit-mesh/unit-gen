@@ -78,7 +78,8 @@ class SimpleCodePicker(private val config: PickerOption) : CodePicker {
             config.codeQualityTypes,
             config.builderConfig,
             pureDataFileName = config.pureDataFileName(),
-            config.completionTypes
+            config.completionTypes,
+            config.maxCompletionInOneFile
         ))
         val walkdirChannel = Channel<FileJob>()
         val summary = mutableListOf<Instruction>()
