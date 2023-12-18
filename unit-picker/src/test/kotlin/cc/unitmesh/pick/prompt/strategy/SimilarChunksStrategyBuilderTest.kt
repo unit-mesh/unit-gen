@@ -98,7 +98,7 @@ public class HelloController {
         val first = result.first()
 
         first.similarChunks shouldBe """
-            // Compare this snippet from cc.unitmesh.testng.repository.BlogRepository   
+            // Compare this snippet from cc.unitmesh.testng.repository.BlogRepository
             // 
             // @Repository
             // public interface BlogRepository extends CrudRepository<BlogPost, Long> {
