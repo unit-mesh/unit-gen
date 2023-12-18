@@ -20,6 +20,18 @@ download the latest version from [GitHub Release](https://github.com/unit-mesh/u
 1. config project by `processor.yml`
 2. run picker: `java -jar unit-cli.jar`
 
+Processor.yml examples:
+
+```yaml
+projects:
+  - repository: https://github.com/domain-driven-design/ddd-lite-example
+    branch: main
+    language: java
+  - repository: https://github.com/unit-mesh/unit-eval-testing
+    branch: main
+    language: java
+```
+
 ### Step 2. run Evaluate CLI (Optional)
 
 1.config the `unit-eval.yml` file and `connection.yml`
