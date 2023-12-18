@@ -75,6 +75,7 @@ data class PickerOption(
     val codeQualityTypes: List<CodeQualityType> = listOf(),
     val builderConfig: BuilderConfig = BuilderConfig(),
     val maxCompletionInOneFile: Int = 1,
+    val gitDepth: Int = 1,
 ) {
     fun pureDataFileName(): String {
         return baseDir + File.separator + repoFileName() + ".jsonl"
@@ -83,7 +84,7 @@ data class PickerOption(
     fun repoFileName() = "${encodeFileName(url)}_${encodeFileName(branch)}_${language}.json"
 
     // for / \ : * ? " < > |, which is not allowed in file name
-    private fun encodeFileName(string: String): String {
+    fun encodeFileName(string: String): String {
         return string.replace("/", "_")
             .replace("\\", "_")
             .replace(":", "_")

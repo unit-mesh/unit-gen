@@ -37,7 +37,8 @@ class PickerCommand : CliktCommand() {
                         url = code.repository,
                         branch = code.branch,
                         language = code.language,
-                        maxCompletionInOneFile = 1
+                        maxCompletionInOneFile = 1,
+                        gitDepth = 1,
                     )
 
                     val content = SimpleCodePicker(pickerOption).execute()
