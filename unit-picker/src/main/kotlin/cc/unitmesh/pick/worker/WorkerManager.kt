@@ -21,7 +21,12 @@ class WorkerManager(workerContext: WorkerContext) {
 
     suspend fun runAll() : List<Instruction> {
         return workers.map { (_, worker) ->
-            worker.start()
+            try {
+                worker.start()
+            } catch (e: Exception) {
+                e.printStackTrace()
+                emptyList()
+            }
         }.flatten()
     }
 }
