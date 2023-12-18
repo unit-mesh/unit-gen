@@ -3,7 +3,6 @@ layout: default
 title: Related Code Completion
 parent: Instruction Builder
 nav_order: 1
-permalink: /instruction/similar-code-builder
 ---
 
 # Related Code Completion
