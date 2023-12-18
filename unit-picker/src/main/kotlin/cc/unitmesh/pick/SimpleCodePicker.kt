@@ -9,7 +9,6 @@ import cc.unitmesh.pick.worker.WorkerManager
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import org.archguard.action.checkout.GitSourceSettings
 import org.archguard.action.checkout.executeGitCheckout
 import org.archguard.scanner.analyser.count.FileJob
@@ -68,7 +67,7 @@ class SimpleCodePicker(private val config: PickerOption) : CodePicker {
             Files.createDirectories(tempGitDir)
         }
 
-        val codeDir = checkoutCode(this@SimpleCodePicker, config.url, config.branch, tempGitDir)
+        val codeDir = checkoutCode(config.url, config.branch, tempGitDir)
             .toFile().canonicalFile
 
         logger.info("start config")
@@ -104,19 +103,6 @@ class SimpleCodePicker(private val config: PickerOption) : CodePicker {
         return@coroutineScope summary
     }
 
-    fun blockingExecute() = runBlocking {
-        return@runBlocking execute()
-    }
-
-    private fun moveRepository(sourceDir: Path, targetDir: Path) {
-        try {
-            Files.move(sourceDir, targetDir)
-        } catch (e: Exception) {
-            // Handle the exception appropriately (e.g., log or throw)
-            e.printStackTrace()
-        }
-    }
-
     companion object {
         private val logger = org.slf4j.LoggerFactory.getLogger(javaClass)
 
@@ -145,7 +131,7 @@ class SimpleCodePicker(private val config: PickerOption) : CodePicker {
             return "$host/$owner/$repo"
         }
 
-        fun checkoutCode(simpleCodePicker: SimpleCodePicker, url: String, branch: String, baseDir: Path): Path {
+        fun checkoutCode(url: String, branch: String, baseDir: Path): Path {
             if (!gitUrlRegex.matches(url)) {
                 return Path.of(url)
             }
