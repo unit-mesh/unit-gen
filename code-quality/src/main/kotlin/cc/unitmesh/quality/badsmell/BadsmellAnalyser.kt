@@ -68,7 +68,9 @@ class BadsmellAnalyser : QualityAnalyser {
         val calledClassesMap = mutableMapOf<String, Boolean>()
         val calledClasses = mutableListOf<String>()
         for (methodCalled in this.FunctionCalls) {
-            if (methodCalled.NodeName == "" || !maps[methodCalled.buildClassFullName()]!! || this.getClassFullName() == methodCalled.buildClassFullName()) {
+            val hasExistFunction = maps[methodCalled.buildClassFullName()] ?: continue
+
+            if (methodCalled.NodeName == "" || hasExistFunction || this.getClassFullName() == methodCalled.buildClassFullName()) {
                 continue
             }
             calledClassesMap[methodCalled.buildClassFullName()] = true
