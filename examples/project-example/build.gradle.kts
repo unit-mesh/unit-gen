@@ -8,8 +8,8 @@ repositories {
 }
 
 dependencies {
-    implementation("cc.unitmesh:unit-picker:0.1.2")
-    implementation("cc.unitmesh:code-quality:0.1.2")
+    implementation("cc.unitmesh:unit-picker:0.1.7")
+    implementation("cc.unitmesh:code-quality:0.1.7")
 }
 
 application {
