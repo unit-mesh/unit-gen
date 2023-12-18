@@ -6,7 +6,7 @@ nav_order: 1
 permalink: /
 ---
 
-<h1 align="center">Unit Eval</h1>
+<h1 align="center">Unit Eval - Intent-Driven Development</h1>
 
 <p align="center">
   <a href="https://github.com/unit-mesh/unit-eval/actions/workflows/build.yml">
