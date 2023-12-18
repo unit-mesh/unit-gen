@@ -56,9 +56,14 @@ class PickerCommand : CliktCommand() {
                 File(outputDir, result.outputName).writeText(json.encodeToString(result.content))
             }
 
-            val outputFile = File(outputDir, "summary.json")
-            val json = Json { prettyPrint = true }
-            outputFile.writeText(json.encodeToString(finalResult))
+            val outputFile = File(outputDir, "summary.jsonl")
+            if (outputFile.exists()) {
+                outputFile.delete()
+            }
+
+            finalResult.forEach {
+                outputFile.appendText(it.toString() + "\n")
+            }
 
             logger.info("Runner finished: ${outputDir.absolutePath}")
             logger.info("Total size: ${finalResult.size}")

@@ -74,6 +74,7 @@ data class PickerOption(
      */
     val codeQualityTypes: List<CodeQualityType> = listOf(),
     val builderConfig: BuilderConfig = BuilderConfig(),
+    val maxCompletionInOneFile: Int = 1,
 ) {
     fun pureDataFileName(): String {
         return baseDir + File.separator + repoFileName() + ".jsonl"
