@@ -99,7 +99,6 @@ public class HelloController {
 
         Assertions.assertEquals(
             first.similarChunks.joinToString("\n"), """
-
 @Repository
 public interface BlogRepository extends CrudRepository<BlogPost, Long> {
 

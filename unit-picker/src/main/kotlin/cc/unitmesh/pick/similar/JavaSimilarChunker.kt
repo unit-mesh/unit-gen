@@ -54,6 +54,9 @@ class JavaSimilarChunker(private val fileTree: HashMap<String, InstructionFileJo
             similarChunks.take(3)
         } else {
             similarChunks
+        }.map {
+            // clean up the similar chunks, if start with multiple \n, remove to one
+            it.replace(Regex("^\\n+"), "\n")
         }
 
         return SimilarChunkContext("java", relatedCodePath, similarChunksText)
