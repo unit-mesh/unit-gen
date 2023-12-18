@@ -64,7 +64,7 @@ class JavaSimilarChunker(private val fileTree: HashMap<String, InstructionFileJo
         return chunks.mapNotNull { chunk ->
             val chunkPackageName = packageNameTokenize(chunk)
             val score = similarityScore(packageName.toSet(), chunkPackageName.toSet())
-            if (score > scoreThreshold) {
+            if (score >= scoreThreshold) {
                 score to chunk
             } else {
                 null

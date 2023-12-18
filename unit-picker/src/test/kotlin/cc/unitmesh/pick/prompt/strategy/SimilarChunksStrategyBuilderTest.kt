@@ -7,7 +7,9 @@ import cc.unitmesh.quality.CodeQualityType
 import chapi.ast.javaast.JavaAnalyser
 import io.kotest.matchers.shouldBe
 import org.archguard.scanner.analyser.count.FileJob
+import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
+import java.io.File
 
 
 class SimilarChunksStrategyBuilderTest {
@@ -47,5 +49,62 @@ public class HelloController {
         val ins = result[0]
         ins.similarChunks.size shouldBe 0
         ins.afterCursor shouldBe "		return \"Greetings from Spring Boot!\";\n\t}"
+    }
+
+    @Test
+    fun shouldBeSimiliarChunkByPackageName() {
+        val model = File(this.javaClass.classLoader.getResource("related/BlogPost.java")!!.file).readText()
+        val modelContainer = JavaAnalyser().analysis(model, "BlogPost.java")
+        val repository = File(this.javaClass.classLoader.getResource("related/BlogRepository.java")!!.file).readText()
+        val repositoryContainer = JavaAnalyser().analysis(repository, "BlogRepository.java")
+        val service = File(this.javaClass.classLoader.getResource("related/BlogService.java")!!.file).readText()
+        val serviceContainer = JavaAnalyser().analysis(service, "BlogService.java")
+
+        val job = InstructionFileJob(
+            FileJob(
+            ),
+            codeLines = service.lines(),
+            code = service,
+            container = serviceContainer
+        )
+
+        val context = JobContext(
+            job = job,
+            qualityTypes = listOf(CodeQualityType.JavaController),
+            fileTree = hashMapOf(
+                "cc.unitmesh.testng.entity.BlogPost" to InstructionFileJob(
+                    FileJob(
+                    ),
+                    codeLines = model.lines(),
+                    code = model,
+                    container = modelContainer
+                ),
+                "cc.unitmesh.testng.repository.BlogRepository" to InstructionFileJob(
+                    FileJob(
+                    ),
+                    codeLines = repository.lines(),
+                    code = repository,
+                    container = repositoryContainer
+                ),
+                "cc.unitmesh.testng.service.BlogService" to job
+            ),
+            builderConfig = BuilderConfig()
+        )
+
+        val builder = SimilarChunksStrategyBuilder(context)
+        val result = builder.build()
+
+        Assertions.assertEquals(result.size, 4)
+        val first = result.first()
+
+        Assertions.assertEquals(
+            first.similarChunks.joinToString("\n"), """
+
+@Repository
+public interface BlogRepository extends CrudRepository<BlogPost, Long> {
+
+}
+"""
+        )
     }
 }
