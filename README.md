@@ -195,6 +195,15 @@ public class App {
 } 
 ```
 
+## Thanks to
+
+- abstract syntax tree: [Chapi](https://github.com/phodal/chapi). Used features: multiple language to same data
+  structure.
+- legacy system analysis: [Coca](https://github.com/phodal/coca). Inspired: Bad Smell, Test Bad Smell
+- architecture governance tool: [ArchGuard](https://github.com/archguard/archguard).
+  Used features: Estimation, Rule Lint (API, SQL)
+- code database [CodeDB](https://github.com/archguard/codedb). Used features: Code analysis pipeline
+
 ## LICENSE
 
 This code is distributed under the MPL 2.0 license. See `LICENSE` in this directory.

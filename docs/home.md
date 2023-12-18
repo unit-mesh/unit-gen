@@ -23,14 +23,11 @@ permalink: /
 > LLM benchmark/evaluation tools with fine-tuning data engineering, specifically tailored for Unit Mesh tools such as
 > AutoDev, Studio B3, and DevOps Genius.
 
-Based on:
+Features:
 
-- abstract syntax tree: [Chapi](https://github.com/phodal/chapi). Used features: multiple language to same data
-  structure.
-- legacy system analysis: [Coca](https://github.com/phodal/coca). Inspired: Bad Smell, Test Bad Smell
-- architecture governance tool: [ArchGuard](https://github.com/archguard/archguard).
-  Used features: Estimation, Rule Lint (API, SQL)
-- code database [CodeDB](https://github.com/archguard/codedb). Used features: Code analysis pipeline
+- Code context strategy: [Related code completion](https://eval.unitmesh.cc/instruction/related-code-completion), [Similar Code Completion](https://eval.unitmesh.cc/instruction/similar-code-completion)
+- Completion type: inline, block, after block
+- [Code quality](https://eval.unitmesh.cc/quality) filter and pipeline. Code smell, test smell, estimation nd more.
 
 ## Design Philosophy
 
@@ -140,3 +137,12 @@ val ruleset = RuleSet(
 val issues = WebApiRuleVisitor(apis).visitor(listOf(ruleset))
 // if issues are not empty, then the code has bad smell
 ```
+
+## Thanks to
+
+- abstract syntax tree: [Chapi](https://github.com/phodal/chapi). Used features: multiple language to same data
+  structure.
+- legacy system analysis: [Coca](https://github.com/phodal/coca). Inspired: Bad Smell, Test Bad Smell
+- architecture governance tool: [ArchGuard](https://github.com/archguard/archguard).
+  Used features: Estimation, Rule Lint (API, SQL)
+- code database [CodeDB](https://github.com/archguard/codedb). Used features: Code analysis pipeline

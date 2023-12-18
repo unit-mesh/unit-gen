@@ -8,5 +8,3 @@ permalink: /quality/rule
 
 参考：[https://archguard.org/governance](https://archguard.org/governance)
 
-
-
