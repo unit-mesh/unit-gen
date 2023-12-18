@@ -79,5 +79,18 @@ data class PickerOption(
         return baseDir + File.separator + repoFileName() + ".jsonl"
     }
 
-    fun repoFileName() = "${url.replace("/", "_")}_${branch}_${language}.json"
+    fun repoFileName() = "${encodeFileName(url)}_${encodeFileName(branch)}_${language}.json"
+
+    // for / \ : * ? " < > |, which is not allowed in file name
+    private fun encodeFileName(string: String): String {
+        return string.replace("/", "_")
+            .replace("\\", "_")
+            .replace(":", "_")
+            .replace("*", "_")
+            .replace("?", "_")
+            .replace("\"", "_")
+            .replace("<", "_")
+            .replace(">", "_")
+            .replace("|", "_")
+    }
 }

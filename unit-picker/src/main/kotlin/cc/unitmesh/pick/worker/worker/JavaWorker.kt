@@ -31,7 +31,9 @@ class JavaWorker(private val context: WorkerContext) : LangWorker() {
     private val packageRegex = Regex("package\\s+([a-zA-Z0-9_.]+);")
     private val extLength = ".java".length
 
-    private var basePackage = ""
+    companion object {
+        val logger = org.slf4j.LoggerFactory.getLogger(JavaWorker::class.java)
+    }
 
     override fun addJob(job: InstructionFileJob) {
         this.jobs.add(job)
@@ -68,11 +70,18 @@ class JavaWorker(private val context: WorkerContext) : LangWorker() {
     override suspend fun start(): Collection<Instruction> = coroutineScope {
         val file = File(context.pureDataFileName)
         if (!file.exists()) {
-            file.createNewFile()
+            try {
+                file.createNewFile()
+            } catch (e: Exception) {
+                logger.error("create file error: $file")
+                e.printStackTrace()
+                return@coroutineScope emptyList()
+            }
         }
 
         val lists = jobs.map { job ->
-            val jobContext = JobContext(job, context.qualityTypes, fileTree, context.builderConfig, context.completionTypes)
+            val jobContext =
+                JobContext(job, context.qualityTypes, fileTree, context.builderConfig, context.completionTypes)
 
             context.codeContextStrategies.map { type ->
                 val instructionBuilder = type.builder(jobContext)
