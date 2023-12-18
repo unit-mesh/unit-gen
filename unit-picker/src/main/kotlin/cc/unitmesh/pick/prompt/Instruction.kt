@@ -32,7 +32,7 @@ data class Instruction(
             }
 
             // if more than maxCompletionInOneFile, return the first maxCompletionInOneFile, and random the rest
-            val first = instructions.take(maxCompletionInOneFile)
+            val first = instructions.take(1)
             val rest = instructions.drop(maxCompletionInOneFile)
             val randomRest = rest.shuffled().take(maxCompletionInOneFile - 1)
             return first + randomRest

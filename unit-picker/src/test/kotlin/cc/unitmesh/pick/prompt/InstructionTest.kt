@@ -1,12 +1,12 @@
 package cc.unitmesh.pick.prompt;
 
-import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
+import kotlin.test.assertEquals
 
 class InstructionTest {
 
     @Test
-    fun `should_return_all_instructions_when_size_is_less_than_maxCompletionInOneFile`() {
+    fun should_return_all_instructions_when_size_is_less_than_max_completion() {
         // given
         val instructions = listOf(
             Instruction("instruction1", "input1", "output1"),
@@ -23,7 +23,7 @@ class InstructionTest {
     }
 
     @Test
-    fun `should_return_first_instruction_when_maxCompletionInOneFile_is_1`() {
+    fun should_return_first_instruction_when_max_completion_is_1() {
         // given
         val instructions = listOf(
             Instruction("instruction1", "input1", "output1"),
@@ -31,17 +31,16 @@ class InstructionTest {
             Instruction("instruction3", "input3", "output3")
         )
         val maxCompletionInOneFile = 1
-        val expected = listOf(instructions[0])
 
         // when
         val result = Instruction.takeStrategy(instructions, maxCompletionInOneFile)
 
         // then
-        assertEquals(expected, result)
+        assertEquals(listOf(instructions.first()), result)
     }
 
     @Test
-    fun `should_return_first_maxCompletionInOneFile_instructions_and_random_rest_when_size_is_greater_than_maxCompletionInOneFile`() {
+    fun should_return_first_maxCompletion_instructions_and_random_rest_when_size_is_more_than_maxCompletion() {
         // given
         val instructions = listOf(
             Instruction("instruction1", "input1", "output1"),
@@ -56,13 +55,8 @@ class InstructionTest {
         val result = Instruction.takeStrategy(instructions, maxCompletionInOneFile)
 
         // then
-        assertEquals(maxCompletionInOneFile, 3)
+        assertEquals(3, result.size)
         assertEquals(instructions[0], result[0])
-        assertEquals(instructions[1], result[1])
-        assertEquals(instructions[2], result[2])
-        // Ensure that the remaining instructions are random
-        for (i in maxCompletionInOneFile until instructions.size) {
-            assert(instructions.contains(result[i]))
-        }
     }
 }
+
