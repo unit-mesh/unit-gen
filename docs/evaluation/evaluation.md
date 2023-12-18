@@ -41,8 +41,15 @@ permalink: /evaluation
     - API Test
     - Integration Test
 
+## Instruct for combined
 
-TypeScript:
+### Trigger by comments
+
+- [https://github.com/ise-uiuc/magicoder](https://github.com/ise-uiuc/magicoder)  
+
+### Code completion 
+
+## TypeScript
 
 - [RefactoringGuru Design Patterns in TypeScript](https://github.com/RefactoringGuru/design-patterns-typescript/tree/main)
 - [Revisiting Design Patterns After 20](https://github.com/yanaga/revisiting-design-patterns/tree/main)
