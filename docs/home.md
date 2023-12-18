@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Home
-description: Chocolate Factory 是一款开源的 AI Agent 开发引擎/数据框架（Toolkit），旨在帮助您轻松打造强大的 LLM 助手。无论您是需要生成前端页面、后端 API、SQL 图表，还是测试用例数据，Chocolate Factory 都能满足您的需求。
+description: UnitEval 是一个充分针对 Unit Mesh 工具（如AutoDev、Studio B3和DevOps）进行的 LLM 基准测试/评估工具和精细调整的数据工程，具体定制了特定功能。其亮点在于 UnitEval 功能，它可以自动选择和评估真实项目中的代码。
 nav_order: 1
 permalink: /
 ---
