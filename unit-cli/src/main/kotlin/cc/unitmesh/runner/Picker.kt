@@ -37,7 +37,7 @@ class PickerCommand : CliktCommand() {
                         url = code.repository,
                         branch = code.branch,
                         language = code.language,
-                        maxCompletionInOneFile = 1,
+                        maxCompletionInOneFile = 3,
                         gitDepth = 1,
                     )
 
@@ -55,7 +55,7 @@ class PickerCommand : CliktCommand() {
                 finalResult.addAll(result.content)
 
                 File(outputDir, result.outputName).writeText(result.content.joinToString("\n") {
-                    it.render(pretty = true, mergeInput = instructionConfig.mergeInput)
+                    it.render(mergeInput = instructionConfig.mergeInput)
                 })
             }
 

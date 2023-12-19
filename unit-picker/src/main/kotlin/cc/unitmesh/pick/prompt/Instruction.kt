@@ -62,13 +62,13 @@ data class Instruction(
                 return instructions
             }
 
-            // if maxCompletionInOneFile == 1, return the first one
+            // if maxCompletionInOneFile == 1, return the last one, the first one almost `constructor` function
             if (maxCompletionInOneFile == 1) {
-                return listOf(instructions.first())
+                return listOf(instructions.last())
             }
 
             // if more than maxCompletionInOneFile, return the first maxCompletionInOneFile, and random the rest
-            val first = instructions.take(1)
+            val first: List<Instruction> = listOf(instructions.last())
             val rest = instructions.drop(maxCompletionInOneFile)
             val randomRest = rest.shuffled().take(maxCompletionInOneFile - 1)
             return first + randomRest

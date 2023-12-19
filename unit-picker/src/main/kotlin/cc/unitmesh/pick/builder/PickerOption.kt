@@ -74,14 +74,14 @@ data class PickerOption(
      */
     val codeQualityTypes: List<CodeQualityType> = listOf(),
     val builderConfig: BuilderConfig = BuilderConfig(),
-    val maxCompletionInOneFile: Int = 1,
+    val maxCompletionInOneFile: Int = 3,
     val gitDepth: Int = 1,
 ) {
     fun pureDataFileName(): String {
         return baseDir + File.separator + repoFileName() + ".jsonl"
     }
 
-    fun repoFileName() = "${encodeFileName(url)}_${encodeFileName(branch)}_${language}.json"
+    fun repoFileName() = "${encodeFileName(url)}_${encodeFileName(branch)}_${language}.jsonl"
 
     // for / \ : * ? " < > |, which is not allowed in file name
     fun encodeFileName(string: String): String {
