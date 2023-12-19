@@ -1,27 +1,47 @@
-# [](https://github.com/unit-mesh/unit-eval/compare/v0.1.7...v) (2023-12-16)
+# [](https://github.com/unit-mesh/unit-eval/compare/v0.2.0-SNAPSHOT...v) (2023-12-19)
 
 
 
-## [0.1.7](https://github.com/unit-mesh/unit-eval/compare/v0.1.6...v0.1.7) (2023-12-16)
+# [0.2.0-SNAPSHOT](https://github.com/unit-mesh/unit-eval/compare/v0.1.6...v0.2.0-SNAPSHOT) (2023-12-19)
 
 
 ### Bug Fixes
 
+* fix dir issues ([e9cf741](https://github.com/unit-mesh/unit-eval/commit/e9cf74169ce4568c47e31ffbd253754498217a56))
+* fix for try catch ([33e9df8](https://github.com/unit-mesh/unit-eval/commit/33e9df830b77575feea7938a6a958d9c296ec3fa))
+* fix merge to summary issue ([c9db1ee](https://github.com/unit-mesh/unit-eval/commit/c9db1eea5dee040b5f4f21bcc06d6e84549f7558))
+* fix order issue ([a459e70](https://github.com/unit-mesh/unit-eval/commit/a459e7052b384fa8a8cc8b62af50d252253e930c))
+* fix picker issue ([9e347b5](https://github.com/unit-mesh/unit-eval/commit/9e347b533fa5dd9ea144c60d9aae10e3e120643c))
+* fix some disable file name symbol in branch ([cb0639b](https://github.com/unit-mesh/unit-eval/commit/cb0639bd6a989199971fda0078a7dc6855c5ed29))
+* fix space issues ([8cb8125](https://github.com/unit-mesh/unit-eval/commit/8cb8125f97a79d4b71b3fabaf7695e2fd0496ac1))
 * fix test ([0718834](https://github.com/unit-mesh/unit-eval/commit/07188344011e4804d22dff816c20a9b61a385d9f))
+* fix tests ([6eba023](https://github.com/unit-mesh/unit-eval/commit/6eba023a581cb3fd29c4a16d73bd059d1848d16c))
 * fix tests ([15683a0](https://github.com/unit-mesh/unit-eval/commit/15683a05ea215f025fee2cf63da3d9514b863b39))
 * fix tests ([591eb71](https://github.com/unit-mesh/unit-eval/commit/591eb7173945db3ba161b009d18b76968225381f))
 * fix tests ([1f8b367](https://github.com/unit-mesh/unit-eval/commit/1f8b3677b0f1d6fc7a31c2dc69ec0abd04af50dc))
+* fix typos ([d849e41](https://github.com/unit-mesh/unit-eval/commit/d849e4164e170d1976b9d81b02fc4ac75ceca546))
+* fix typos ([de7e2e4](https://github.com/unit-mesh/unit-eval/commit/de7e2e4b8084d830753e1f7fc88ea362bcd83f95))
+* fix url issues ([104ed32](https://github.com/unit-mesh/unit-eval/commit/104ed32965c513b6ef81616113f2f04e93836fbe))
 
 
 ### Features
 
 * add basic chunk split logic ([646ee3f](https://github.com/unit-mesh/unit-eval/commit/646ee3feaafaad639d0cb70ac66874e78529e21b))
 * add basic releated code for support ([8ab5824](https://github.com/unit-mesh/unit-eval/commit/8ab58243056d5611d886ffbfc68e53826c1e634f))
+* add filter for some job is complex ([41ce7e4](https://github.com/unit-mesh/unit-eval/commit/41ce7e48743f6fb95234c5f26d370b8e5be4775b))
 * add first version chunker ([ffd6930](https://github.com/unit-mesh/unit-eval/commit/ffd69301c9a7b2122556b961cf232e8f26fc5479))
+* add git dpth to options ([3311e91](https://github.com/unit-mesh/unit-eval/commit/3311e91cb9f1e4c869fa66291c7f551fffdc87f8))
 * add inline code support ([5c784ab](https://github.com/unit-mesh/unit-eval/commit/5c784ab8a78b3cb57299e25816a89699ce3a636a))
+* add max completion in files support ([152648e](https://github.com/unit-mesh/unit-eval/commit/152648ed4b58cb7ad525c4b12f56e7e10158fe26))
 * add serach for path ([ac467ca](https://github.com/unit-mesh/unit-eval/commit/ac467ca3e3f1efcc90263d8aab6517f70e6a24ca))
+* add take strategy ([bc0169d](https://github.com/unit-mesh/unit-eval/commit/bc0169dcfebb5d64c19b27e0f81adfdae31a4b7e))
+* add threshold ([c3deccb](https://github.com/unit-mesh/unit-eval/commit/c3deccbe6a53493066c181d08219074a1d6df715))
 * make for sample ([684cc43](https://github.com/unit-mesh/unit-eval/commit/684cc43d09db4f8b39db975f57c2e00165717172))
 * make support for completion types ([fcf338a](https://github.com/unit-mesh/unit-eval/commit/fcf338aa8befb20a7706a02a0f036e5cf7cbb83b))
+* remove before multiple \n ([cc62f95](https://github.com/unit-mesh/unit-eval/commit/cc62f950f5f979047b5edf171f77f28a274c7022))
+* **threshold:** add basic threshold design ([d3418ae](https://github.com/unit-mesh/unit-eval/commit/d3418aef48fa8068d5459f3f2ca6007ee7e0d7c7))
+* try jtiktoken and disable for it's veryslowly in before check ([b77af2d](https://github.com/unit-mesh/unit-eval/commit/b77af2db4b6a170115f54cec20dc8602bfa71e3d))
+* update for context ([ad760f0](https://github.com/unit-mesh/unit-eval/commit/ad760f0f7ebd44c3b3e8328bb39991c8fe9328ae))
 
 
 
