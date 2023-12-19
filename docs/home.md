@@ -23,7 +23,12 @@ permalink: /
 > LLM benchmark/evaluation tools with fine-tuning data engineering, specifically tailored for Unit Mesh tools such as
 > AutoDev, Studio B3, and DevOps Genius.
 
-- 🤗DeepSeek: [unit-mesh/autodev-deepseek-6.7b-finetunes](https://huggingface.co/unit-mesh/autodev-deepseek-6.7b-finetunes)
+Examples:
+
+| name          | model download                                                                                                | fine-tune                            | jupyter notebook Log                                                     |
+|---------------|---------------------------------------------------------------------------------------------------------------|--------------------------------------|--------------------------------------------------------------------------|
+| DeepSeek 6.7B | [unit-mesh/autodev-deepseek-6.7b-finetunes](https://huggingface.co/unit-mesh/autodev-deepseek-6.7b-finetunes) | [finetune.ipynb](finetunes/deepseek) | [OpenBayes](https://openbayes.com/console/phodal/containers/mzEofYrqrfc) |
+| CodeGeeX 6B   | TODO                                                                                                          | TODO                                 | TODO                                                                     |      
 
 Features:
 

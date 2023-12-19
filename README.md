@@ -19,7 +19,10 @@ Docs: [https://eval.unitmesh.cc/](https://eval.unitmesh.cc/)
 
 Thanks to [OpenBayes](https://openbayes.com/console/signup?r=phodal_uVxU) for providing computing resources.
 
-- 🤗DeepSeek: [unit-mesh/autodev-deepseek-6.7b-finetunes](https://huggingface.co/unit-mesh/autodev-deepseek-6.7b-finetunes)
+| name          | model download                                                                                                | fine-tune                            | jupyter notebook Log                                                     |
+|---------------|---------------------------------------------------------------------------------------------------------------|--------------------------------------|--------------------------------------------------------------------------|
+| DeepSeek 6.7B | [unit-mesh/autodev-deepseek-6.7b-finetunes](https://huggingface.co/unit-mesh/autodev-deepseek-6.7b-finetunes) | [finetune.ipynb](finetunes/deepseek) | [OpenBayes](https://openbayes.com/console/phodal/containers/mzEofYrqrfc) |
+| CodeGeeX 6B   | TODO                                                                                                          | TODO                                 | TODO                                                                     |      
 
 Features:
 
