@@ -92,5 +92,8 @@ cf-prompt-script = { group = "cc.unitmesh", name = "prompt-script", version.ref 
 
 kaml = { group = "com.charleskorn.kaml", name = "kaml", version.ref = "kaml" }
 
+#    implementation 'com.knuddels:jtokkit:0.6.1'
+jtokkit = { group = "com.knuddels", name = "jtokkit", version = "0.6.1" }
+
 [bundles]
 test = ["test-junit-params", "test-kotlintest-assertions", "test-mockk", "test-assertj"]
