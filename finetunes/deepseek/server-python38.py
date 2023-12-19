@@ -25,7 +25,7 @@ if not torch.cuda.is_available():
     DESCRIPTION += "\n<p>Running on CPU 🥶 This demo does not work on CPU.</p>"
 
 if torch.cuda.is_available():
-    model_id = "/openbayes/home/output/tmp-checkpoint-100"
+    model_id = "/openbayes/home/output/checkpoint-100"
     model = AutoModelForCausalLM.from_pretrained(model_id, torch_dtype=torch.bfloat16, device_map="auto")
     tokenizer = AutoTokenizer.from_pretrained(model_id)
     tokenizer.use_default_system_prompt = False
@@ -143,4 +143,4 @@ if __name__ == "__main__":
     except Exception:
         pass
 
-    demo.queue(max_size=5).launch(share=True, server_port=8080)
+    demo.queue(max_size=5).launch(share=True, server_port=8080, server_name="0.0.0.0")

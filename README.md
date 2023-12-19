@@ -19,6 +19,8 @@ Docs: [https://eval.unitmesh.cc/](https://eval.unitmesh.cc/)
 
 Thanks to [OpenBayes](https://openbayes.com/console/signup?r=phodal_uVxU) for providing computing resources.
 
+- 🤗DeepSeek: [unit-mesh/autodev-deepseek-6.7b-finetunes](https://huggingface.co/unit-mesh/autodev-deepseek-6.7b-finetunes)
+
 Features:
 
 - Code context strategy: [Related code completion](https://eval.unitmesh.cc/instruction/related-code-completion), [Similar Code Completion](https://eval.unitmesh.cc/instruction/similar-code-completion)
