@@ -87,7 +87,7 @@ class RelatedCodeStrategyBuilder(private val context: JobContext) :
 
     override fun unique(list: List<RelatedCodeCompletionIns>): List<Instruction> {
         return list.map {
-            val relatedCode = if (it.relatedCode.isNotBlank() || it.relatedCode.isNotEmpty()) {
+            val relatedCode = if (it.relatedCode.isNotBlank() && it.relatedCode.isNotEmpty()) {
                 "\n// Compare this snippets: \n ```${it.language}\n${it.relatedCode}\n```"
             } else {
                 ""
