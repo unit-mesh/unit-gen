@@ -30,7 +30,7 @@ pip install -r requirements.txt
 2.run server
 
 ```bash
-python server.py
+python web-ui.py
 ```
 
 
