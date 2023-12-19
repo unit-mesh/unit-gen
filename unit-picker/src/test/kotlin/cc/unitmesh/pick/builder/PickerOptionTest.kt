@@ -14,7 +14,7 @@ class PickerOptionTest {
         ).pureDataFileName()
 
         // Then
-        assertEquals("datasets/https___github.com_functionaljava_functionaljava_series_5.x_java.json.jsonl", result)
+        assertEquals("datasets/https___github.com_functionaljava_functionaljava_series_5.x_java.jsonl.jsonl", result)
     }
 
     @Test
@@ -29,7 +29,7 @@ class PickerOptionTest {
         val result = pickerOption.repoFileName()
 
         // Then
-        assertEquals("https___github.com_example_repo.git_main_java.json", result)
+        assertEquals("https___github.com_example_repo.git_main_java.jsonl", result)
     }
 
     @Test
