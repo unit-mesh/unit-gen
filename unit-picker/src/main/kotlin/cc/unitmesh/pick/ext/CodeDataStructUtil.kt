@@ -6,9 +6,13 @@ import chapi.domain.core.CodePosition
 fun CodeDataStruct.toUml(): String {
     val output = StringBuilder()
 
-    val superClass = Implements + Extend
+    val superClass = Implements + if (Extend.isNotBlank()) {
+        listOf(Extend)
+    } else {
+        emptyList()
+    }
     val superClasses = if (superClass.isNotEmpty()) {
-        ":" + superClass.joinToString(", ") + " "
+        ": " + superClass.joinToString(", ") + " "
     } else {
         ""
     }

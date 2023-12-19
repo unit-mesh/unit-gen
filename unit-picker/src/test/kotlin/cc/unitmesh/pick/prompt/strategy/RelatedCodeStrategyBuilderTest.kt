@@ -141,7 +141,7 @@ public class HelloController {
 // 
 //  }
 // 
-// class BlogRepository {
+// class BlogRepository : CrudRepository<BlogPost,Long> {
 // 
 //  }
 // """
