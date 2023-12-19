@@ -17,23 +17,31 @@ class WorkerManager(workerContext: WorkerContext) {
     private val logger: Logger = org.slf4j.LoggerFactory.getLogger(WorkerManager::class.java)
 
     fun addJob(job: InstructionFileJob) {
-        if (job.fileSummary.complexity > 100) {
-            logger.info("skip file ${job.fileSummary.location} for complexity ${job.fileSummary.complexity}")
-            return;
+        val summary = job.fileSummary
+        if (summary.complexity > 100) {
+            logger.info("skip file ${summary.location} for complexity ${summary.complexity}")
+// TODO: add debugging option
+//            if (summary.filename.endsWith(".java")) {
+//                println("| filename: ${summary.filename} | complexity: ${summary.complexity} | code: ${summary.lines} | size: ${summary.bytes} | location: ${summary.location} |")
+//            }
+//            return;
         }
-        if (job.fileSummary.binary || job.fileSummary.generated || job.fileSummary.minified) {
+        if (summary.binary || summary.generated || summary.minified) {
             return
         }
 
         // if the file size is too large, we just try 64k
-        if (job.fileSummary.bytes > 1024 * 64) {
-            logger.info("skip file ${job.fileSummary.location} for size ${job.fileSummary.bytes}")
-            return;
+        if (summary.bytes > 1024 * 64) {
+            logger.info("skip file ${summary.location} for size ${summary.bytes}")
+// TODO: add debugging option
+//            if (summary.filename.endsWith(".java")) {
+//                println("| filename: ${summary.filename} | complexity: ${summary.complexity} | code: ${summary.lines} | size: ${summary.bytes} | location: ${summary.location} |")
+//            }
+            return
         }
 
-        val language = job.fileSummary.language.toSupportLanguage()
+        val language = summary.language.toSupportLanguage()
         val worker = workers[language] ?: return
-//        logger.info("add file:" + job.fileSummary.location)
         worker.addJob(job)
     }
 
