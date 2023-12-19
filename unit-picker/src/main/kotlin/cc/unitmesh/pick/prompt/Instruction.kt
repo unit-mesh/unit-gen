@@ -3,6 +3,10 @@ package cc.unitmesh.pick.prompt
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 
+private val prettyJson = Json {
+    prettyPrint = true
+}
+
 @Serializable
 data class Instruction(
     val instruction: String,
@@ -10,7 +14,24 @@ data class Instruction(
     val output: String,
 ) {
     override fun toString(): String {
-        return Json.encodeToString(serializer(), this)
+        throw Exception("we don't support toString() for Instruction, please call render()")
+    }
+
+    fun render(
+        pretty: Boolean = false,
+        mergeInput: Boolean = false,
+    ): String {
+        val instruction = if (mergeInput) {
+            this.instruction + "\n" + this.input
+        } else {
+            this.instruction
+        }
+
+        return if (pretty) {
+            prettyJson.encodeToString(serializer(), this.copy(instruction = instruction))
+        } else {
+            Json.encodeToString(serializer(), this.copy(instruction = instruction))
+        }
     }
 
     companion object {

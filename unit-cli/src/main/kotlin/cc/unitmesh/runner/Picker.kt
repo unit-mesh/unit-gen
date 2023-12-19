@@ -5,7 +5,6 @@ import cc.unitmesh.pick.SimpleCodePicker
 import cc.unitmesh.pick.prompt.Instruction
 import cc.unitmesh.runner.cli.ProcessorResult
 import cc.unitmesh.runner.cli.ProcessorUtils
-import cc.unitmesh.runner.cli.SourceCode
 import com.github.ajalt.clikt.core.CliktCommand
 import kotlinx.coroutines.*
 import kotlinx.serialization.encodeToString
@@ -27,6 +26,7 @@ class PickerCommand : CliktCommand() {
 
         val evalConfig = ProcessorUtils.loadConfig()
         val projects = evalConfig.projects
+        val instructionConfig = evalConfig.instructionConfig
 
         runBlocking {
             val finalResult: MutableList<Instruction> = mutableListOf()
@@ -54,8 +54,9 @@ class PickerCommand : CliktCommand() {
             results.forEach { result ->
                 finalResult.addAll(result.content)
 
-                val json = Json { prettyPrint = true }
-                File(outputDir, result.outputName).writeText(json.encodeToString(result.content))
+                File(outputDir, result.outputName).writeText(result.content.joinToString("\n") {
+                    it.render(pretty = true, mergeInput = instructionConfig.mergeInput)
+                })
             }
 
             val outputFile = File(outputDir, "summary.jsonl")
@@ -64,7 +65,7 @@ class PickerCommand : CliktCommand() {
             }
 
             finalResult.forEach {
-                outputFile.appendText(it.toString() + "\n")
+                outputFile.appendText(it.render(mergeInput = instructionConfig.mergeInput) + "\n")
             }
 
             logger.info("Runner finished: ${outputDir.absolutePath}")
