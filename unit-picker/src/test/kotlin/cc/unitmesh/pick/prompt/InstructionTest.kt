@@ -38,7 +38,7 @@ class InstructionTest {
         val result = Instruction.takeStrategy(instructions, maxCompletionInOneFile)
 
         // then
-        assertEquals(listOf(instructions.first()), result)
+        assertEquals(listOf(instructions.last()), result)
     }
 
     @Test
@@ -58,7 +58,7 @@ class InstructionTest {
 
         // then
         assertEquals(3, result.size)
-        assertEquals(instructions[0], result[0])
+        assertEquals(instructions.last(), result.first())
     }
 
 
