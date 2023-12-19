@@ -1,15 +1,19 @@
 import os
 from threading import Thread
 from typing import Iterator, List, Tuple
+from urllib.request import Request
 
 import uvicorn
 from fastapi import FastAPI, Response
 from fastapi.responses import StreamingResponse
+from fastapi.exceptions import RequestValidationError
 
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer, TextIteratorStreamer
 import requests
 from pydantic import BaseModel
+from starlette import status
+from starlette.responses import JSONResponse
 
 MAX_MAX_NEW_TOKENS = 2048
 DEFAULT_MAX_NEW_TOKENS = 1024
@@ -21,6 +25,21 @@ if torch.cuda.is_available():
     model = AutoModelForCausalLM.from_pretrained(model_id, torch_dtype=torch.bfloat16, device_map="auto")
     tokenizer = AutoTokenizer.from_pretrained(model_id)
     tokenizer.use_default_system_prompt = False
+
+
+class MessageInResponseChat(BaseModel):
+    role: str
+    content: str
+
+
+class ChatResponse(BaseModel):
+    choices: List[MessageInResponseChat]
+    model: str
+
+
+class Message(BaseModel):
+    role: str
+    content: str
 
 
 def generate(
@@ -35,8 +54,10 @@ def generate(
     total_count += 1
     if total_count % 50 == 0:
         os.system("nvidia-smi")
+    conversation = []
 
-    conversation = chat_history
+    for message in chat_history:
+        conversation.append({"role": message.role, "content": message.message})
 
     input_ids = tokenizer.apply_chat_template(conversation, return_tensors="pt")
     if input_ids.shape[1] > MAX_INPUT_TOKEN_LENGTH:
@@ -62,15 +83,22 @@ def generate(
     outputs = []
     for text in streamer:
         outputs.append(text)
-        yield "".join(outputs).replace("<|EOT|>", "")
+        output = "".join(outputs).replace("<|EOT|>", "")
+        yield ChatResponse(choices=[MessageInResponseChat(role='assistant', content=output)],
+                           model="deepseek").model_dump_json()
+
+    yield 'data: DONE'
 
 
 app = FastAPI()
 
 
-class Message(BaseModel):
-    role: str
-    content: str
+@app.exception_handler(RequestValidationError)
+async def validation_exception_handler(request: Request, exc: RequestValidationError):
+    exc_str = f'{exc}'.replace('\n', ' ').replace('   ', ' ')
+    print(f"{request}: {exc_str}")
+    content = {'status_code': 10422, 'message': exc_str, 'data': None}
+    return JSONResponse(content=content, status_code=status.HTTP_422_UNPROCESSABLE_ENTITY)
 
 
 @app.post("/api/chat", response_class=Response)
