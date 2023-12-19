@@ -17,6 +17,8 @@
 
 Docs: [https://eval.unitmesh.cc/](https://eval.unitmesh.cc/)
 
+Thanks to [OpenBayes](https://openbayes.com/console/signup?r=phodal_uVxU) for providing computing resources.
+
 Features:
 
 - Code context strategy: [Related code completion](https://eval.unitmesh.cc/instruction/related-code-completion), [Similar Code Completion](https://eval.unitmesh.cc/instruction/similar-code-completion)
