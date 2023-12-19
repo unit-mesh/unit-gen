@@ -6,6 +6,6 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class ProcessorResult(
     val repository: String,
-    val content: MutableList<Instruction>,
+    val content: List<Instruction>,
     val outputName: String,
 )
