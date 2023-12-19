@@ -66,14 +66,9 @@ class SimilarChunksStrategyBuilder(private val context: JobContext) :
     override fun unique(list: List<SimilarChunkCompletionIns>): List<Instruction> {
         return list.map {
             Instruction(
-                instruction = "Complete ${it.language} code, return rest code, no explaining",
+                instruction = "Complete ${it.language} code, return rest code, no explaining\n${it.similarChunks}              \nCode:\n```${it.language}\n${it.beforeCursor}\n```",
                 output = it.output,
-                input = """
-                |${it.similarChunks}              
-                |Code:
-                |```${it.language}
-                |${it.beforeCursor}
-                |```""".trimMargin()
+                input = ""
             )
         }
     }

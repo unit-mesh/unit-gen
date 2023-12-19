@@ -93,9 +93,14 @@ class RelatedCodeStrategyBuilder(private val context: JobContext) :
                 ""
             }
             Instruction(
-                instruction = "Complete ${it.language} code, return rest code, no explaining",
+                instruction = "Complete ${it.language} code, return rest code, no explaining\n$relatedCode\n" +
+                        "\n" +
+                        "Code:\n" +
+                        "```${it.language}\n" +
+                        "${it.beforeCursor}\n" +
+                        "```",
                 output = it.output,
-                input = "$relatedCode\n\nCode:\n```${it.language}\n${it.beforeCursor}\n```"
+                input = ""
             )
         }
     }
