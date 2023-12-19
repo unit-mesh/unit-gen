@@ -33,7 +33,7 @@ class WorkerManager(workerContext: WorkerContext) {
 
         val language = job.fileSummary.language.toSupportLanguage()
         val worker = workers[language] ?: return
-        logger.info("add file:" + job.fileSummary.location)
+//        logger.info("add file:" + job.fileSummary.location)
         worker.addJob(job)
     }
 

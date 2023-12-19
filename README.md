@@ -88,6 +88,11 @@ Unit Eval prompt should keep the same structure as the AutoDev prompt. Prompt ex
 
 ### Code quality pipeline
 
+Before Check:
+
+- FileSize: 64k
+- Complexity: 1000
+
 ![Code Quality Workflow](https://unitmesh.cc/uniteval/code-quality-workflow.png)
 
 ### Extendable customize quality thresholds

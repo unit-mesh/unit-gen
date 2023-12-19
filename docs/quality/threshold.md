@@ -8,7 +8,7 @@ permalink: /quality/threshold
 
 Default threshold:
 
-- File Size: 64kb, about 640 ~ 1280 lines,
+- File Size: 64kb, about 640 ~ 1280 lines, maybe some comments, like chinese
 - Complexity: 100,
 
 
