@@ -8,9 +8,15 @@ private val prettyJson = Json {
 }
 
 @Serializable
-data class Instruction(
+data class SimpleInstruction(
     val instruction: String,
-    val input: String,
+    val output: String,
+)
+
+@Serializable
+data class Instruction(
+    var instruction: String,
+    var input: String,
     val output: String,
 ) {
     override fun toString(): String {
@@ -21,16 +27,25 @@ data class Instruction(
         pretty: Boolean = false,
         mergeInput: Boolean = false,
     ): String {
-        val instruction = if (mergeInput) {
-            this.instruction + "\n" + this.input
-        } else {
-            this.instruction
+        if (mergeInput) {
+            val simpleInstruction = SimpleInstruction(
+                instruction = this.instruction.trim() + "\n" + this.input.trim(),
+                output = this.output.trim(),
+            )
+
+            return simpleInstruction.let {
+                if (pretty) {
+                    prettyJson.encodeToString(SimpleInstruction.serializer(), it)
+                } else {
+                    Json.encodeToString(SimpleInstruction.serializer(), it)
+                }
+            }
         }
 
         return if (pretty) {
-            prettyJson.encodeToString(serializer(), this.copy(instruction = instruction))
+            prettyJson.encodeToString(serializer(), this)
         } else {
-            Json.encodeToString(serializer(), this.copy(instruction = instruction))
+            Json.encodeToString(serializer(), this)
         }
     }
 

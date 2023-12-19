@@ -1,5 +1,7 @@
 package cc.unitmesh.pick.prompt;
 
+import io.kotest.matchers.shouldBe
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
@@ -58,5 +60,61 @@ class InstructionTest {
         assertEquals(3, result.size)
         assertEquals(instructions[0], result[0])
     }
-}
 
+
+    @Test
+    fun should_return_not_pretty_json_string_when_pretty_is_false_and_mergeInput_is_false() {
+        // Given
+        val instruction = Instruction(
+            "instruction",
+            "input",
+            "output"
+        )
+
+        // When
+        val result = instruction.render(pretty = false, mergeInput = false)
+
+        // Then
+        result shouldBe "{\"instruction\":\"instruction\",\"input\":\"input\",\"output\":\"output\"}"
+    }
+
+    @Test
+    fun should_return_pretty_json_string_when_pretty_is_true_and_mergeInput_is_false() {
+        // Given
+        val instruction = Instruction(
+            "instruction",
+            "input",
+            "output"
+        )
+
+        // When
+        val result = instruction.render(pretty = true, mergeInput = false)
+
+        // Then
+        assertThat(result).isEqualTo(
+            """
+            {
+                "instruction": "instruction",
+                "input": "input",
+                "output": "output"
+            }
+            """.trimIndent()
+        )
+    }
+
+    @Test
+    fun should_return_not_pretty_json_string_with_merged_input_when_pretty_is_false_and_mergeInput_is_true() {
+        // Given
+        val instruction = Instruction(
+            "instruction",
+            "input",
+            "output"
+        )
+
+        // When
+        val result = instruction.render(pretty = false, mergeInput = true)
+
+        // Then
+        assertThat(result).isEqualTo("{\"instruction\":\"instruction\\ninput\",\"output\":\"output\"}")
+    }
+}
