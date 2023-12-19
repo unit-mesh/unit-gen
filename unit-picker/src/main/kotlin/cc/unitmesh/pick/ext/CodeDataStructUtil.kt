@@ -6,7 +6,14 @@ import chapi.domain.core.CodePosition
 fun CodeDataStruct.toUml(): String {
     val output = StringBuilder()
 
-    output.append("class $NodeName {\n")
+    val superClass = Implements + Extend
+    val superClasses = if (superClass.isNotEmpty()) {
+        ":" + superClass.joinToString(", ") + " "
+    } else {
+        ""
+    }
+
+    output.append("class $NodeName $superClasses{\n")
     Fields.forEach {
         output.append("   ${it.TypeKey}: ${it.TypeType}\n")
     }
