@@ -9,16 +9,19 @@ import chapi.domain.core.CodeFunction
 class AfterBlockCodeCompletionBuilder(val context: JobContext) : CompletionBuilder {
     override fun build(function: CodeFunction): List<CodeCompletionIns> {
         val position = function.Position
-        val beforeCursor = context.job.codeLines.subList(0, position.StartLine).joinToString("\n")
+        val codeLines = context.job.codeLines
+        val beforeCursor = codeLines.subList(0, position.StopLine).joinToString("\n")
+        var afterCursor = codeLines.subList(position.StopLine, codeLines.size).joinToString("\n")
 
-        // pick after lines
-        val stopLine = if (position.StopLine == 0) {
-            context.job.codeLines.size
-        } else {
-            position.StopLine
+        if (position.StopLine == 0) {
+            afterCursor = codeLines.joinToString("\n")
         }
 
-        val afterCursor = context.job.codeLines.subList(position.StartLine, stopLine).joinToString("\n")
+        // create line break by os
+        val lineBreak = System.lineSeparator()
+        if (afterCursor == "}$lineBreak") {
+            return emptyList()
+        }
 
         return listOf(CodeCompletionIns(beforeCursor, afterCursor))
     }
