@@ -88,7 +88,7 @@ async def stream_generate(
                 repetition_penalty=repetition_penalty,
                 eos_token_id=32021
             )
-            t = Thread(target=model.stream_generate, kwargs=generate_kwargs)
+            t = Thread(target=model.generate, kwargs=generate_kwargs)
             t.start()
 
             for text in streamer:
