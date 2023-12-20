@@ -17,7 +17,9 @@ private val logger = org.slf4j.LoggerFactory.getLogger(PickerCommand::class.java
 fun main(args: Array<String>) = PickerCommand().main(args)
 
 class PickerCommand : CliktCommand() {
-    val completionTypeSize by option(help = "Limit each CompletionType size").int().default(500)
+    private val completionTypeSize by option(help = "Limit each CompletionType size").int().default(500)
+    private val gitDepth by option(help = "Git depth").int().default(1)
+    private val maxCompletionInOneFile by option(help = "Max completion in one file").int().default(3)
 
     override fun run() {
         val outputDir = File("datasets" + File.separator + "origin")
@@ -40,8 +42,8 @@ class PickerCommand : CliktCommand() {
                         url = code.repository,
                         branch = code.branch,
                         language = code.language,
-                        maxCompletionInOneFile = 3,
-                        gitDepth = 1,
+                        maxCompletionInOneFile = maxCompletionInOneFile,
+                        gitDepth = gitDepth,
                         completionTypeSize = completionTypeSize
                     )
 
