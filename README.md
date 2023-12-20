@@ -27,14 +27,15 @@ Thanks to [OpenBayes](https://openbayes.com/console/signup?r=phodal_uVxU) for pr
 
 Examples:
 
-| name          | model download                                                                                                | fine-tune                            | jupyter notebook Log                                                     |
-|---------------|---------------------------------------------------------------------------------------------------------------|--------------------------------------|--------------------------------------------------------------------------|
-| DeepSeek 6.7B | [unit-mesh/autodev-deepseek-6.7b-finetunes](https://huggingface.co/unit-mesh/autodev-deepseek-6.7b-finetunes) | [finetune.ipynb](finetunes/deepseek) | [OpenBayes](https://openbayes.com/console/phodal/containers/mzEofYrqrfc) |
-| CodeGeeX 6B   | TODO                                                                                                          | TODO                                 | TODO                                                                     |      
+| name          | model download (HuggingFace)                                                                                  | finetune Notebook                    | jupyter notebook Log                                                     | model download (OpenBayes)                                                                                           |
+|---------------|---------------------------------------------------------------------------------------------------------------|--------------------------------------|--------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------|
+| DeepSeek 6.7B | [unit-mesh/autodev-deepseek-6.7b-finetunes](https://huggingface.co/unit-mesh/autodev-deepseek-6.7b-finetunes) | [finetune.ipynb](finetunes/deepseek) | [OpenBayes](https://openbayes.com/console/phodal/containers/mzEofYrqrfc) | [deepseek-coder-6.7b-instruct-finetune-100steps](https://openbayes.com/console/phodal/models/XAyeQEC0h4Q/1/overview) |
+| CodeGeeX2 6B  | TODO                                                                                                          | TODO                                 | TODO                                                                     |
 
 Features:
 
-- Code context strategy: [Related code completion](https://eval.unitmesh.cc/instruction/related-code-completion), [Similar Code Completion](https://eval.unitmesh.cc/instruction/similar-code-completion)
+- Code context
+  strategy: [Related code completion](https://eval.unitmesh.cc/instruction/related-code-completion), [Similar Code Completion](https://eval.unitmesh.cc/instruction/similar-code-completion)
 - Completion type: inline, block, after block
 - [Code quality](https://eval.unitmesh.cc/quality) filter and pipeline. Code smell, test smell, estimation nd more.
 
@@ -124,7 +125,7 @@ enum class CodeQualityType {
 }
 ```
 
-Custom thresholds' config: 
+Custom thresholds' config:
 
 ```kotlin
 data class BsThresholds(
@@ -173,7 +174,8 @@ download the latest version from [GitHub Release](https://github.com/unit-mesh/u
 
 2.run eval: `java -jar unit-eval.jar`
 
-PS：Connection config: [https://framework.unitmesh.cc/prompt-script/connection-config](https://framework.unitmesh.cc/prompt-script/connection-config)
+PS：Connection
+config: [https://framework.unitmesh.cc/prompt-script/connection-config](https://framework.unitmesh.cc/prompt-script/connection-config)
 
 ### use Java API
 
@@ -194,24 +196,24 @@ dependencies {
 
 ```java
 public class App {
-  public static void main(String[] args) {
-    List<InstructionType> builderTypes = new ArrayList<>();
-    builderTypes.add(InstructionType.RELATED_CODE_COMPLETION);
+    public static void main(String[] args) {
+        List<InstructionType> builderTypes = new ArrayList<>();
+        builderTypes.add(InstructionType.RELATED_CODE_COMPLETION);
 
-    List<CodeQualityType> codeQualityTypes = new ArrayList<>();
-    codeQualityTypes.add(CodeQualityType.BadSmell);
-    codeQualityTypes.add(CodeQualityType.JavaService);
+        List<CodeQualityType> codeQualityTypes = new ArrayList<>();
+        codeQualityTypes.add(CodeQualityType.BadSmell);
+        codeQualityTypes.add(CodeQualityType.JavaService);
 
-    PickerOption pickerOption = new PickerOption(
-            "https://github.com/unit-mesh/unit-eval-testing", "master", "java",
-            ".", builderTypes, codeQualityTypes, new BuilderConfig()
-    );
+        PickerOption pickerOption = new PickerOption(
+                "https://github.com/unit-mesh/unit-eval-testing", "master", "java",
+                ".", builderTypes, codeQualityTypes, new BuilderConfig()
+        );
 
-    SimpleCodePicker simpleCodePicker = new SimpleCodePicker(pickerOption);
-    List<Instruction> output = simpleCodePicker.blockingExecute();
+        SimpleCodePicker simpleCodePicker = new SimpleCodePicker(pickerOption);
+        List<Instruction> output = simpleCodePicker.blockingExecute();
 
-    // handle output in here
-  }
+        // handle output in here
+    }
 } 
 ```
 
