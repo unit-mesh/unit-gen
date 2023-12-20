@@ -14,6 +14,8 @@ import requests
 from pydantic import BaseModel
 from starlette import status
 from starlette.responses import JSONResponse
+import async_timeout
+import asyncio
 
 MAX_MAX_NEW_TOKENS = 2048
 DEFAULT_MAX_NEW_TOKENS = 1024
@@ -42,52 +44,62 @@ class Message(BaseModel):
     content: str
 
 
-def generate(
-        chat_history: List[Tuple[str, str]],
+class SimpleOpenAIBody(BaseModel):
+    messages: List[Message]
+    temperature: float
+    stream: bool
+
+
+GENERATION_TIMEOUT_SEC = 60
+
+
+async def stream_generate(
+        chat_history: List[Message],
         max_new_tokens: int = 512,
         temperature: float = 0.1,
         top_p: float = 0.9,
         top_k: int = 50,
         repetition_penalty: float = 1,
-) -> Iterator[str]:
-    global total_count
-    total_count += 1
-    if total_count % 50 == 0:
-        os.system("nvidia-smi")
-    conversation = []
+):
+    async with async_timeout.timeout(GENERATION_TIMEOUT_SEC):
+        try:
+            global total_count
+            total_count += 1
+            if total_count % 50 == 0:
+                os.system("nvidia-smi")
 
-    for message in chat_history:
-        conversation.append({"role": message.role, "content": message.message})
+            conversation = chat_history
 
-    input_ids = tokenizer.apply_chat_template(conversation, return_tensors="pt")
-    if input_ids.shape[1] > MAX_INPUT_TOKEN_LENGTH:
-        input_ids = input_ids[:, -MAX_INPUT_TOKEN_LENGTH:]
-    input_ids = input_ids.to(model.device)
+            input_ids = tokenizer.apply_chat_template(conversation, return_tensors="pt")
+            if input_ids.shape[1] > MAX_INPUT_TOKEN_LENGTH:
+                input_ids = input_ids[:, -MAX_INPUT_TOKEN_LENGTH:]
+            input_ids = input_ids.to(model.device)
 
-    streamer = TextIteratorStreamer(tokenizer, timeout=10.0, skip_prompt=True, skip_special_tokens=True)
-    generate_kwargs = dict(
-        {"input_ids": input_ids},
-        streamer=streamer,
-        max_new_tokens=max_new_tokens,
-        do_sample=False,
-        top_p=top_p,
-        top_k=top_k,
-        num_beams=1,
-        temperature=temperature,
-        repetition_penalty=repetition_penalty,
-        eos_token_id=32021
-    )
-    t = Thread(target=model.generate, kwargs=generate_kwargs)
-    t.start()
+            streamer = TextIteratorStreamer(tokenizer, timeout=10.0, skip_prompt=True, skip_special_tokens=True)
+            generate_kwargs = dict(
+                {"input_ids": input_ids},
+                streamer=streamer,
+                max_new_tokens=max_new_tokens,
+                do_sample=False,
+                top_p=top_p,
+                top_k=top_k,
+                num_beams=1,
+                temperature=temperature,
+                repetition_penalty=repetition_penalty,
+                eos_token_id=32021
+            )
+            t = Thread(target=model.stream_generate, kwargs=generate_kwargs)
+            t.start()
 
-    outputs = []
-    for text in streamer:
-        outputs.append(text)
-        output = "".join(outputs).replace("<|EOT|>", "")
-        yield ChatResponse(choices=[MessageInResponseChat(role='assistant', content=output)],
-                           model="deepseek").model_dump_json()
+            for text in streamer:
+                yield 'data: ' + ChatResponse(
+                    choices=[MessageInResponseChat(role='assistant', content=text.replace("<|EOT|>", ""))],
+                    model="deepseek").model_dump_json()
 
-    yield 'data: DONE'
+            yield 'data: DONE'
+
+        except asyncio.TimeoutError:
+            raise HTTPException(status_code=504, detail="Stream timed out")
 
 
 app = FastAPI()
@@ -102,9 +114,9 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
 
 
 @app.post("/api/chat", response_class=Response)
-async def root(msgs: List[Message]) -> StreamingResponse:
-    return StreamingResponse(generate(msgs), media_type="text/event-stream")
-
+async def root(body: SimpleOpenAIBody) -> StreamingResponse:
+    return StreamingResponse(stream_generate(body.messages, temperature=body.temperature),
+                             media_type="text/event-stream")
 
 if __name__ == "__main__":
     try:
