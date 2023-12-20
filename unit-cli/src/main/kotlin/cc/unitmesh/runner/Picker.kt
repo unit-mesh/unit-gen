@@ -17,7 +17,7 @@ private val logger = org.slf4j.LoggerFactory.getLogger(PickerCommand::class.java
 fun main(args: Array<String>) = PickerCommand().main(args)
 
 class PickerCommand : CliktCommand() {
-    val completionTypeSize by option(help = "Limit each CompletionType size").int().default(1000)
+    val completionTypeSize by option(help = "Limit each CompletionType size").int().default(500)
 
     override fun run() {
         val outputDir = File("datasets" + File.separator + "origin")
