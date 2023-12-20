@@ -2,6 +2,7 @@ package cc.unitmesh.pick.prompt.strategy
 
 import cc.unitmesh.pick.builder.BuilderConfig
 import cc.unitmesh.pick.builder.InstructionFileJob
+import cc.unitmesh.pick.prompt.CompletionBuilderType
 import cc.unitmesh.pick.prompt.JobContext
 import cc.unitmesh.quality.CodeQualityType
 import chapi.ast.javaast.JavaAnalyser
@@ -40,7 +41,8 @@ public class HelloController {
             job = job,
             qualityTypes = listOf(CodeQualityType.JavaController),
             fileTree = hashMapOf("" to job),
-            builderConfig = BuilderConfig()
+            builderConfig = BuilderConfig(),
+            completionBuilderTypes = listOf(CompletionBuilderType.IN_BLOCK_COMPLETION)
         )
         val builder = RelatedCodeStrategyBuilder(context)
         val result = builder.build()
@@ -76,7 +78,8 @@ public class HelloController {
             job = job,
             qualityTypes = listOf(CodeQualityType.JavaController),
             fileTree = hashMapOf("" to job),
-            builderConfig = BuilderConfig()
+            builderConfig = BuilderConfig(),
+            completionBuilderTypes = listOf(CompletionBuilderType.IN_BLOCK_COMPLETION)
         )
         val builder = RelatedCodeStrategyBuilder(context)
         val result = builder.build()
@@ -121,7 +124,8 @@ public class HelloController {
                 ),
                 "cc.unitmesh.testng.service.BlogService" to job
             ),
-            builderConfig = BuilderConfig()
+            builderConfig = BuilderConfig(),
+            completionBuilderTypes = listOf(CompletionBuilderType.IN_BLOCK_COMPLETION)
         )
 
         val builder = RelatedCodeStrategyBuilder(context)
