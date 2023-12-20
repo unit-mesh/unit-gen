@@ -10,6 +10,12 @@
   <a href="https://central.sonatype.com/artifact/cc.unitmesh/unit-picker">
     <img src="https://img.shields.io/maven-central/v/cc.unitmesh/unit-picker"  alt="Maven"/>
   </a>
+  <a href="https://openbayes.com/console/signup?r=phodal_uVxU">
+    <img src="https://openbayes.com/img/badge-open-in-openbayes.svg" alt="Open In OpenBayes" />
+  </a>
+  <a href="https://openbayes.com/console/signup?r=phodal_uVxU">
+    <img src="https://openbayes.com/img/badge-built-with-openbayes.svg" alt="Built with OpenBayes" />
+  </a>
 </p>
 
 > LLM benchmark/evaluation tools with fine-tuning data engineering, specifically tailored for Unit Mesh tools such as

@@ -16,8 +16,9 @@ from starlette import status
 from starlette.responses import JSONResponse
 import async_timeout
 import asyncio
+import time
 
-MAX_MAX_NEW_TOKENS = 2048
+MAX_MAX_NEW_TOKENS = 4096
 DEFAULT_MAX_NEW_TOKENS = 1024
 total_count = 0
 MAX_INPUT_TOKEN_LENGTH = int(os.getenv("MAX_INPUT_TOKEN_LENGTH", "4096"))
@@ -29,19 +30,18 @@ if torch.cuda.is_available():
     tokenizer.use_default_system_prompt = False
 
 
-class MessageInResponseChat(BaseModel):
+class Message(BaseModel):
     role: str
     content: str
+
+
+class MessageInResponseChat(BaseModel):
+    message: Message
 
 
 class ChatResponse(BaseModel):
     choices: List[MessageInResponseChat]
     model: str
-
-
-class Message(BaseModel):
-    role: str
-    content: str
 
 
 class SimpleOpenAIBody(BaseModel):
@@ -50,7 +50,7 @@ class SimpleOpenAIBody(BaseModel):
     stream: bool
 
 
-GENERATION_TIMEOUT_SEC = 60
+GENERATION_TIMEOUT_SEC = 480
 
 
 async def stream_generate(
@@ -75,7 +75,7 @@ async def stream_generate(
                 input_ids = input_ids[:, -MAX_INPUT_TOKEN_LENGTH:]
             input_ids = input_ids.to(model.device)
 
-            streamer = TextIteratorStreamer(tokenizer, timeout=10.0, skip_prompt=True, skip_special_tokens=True)
+            streamer = TextIteratorStreamer(tokenizer, timeout=20.0, skip_prompt=True, skip_special_tokens=True)
             generate_kwargs = dict(
                 {"input_ids": input_ids},
                 streamer=streamer,
@@ -91,12 +91,19 @@ async def stream_generate(
             t = Thread(target=model.generate, kwargs=generate_kwargs)
             t.start()
 
+            result = ""
+            outputs = []
             for text in streamer:
-                yield 'data: ' + ChatResponse(
-                    choices=[MessageInResponseChat(role='assistant', content=text.replace("<|EOT|>", ""))],
-                    model="deepseek").model_dump_json()
+                outputs.append(text)
+                result = "".join(outputs).replace("<|EOT|>", "")
+            yield 'data:' + ChatResponse(
+                choices=[MessageInResponseChat(message=Message(role='assistant', content=result))],
+                model="autodev-deepseek").model_dump_json()
 
-            yield 'data: DONE'
+            yield '\n\n'
+            time.sleep(0.2)
+            yield 'data:[DONE]'
+            print(result)
 
         except asyncio.TimeoutError:
             raise HTTPException(status_code=504, detail="Stream timed out")
@@ -117,6 +124,7 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
 async def root(body: SimpleOpenAIBody) -> StreamingResponse:
     return StreamingResponse(stream_generate(body.messages, temperature=body.temperature),
                              media_type="text/event-stream")
+
 
 if __name__ == "__main__":
     try:
