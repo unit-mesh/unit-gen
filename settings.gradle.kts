@@ -14,6 +14,8 @@ include(
     "unit-eval",
     "unit-cli",
 
+    "unit-distillation",
+
     "code-quality",
 
     "examples:project-example",
