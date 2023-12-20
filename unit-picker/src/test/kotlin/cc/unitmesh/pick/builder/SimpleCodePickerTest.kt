@@ -73,7 +73,7 @@ class SimpleCodePickerTest {
         val picker = SimpleCodePicker(
             PickerOption(
                 url = "https://github.com/unit-mesh/unit-eval-testing",
-                completionTypeSize = completionTypeSize
+                completionTypeSize  = 10
             )
         )
 
