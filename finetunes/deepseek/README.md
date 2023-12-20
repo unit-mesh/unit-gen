@@ -30,8 +30,12 @@ pip install -r requirements.txt
 2.run server
 
 ```bash
-python web-ui.py
+python api-server-python38.py
 ```
+
+3.config AutoDev using Azure config
+
+Custom OpenAI Host: `https://phodal-c0s1mum5qnd5.gear-c1.openbayes.net/api/chat`
 
 
 ## Issue
