@@ -41,6 +41,27 @@ class InlineCodeCompletionBuilder(val context: JobContext) : CompletionBuilder {
                         continue
                     }
 
+                    // check is some rubbish code, like use:
+                    // - "System.out.println", "System.out.print", "System.out.printf", "log.info", "log.debug", "log.error", "log.warn"
+                    val rubbishCode = listOf(
+                        "System.out.println",
+                        "System.out.print",
+                        "System.out.printf",
+                        "log.info",
+                        "log.debug",
+                        "log.error",
+                        "log.warn"
+                    )
+
+                    if (rubbishCode.any { beforeCursor.endsWith(it) }) {
+                        continue
+                    }
+
+                    // if afterCursor is a ';', skip it
+                    if (afterCursor == ";") {
+                        continue
+                    }
+
                     completions.add(CodeCompletionIns(beforeCursor, afterCursor))
                 }
             }

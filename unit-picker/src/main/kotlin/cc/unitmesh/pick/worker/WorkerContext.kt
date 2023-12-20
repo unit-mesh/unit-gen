@@ -16,6 +16,7 @@ data class WorkerContext(
     val maxCompletionInOneFile: Int,
     val completionTypeSize: Int,
 )
+
 @Serializable
 data class QualityThreshold(
     val complexity: Long = 100,
