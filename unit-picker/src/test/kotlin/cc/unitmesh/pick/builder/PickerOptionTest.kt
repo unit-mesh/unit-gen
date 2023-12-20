@@ -11,6 +11,7 @@ class PickerOptionTest {
         val result = PickerOption(
             url = "https://github.com/functionaljava/functionaljava",
             branch = "series/5.x",
+            completionTypeSize = completionTypeSize,
         ).pureDataFileName()
 
         // Then
@@ -22,7 +23,8 @@ class PickerOptionTest {
         // Given
         val pickerOption = PickerOption(
             url = "https://github.com/example/repo.git",
-            branch = "main"
+            branch = "main",
+            completionTypeSize = completionTypeSize
         )
 
         // When
@@ -36,7 +38,8 @@ class PickerOptionTest {
     fun should_encode_file_name_with_special_characters() {
         // Given
         val pickerOption = PickerOption(
-            url = "https://github.com/example/repo*:?<>.|"
+            url = "https://github.com/example/repo*:?<>.|",
+            completionTypeSize = completionTypeSize
         )
 
         // When

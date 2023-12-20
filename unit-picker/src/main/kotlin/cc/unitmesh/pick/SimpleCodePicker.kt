@@ -80,7 +80,8 @@ class SimpleCodePicker(private val config: PickerOption) : CodePicker {
                 config.builderConfig,
                 pureDataFileName = config.pureDataFileName(),
                 config.completionTypes,
-                config.maxCompletionInOneFile
+                config.maxCompletionInOneFile,
+                config.completionTypeSize
             )
         )
         val walkdirChannel = Channel<FileJob>()
@@ -99,6 +100,11 @@ class SimpleCodePicker(private val config: PickerOption) : CodePicker {
                 }
 
                 summary.addAll(workerManager.runAll())
+                if (summary.size > config.completionTypeSize) {
+                    summary.shuffle()
+                    summary.subList(config.completionTypeSize, summary.size).clear()
+                    return@launch
+                }
             }
 
         }.join()

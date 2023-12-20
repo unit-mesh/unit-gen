@@ -71,7 +71,10 @@ class SimpleCodePickerTest {
     @Test
     fun shouldCheckoutTestCode() {
         val picker = SimpleCodePicker(
-            PickerOption(url = "https://github.com/unit-mesh/unit-eval-testing")
+            PickerOption(
+                url = "https://github.com/unit-mesh/unit-eval-testing",
+                completionTypeSize = completionTypeSize
+            )
         )
 
         runBlocking {

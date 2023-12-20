@@ -14,6 +14,7 @@ data class WorkerContext(
     val pureDataFileName: String,
     val completionTypes: List<CompletionBuilderType>,
     val maxCompletionInOneFile: Int,
+    val completionTypeSize: Int,
 )
 @Serializable
 data class QualityThreshold(

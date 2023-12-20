@@ -2,7 +2,6 @@ package cc.unitmesh.pick.builder
 
 import cc.unitmesh.pick.prompt.CodeContextStrategy
 import cc.unitmesh.pick.prompt.CompletionBuilderType
-import cc.unitmesh.pick.prompt.Instruction
 import cc.unitmesh.quality.CodeQualityType
 import cc.unitmesh.quality.badsmell.BadsmellAnalyser
 import cc.unitmesh.quality.extension.JavaControllerAnalyser
@@ -57,6 +56,7 @@ data class PickerOption(
     val completionTypes: List<CompletionBuilderType> = listOf(
         CompletionBuilderType.AFTER_BLOCK_COMPLETION,
         CompletionBuilderType.IN_BLOCK_COMPLETION,
+        CompletionBuilderType.INLINE_COMPLETION
     ),
     /**
      * The [CodeQualityType], will be like a tree to hold the item.
@@ -76,6 +76,7 @@ data class PickerOption(
     val builderConfig: BuilderConfig = BuilderConfig(),
     val maxCompletionInOneFile: Int = 3,
     val gitDepth: Int = 1,
+    val completionTypeSize: Int,
 ) {
     fun pureDataFileName(): String {
         return baseDir + File.separator + repoFileName() + ".jsonl"

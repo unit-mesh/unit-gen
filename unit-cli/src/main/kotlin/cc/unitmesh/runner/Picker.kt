@@ -1,14 +1,15 @@
 package cc.unitmesh.runner
 
-import cc.unitmesh.pick.builder.PickerOption
 import cc.unitmesh.pick.SimpleCodePicker
+import cc.unitmesh.pick.builder.PickerOption
 import cc.unitmesh.pick.prompt.Instruction
 import cc.unitmesh.runner.cli.ProcessorResult
 import cc.unitmesh.runner.cli.ProcessorUtils
 import com.github.ajalt.clikt.core.CliktCommand
+import com.github.ajalt.clikt.parameters.options.default
+import com.github.ajalt.clikt.parameters.options.option
+import com.github.ajalt.clikt.parameters.types.int
 import kotlinx.coroutines.*
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
 import java.io.File
 
 private val logger = org.slf4j.LoggerFactory.getLogger(PickerCommand::class.java)
@@ -16,6 +17,8 @@ private val logger = org.slf4j.LoggerFactory.getLogger(PickerCommand::class.java
 fun main(args: Array<String>) = PickerCommand().main(args)
 
 class PickerCommand : CliktCommand() {
+    val completionTypeSize by option(help = "Limit each CompletionType size").int().default(1000)
+
     override fun run() {
         val outputDir = File("datasets" + File.separator + "origin")
         if (!outputDir.exists()) {
@@ -39,6 +42,7 @@ class PickerCommand : CliktCommand() {
                         language = code.language,
                         maxCompletionInOneFile = 3,
                         gitDepth = 1,
+                        completionTypeSize = completionTypeSize
                     )
 
                     val content = SimpleCodePicker(pickerOption).execute()
