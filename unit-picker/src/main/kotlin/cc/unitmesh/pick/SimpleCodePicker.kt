@@ -100,11 +100,6 @@ class SimpleCodePicker(private val config: PickerOption) : CodePicker {
                 }
 
                 summary.addAll(workerManager.runAll())
-                if (summary.size > config.completionTypeSize) {
-                    summary.shuffle()
-                    summary.subList(config.completionTypeSize, summary.size).clear()
-                    return@launch
-                }
             }
 
         }.join()

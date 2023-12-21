@@ -17,7 +17,8 @@ private val logger = org.slf4j.LoggerFactory.getLogger(PickerCommand::class.java
 fun main(args: Array<String>) = PickerCommand().main(args)
 
 class PickerCommand : CliktCommand() {
-    private val completionTypeSize by option(help = "Limit each CompletionType size").int().default(500)
+    // todo: find a way to make this configurable
+    private val completionTypeSize by option(help = "Limit each CompletionType size").int().default(100)
     private val gitDepth by option(help = "Git depth").int().default(1)
     private val maxCompletionInOneFile by option(help = "Max completion in one file").int().default(3)
 
