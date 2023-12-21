@@ -38,7 +38,7 @@ class SimilarChunksStrategyBuilder(private val context: JobContext) :
                             ""
                         }
 
-                        if (similarChunks.isNotBlank()) {
+                        if (similarChunks.isBlank()) {
                             return@mapNotNull null
                         }
 

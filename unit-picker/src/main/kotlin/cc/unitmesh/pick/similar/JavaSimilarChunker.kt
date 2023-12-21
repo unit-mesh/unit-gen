@@ -30,7 +30,7 @@ class JavaSimilarChunker(private val fileTree: HashMap<String, InstructionFileJo
         val beforeCursor = lines.takeLast(snippetLength).joinToString("\n")
 
         val canonicalNames = fileTree.keys.filter { it != canonicalName }
-        val relatedCodePath = cannonicalNameLevelJaccardSimilarity(canonicalNames, canonicalName)
+        val relatedCodePath = canonicalNameLevelJaccardSimilarity(canonicalNames, canonicalName)
             .toList()
             .sortedByDescending { it.first }
             .take(maxRelevantFiles)
@@ -62,7 +62,7 @@ class JavaSimilarChunker(private val fileTree: HashMap<String, InstructionFileJo
         return SimilarChunkContext("java", relatedCodePath, similarChunksText)
     }
 
-    private fun cannonicalNameLevelJaccardSimilarity(chunks: List<String>, text: String): Map<Double, String> {
+    private fun canonicalNameLevelJaccardSimilarity(chunks: List<String>, text: String): Map<Double, String> {
         val packageName = packageNameTokenize(text)
         return chunks.mapNotNull { chunk ->
             val chunkPackageName = packageNameTokenize(chunk)
