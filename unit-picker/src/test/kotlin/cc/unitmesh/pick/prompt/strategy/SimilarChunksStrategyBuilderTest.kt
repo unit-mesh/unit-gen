@@ -8,14 +8,13 @@ import cc.unitmesh.quality.CodeQualityType
 import chapi.ast.javaast.JavaAnalyser
 import io.kotest.matchers.shouldBe
 import org.archguard.scanner.analyser.count.FileJob
-import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import java.io.File
 
 
 class SimilarChunksStrategyBuilderTest {
     @Test
-    fun shouldReturnEmptySimlarChunk() {
+    fun shouldReturnEmptySimilarChunk() {
         val code = """package com.example.springboot;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -49,9 +48,7 @@ public class HelloController {
         val builder = SimilarChunksStrategyBuilder(context)
         val result = builder.build()
 
-        val ins = result[0]
-        ins.similarChunks.length shouldBe 0
-        ins.afterCursor shouldBe "		return \"Greetings from Spring Boot!\";\n\t}"
+        result.size shouldBe 0
     }
 
     @Test
@@ -99,10 +96,9 @@ public class HelloController {
         val builder = SimilarChunksStrategyBuilder(context)
         val result = builder.build()
 
-        Assertions.assertEquals(result.size, 4)
-        val first = result.first()
+        result.size shouldBe 3
 
-        first.similarChunks shouldBe """
+        result.first().similarChunks shouldBe """
             // Compare this snippet from cc.unitmesh.testng.repository.BlogRepository
             // 
             // @Repository

@@ -31,7 +31,7 @@ class SimilarChunksStrategyBuilder(private val context: JobContext) :
                     .filter {
                         it.afterCursor.isNotBlank() && it.beforeCursor.isNotBlank()
                     }.mapNotNull {
-                        val isBlockCompletion = it.afterCursor.length > 50
+                        val isBlockCompletion = it.afterCursor.length > 10
                         val similarChunks: String = if (isBlockCompletion) {
                             similarChunker.calculate(it.beforeCursor, canonicalName).format()
                         } else {

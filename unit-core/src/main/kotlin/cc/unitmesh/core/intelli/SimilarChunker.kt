@@ -10,7 +10,7 @@ abstract class SimilarChunker(
     var snippetLength: Int = 60,
     var maxRelevantFiles: Int = 20,
     val packageScoreThreshold: Double = 0.5,
-    val codeScoreThreshold: Double = 0.3,
+    val codeScoreThreshold: Double = 0.1,
 ) {
     /**
      * Returns a list of the most recently edited files in the project.
