@@ -71,6 +71,7 @@ class PickerCommand : CliktCommand() {
                 outputFile.delete()
             }
 
+            finalResult.shuffle()
             finalResult.forEach {
                 outputFile.appendText(it.render(mergeInput = instructionConfig.mergeInput) + "\n")
             }
