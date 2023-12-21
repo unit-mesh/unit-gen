@@ -8,7 +8,7 @@ import org.archguard.scanner.analyser.count.LanguageService
 import org.slf4j.Logger
 
 
-class WorkerManager(workerContext: WorkerContext) {
+class WorkerManager(val workerContext: WorkerContext) {
     private val workers: Map<Language, LangWorker> = mapOf(
         Language.JAVA to JavaWorker(workerContext),
 //        Language.TYPESCRIPT to TypescriptWorker(workerContext),
@@ -21,9 +21,6 @@ class WorkerManager(workerContext: WorkerContext) {
         language.getExtension(Language.JAVA.name.lowercase()),
     )
 
-//    var registry: EncodingRegistry = Encodings.newDefaultEncodingRegistry()
-//    var enc: Encoding = registry.getEncoding(EncodingType.CL100K_BASE)
-
     private val logger: Logger = org.slf4j.LoggerFactory.getLogger(WorkerManager::class.java)
 
     fun addJob(job: InstructionFileJob) {
@@ -32,7 +29,7 @@ class WorkerManager(workerContext: WorkerContext) {
             return
         }
 
-        if (summary.complexity > 100) {
+        if (summary.complexity > workerContext.qualityThreshold.complexity) {
             logger.info("skip file ${summary.location} for complexity ${summary.complexity}")
 // TODO: add debugging option
 //            if (summary.filename.endsWith(".java")) {
@@ -45,7 +42,7 @@ class WorkerManager(workerContext: WorkerContext) {
         }
 
         // if the file size is too large, we just try 64k
-        if (summary.bytes > 1024 * 64) {
+        if (summary.bytes > workerContext.qualityThreshold.fileSize) {
             logger.info("skip file ${summary.location} for size ${summary.bytes}")
 // TODO: add debugging option
 //            if (summary.filename.endsWith(".java")) {
