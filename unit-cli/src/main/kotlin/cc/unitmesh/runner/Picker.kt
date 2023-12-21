@@ -17,10 +17,11 @@ private val logger = org.slf4j.LoggerFactory.getLogger(PickerCommand::class.java
 fun main(args: Array<String>) = PickerCommand().main(args)
 
 class PickerCommand : CliktCommand() {
-    // todo: find a way to make this configurable
     private val projectTypedCompletionSize by option(help = "Limit each CompletionType size").int().default(100)
     private val gitDepth by option(help = "Git depth").int().default(1)
     private val maxCompletionInOneFile by option(help = "Max completion in one file").int().default(3)
+    private val maxCharInCode by option(help = "Max char in code").int().default(1500)
+    private val maxLineInCode by option(help = "Max line in code").int().default(320)
 
     override fun run() {
         val outputDir = File("datasets" + File.separator + "origin")
@@ -45,7 +46,9 @@ class PickerCommand : CliktCommand() {
                         language = code.language,
                         maxCompletionInOneFile = maxCompletionInOneFile,
                         gitDepth = gitDepth,
-                        completionTypeSize = projectTypedCompletionSize
+                        completionTypeSize = projectTypedCompletionSize,
+                        maxCharInCode = maxCharInCode,
+                        maxLineInCode = maxLineInCode,
                     )
 
                     val content = SimpleCodePicker(pickerOption).execute()

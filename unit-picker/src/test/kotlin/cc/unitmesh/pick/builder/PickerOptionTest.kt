@@ -12,6 +12,7 @@ class PickerOptionTest {
             url = "https://github.com/functionaljava/functionaljava",
             branch = "series/5.x",
             completionTypeSize  = 10,
+            maxCharInCode = maxCharInCode,
         ).pureDataFileName()
 
         // Then
@@ -24,7 +25,8 @@ class PickerOptionTest {
         val pickerOption = PickerOption(
             url = "https://github.com/example/repo.git",
             branch = "main",
-            completionTypeSize  = 10
+            completionTypeSize  = 10,
+            maxCharInCode = maxCharInCode
         )
 
         // When
@@ -39,7 +41,8 @@ class PickerOptionTest {
         // Given
         val pickerOption = PickerOption(
             url = "https://github.com/example/repo*:?<>.|",
-            completionTypeSize  = 10
+            completionTypeSize  = 10,
+            maxCharInCode = maxCharInCode
         )
 
         // When

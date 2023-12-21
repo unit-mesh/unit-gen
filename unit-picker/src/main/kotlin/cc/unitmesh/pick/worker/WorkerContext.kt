@@ -20,6 +20,13 @@ data class WorkerContext(
 
 @Serializable
 data class QualityThreshold(
-    val complexity: Long = 100,
-    val fileSize: Long = 1024 * 64,
-)
+    val complexity: Long = MAX_COMPLEXITY,
+    val fileSize: Long = MAX_FILE_SIZE,
+    val maxLineInCode: Int = 160,
+    val maxCharInCode: Int = 3000,
+) {
+    companion object {
+        const val MAX_COMPLEXITY: Long = 100
+        const val MAX_FILE_SIZE: Long = 1024 * 64
+    }
+}

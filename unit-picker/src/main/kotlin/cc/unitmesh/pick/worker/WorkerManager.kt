@@ -23,20 +23,22 @@ class WorkerManager(private val workerContext: WorkerContext) {
 
     private val logger: Logger = org.slf4j.LoggerFactory.getLogger(WorkerManager::class.java)
 
-    fun addJob(job: InstructionFileJob) {
+    fun addJobByThreshold(job: InstructionFileJob) {
         val summary = job.fileSummary
         if (!supportedExtensions.contains(summary.extension)) {
             return
         }
 
+        if (summary.lines > workerContext.qualityThreshold.maxLineInCode) {
+            logger.info("skip file ${summary.location} for lines ${summary.lines}")
+            return
+        }
+
         if (summary.complexity > workerContext.qualityThreshold.complexity) {
             logger.info("skip file ${summary.location} for complexity ${summary.complexity}")
-// TODO: add debugging option
-//            if (summary.filename.endsWith(".java")) {
-//                println("| filename: ${summary.filename} | complexity: ${summary.complexity} | code: ${summary.lines} | size: ${summary.bytes} | location: ${summary.location} |")
-//            }
             return;
         }
+
         if (summary.binary || summary.generated || summary.minified) {
             return
         }
@@ -44,10 +46,6 @@ class WorkerManager(private val workerContext: WorkerContext) {
         // if the file size is too large, we just try 64k
         if (summary.bytes > workerContext.qualityThreshold.fileSize) {
             logger.info("skip file ${summary.location} for size ${summary.bytes}")
-// TODO: add debugging option
-//            if (summary.filename.endsWith(".java")) {
-//                println("| filename: ${summary.filename} | complexity: ${summary.complexity} | code: ${summary.lines} | size: ${summary.bytes} | location: ${summary.location} |")
-//            }
             return
         }
 

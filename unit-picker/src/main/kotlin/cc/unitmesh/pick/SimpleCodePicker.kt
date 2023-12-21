@@ -4,6 +4,7 @@ import cc.unitmesh.pick.builder.InstructionFileJob
 import cc.unitmesh.pick.builder.PickerOption
 import cc.unitmesh.pick.prompt.Instruction
 import cc.unitmesh.pick.walker.PickDirectoryWalker
+import cc.unitmesh.pick.worker.QualityThreshold
 import cc.unitmesh.pick.worker.WorkerContext
 import cc.unitmesh.pick.worker.WorkerManager
 import kotlinx.coroutines.channels.Channel
@@ -81,7 +82,13 @@ class SimpleCodePicker(private val config: PickerOption) : CodePicker {
                 pureDataFileName = config.pureDataFileName(),
                 config.completionTypes,
                 config.maxCompletionInOneFile,
-                config.completionTypeSize
+                config.completionTypeSize,
+                qualityThreshold = QualityThreshold(
+                    complexity = QualityThreshold.MAX_COMPLEXITY,
+                    fileSize = QualityThreshold.MAX_FILE_SIZE,
+                    maxLineInCode = config.maxLineInCode,
+                    maxCharInCode = config.maxCharInCode,
+                )
             )
         )
         val walkdirChannel = Channel<FileJob>()
@@ -95,7 +102,7 @@ class SimpleCodePicker(private val config: PickerOption) : CodePicker {
             launch {
                 for (fileJob in walkdirChannel) {
                     languageWorker.processFile(fileJob)?.let {
-                        workerManager.addJob(InstructionFileJob.from(it))
+                        workerManager.addJobByThreshold(InstructionFileJob.from(it))
                     }
                 }
 

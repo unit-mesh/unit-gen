@@ -77,6 +77,19 @@ data class PickerOption(
     val maxCompletionInOneFile: Int = 3,
     val gitDepth: Int = 1,
     val completionTypeSize: Int,
+    /**
+     * https://docs.sweep.dev/blogs/chunking-2m-files
+     * This is because the average token to a character ratio for code is ~1:5(300 tokens), and embedding models are
+     *  capped at 512 tokens. Further, 1500 characters correspond approximately to 40 lines, roughly equivalent to a
+     *  small to medium-sized function or class.
+     *
+     * Our token length is 2048, so we can use 1500 * 1024 / 512 = 3000
+     */
+    val maxCharInCode: Int = 3000,
+    /**
+     * Our token length is 2048, so we can use 40 * 2048 / 512 = 160, but java has a lot of new lines, so we double it
+     */
+    val maxLineInCode: Int = 320,
 ) {
     fun pureDataFileName(): String {
         return baseDir + File.separator + repoFileName() + ".jsonl"
