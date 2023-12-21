@@ -26,5 +26,6 @@ data class QualityThreshold(
         const val MAX_FILE_SIZE: Long = 1024 * 64
         const val MAX_LINE_IN_CODE: Int = 160
         const val MAX_CHAR_IN_CODE: Int = 1500
+        const val MAX_RELATED_CODE_LINE: Int = 30
     }
 }

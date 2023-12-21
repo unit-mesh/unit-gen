@@ -2,6 +2,7 @@ package cc.unitmesh.pick.prompt.strategy
 
 import cc.unitmesh.pick.prompt.CompletionBuilderType
 import cc.unitmesh.pick.prompt.Instruction
+import cc.unitmesh.pick.threshold.QualityThreshold
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 
@@ -19,7 +20,34 @@ data class SimilarChunkCompletionIns(
     }
 
     override fun unique(): Instruction {
-        val input = "\n${similarChunks}              \nCode:\n```${language}\n${beforeCursor}\n```"
+        // Similar chunk strategy
+        val similarChunks = if (similarChunks.isNotBlank() && similarChunks.isNotEmpty()) {
+            // limit similarChunks to 30 lines
+            val similarChunksLines = similarChunks.lines()
+            val maxLine = QualityThreshold.MAX_RELATED_CODE_LINE
+            if (similarChunksLines.size > maxLine) {
+                similarChunksLines.take(maxLine).joinToString("\n")
+            } else {
+                similarChunks
+            }
+            "\n// Similar chunk:\n ```${language}\n${similarChunksLines.joinToString("\n")}\n```"
+        } else {
+            ""
+        }
+
+        // Count strategy
+        val maxLine = QualityThreshold.MAX_LINE_IN_CODE
+        val beforeCursorLine = beforeCursor.count { it == '\n' }
+        val afterCursorLine = output.count { it == '\n' }
+        // drop from the start of beforeCursor
+        val beforeCursor = if (beforeCursorLine + afterCursorLine > maxLine) {
+            val dropLine = beforeCursorLine + afterCursorLine - maxLine
+            beforeCursor.lines().drop(dropLine).joinToString("\n")
+        } else {
+            beforeCursor
+        }
+
+        val input = "$similarChunks\n\nCode:\n```${language}\n$beforeCursor\n```"
 
         return Instruction(
             instruction = "Complete $language code, return rest code, no explaining",

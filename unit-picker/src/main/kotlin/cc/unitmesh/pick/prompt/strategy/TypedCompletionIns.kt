@@ -5,5 +5,6 @@ import cc.unitmesh.pick.prompt.Instruction
 
 interface TypedCompletionIns {
     val type: CompletionBuilderType
+
     fun unique(): Instruction
 }
