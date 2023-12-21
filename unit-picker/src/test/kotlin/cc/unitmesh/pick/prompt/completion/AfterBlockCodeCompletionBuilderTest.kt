@@ -3,6 +3,7 @@ package cc.unitmesh.pick.prompt.completion;
 import cc.unitmesh.pick.builder.BuilderConfig
 import cc.unitmesh.pick.builder.InstructionFileJob
 import cc.unitmesh.pick.prompt.CodeCompletionIns
+import cc.unitmesh.pick.prompt.CompletionBuilderType
 import cc.unitmesh.pick.prompt.JobContext
 import chapi.domain.core.CodeFunction
 import chapi.domain.core.CodePosition
@@ -36,7 +37,8 @@ class AfterBlockCodeCompletionBuilderTest {
         result shouldBe listOf(
             CodeCompletionIns(
                 beforeCursor = codeLines.subList(0, 3).joinToString("\n"),
-                afterCursor = "// other code here"
+                afterCursor = "// other code here",
+                completionBuilderType = CompletionBuilderType.AFTER_BLOCK_COMPLETION
             )
         )
     }

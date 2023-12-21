@@ -3,6 +3,7 @@ package cc.unitmesh.pick.prompt.completion;
 import cc.unitmesh.pick.builder.BuilderConfig
 import cc.unitmesh.pick.builder.InstructionFileJob
 import cc.unitmesh.pick.prompt.CodeCompletionIns
+import cc.unitmesh.pick.prompt.CompletionBuilderType
 import cc.unitmesh.pick.prompt.JobContext
 import chapi.domain.core.CodeFunction
 import chapi.domain.core.CodePosition
@@ -35,19 +36,12 @@ class InlineCodeCompletionBuilderTest {
         val result = builder.build(codeFunction)
 
         // Then
-        result.size shouldBe 3
+        result.size shouldBe 1
         result shouldBe listOf(
             CodeCompletionIns(
                 beforeCursor = "println(\"",
-                afterCursor = "Hello, world!\")"
-            ),
-            CodeCompletionIns(
-                beforeCursor = "println(\"Hello,",
-                afterCursor = " world!\")"
-            ),
-            CodeCompletionIns(
-                beforeCursor = "println(\"Hello, world!\"",
-                afterCursor = ")"
+                afterCursor = "Hello, world!\")",
+                completionBuilderType = CompletionBuilderType.INLINE_COMPLETION
             )
         )
     }
