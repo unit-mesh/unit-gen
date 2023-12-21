@@ -23,16 +23,24 @@ class SimilarChunksStrategyBuilder(private val context: JobContext) :
 
         // 2. collect all with similar data structure
         val codeCompletionIns = dataStructs.map { ds ->
+            val canonicalName = ds.Package + "." + ds.NodeName
+
             ds.Functions.map { function ->
                 builders.map { it.build(function) }
                     .flatten()
                     .filter {
                         it.afterCursor.isNotBlank() && it.beforeCursor.isNotBlank()
-                    }.map {
-                        val similarChunks: String = similarChunker.calculate(
-                            it.beforeCursor,
-                            ds.Package + "." + ds.NodeName,
-                        ).format() ?: ""
+                    }.mapNotNull {
+                        val isBlockCompletion = it.afterCursor.length > 50
+                        val similarChunks: String = if (isBlockCompletion) {
+                            similarChunker.calculate(it.beforeCursor, canonicalName,).format()
+                        } else {
+                            ""
+                        }
+
+                        if (similarChunks.isNotBlank()) {
+                            return@mapNotNull null
+                        }
 
                         SimilarChunkCompletionIns(
                             language = language,
