@@ -29,11 +29,6 @@ class WorkerManager(private val workerContext: WorkerContext) {
             return
         }
 
-        if (summary.lines > workerContext.qualityThreshold.maxLineInCode) {
-            logger.info("skip file ${summary.location} for lines ${summary.lines}")
-            return
-        }
-
         if (summary.complexity > workerContext.qualityThreshold.complexity) {
             logger.info("skip file ${summary.location} for complexity ${summary.complexity}")
             return;

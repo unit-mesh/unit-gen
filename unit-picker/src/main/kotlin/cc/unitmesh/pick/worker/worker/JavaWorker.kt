@@ -117,15 +117,4 @@ class JavaWorker(private val context: WorkerContext) : LangWorker() {
 
         return@coroutineScope instructions
     }
-
-    // check by history?
-    suspend fun startWithHistory(filePath: String) = coroutineScope {
-        // 1. read directory to a collection of files for FileJob
-
-        // 2. check package information from line 1?
-
-        // 3. build full project trees
-
-        // 4. check history
-    }
 }

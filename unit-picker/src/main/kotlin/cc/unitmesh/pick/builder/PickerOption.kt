@@ -2,6 +2,7 @@ package cc.unitmesh.pick.builder
 
 import cc.unitmesh.pick.prompt.CodeContextStrategy
 import cc.unitmesh.pick.prompt.CompletionBuilderType
+import cc.unitmesh.pick.threshold.QualityThreshold
 import cc.unitmesh.quality.CodeQualityType
 import cc.unitmesh.quality.badsmell.BadsmellAnalyser
 import cc.unitmesh.quality.extension.JavaControllerAnalyser
@@ -85,11 +86,11 @@ data class PickerOption(
      *
      * Our token length is 2048, so we can use 1500 * 1024 / 512 = 3000
      */
-    val maxCharInCode: Int = 3000,
+    val maxCharInCode: Int = QualityThreshold.MAX_CHAR_IN_CODE,
     /**
      * Our token length is 2048, so we can use 40 * 2048 / 512 = 160, but java has a lot of new lines, so we double it
      */
-    val maxLineInCode: Int = 320,
+    val maxLineInCode: Int = QualityThreshold.MAX_LINE_IN_CODE,
 ) {
     fun pureDataFileName(): String {
         return baseDir + File.separator + repoFileName() + ".jsonl"

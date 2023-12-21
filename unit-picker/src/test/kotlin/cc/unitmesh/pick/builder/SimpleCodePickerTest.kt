@@ -74,7 +74,7 @@ class SimpleCodePickerTest {
             PickerOption(
                 url = "https://github.com/unit-mesh/unit-eval-testing",
                 completionTypeSize  = 10,
-                maxCharInCode = maxCharInCode
+                maxCharInCode = 100
             )
         )
 

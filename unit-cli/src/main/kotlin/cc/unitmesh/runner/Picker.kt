@@ -3,6 +3,7 @@ package cc.unitmesh.runner
 import cc.unitmesh.pick.SimpleCodePicker
 import cc.unitmesh.pick.builder.PickerOption
 import cc.unitmesh.pick.prompt.Instruction
+import cc.unitmesh.pick.threshold.QualityThreshold
 import cc.unitmesh.runner.cli.ProcessorResult
 import cc.unitmesh.runner.cli.ProcessorUtils
 import com.github.ajalt.clikt.core.CliktCommand
@@ -20,8 +21,8 @@ class PickerCommand : CliktCommand() {
     private val projectTypedCompletionSize by option(help = "Limit each CompletionType size").int().default(100)
     private val gitDepth by option(help = "Git depth").int().default(1)
     private val maxCompletionInOneFile by option(help = "Max completion in one file").int().default(3)
-    private val maxCharInCode by option(help = "Max char in code").int().default(1500)
-    private val maxLineInCode by option(help = "Max line in code").int().default(320)
+    private val maxCharInCode by option(help = "Max char in code").int().default(QualityThreshold.MAX_CHAR_IN_CODE)
+    private val maxLineInCode by option(help = "Max line in code").int().default(QualityThreshold.MAX_LINE_IN_CODE)
 
     override fun run() {
         val outputDir = File("datasets" + File.separator + "origin")
