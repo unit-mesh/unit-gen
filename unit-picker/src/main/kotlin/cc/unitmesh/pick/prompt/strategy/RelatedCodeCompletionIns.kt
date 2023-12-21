@@ -1,8 +1,10 @@
 package cc.unitmesh.pick.prompt.strategy
 
+import cc.unitmesh.pick.ext.toUml
 import cc.unitmesh.pick.prompt.CompletionBuilderType
 import cc.unitmesh.pick.prompt.Instruction
 import cc.unitmesh.pick.threshold.QualityThreshold
+import chapi.domain.core.CodeDataStruct
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 
@@ -10,7 +12,7 @@ import kotlinx.serialization.json.Json
 data class RelatedCodeCompletionIns(
     val language: String,
     val beforeCursor: String,
-    val relatedCode: String,
+    val relatedCode: List<CodeDataStruct>,
     // the output aka afterCursor
     val output: String,
     override val type: CompletionBuilderType,
@@ -21,8 +23,12 @@ data class RelatedCodeCompletionIns(
 
     override fun unique(): Instruction {
         // Related code strategy
-        val relatedCode = if (relatedCode.isNotBlank() && relatedCode.isNotEmpty()) {
-            // limit relatedCode to 30 lines
+        val relatedCode = if (relatedCode.isNotEmpty()) {
+            // todo: count be similar
+            val relatedCode = relatedCode.take(3).joinToString("\n") {
+                it.toUml()
+            }
+
             val relatedCodeLines = relatedCode.lines()
             val maxLine = QualityThreshold.MAX_RELATED_CODE_LINE
             if (relatedCodeLines.size > maxLine) {

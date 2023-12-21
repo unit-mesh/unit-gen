@@ -2,10 +2,12 @@ package cc.unitmesh.pick.prompt.strategy
 
 import cc.unitmesh.pick.builder.BuilderConfig
 import cc.unitmesh.pick.builder.InstructionFileJob
+import cc.unitmesh.pick.ext.toUml
 import cc.unitmesh.pick.prompt.CompletionBuilderType
 import cc.unitmesh.pick.prompt.JobContext
 import cc.unitmesh.quality.CodeQualityType
 import chapi.ast.javaast.JavaAnalyser
+import chapi.domain.core.CodeDataStruct
 import org.archguard.scanner.analyser.count.FileJob
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
@@ -138,7 +140,7 @@ public class HelloController {
         val first = result.first()
 
         assertEquals(
-            first.relatedCode, """// class BlogPost {
+            first.relatedCode.joinToString("\n", transform = CodeDataStruct::toUml), """// class BlogPost {
 //    id: Long
 //    title: String
 //    content: String

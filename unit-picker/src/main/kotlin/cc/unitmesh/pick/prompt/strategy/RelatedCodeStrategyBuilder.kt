@@ -26,7 +26,7 @@ class RelatedCodeStrategyBuilder(private val context: JobContext) :
 
         val codeCompletionIns = dataStructs.map { ds ->
             ds.Functions.map { function ->
-                builders.map {
+                builders.asSequence().map {
                     it.build(function)
                 }
                     .flatten()
@@ -42,14 +42,14 @@ class RelatedCodeStrategyBuilder(private val context: JobContext) :
                             output = it.afterCursor,
                             type = it.completionBuilderType
                         )
-                    }
+                    }.toList()
             }.flatten()
         }.flatten()
 
         return codeCompletionIns
     }
 
-    private fun findRelatedCode(container: CodeContainer): String {
+    private fun findRelatedCode(container: CodeContainer): List<CodeDataStruct> {
         // 1. collects all similar data structure by imports if exists in a file tree
         val byImports = container.Imports
             .mapNotNull {
@@ -68,8 +68,7 @@ class RelatedCodeStrategyBuilder(private val context: JobContext) :
 
         val related = (byImports + byInheritance).distinctBy { it.NodeName }
         // 3. convert all similar data structure to uml
-        val relatedCode = related.joinToString("\n", transform = CodeDataStruct::toUml)
-        return relatedCode
+        return related
     }
 }
 
