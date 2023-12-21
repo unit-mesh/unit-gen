@@ -49,7 +49,8 @@ data class PickerOption(
      *
      */
     val codeContextStrategies: List<CodeContextStrategy> = listOf(
-        CodeContextStrategy.RELATED_CODE
+//        CodeContextStrategy.RELATED_CODE,
+        CodeContextStrategy.SIMILAR_CHUNKS,
     ),
     /**
      * The [CompletionBuilderType], which will according you IDE strategy to generate the type.

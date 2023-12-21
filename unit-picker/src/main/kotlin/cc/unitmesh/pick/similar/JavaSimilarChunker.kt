@@ -36,25 +36,26 @@ class JavaSimilarChunker(private val fileTree: HashMap<String, InstructionFileJo
             .take(maxRelevantFiles)
             .map { it.second }
 
-        logger.info("canonicalName: $canonicalName, relatedCodePath: $relatedCodePath")
+//        logger.info("canonicalName: $canonicalName, relatedCodePath: $relatedCodePath")
 
         val chunks = chunkedCode(beforeCursor)
         val allRelatedChunks = relatedCodePath
             .mapNotNull { fileTree[it] }
             .map { chunkedCode(it.code).joinToString("\n") }
 
-        val similarChunks = allRelatedChunks.map {
+        val similarChunks: List<Pair<Double, String>> = allRelatedChunks.map {
             val score = similarityScore(tokenize(it).toSet(), chunks.toSet())
             score to it
         }.sortedByDescending { it.first }
+            .filter { it.first > 0.0 }
             .take(maxRelevantFiles)
-            .map { it.second }
 
         // take the first 3 similar chunks or empty
         val similarChunksText = if (similarChunks.size > 3) {
-            similarChunks.take(3)
+            println("score: ${similarChunks.map { it.first }}")
+            similarChunks.take(3).map { it.second }
         } else {
-            similarChunks
+            similarChunks.map { it.second }
         }.map {
             // clean up the similar chunks, if start with multiple \n, remove to one
             it.replace(Regex("^\\n+"), "\n")
