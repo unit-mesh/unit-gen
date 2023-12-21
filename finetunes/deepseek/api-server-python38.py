@@ -75,7 +75,7 @@ async def stream_generate(
                 input_ids = input_ids[:, -MAX_INPUT_TOKEN_LENGTH:]
             input_ids = input_ids.to(model.device)
 
-            streamer = TextIteratorStreamer(tokenizer, timeout=20.0)
+            streamer = TextIteratorStreamer(tokenizer, timeout=20.0, skip_prompt=True, skip_special_tokens=True)
             generate_kwargs = dict(
                 {"input_ids": input_ids},
                 streamer=streamer,
@@ -92,8 +92,11 @@ async def stream_generate(
             t.start()
 
             result = ""
+            outputs = []
             for text in streamer:
-                result += text
+                outputs.append(text)
+                result = "".join(outputs)
+                # result = "".join(outputs).replace("<|EOT|>", "")
 
             yield 'data:' + ChatResponse(
                 choices=[MessageInResponseChat(message=Message(role='assistant', content=result))],
