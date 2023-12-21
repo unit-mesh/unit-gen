@@ -5,7 +5,7 @@ import cc.unitmesh.pick.builder.InstructionFileJob
 import cc.unitmesh.pick.prompt.CompletionBuilderType
 import cc.unitmesh.pick.prompt.Instruction
 import cc.unitmesh.pick.prompt.JobContext
-import cc.unitmesh.pick.prompt.strategy.TypedCompletion
+import cc.unitmesh.pick.prompt.strategy.TypedCompletionIns
 import cc.unitmesh.pick.worker.LangWorker
 import cc.unitmesh.pick.worker.WorkerContext
 import chapi.ast.javaast.JavaAnalyser
@@ -100,7 +100,7 @@ class JavaWorker(private val context: WorkerContext) : LangWorker() {
         }.flatten()
 
         // take context.completionTypeSize for each type
-        val finalList: EnumMap<CompletionBuilderType, List<TypedCompletion>> =
+        val finalList: EnumMap<CompletionBuilderType, List<TypedCompletionIns>> =
             EnumMap(CompletionBuilderType::class.java)
 
         val instructions: MutableList<Instruction> = mutableListOf()

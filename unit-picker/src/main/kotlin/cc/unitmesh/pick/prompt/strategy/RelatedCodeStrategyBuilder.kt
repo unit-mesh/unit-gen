@@ -4,38 +4,6 @@ import cc.unitmesh.pick.ext.toUml
 import cc.unitmesh.pick.prompt.*
 import chapi.domain.core.CodeContainer
 import chapi.domain.core.CodeDataStruct
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.json.Json
-
-@Serializable
-data class RelatedCodeCompletionIns(
-    val language: String,
-    val beforeCursor: String,
-    val relatedCode: String,
-    // the output aka afterCursor
-    val output: String,
-    override val type: CompletionBuilderType,
-) : TypedCompletion {
-
-    override fun toString(): String {
-        return Json.encodeToString(serializer(), this)
-    }
-
-    override fun unique(): Instruction {
-        val relatedCode = if (relatedCode.isNotBlank() && relatedCode.isNotEmpty()) {
-            "\n// Compare this snippets: \n ```${language}\n$relatedCode\n```"
-        } else {
-            ""
-        }
-        val input = "$relatedCode\n\nCode:\n```${language}\n$beforeCursor\n```"
-        return Instruction(
-            instruction = "Complete $language code, return rest code, no explaining",
-            output = output,
-            input = input
-        )
-    }
-
-}
 
 class RelatedCodeStrategyBuilder(private val context: JobContext) :
     CodeStrategyBuilder<RelatedCodeCompletionIns> {
