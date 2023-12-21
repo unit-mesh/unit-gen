@@ -6,7 +6,6 @@ import kotlinx.serialization.Serializable
 data class QualityThreshold(
     val complexity: Long = MAX_COMPLEXITY,
     val fileSize: Long = MAX_FILE_SIZE,
-    // todo: add logic for maxLineInCode in generate code
     /**
      * https://docs.sweep.dev/blogs/chunking-2m-files
      * This is because the average token to a character ratio for code is ~1:5(300 tokens), and embedding models are

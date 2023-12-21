@@ -30,6 +30,9 @@ projects:
   - repository: https://github.com/unit-mesh/unit-eval-testing
     branch: main
     language: java
+
+instructionConfig:
+  mergeInput: true # if the LLM don't support separate input, you can set it to true, will merge input to instruction.  
 ```
 
 ### Step 2. run Evaluate CLI (Optional)
