@@ -9,7 +9,6 @@ import chapi.domain.core.CodePosition
 import io.kotest.matchers.shouldBe
 import org.archguard.scanner.analyser.count.FileJob
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.Assertions.*
 
 class InBlockCodeCompletionBuilderTest {
 
@@ -29,7 +28,7 @@ class InBlockCodeCompletionBuilderTest {
             codeLines = codeLines,
             code = codeLines.joinToString("\n")
         )
-        val jobContext = JobContext(job, emptyList(), hashMapOf("" to job), BuilderConfig(), emptyList())
+        val jobContext = JobContext(job, emptyList(), hashMapOf("" to job), BuilderConfig(), emptyList(), 3)
         val builder = InBlockCodeCompletionBuilder(jobContext)
 
         // when

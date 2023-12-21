@@ -44,11 +44,15 @@ class RelatedCodeStrategyBuilder(private val context: JobContext) :
 
         val codeCompletionIns = dataStructs.map { ds ->
             ds.Functions.map { function ->
-                builders.map { it.build(function) }
+                builders.map {
+                    it.build(function)
+                }
                     .flatten()
                     .filter {
                         it.afterCursor.isNotBlank() && it.beforeCursor.isNotBlank()
-                    }.map {
+                    }
+                    .take(context.maxCompletionInOneFile)
+                    .map {
                         RelatedCodeCompletionIns(
                             language = language,
                             beforeCursor = it.beforeCursor,

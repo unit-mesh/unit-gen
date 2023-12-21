@@ -47,9 +47,9 @@ class TypescriptWorker(private val context: WorkerContext) : LangWorker() {
 
         val lists = jobs.map { job ->
             val jobContext =
-                JobContext(job, context.qualityTypes, fileTree, context.builderConfig, context.completionTypes)
+                JobContext(job, context.qualityTypes, fileTree, context.builderConfig, context.completionTypes, 3)
 
-            val instructions = context.codeContextStrategies.map { type ->
+            context.codeContextStrategies.map { type ->
                 val instructionBuilder = type.builder(jobContext)
                 val list = instructionBuilder.build()
                 list.map {
@@ -57,8 +57,6 @@ class TypescriptWorker(private val context: WorkerContext) : LangWorker() {
                 }
                 instructionBuilder.unique(list as List<Nothing>)
             }.flatten()
-
-            Instruction.takeStrategy(instructions, context.maxCompletionInOneFile)
         }.flatten()
 
         return@coroutineScope lists

@@ -8,7 +8,7 @@ import org.archguard.scanner.analyser.count.LanguageService
 import org.slf4j.Logger
 
 
-class WorkerManager(val workerContext: WorkerContext) {
+class WorkerManager(private val workerContext: WorkerContext) {
     private val workers: Map<Language, LangWorker> = mapOf(
         Language.JAVA to JavaWorker(workerContext),
 //        Language.TYPESCRIPT to TypescriptWorker(workerContext),

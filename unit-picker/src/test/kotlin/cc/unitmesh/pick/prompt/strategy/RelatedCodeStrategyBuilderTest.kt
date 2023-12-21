@@ -42,7 +42,8 @@ public class HelloController {
             qualityTypes = listOf(CodeQualityType.JavaController),
             fileTree = hashMapOf("" to job),
             builderConfig = BuilderConfig(),
-            completionBuilderTypes = listOf(CompletionBuilderType.IN_BLOCK_COMPLETION)
+            completionBuilderTypes = listOf(CompletionBuilderType.IN_BLOCK_COMPLETION),
+            maxCompletionInOneFile = 3
         )
         val builder = RelatedCodeStrategyBuilder(context)
         val result = builder.build()
@@ -79,7 +80,8 @@ public class HelloController {
             qualityTypes = listOf(CodeQualityType.JavaController),
             fileTree = hashMapOf("" to job),
             builderConfig = BuilderConfig(),
-            completionBuilderTypes = listOf(CompletionBuilderType.IN_BLOCK_COMPLETION)
+            completionBuilderTypes = listOf(CompletionBuilderType.IN_BLOCK_COMPLETION),
+            maxCompletionInOneFile = 3
         )
         val builder = RelatedCodeStrategyBuilder(context)
         val result = builder.build()
@@ -125,7 +127,8 @@ public class HelloController {
                 "cc.unitmesh.testng.service.BlogService" to job
             ),
             builderConfig = BuilderConfig(),
-            completionBuilderTypes = listOf(CompletionBuilderType.IN_BLOCK_COMPLETION)
+            completionBuilderTypes = listOf(CompletionBuilderType.IN_BLOCK_COMPLETION),
+            maxCompletionInOneFile = 3
         )
 
         val builder = RelatedCodeStrategyBuilder(context)

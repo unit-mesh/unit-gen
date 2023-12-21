@@ -9,5 +9,6 @@ data class JobContext(
     val qualityTypes: List<CodeQualityType>,
     val fileTree: HashMap<String, InstructionFileJob>,
     val builderConfig: BuilderConfig,
-    val completionBuilderTypes: List<CompletionBuilderType>
+    val completionBuilderTypes: List<CompletionBuilderType>,
+    val maxCompletionInOneFile: Int
 )
