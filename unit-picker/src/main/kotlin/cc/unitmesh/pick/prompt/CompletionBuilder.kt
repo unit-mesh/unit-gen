@@ -9,6 +9,7 @@ import kotlinx.serialization.json.Json
 data class CodeCompletionIns(
     val beforeCursor: String,
     val afterCursor: String,
+    val completionBuilderType: CompletionBuilderType,
 ) {
     override fun toString(): String {
         return Json.encodeToString(serializer(), this)

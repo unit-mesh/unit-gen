@@ -2,6 +2,7 @@ package cc.unitmesh.pick.prompt
 
 import cc.unitmesh.pick.prompt.strategy.RelatedCodeStrategyBuilder
 import cc.unitmesh.pick.prompt.strategy.SimilarChunksStrategyBuilder
+import cc.unitmesh.pick.prompt.strategy.TypedCompletion
 import kotlinx.serialization.SerializationException
 
 /**
@@ -28,7 +29,7 @@ enum class CodeContextStrategy {
      */
     RELATED_CODE;
 
-    fun builder(context: JobContext): CodeStrategyBuilder<out Any> {
+    fun builder(context: JobContext): CodeStrategyBuilder<out TypedCompletion> {
         return mapOf(
             SIMILAR_CHUNKS to SimilarChunksStrategyBuilder(context),
             RELATED_CODE to RelatedCodeStrategyBuilder(context),

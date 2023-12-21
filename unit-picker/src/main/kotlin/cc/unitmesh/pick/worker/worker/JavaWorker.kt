@@ -2,13 +2,16 @@ package cc.unitmesh.pick.worker.worker
 
 import cc.unitmesh.pick.ext.CodeDataStructUtil
 import cc.unitmesh.pick.builder.InstructionFileJob
+import cc.unitmesh.pick.prompt.CompletionBuilderType
 import cc.unitmesh.pick.prompt.Instruction
 import cc.unitmesh.pick.prompt.JobContext
+import cc.unitmesh.pick.prompt.strategy.TypedCompletion
 import cc.unitmesh.pick.worker.LangWorker
 import cc.unitmesh.pick.worker.WorkerContext
 import chapi.ast.javaast.JavaAnalyser
 import kotlinx.coroutines.coroutineScope
 import java.io.File
+import java.util.EnumMap
 
 /**
  * A repository will be like this:
@@ -68,12 +71,12 @@ class JavaWorker(private val context: WorkerContext) : LangWorker() {
     }
 
     override suspend fun start(): Collection<Instruction> = coroutineScope {
-        val file = File(context.pureDataFileName)
-        if (!file.exists()) {
+        val outputFile = File(context.pureDataFileName)
+        if (!outputFile.exists()) {
             try {
-                file.createNewFile()
+                outputFile.createNewFile()
             } catch (e: Exception) {
-                logger.error("create file error: $file")
+                logger.error("create file error: $outputFile")
                 e.printStackTrace()
                 return@coroutineScope emptyList()
             }
@@ -92,15 +95,27 @@ class JavaWorker(private val context: WorkerContext) : LangWorker() {
 
             context.codeContextStrategies.map { type ->
                 val codeStrategyBuilder = type.builder(jobContext)
-                val list = codeStrategyBuilder.build()
-                list.map {
-                    file.appendText(it.toString() + "\n")
-                }
-                codeStrategyBuilder.unique(list as List<Nothing>)
+                codeStrategyBuilder.build()
             }.flatten()
         }.flatten()
 
-        return@coroutineScope lists
+        // take context.completionTypeSize for each type
+        val finalList: EnumMap<CompletionBuilderType, List<TypedCompletion>> =
+            EnumMap(CompletionBuilderType::class.java)
+
+        val instructions: MutableList<Instruction> = mutableListOf()
+
+        lists.map {
+            finalList[it.type] = finalList[it.type]?.plus(it) ?: listOf(it)
+        }
+
+        val result = finalList.values.map { it.take(context.completionTypeSize) }.flatten()
+        result.map {
+            instructions.add(it.unique())
+            outputFile.appendText(it.toString() + "\n")
+        }
+
+        return@coroutineScope instructions
     }
 
     // check by history?

@@ -46,11 +46,6 @@ interface CodeStrategyBuilder<T> {
      */
     fun build(): List<T>
 
-    /**
-     * Build instruction from data <T>, and return a list of instructions.
-     */
-    fun unique(list: List<T>): List<Instruction>
-
     fun hasIssue(node: CodeDataStruct, types: List<CodeQualityType>): Boolean {
         return QualityAnalyser.create(types).map { analyser ->
             analyser.analysis(listOf(node))

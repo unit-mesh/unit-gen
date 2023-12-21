@@ -2,6 +2,7 @@ package cc.unitmesh.pick.prompt.completion
 
 import cc.unitmesh.pick.prompt.CodeCompletionIns
 import cc.unitmesh.pick.prompt.CompletionBuilder
+import cc.unitmesh.pick.prompt.CompletionBuilderType
 import cc.unitmesh.pick.prompt.JobContext
 import chapi.domain.core.CodeFunction
 
@@ -48,7 +49,7 @@ class InlineCodeCompletionBuilder(val context: JobContext) : CompletionBuilder {
                         continue
                     }
 
-                    completions.add(CodeCompletionIns(beforeCursor, afterCursor))
+                    completions.add(CodeCompletionIns(beforeCursor, afterCursor, CompletionBuilderType.INLINE_COMPLETION))
                 }
             }
         }

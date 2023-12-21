@@ -12,9 +12,20 @@ data class SimilarChunkCompletionIns(
     val afterCursor: String,
     val similarChunks: String,
     val output: String,
-) {
+    override val type: CompletionBuilderType,
+) : TypedCompletion {
     override fun toString(): String {
         return Json.encodeToString(serializer(), this)
+    }
+
+    override fun unique(): Instruction {
+        val input = "\n${similarChunks}              \nCode:\n```${language}\n${beforeCursor}\n```"
+
+        return Instruction(
+            instruction = "Complete $language code, return rest code, no explaining",
+            output = output,
+            input = input
+        )
     }
 }
 
@@ -54,23 +65,13 @@ class SimilarChunksStrategyBuilder(private val context: JobContext) :
                             beforeCursor = it.beforeCursor,
                             similarChunks = similarChunks,
                             afterCursor = it.afterCursor,
-                            output = it.afterCursor
+                            output = it.afterCursor,
+                            type = it.completionBuilderType
                         )
                     }
             }.flatten()
         }.flatten()
 
         return codeCompletionIns
-    }
-
-    override fun unique(list: List<SimilarChunkCompletionIns>): List<Instruction> {
-        return list.map {
-            val input = "\n${it.similarChunks}              \nCode:\n```${it.language}\n${it.beforeCursor}\n```"
-            Instruction(
-                instruction = "Complete ${it.language} code, return rest code, no explaining",
-                output = it.output,
-                input = input
-            )
-        }
     }
 }

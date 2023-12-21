@@ -2,6 +2,7 @@ package cc.unitmesh.pick.prompt.completion
 
 import cc.unitmesh.pick.prompt.CodeCompletionIns
 import cc.unitmesh.pick.prompt.CompletionBuilder
+import cc.unitmesh.pick.prompt.CompletionBuilderType
 import cc.unitmesh.pick.prompt.JobContext
 import chapi.domain.core.CodeFunction
 
@@ -23,6 +24,6 @@ class AfterBlockCodeCompletionBuilder(val context: JobContext) : CompletionBuild
             return emptyList()
         }
 
-        return listOf(CodeCompletionIns(beforeCursor, afterCursor))
+        return listOf(CodeCompletionIns(beforeCursor, afterCursor, CompletionBuilderType.AFTER_BLOCK_COMPLETION))
     }
 }
