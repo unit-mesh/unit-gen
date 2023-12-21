@@ -2,6 +2,8 @@
 
 ## Fine Tune
 
+Deepspeed  配置：[https://huggingface.co/docs/transformers/main/zh/main_classes/deepspeed](https://huggingface.co/docs/transformers/main/zh/main_classes/deepspeed)
+
 步骤参考：[FineTune.ipynb](./finetune.ipynb)
 
 3090 或者 4000 系列的显卡需要设置环境变量，否则会报错：
