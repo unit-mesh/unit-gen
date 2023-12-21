@@ -18,7 +18,7 @@ fun main(args: Array<String>) = PickerCommand().main(args)
 
 class PickerCommand : CliktCommand() {
     // todo: find a way to make this configurable
-    private val completionTypeSize by option(help = "Limit each CompletionType size").int().default(100)
+    private val projectTypedCompletionSize by option(help = "Limit each CompletionType size").int().default(100)
     private val gitDepth by option(help = "Git depth").int().default(1)
     private val maxCompletionInOneFile by option(help = "Max completion in one file").int().default(3)
 
@@ -45,7 +45,7 @@ class PickerCommand : CliktCommand() {
                         language = code.language,
                         maxCompletionInOneFile = maxCompletionInOneFile,
                         gitDepth = gitDepth,
-                        completionTypeSize = completionTypeSize
+                        completionTypeSize = projectTypedCompletionSize
                     )
 
                     val content = SimpleCodePicker(pickerOption).execute()
