@@ -9,7 +9,8 @@ import java.io.File
 abstract class SimilarChunker(
     var snippetLength: Int = 60,
     var maxRelevantFiles: Int = 20,
-    val scoreThreshold: Double = 0.5,
+    val packageScoreThreshold: Double = 0.5,
+    val codeScoreThreshold: Double = 0.1,
 ) {
     /**
      * Returns a list of the most recently edited files in the project.

@@ -30,24 +30,22 @@ class JavaSimilarChunker(private val fileTree: HashMap<String, InstructionFileJo
         val beforeCursor = lines.takeLast(snippetLength).joinToString("\n")
 
         val canonicalNames = fileTree.keys.filter { it != canonicalName }
-        val relatedCodePath = packageNameLevelJaccardSimilarity(canonicalNames, canonicalName)
+        val relatedCodePath = cannonicalNameLevelJaccardSimilarity(canonicalNames, canonicalName)
             .toList()
             .sortedByDescending { it.first }
             .take(maxRelevantFiles)
             .map { it.second }
 
-//        logger.info("canonicalName: $canonicalName, relatedCodePath: $relatedCodePath")
-
-        val chunks = chunkedCode(beforeCursor)
         val allRelatedChunks = relatedCodePath
             .mapNotNull { fileTree[it] }
             .map { chunkedCode(it.code).joinToString("\n") }
 
         val similarChunks: List<Pair<Double, String>> = allRelatedChunks.map {
-            val score = similarityScore(tokenize(it).toSet(), chunks.toSet())
+            val tokenize = tokenize(it)
+            val score = similarityScore(tokenize.toSet(), tokenize(beforeCursor).toSet())
             score to it
         }.sortedByDescending { it.first }
-            .filter { it.first > 0.0 }
+            .filter { it.first > codeScoreThreshold }
             .take(maxRelevantFiles)
 
         // take the first 3 similar chunks or empty
@@ -64,12 +62,12 @@ class JavaSimilarChunker(private val fileTree: HashMap<String, InstructionFileJo
         return SimilarChunkContext("java", relatedCodePath, similarChunksText)
     }
 
-    private fun packageNameLevelJaccardSimilarity(chunks: List<String>, text: String): Map<Double, String> {
+    private fun cannonicalNameLevelJaccardSimilarity(chunks: List<String>, text: String): Map<Double, String> {
         val packageName = packageNameTokenize(text)
         return chunks.mapNotNull { chunk ->
             val chunkPackageName = packageNameTokenize(chunk)
             val score = similarityScore(packageName.toSet(), chunkPackageName.toSet())
-            if (score >= scoreThreshold) {
+            if (score >= packageScoreThreshold) {
                 score to chunk
             } else {
                 null
