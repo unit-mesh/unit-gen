@@ -8,6 +8,9 @@ import chapi.domain.core.CodeFunction
 import org.archguard.rule.core.Issue
 
 class TestBadsmellAnalyser(val thresholds: Map<String, Int> = mapOf()) : QualityAnalyser {
+    private val ASSERT_PARAMETER_SIZE = 2
+    private val DUPLICATED_LIMIT_SIZE = 5
+
     override fun analysis(nodes: List<CodeDataStruct>): List<Issue> {
         val tbsResult = TbsResult(listOf())
         val callMethodMap = buildCallMethodMap(nodes)
@@ -99,8 +102,7 @@ class TestBadsmellAnalyser(val thresholds: Map<String, Int> = mapOf()) : Quality
         var isDuplicateTest = false
         for (entry in methodCallMap) {
             val methodCalls = entry.value
-            val duplicatedLimitLength = 5
-            if (methodCalls.size >= duplicatedLimitLength) {
+            if (methodCalls.size >= DUPLICATED_LIMIT_SIZE) {
                 if (methodCalls.last().hasAssertion()) {
                     isDuplicateTest = true
                 }
@@ -120,14 +122,12 @@ class TestBadsmellAnalyser(val thresholds: Map<String, Int> = mapOf()) : Quality
     }
 
     private fun appendUnknownTest(filePath: String, method: CodeFunction, tbsResult: TbsResult) {
-        val testBadSmell = TestBadSmell(
+        tbsResult.results += TestBadSmell(
             fileName = filePath,
             type = "UnknownTest",
             description = "",
             line = method.Position.StartLine
         )
-
-        tbsResult.results += testBadSmell
     }
 
     private fun checkRedundantAssertionTest(
@@ -135,19 +135,17 @@ class TestBadsmellAnalyser(val thresholds: Map<String, Int> = mapOf()) : Quality
         funcCall: CodeCall,
         tbsResult: TbsResult,
     ) {
-        val assertParametersSize = 2
-        if (funcCall.Parameters.size == assertParametersSize) {
-            if (funcCall.Parameters[0].TypeValue == funcCall.Parameters[1].TypeValue) {
-                val testBadSmell = TestBadSmell(
-                    fileName = filePath,
-                    type = "RedundantAssertionTest",
-                    description = "",
-                    line = funcCall.Position.StartLine
-                )
+        if (funcCall.Parameters.size != ASSERT_PARAMETER_SIZE) return
 
-                tbsResult.results += testBadSmell
-            }
-        }
+        if (funcCall.Parameters[0].TypeValue != funcCall.Parameters[1].TypeValue) return
+        val testBadSmell = TestBadSmell(
+            fileName = filePath,
+            type = "RedundantAssertionTest",
+            description = "",
+            line = funcCall.Position.StartLine
+        )
+
+        tbsResult.results += testBadSmell
     }
 
     private fun checkSleepyTest(filePath: String, funcCall: CodeCall, tbsResult: TbsResult) {
