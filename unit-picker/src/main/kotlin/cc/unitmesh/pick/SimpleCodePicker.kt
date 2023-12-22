@@ -89,7 +89,6 @@ class SimpleCodePicker(private val config: PickerOption) : CodePicker {
                     fileSize = QualityThreshold.MAX_FILE_SIZE,
                     maxLineInCode = config.maxLineInCode,
                     maxCharInCode = config.maxCharInCode,
-                    badsmellThreshold = BsThresholds(),
                 )
             )
         )
