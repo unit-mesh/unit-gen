@@ -50,6 +50,7 @@ class WorkerManager(private val workerContext: WorkerContext) {
         }
 
         workerContext.compositionDependency = dependencies
+        workerContext.testFramework = TestFrameworkIdentifier(language, dependencies).identify()
     }
 
     fun addJobByThreshold(job: InstructionFileJob) {

@@ -19,5 +19,7 @@ data class WorkerContext(
     val completionTypeSize: Int,
     val insQualityThreshold: InsQualityThreshold = InsQualityThreshold(),
     var compositionDependency: List<CompositionDependency> = listOf()
-)
+) {
+    var testFramework: List<String> = listOf()
+}
 
