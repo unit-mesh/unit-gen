@@ -1,5 +1,8 @@
 package cc.unitmesh.quality.badsmell
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class BsThresholds(
     val bsLongParasLength: Int = 5,
     val bsIfSwitchLength: Int = 8,

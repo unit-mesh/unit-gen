@@ -35,7 +35,7 @@ permalink: /evaluation
 - Security & Cryptography
     - JWT
     - Spring Security
-    - MD5 //?
+    - MD5
 - Test
     - Unit Test - Given-When-Then
     - API Test
@@ -48,6 +48,8 @@ permalink: /evaluation
 - [https://github.com/ise-uiuc/magicoder](https://github.com/ise-uiuc/magicoder)  
 
 ### Code completion 
+
+- Unit Eval
 
 ## TypeScript
 

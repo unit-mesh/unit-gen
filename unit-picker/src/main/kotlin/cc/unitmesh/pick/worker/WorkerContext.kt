@@ -5,6 +5,7 @@ import cc.unitmesh.pick.prompt.CodeContextStrategy
 import cc.unitmesh.pick.prompt.CompletionBuilderType
 import cc.unitmesh.pick.threshold.QualityThreshold
 import cc.unitmesh.quality.CodeQualityType
+import cc.unitmesh.quality.badsmell.BsThresholds
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -16,6 +17,6 @@ data class WorkerContext(
     val completionTypes: List<CompletionBuilderType>,
     val maxCompletionInOneFile: Int,
     val completionTypeSize: Int,
-    val qualityThreshold: QualityThreshold = QualityThreshold(),
+    val qualityThreshold: QualityThreshold = QualityThreshold(badsmellThreshold = BsThresholds()),
 )
 

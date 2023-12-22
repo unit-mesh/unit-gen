@@ -1,5 +1,6 @@
 package cc.unitmesh.pick.threshold
 
+import cc.unitmesh.quality.badsmell.BsThresholds
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -19,6 +20,7 @@ data class QualityThreshold(
      * Our token length is 1024, so we can use 40 * 2048 / 512 = 160
      */
     val maxLineInCode: Int = MAX_LINE_IN_CODE,
+    val badsmellThreshold: Map<String, Int> = BsThresholds().toThresholds(),
 ) {
     companion object {
         const val MAX_COMPLEXITY: Long = 100

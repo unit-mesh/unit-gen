@@ -11,10 +11,10 @@ private val CodeFunction.IfSize: Int get() = 0
 private val CodeFunction.SwitchSize: Int get() = 0
 private val CodeFunction.IfInfo: List<CodePosition> get() = listOf()
 
-class BadsmellAnalyser : QualityAnalyser {
+class BadsmellAnalyser(thresholds: Map<String, Int> = BsThresholds().toThresholds()) : QualityAnalyser {
     private var bsThresholds = BsThresholds()
 
-    constructor(thresholds: Map<String, Int> = BsThresholds().toThresholds()) {
+    init {
         this.bsThresholds = bsThresholds.from(thresholds)
     }
 
