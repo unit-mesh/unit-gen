@@ -1,7 +1,7 @@
 package cc.unitmesh.pick.worker
 
 import cc.unitmesh.pick.option.InsOutputConfig
-import cc.unitmesh.pick.prompt.strategy.CodeContextStrategy
+import cc.unitmesh.pick.strategy.BizCodeContextStrategy
 import cc.unitmesh.core.completion.CompletionBuilderType
 import cc.unitmesh.pick.option.InsQualityThreshold
 import cc.unitmesh.quality.CodeQualityType
@@ -9,7 +9,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class WorkerContext(
-    val codeContextStrategies: List<CodeContextStrategy>,
+    val codeContextStrategies: List<BizCodeContextStrategy>,
     val qualityTypes: List<CodeQualityType>,
     val insOutputConfig: InsOutputConfig,
     val pureDataFileName: String,

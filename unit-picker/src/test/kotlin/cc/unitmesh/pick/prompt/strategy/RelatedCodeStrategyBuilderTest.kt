@@ -4,6 +4,7 @@ import cc.unitmesh.pick.option.InsOutputConfig
 import cc.unitmesh.pick.worker.job.InstructionFileJob
 import cc.unitmesh.pick.ext.toUml
 import cc.unitmesh.core.completion.CompletionBuilderType
+import cc.unitmesh.pick.strategy.bizcode.RelatedCodeStrategyBuilder
 import cc.unitmesh.pick.worker.job.JobContext
 import cc.unitmesh.quality.CodeQualityType
 import chapi.ast.javaast.JavaAnalyser

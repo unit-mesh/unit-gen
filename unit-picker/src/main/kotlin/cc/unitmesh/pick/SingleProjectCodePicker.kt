@@ -26,7 +26,6 @@ import java.nio.file.Path
  */
 class SingleProjectCodePicker(private val config: InsPickerOption) {
     private val logger = org.slf4j.LoggerFactory.getLogger(javaClass)
-
     /**
      * Executes the code picker with the provided configuration.
      *
