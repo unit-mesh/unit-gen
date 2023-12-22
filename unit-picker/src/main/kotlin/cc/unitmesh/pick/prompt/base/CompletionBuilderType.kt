@@ -1,8 +1,9 @@
-package cc.unitmesh.pick.prompt
+package cc.unitmesh.pick.prompt.base
 
 import cc.unitmesh.pick.prompt.completion.AfterBlockCodeCompletionBuilder
 import cc.unitmesh.pick.prompt.completion.InBlockCodeCompletionBuilder
 import cc.unitmesh.pick.prompt.completion.InlineCodeCompletionBuilder
+import cc.unitmesh.pick.worker.JobContext
 import kotlinx.serialization.SerializationException
 
 enum class CompletionBuilderType {

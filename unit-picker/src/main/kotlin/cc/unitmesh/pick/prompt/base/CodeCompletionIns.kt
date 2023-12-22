@@ -1,7 +1,6 @@
-package cc.unitmesh.pick.prompt
+package cc.unitmesh.pick.prompt.base
 
-import chapi.domain.core.CodeDataStruct
-import chapi.domain.core.CodeFunction
+import cc.unitmesh.pick.prompt.base.CompletionBuilderType
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 
@@ -15,13 +14,3 @@ data class CodeCompletionIns(
         return Json.encodeToString(serializer(), this)
     }
 }
-
-interface CompletionBuilder {
-    fun build(dataStruct: CodeDataStruct): List<CodeCompletionIns> {
-        return listOf()
-    }
-
-    fun build(function: CodeFunction): List<CodeCompletionIns>
-}
-
-

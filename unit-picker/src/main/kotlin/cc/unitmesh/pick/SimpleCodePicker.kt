@@ -2,7 +2,7 @@ package cc.unitmesh.pick
 
 import cc.unitmesh.pick.builder.InstructionFileJob
 import cc.unitmesh.pick.builder.PickerOption
-import cc.unitmesh.pick.prompt.Instruction
+import cc.unitmesh.pick.prompt.base.Instruction
 import cc.unitmesh.pick.walker.PickDirectoryWalker
 import cc.unitmesh.pick.threshold.QualityThreshold
 import cc.unitmesh.pick.worker.WorkerContext

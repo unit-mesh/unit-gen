@@ -1,7 +1,9 @@
 package cc.unitmesh.pick.prompt.strategy
 
-import cc.unitmesh.pick.ext.toUml
-import cc.unitmesh.pick.prompt.*
+import cc.unitmesh.pick.prompt.base.CodeStrategyBuilder
+import cc.unitmesh.pick.prompt.base.completionBuilders
+import cc.unitmesh.pick.prompt.ins.RelatedCodeCompletionIns
+import cc.unitmesh.pick.worker.JobContext
 import chapi.domain.core.CodeContainer
 import chapi.domain.core.CodeDataStruct
 

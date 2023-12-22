@@ -2,10 +2,10 @@ package cc.unitmesh.pick.worker.worker
 
 import cc.unitmesh.pick.ext.CodeDataStructUtil
 import cc.unitmesh.pick.builder.InstructionFileJob
-import cc.unitmesh.pick.prompt.CompletionBuilderType
-import cc.unitmesh.pick.prompt.Instruction
-import cc.unitmesh.pick.prompt.JobContext
-import cc.unitmesh.pick.prompt.strategy.TypedCompletionIns
+import cc.unitmesh.pick.prompt.base.CompletionBuilderType
+import cc.unitmesh.pick.prompt.base.Instruction
+import cc.unitmesh.pick.worker.JobContext
+import cc.unitmesh.pick.prompt.ins.TypedCompletionIns
 import cc.unitmesh.pick.worker.LangWorker
 import cc.unitmesh.pick.worker.WorkerContext
 import chapi.ast.javaast.JavaAnalyser

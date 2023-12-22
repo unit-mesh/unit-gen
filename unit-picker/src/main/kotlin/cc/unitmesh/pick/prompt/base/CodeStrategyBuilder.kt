@@ -1,4 +1,4 @@
-package cc.unitmesh.pick.prompt
+package cc.unitmesh.pick.prompt.base
 
 import cc.unitmesh.quality.CodeQualityType
 import cc.unitmesh.quality.QualityAnalyser

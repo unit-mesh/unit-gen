@@ -1,7 +1,7 @@
 package cc.unitmesh.pick.builder;
 
 import cc.unitmesh.pick.SimpleCodePicker
-import cc.unitmesh.pick.prompt.Instruction
+import cc.unitmesh.pick.prompt.base.Instruction
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json

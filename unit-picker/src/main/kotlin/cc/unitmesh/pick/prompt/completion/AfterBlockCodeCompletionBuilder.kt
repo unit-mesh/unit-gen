@@ -1,9 +1,9 @@
 package cc.unitmesh.pick.prompt.completion
 
-import cc.unitmesh.pick.prompt.CodeCompletionIns
-import cc.unitmesh.pick.prompt.CompletionBuilder
-import cc.unitmesh.pick.prompt.CompletionBuilderType
-import cc.unitmesh.pick.prompt.JobContext
+import cc.unitmesh.pick.prompt.base.CodeCompletionIns
+import cc.unitmesh.pick.prompt.base.CompletionBuilder
+import cc.unitmesh.pick.prompt.base.CompletionBuilderType
+import cc.unitmesh.pick.worker.JobContext
 import chapi.domain.core.CodeFunction
 
 

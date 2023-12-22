@@ -1,5 +1,6 @@
 package cc.unitmesh.pick.prompt;
 
+import cc.unitmesh.pick.prompt.base.Instruction
 import io.kotest.matchers.shouldBe
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test

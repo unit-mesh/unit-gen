@@ -1,8 +1,8 @@
-package cc.unitmesh.pick.prompt.strategy
+package cc.unitmesh.pick.prompt.ins
 
 import cc.unitmesh.pick.ext.toUml
-import cc.unitmesh.pick.prompt.CompletionBuilderType
-import cc.unitmesh.pick.prompt.Instruction
+import cc.unitmesh.pick.prompt.base.CompletionBuilderType
+import cc.unitmesh.pick.prompt.base.Instruction
 import cc.unitmesh.pick.threshold.QualityThreshold
 import chapi.domain.core.CodeDataStruct
 import kotlinx.serialization.Serializable

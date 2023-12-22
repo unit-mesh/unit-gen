@@ -3,8 +3,8 @@ package cc.unitmesh.pick.prompt.strategy
 import cc.unitmesh.pick.builder.BuilderConfig
 import cc.unitmesh.pick.builder.InstructionFileJob
 import cc.unitmesh.pick.ext.toUml
-import cc.unitmesh.pick.prompt.CompletionBuilderType
-import cc.unitmesh.pick.prompt.JobContext
+import cc.unitmesh.pick.prompt.base.CompletionBuilderType
+import cc.unitmesh.pick.worker.JobContext
 import cc.unitmesh.quality.CodeQualityType
 import chapi.ast.javaast.JavaAnalyser
 import chapi.domain.core.CodeDataStruct
