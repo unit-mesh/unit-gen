@@ -89,6 +89,7 @@ class TestBadsmellAnalyser(val thresholds: Map<String, Int> = mapOf()) : Quality
         if (methodCallMap[buildFullMethodName] != null) {
             calls = methodCallMap[buildFullMethodName]!!
         }
+
         calls += funcCall
         methodCallMap[buildFullMethodName] = calls
     }
@@ -110,86 +111,55 @@ class TestBadsmellAnalyser(val thresholds: Map<String, Int> = mapOf()) : Quality
         }
 
         if (isDuplicateTest) {
-            val testBadSmell = TestBadSmell(
+            tbsResult.results += TestBadSmell(
                 fileName = node.FilePath,
                 type = "DuplicateAssertTest",
                 description = "",
                 line = method.Position.StartLine
             )
-
-            tbsResult.results += testBadSmell
         }
     }
 
     private fun appendUnknownTest(filePath: String, method: CodeFunction, tbsResult: TbsResult) {
         tbsResult.results += TestBadSmell(
-            fileName = filePath,
-            type = "UnknownTest",
-            description = "",
-            line = method.Position.StartLine
+            fileName = filePath, type = "UnknownTest", description = "", line = method.Position.StartLine
         )
     }
 
-    private fun checkRedundantAssertionTest(
-        filePath: String,
-        funcCall: CodeCall,
-        tbsResult: TbsResult,
-    ) {
+    private fun checkRedundantAssertionTest(filePath: String, funcCall: CodeCall, tbsResult: TbsResult) {
         if (funcCall.Parameters.size != ASSERT_PARAMETER_SIZE) return
 
         if (funcCall.Parameters[0].TypeValue != funcCall.Parameters[1].TypeValue) return
-        val testBadSmell = TestBadSmell(
-            fileName = filePath,
-            type = "RedundantAssertionTest",
-            description = "",
-            line = funcCall.Position.StartLine
-        )
 
-        tbsResult.results += testBadSmell
+        tbsResult.results += TestBadSmell(
+            fileName = filePath, type = "RedundantAssertionTest", description = "", line = funcCall.Position.StartLine
+        )
     }
 
     private fun checkSleepyTest(filePath: String, funcCall: CodeCall, tbsResult: TbsResult) {
-        if (funcCall.isThreadSleep()) {
-            val testBadSmell = TestBadSmell(
-                fileName = filePath,
-                type = "SleepyTest",
-                description = "",
-                line = funcCall.Position.StartLine
-            )
-
-            tbsResult.results += testBadSmell
-        }
+        if (!funcCall.isThreadSleep()) return
+        tbsResult.results += TestBadSmell(
+            fileName = filePath, type = "SleepyTest", description = "", line = funcCall.Position.StartLine
+        )
     }
 
     private fun checkRedundantPrintTest(filePath: String, funcCall: CodeCall, tbsResult: TbsResult) {
-        if (funcCall.isSystemOutput()) {
-            val testBadSmell = TestBadSmell(
-                fileName = filePath,
-                type = "RedundantPrintTest",
-                description = "",
-                line = funcCall.Position.StartLine
-            )
-
-            tbsResult.results += testBadSmell
-        }
+        if (!funcCall.isSystemOutput()) return
+        tbsResult.results += TestBadSmell(
+            fileName = filePath, type = "RedundantPrintTest", description = "", line = funcCall.Position.StartLine
+        )
     }
 
     private fun checkIgnoreTest(
-        filePath: String,
+        path: String,
         annotation: CodeAnnotation,
         tbsResult: TbsResult,
         method: CodeFunction,
     ) {
-        if (annotation.isIgnore()) {
-            val testBadSmell = TestBadSmell(
-                fileName = filePath,
-                type = "IgnoreTest",
-                description = "",
-                line = method.Position.StartLine
-            )
-
-            tbsResult.results += testBadSmell
-        }
+        if (!annotation.isIgnore()) return
+        tbsResult.results += TestBadSmell(
+            fileName = path, type = "IgnoreTest", description = "", line = method.Position.StartLine
+        )
     }
 
     private fun checkEmptyTest(
@@ -200,18 +170,15 @@ class TestBadsmellAnalyser(val thresholds: Map<String, Int> = mapOf()) : Quality
     ) {
         val isJavaTest = filePath.endsWith(".java") && annotation.isTest()
         val isGoTest = filePath.endsWith("_test.go")
-        if (isJavaTest || isGoTest) {
-            if (method.FunctionCalls.size <= 1) {
-                val badSmell = TestBadSmell(
-                    fileName = filePath,
-                    type = "EmptyTest",
-                    description = "",
-                    line = method.Position.StartLine
-                )
+        if (!isJavaTest && !isGoTest) return
+        if (method.FunctionCalls.size > 1) return
 
-                tbsResult.results += badSmell
-            }
-        }
+        tbsResult.results += TestBadSmell(
+            fileName = filePath,
+            type = "EmptyTest",
+            description = "",
+            line = method.Position.StartLine
+        )
     }
 
     private fun buildCallMethodMap(nodes: List<CodeDataStruct>): MutableMap<String, CodeFunction> {
