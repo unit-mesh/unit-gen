@@ -2,7 +2,7 @@ package cc.unitmesh.pick.worker
 
 import cc.unitmesh.pick.worker.job.InstructionFileJob
 import cc.unitmesh.core.Instruction
-import cc.unitmesh.pick.worker.worker.JavaWorker
+import cc.unitmesh.pick.worker.lang.JavaWorker
 import cc.unitmesh.pick.worker.base.LangWorker
 import org.archguard.rule.common.Language
 import org.archguard.scanner.analyser.count.LanguageService
