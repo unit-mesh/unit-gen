@@ -4,12 +4,29 @@ import cc.unitmesh.pick.option.InsOutputConfig
 import cc.unitmesh.pick.worker.job.InstructionFileJob
 import cc.unitmesh.core.completion.CompletionBuilderType
 import cc.unitmesh.quality.CodeQualityType
+import kotlinx.serialization.Serializable
+import org.archguard.scanner.analyser.count.FileJob
 
+@Serializable
 data class JobContext(
     val job: InstructionFileJob,
     val qualityTypes: List<CodeQualityType>,
     val fileTree: HashMap<String, InstructionFileJob>,
-    val insOutputConfig: InsOutputConfig,
+    val insOutputConfig: InsOutputConfig = InsOutputConfig(),
     val completionBuilderTypes: List<CompletionBuilderType>,
     val maxCompletionInOneFile: Int
-)
+) {
+    companion object {
+        fun default(fileTree: HashMap<String, InstructionFileJob> = hashMapOf()): JobContext {
+            return JobContext(
+                job = InstructionFileJob(
+                    fileSummary = FileJob()
+                ),
+                qualityTypes = listOf(),
+                fileTree = fileTree,
+                completionBuilderTypes = listOf(),
+                maxCompletionInOneFile = 3
+            )
+        }
+    }
+}

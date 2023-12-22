@@ -11,6 +11,10 @@ class JavaTestCodeHelper(val context: JobContext) : UnitTestService {
         val fileTree = context.fileTree
         val testClass = dataStruct.NodeName.removeSuffix("Test").removeSuffix("Tests")
 
+        if (testClass == dataStruct.NodeName) {
+            return emptyList()
+        }
+
         return fileTree.values.mapNotNull { fileJob ->
             fileJob.container?.DataStructures?.find {
                 it.NodeName == testClass
@@ -41,7 +45,7 @@ class JavaTestCodeHelper(val context: JobContext) : UnitTestService {
         return outboundType + inboundsType
     }
 
-    private fun filterDs(
+    fun filterDs(
         imports: List<CodeImport>,
         returnType: String,
         fileTree: HashMap<String, InstructionFileJob>,
