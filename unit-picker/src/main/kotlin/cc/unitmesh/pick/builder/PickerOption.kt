@@ -12,6 +12,8 @@ import cc.unitmesh.quality.testbadsmell.TestBadsmellAnalyser
 import kotlinx.serialization.Serializable
 import java.io.File
 
+const val MAX_COMPLETION_EACH_FILE = 3
+
 /**
  * Represents an option for picking a code repository.
  *
@@ -76,7 +78,7 @@ data class PickerOption(
      */
     val codeQualityTypes: List<CodeQualityType> = listOf(),
     val builderConfig: BuilderConfig = BuilderConfig(),
-    val maxCompletionInOneFile: Int = 3,
+    val maxCompletionEachFile: Int = MAX_COMPLETION_EACH_FILE,
     val gitDepth: Int = 1,
     val completionTypeSize: Int,
     /**

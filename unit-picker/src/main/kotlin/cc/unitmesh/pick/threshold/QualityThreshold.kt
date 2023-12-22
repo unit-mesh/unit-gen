@@ -5,8 +5,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class QualityThreshold(
-    val complexity: Long = MAX_COMPLEXITY,
-    val fileSize: Long = MAX_FILE_SIZE,
+    val complexity: Int = MAX_COMPLEXITY,
+    val fileSize: Int = MAX_FILE_SIZE,
     /**
      * https://docs.sweep.dev/blogs/chunking-2m-files
      * This is because the average token to a character ratio for code is ~1:5(300 tokens), and embedding models are
@@ -23,8 +23,8 @@ data class QualityThreshold(
     val badsmellThreshold: Map<String, Int> = BsThresholds().toThresholds(),
 ) {
     companion object {
-        const val MAX_COMPLEXITY: Long = 100
-        const val MAX_FILE_SIZE: Long = 1024 * 64
+        const val MAX_COMPLEXITY: Int = 100
+        const val MAX_FILE_SIZE: Int = 1024 * 64
         const val MAX_LINE_IN_CODE: Int = 160
         const val MAX_CHAR_IN_CODE: Int = 1500
         const val MAX_RELATED_CODE_LINE: Int = 30

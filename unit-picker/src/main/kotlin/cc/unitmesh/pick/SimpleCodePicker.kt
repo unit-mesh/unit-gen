@@ -7,7 +7,6 @@ import cc.unitmesh.pick.walker.PickDirectoryWalker
 import cc.unitmesh.pick.threshold.QualityThreshold
 import cc.unitmesh.pick.worker.WorkerContext
 import cc.unitmesh.pick.worker.WorkerManager
-import cc.unitmesh.quality.badsmell.BsThresholds
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
@@ -82,7 +81,7 @@ class SimpleCodePicker(private val config: PickerOption) : CodePicker {
                 config.builderConfig,
                 pureDataFileName = config.pureDataFileName(),
                 config.completionTypes,
-                config.maxCompletionInOneFile,
+                config.maxCompletionEachFile,
                 config.completionTypeSize,
                 qualityThreshold = QualityThreshold(
                     complexity = QualityThreshold.MAX_COMPLEXITY,

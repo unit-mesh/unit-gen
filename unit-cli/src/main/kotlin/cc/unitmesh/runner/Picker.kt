@@ -1,6 +1,7 @@
 package cc.unitmesh.runner
 
 import cc.unitmesh.pick.SimpleCodePicker
+import cc.unitmesh.pick.builder.MAX_COMPLETION_EACH_FILE
 import cc.unitmesh.pick.builder.PickerOption
 import cc.unitmesh.pick.prompt.Instruction
 import cc.unitmesh.pick.threshold.QualityThreshold
@@ -18,9 +19,13 @@ private val logger = org.slf4j.LoggerFactory.getLogger(PickerCommand::class.java
 fun main(args: Array<String>) = PickerCommand().main(args)
 
 class PickerCommand : CliktCommand() {
-    private val projectTypedCompletionSize by option(help = "Limit each CompletionType size").int().default(100)
     private val gitDepth by option(help = "Git depth").int().default(1)
-    private val maxCompletionInOneFile by option(help = "Max completion in one file").int().default(3)
+
+    private val projectTypedCompletionSize by option(help = "Limit each CompletionType size").int()
+        .default(QualityThreshold.MAX_COMPLEXITY)
+    private val maxCompletionEachFile by option(help = "Max completion / file").int().default(
+        MAX_COMPLETION_EACH_FILE
+    )
     private val maxCharInCode by option(help = "Max char in code").int().default(QualityThreshold.MAX_CHAR_IN_CODE)
     private val maxLineInCode by option(help = "Max line in code").int().default(QualityThreshold.MAX_LINE_IN_CODE)
 
@@ -45,7 +50,7 @@ class PickerCommand : CliktCommand() {
                         url = code.repository,
                         branch = code.branch,
                         language = code.language,
-                        maxCompletionInOneFile = maxCompletionInOneFile,
+                        maxCompletionEachFile = maxCompletionEachFile,
                         gitDepth = gitDepth,
                         completionTypeSize = projectTypedCompletionSize,
                         maxCharInCode = maxCharInCode,
