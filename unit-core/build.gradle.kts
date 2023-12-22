@@ -8,6 +8,7 @@ dependencies {
     implementation(libs.clikt)
     implementation(libs.serialization.json)
 
+    implementation(libs.chapi.domain)
     implementation(libs.cf.language)
     implementation(libs.kaml)
 

@@ -1,6 +1,5 @@
-package cc.unitmesh.pick.prompt.completion.base
+package cc.unitmesh.core.completion
 
-import cc.unitmesh.pick.prompt.completion.CompletionBuilderType
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 

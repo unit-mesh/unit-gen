@@ -10,5 +10,4 @@ enum class CodeQualityType {
     JavaRepository,
     JavaService;
 
-    fun all() = listOf(BadSmell, TestBadSmell, JavaController, JavaRepository, JavaService)
 }

@@ -1,8 +1,8 @@
 package cc.unitmesh.pick.prompt.ins
 
-import cc.unitmesh.pick.prompt.completion.CompletionBuilderType
-import cc.unitmesh.pick.prompt.Instruction
-import cc.unitmesh.pick.prompt.ins.base.TypedCompletionIns
+import cc.unitmesh.core.completion.CompletionBuilderType
+import cc.unitmesh.core.Instruction
+import cc.unitmesh.core.completion.TypedCompletionIns
 import cc.unitmesh.pick.threshold.QualityThreshold
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json

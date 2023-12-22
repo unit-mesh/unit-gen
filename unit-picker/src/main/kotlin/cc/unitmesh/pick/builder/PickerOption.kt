@@ -1,7 +1,7 @@
 package cc.unitmesh.pick.builder
 
 import cc.unitmesh.pick.prompt.strategy.CodeContextStrategy
-import cc.unitmesh.pick.prompt.completion.CompletionBuilderType
+import cc.unitmesh.core.completion.CompletionBuilderType
 import cc.unitmesh.pick.threshold.QualityThreshold
 import cc.unitmesh.quality.CodeQualityType
 import cc.unitmesh.quality.badsmell.BadsmellAnalyser

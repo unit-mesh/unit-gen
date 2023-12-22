@@ -7,6 +7,7 @@ plugins {
 }
 
 dependencies {
+    implementation(projects.unitCore)
     implementation(libs.clikt)
     implementation(libs.serialization.json)
 

@@ -1,4 +1,4 @@
-package cc.unitmesh.pick.prompt;
+package cc.unitmesh.core;
 
 import io.kotest.matchers.shouldBe
 import org.assertj.core.api.Assertions.assertThat

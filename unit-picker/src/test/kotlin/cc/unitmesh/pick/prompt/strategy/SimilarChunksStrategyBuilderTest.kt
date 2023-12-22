@@ -2,7 +2,7 @@ package cc.unitmesh.pick.prompt.strategy;
 
 import cc.unitmesh.pick.builder.BuilderConfig
 import cc.unitmesh.pick.builder.InstructionFileJob
-import cc.unitmesh.pick.prompt.completion.CompletionBuilderType
+import cc.unitmesh.core.completion.CompletionBuilderType
 import cc.unitmesh.pick.worker.JobContext
 import cc.unitmesh.quality.CodeQualityType
 import chapi.ast.javaast.JavaAnalyser

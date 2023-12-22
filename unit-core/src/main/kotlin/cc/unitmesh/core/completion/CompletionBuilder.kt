@@ -1,4 +1,4 @@
-package cc.unitmesh.pick.prompt.completion.base
+package cc.unitmesh.core.completion
 
 import chapi.domain.core.CodeDataStruct
 import chapi.domain.core.CodeFunction

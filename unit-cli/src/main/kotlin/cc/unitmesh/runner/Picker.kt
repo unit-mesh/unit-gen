@@ -3,7 +3,7 @@ package cc.unitmesh.runner
 import cc.unitmesh.pick.SimpleCodePicker
 import cc.unitmesh.pick.builder.MAX_COMPLETION_EACH_FILE
 import cc.unitmesh.pick.builder.PickerOption
-import cc.unitmesh.pick.prompt.Instruction
+import cc.unitmesh.core.Instruction
 import cc.unitmesh.pick.threshold.QualityThreshold
 import cc.unitmesh.runner.cli.ProcessorResult
 import cc.unitmesh.runner.cli.ProcessorUtils

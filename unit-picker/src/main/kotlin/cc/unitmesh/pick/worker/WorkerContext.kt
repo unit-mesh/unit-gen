@@ -2,7 +2,7 @@ package cc.unitmesh.pick.worker
 
 import cc.unitmesh.pick.builder.BuilderConfig
 import cc.unitmesh.pick.prompt.strategy.CodeContextStrategy
-import cc.unitmesh.pick.prompt.completion.CompletionBuilderType
+import cc.unitmesh.core.completion.CompletionBuilderType
 import cc.unitmesh.pick.threshold.QualityThreshold
 import cc.unitmesh.quality.CodeQualityType
 import kotlinx.serialization.Serializable
