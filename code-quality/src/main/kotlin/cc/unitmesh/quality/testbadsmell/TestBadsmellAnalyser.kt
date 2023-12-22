@@ -9,7 +9,7 @@ import org.archguard.rule.core.Issue
 
 class TestBadsmellAnalyser(val thresholds: Map<String, Int> = mapOf()) : QualityAnalyser {
     override fun analysis(nodes: List<CodeDataStruct>): List<Issue> {
-        val tbsResult = TbsResult(arrayOf())
+        val tbsResult = TbsResult(listOf())
         val callMethodMap = buildCallMethodMap(nodes)
 
         for (node in nodes) {

@@ -8,5 +8,7 @@ enum class CodeQualityType {
     TestBadSmell,
     JavaController,
     JavaRepository,
-    JavaService,
+    JavaService;
+
+    fun all() = listOf(BadSmell, TestBadSmell, JavaController, JavaRepository, JavaService)
 }

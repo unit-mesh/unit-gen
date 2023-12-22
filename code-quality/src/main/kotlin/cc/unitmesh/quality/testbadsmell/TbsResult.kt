@@ -1,3 +1,8 @@
 package cc.unitmesh.quality.testbadsmell
 
-data class TbsResult(var results: Array<TestBadSmell>)
+import kotlinx.serialization.Serializable
+
+@Serializable
+data class TbsResult(var results: List<TestBadSmell>) {
+
+}
