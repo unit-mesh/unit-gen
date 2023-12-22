@@ -1,10 +1,10 @@
-package cc.unitmesh.pick.threshold
+package cc.unitmesh.pick.option
 
 import cc.unitmesh.quality.badsmell.BsThresholds
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class QualityThreshold(
+data class InsQualityThreshold(
     val complexity: Int = MAX_COMPLEXITY,
     val fileSize: Int = MAX_FILE_SIZE,
     /**

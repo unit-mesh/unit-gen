@@ -1,8 +1,7 @@
-package cc.unitmesh.pick.builder
+package cc.unitmesh.pick.option
 
 import cc.unitmesh.pick.prompt.strategy.CodeContextStrategy
 import cc.unitmesh.core.completion.CompletionBuilderType
-import cc.unitmesh.pick.threshold.QualityThreshold
 import cc.unitmesh.quality.CodeQualityType
 import cc.unitmesh.quality.badsmell.BadsmellAnalyser
 import cc.unitmesh.quality.extension.JavaControllerAnalyser
@@ -33,10 +32,10 @@ const val MAX_COMPLETION_EACH_FILE = 3
  *        - [CodeQualityType.JavaController]: Analyzes a Java controller class using [JavaControllerAnalyser].
  *        - [CodeQualityType.JavaRepository]: Analyzes a Java repository class using [JavaRepositoryAnalyser].
  *        - [CodeQualityType.JavaService]: Analyzes a Java service class using [JavaServiceAnalyser].
- * @property builderConfig The configuration for the builder.
+ * @property insOutputConfig The configuration for the builder.
  */
 @Serializable
-data class PickerOption(
+data class InsPickerOption(
     /* The url of the repo should be git url */
     val url: String,
     /* The branch of the repo */
@@ -77,7 +76,7 @@ data class PickerOption(
      *
      */
     val codeQualityTypes: List<CodeQualityType> = listOf(),
-    val builderConfig: BuilderConfig = BuilderConfig(),
+    val insOutputConfig: InsOutputConfig = InsOutputConfig(),
     val maxCompletionEachFile: Int = MAX_COMPLETION_EACH_FILE,
     val gitDepth: Int = 1,
     val completionTypeSize: Int,
@@ -89,11 +88,11 @@ data class PickerOption(
      *
      * Our token length is 2048, so we can use 1500 * 1024 / 512 = 3000
      */
-    val maxCharInCode: Int = QualityThreshold.MAX_CHAR_IN_CODE,
+    val maxCharInCode: Int = InsQualityThreshold.MAX_CHAR_IN_CODE,
     /**
      * Our token length is 2048, so we can use 40 * 2048 / 512 = 160, but java has a lot of new lines, so we double it
      */
-    val maxLineInCode: Int = QualityThreshold.MAX_LINE_IN_CODE,
+    val maxLineInCode: Int = InsQualityThreshold.MAX_LINE_IN_CODE,
 ) {
     fun pureDataFileName(): String {
         return baseDir + File.separator + repoFileName() + ".jsonl"

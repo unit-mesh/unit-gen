@@ -1,4 +1,4 @@
-package cc.unitmesh.pick.builder;
+package cc.unitmesh.pick.option;
 
 import cc.unitmesh.pick.SimpleCodePicker
 import cc.unitmesh.core.Instruction
@@ -71,7 +71,7 @@ class SimpleCodePickerTest {
     @Test
     fun shouldCheckoutTestCode() {
         val picker = SimpleCodePicker(
-            PickerOption(
+            InsPickerOption(
                 url = "https://github.com/unit-mesh/unit-eval-testing",
                 completionTypeSize  = 10,
                 maxCharInCode = 100

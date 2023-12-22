@@ -1,10 +1,10 @@
 package cc.unitmesh.runner
 
 import cc.unitmesh.pick.SimpleCodePicker
-import cc.unitmesh.pick.builder.MAX_COMPLETION_EACH_FILE
-import cc.unitmesh.pick.builder.PickerOption
+import cc.unitmesh.pick.option.MAX_COMPLETION_EACH_FILE
+import cc.unitmesh.pick.option.InsPickerOption
 import cc.unitmesh.core.Instruction
-import cc.unitmesh.pick.threshold.QualityThreshold
+import cc.unitmesh.pick.option.InsQualityThreshold
 import cc.unitmesh.runner.cli.ProcessorResult
 import cc.unitmesh.runner.cli.ProcessorUtils
 import com.github.ajalt.clikt.core.CliktCommand
@@ -22,12 +22,12 @@ class PickerCommand : CliktCommand() {
     private val gitDepth by option(help = "Git depth").int().default(1)
 
     private val projectTypedCompletionSize by option(help = "Limit each CompletionType size").int()
-        .default(QualityThreshold.MAX_COMPLEXITY)
+        .default(InsQualityThreshold.MAX_COMPLEXITY)
     private val maxCompletionEachFile by option(help = "Max completion / file").int().default(
         MAX_COMPLETION_EACH_FILE
     )
-    private val maxCharInCode by option(help = "Max char in code").int().default(QualityThreshold.MAX_CHAR_IN_CODE)
-    private val maxLineInCode by option(help = "Max line in code").int().default(QualityThreshold.MAX_LINE_IN_CODE)
+    private val maxCharInCode by option(help = "Max char in code").int().default(InsQualityThreshold.MAX_CHAR_IN_CODE)
+    private val maxLineInCode by option(help = "Max line in code").int().default(InsQualityThreshold.MAX_LINE_IN_CODE)
 
     override fun run() {
         val outputDir = File("datasets" + File.separator + "origin")
@@ -46,7 +46,7 @@ class PickerCommand : CliktCommand() {
             val deferredResults = projects.map { code ->
                 async {
                     logger.info("Start to process ${code.repository}")
-                    val pickerOption = PickerOption(
+                    val insPickerOption = InsPickerOption(
                         url = code.repository,
                         branch = code.branch,
                         language = code.language,
@@ -57,11 +57,11 @@ class PickerCommand : CliktCommand() {
                         maxLineInCode = maxLineInCode,
                     )
 
-                    val content = SimpleCodePicker(pickerOption).execute()
+                    val content = SimpleCodePicker(insPickerOption).execute()
                     ProcessorResult(
                         repository = code.repository,
                         content = content,
-                        outputName = pickerOption.repoFileName()
+                        outputName = insPickerOption.repoFileName()
                     )
                 }
             }

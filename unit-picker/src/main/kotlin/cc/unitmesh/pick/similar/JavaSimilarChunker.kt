@@ -2,7 +2,7 @@ package cc.unitmesh.pick.similar
 
 import cc.unitmesh.core.intelli.SimilarChunkContext
 import cc.unitmesh.core.intelli.SimilarChunker
-import cc.unitmesh.pick.builder.InstructionFileJob
+import cc.unitmesh.pick.worker.job.InstructionFileJob
 import org.slf4j.Logger
 
 /**

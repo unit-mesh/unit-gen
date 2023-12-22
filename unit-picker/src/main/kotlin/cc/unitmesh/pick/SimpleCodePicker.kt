@@ -1,10 +1,10 @@
 package cc.unitmesh.pick
 
-import cc.unitmesh.pick.builder.InstructionFileJob
-import cc.unitmesh.pick.builder.PickerOption
+import cc.unitmesh.pick.worker.job.InstructionFileJob
+import cc.unitmesh.pick.option.InsPickerOption
 import cc.unitmesh.core.Instruction
-import cc.unitmesh.pick.walker.PickDirectoryWalker
-import cc.unitmesh.pick.threshold.QualityThreshold
+import cc.unitmesh.pick.ext.PickDirectoryWalker
+import cc.unitmesh.pick.option.InsQualityThreshold
 import cc.unitmesh.pick.worker.WorkerContext
 import cc.unitmesh.pick.worker.WorkerManager
 import kotlinx.coroutines.channels.Channel
@@ -28,7 +28,7 @@ interface CodePicker
  *
  * @constructor Creates a `SimpleCodePicker` instance with the provided configuration.
  */
-class SimpleCodePicker(private val config: PickerOption) : CodePicker {
+class SimpleCodePicker(private val config: InsPickerOption) : CodePicker {
     /**
      * Executes the code config with the provided configuration.
      *
@@ -78,14 +78,14 @@ class SimpleCodePicker(private val config: PickerOption) : CodePicker {
             WorkerContext(
                 config.codeContextStrategies,
                 config.codeQualityTypes,
-                config.builderConfig,
+                config.insOutputConfig,
                 pureDataFileName = config.pureDataFileName(),
                 config.completionTypes,
                 config.maxCompletionEachFile,
                 config.completionTypeSize,
-                qualityThreshold = QualityThreshold(
-                    complexity = QualityThreshold.MAX_COMPLEXITY,
-                    fileSize = QualityThreshold.MAX_FILE_SIZE,
+                insQualityThreshold = InsQualityThreshold(
+                    complexity = InsQualityThreshold.MAX_COMPLEXITY,
+                    fileSize = InsQualityThreshold.MAX_FILE_SIZE,
                     maxLineInCode = config.maxLineInCode,
                     maxCharInCode = config.maxCharInCode,
                 )

@@ -3,7 +3,7 @@ package cc.unitmesh.pick.prompt.ins
 import cc.unitmesh.core.completion.CompletionBuilderType
 import cc.unitmesh.core.Instruction
 import cc.unitmesh.core.completion.TypedCompletionIns
-import cc.unitmesh.pick.threshold.QualityThreshold
+import cc.unitmesh.pick.option.InsQualityThreshold
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 
@@ -25,7 +25,7 @@ data class SimilarChunkCompletionIns(
         val similarChunks = if (similarChunks.isNotBlank() && similarChunks.isNotEmpty()) {
             // limit similarChunks to 30 lines
             val similarChunksLines = similarChunks.lines()
-            val maxLine = QualityThreshold.MAX_RELATED_CODE_LINE
+            val maxLine = InsQualityThreshold.MAX_RELATED_CODE_LINE
             if (similarChunksLines.size > maxLine) {
                 similarChunksLines.take(maxLine).joinToString("\n")
             } else {
@@ -37,7 +37,7 @@ data class SimilarChunkCompletionIns(
         }
 
         // Count strategy
-        val maxLine = QualityThreshold.MAX_LINE_IN_CODE
+        val maxLine = InsQualityThreshold.MAX_LINE_IN_CODE
         val beforeCursorLine = beforeCursor.count { it == '\n' }
         val afterCursorLine = output.count { it == '\n' }
         // drop from the start of beforeCursor

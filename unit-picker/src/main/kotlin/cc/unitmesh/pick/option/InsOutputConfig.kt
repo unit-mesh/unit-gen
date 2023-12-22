@@ -1,10 +1,10 @@
-package cc.unitmesh.pick.builder
+package cc.unitmesh.pick.option
 
 import kotlinx.serialization.Serializable
 
 
 @Serializable
-data class BuilderConfig(
+data class InsOutputConfig(
     /**
      * For different generic data in [cc.unitmesh.pick.prompt.CodeStrategyBuilder]
      */

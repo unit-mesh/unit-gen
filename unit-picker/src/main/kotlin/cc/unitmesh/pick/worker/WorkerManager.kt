@@ -1,8 +1,9 @@
 package cc.unitmesh.pick.worker
 
-import cc.unitmesh.pick.builder.InstructionFileJob
+import cc.unitmesh.pick.worker.job.InstructionFileJob
 import cc.unitmesh.core.Instruction
 import cc.unitmesh.pick.worker.worker.JavaWorker
+import cc.unitmesh.pick.worker.base.LangWorker
 import org.archguard.rule.common.Language
 import org.archguard.scanner.analyser.count.LanguageService
 import org.slf4j.Logger
@@ -29,7 +30,7 @@ class WorkerManager(private val workerContext: WorkerContext) {
             return
         }
 
-        if (summary.complexity > workerContext.qualityThreshold.complexity) {
+        if (summary.complexity > workerContext.insQualityThreshold.complexity) {
             logger.info("skip file ${summary.location} for complexity ${summary.complexity}")
             return;
         }
@@ -39,7 +40,7 @@ class WorkerManager(private val workerContext: WorkerContext) {
         }
 
         // if the file size is too large, we just try 64k
-        if (summary.bytes > workerContext.qualityThreshold.fileSize) {
+        if (summary.bytes > workerContext.insQualityThreshold.fileSize) {
             logger.info("skip file ${summary.location} for size ${summary.bytes}")
             return
         }

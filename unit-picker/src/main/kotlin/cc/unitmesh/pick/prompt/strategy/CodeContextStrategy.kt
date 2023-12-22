@@ -2,7 +2,7 @@ package cc.unitmesh.pick.prompt.strategy
 
 import cc.unitmesh.pick.prompt.strategy.base.CodeStrategyBuilder
 import cc.unitmesh.core.completion.TypedCompletionIns
-import cc.unitmesh.pick.worker.JobContext
+import cc.unitmesh.pick.worker.job.JobContext
 import kotlinx.serialization.SerializationException
 
 /**

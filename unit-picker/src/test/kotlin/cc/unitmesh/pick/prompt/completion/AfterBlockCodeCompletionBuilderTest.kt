@@ -1,10 +1,10 @@
 package cc.unitmesh.pick.prompt.completion;
 
-import cc.unitmesh.pick.builder.BuilderConfig
-import cc.unitmesh.pick.builder.InstructionFileJob
+import cc.unitmesh.pick.option.InsOutputConfig
+import cc.unitmesh.pick.worker.job.InstructionFileJob
 import cc.unitmesh.core.completion.CodeCompletionIns
 import cc.unitmesh.core.completion.CompletionBuilderType
-import cc.unitmesh.pick.worker.JobContext
+import cc.unitmesh.pick.worker.job.JobContext
 import chapi.domain.core.CodeFunction
 import chapi.domain.core.CodePosition
 import io.kotest.matchers.shouldBe
@@ -29,7 +29,7 @@ class AfterBlockCodeCompletionBuilderTest {
             codeLines = codeLines,
             code = codeLines.joinToString("\n")
         )
-        val jobContext = JobContext(job, emptyList(), hashMapOf("" to job), BuilderConfig(), emptyList(), 3)
+        val jobContext = JobContext(job, emptyList(), hashMapOf("" to job), InsOutputConfig(), emptyList(), 3)
         val builder = AfterBlockCodeCompletionBuilder(jobContext)
 
         val result = builder.build(codeFunction)

@@ -1,20 +1,20 @@
 package cc.unitmesh.pick.worker.worker
 
-import cc.unitmesh.pick.builder.InstructionFileJob
+import cc.unitmesh.pick.worker.job.InstructionFileJob
 import cc.unitmesh.pick.ext.CodeDataStructUtil
 import cc.unitmesh.core.completion.CompletionBuilderType
 import cc.unitmesh.core.Instruction
-import cc.unitmesh.pick.worker.JobContext
+import cc.unitmesh.pick.worker.job.JobContext
 import cc.unitmesh.core.completion.TypedCompletionIns
-import cc.unitmesh.pick.worker.LangWorker
 import cc.unitmesh.pick.worker.WorkerContext
+import cc.unitmesh.pick.worker.base.LangWorker
 import chapi.ast.typescriptast.TypeScriptAnalyser
 import kotlinx.coroutines.coroutineScope
 import java.io.File
 import java.util.*
 import kotlin.collections.HashMap
 
-class TypescriptWorker(private val context: WorkerContext) : LangWorker() {
+class TypescriptWorker(private val context: WorkerContext) : LangWorker {
     private val jobs: MutableList<InstructionFileJob> = mutableListOf()
     private val fileTree: HashMap<String, InstructionFileJob> = hashMapOf()
 
@@ -51,7 +51,7 @@ class TypescriptWorker(private val context: WorkerContext) : LangWorker() {
 
         val lists = jobs.map { job ->
             val jobContext =
-                JobContext(job, context.qualityTypes, fileTree, context.builderConfig, context.completionTypes, 3)
+                JobContext(job, context.qualityTypes, fileTree, context.insOutputConfig, context.completionTypes, 3)
 
             context.codeContextStrategies.map { type ->
                 type.builder(jobContext).build()

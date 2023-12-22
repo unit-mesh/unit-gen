@@ -3,7 +3,7 @@ package cc.unitmesh.pick.prompt.completion
 import cc.unitmesh.core.completion.CodeCompletionIns
 import cc.unitmesh.core.completion.CompletionBuilder
 import cc.unitmesh.core.completion.CompletionBuilderType
-import cc.unitmesh.pick.worker.JobContext
+import cc.unitmesh.pick.worker.job.JobContext
 import chapi.domain.core.CodeFunction
 
 class InlineCodeCompletionBuilder(val context: JobContext) : CompletionBuilder {

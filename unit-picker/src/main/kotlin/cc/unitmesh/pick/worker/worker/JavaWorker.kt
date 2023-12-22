@@ -1,15 +1,16 @@
 package cc.unitmesh.pick.worker.worker
 
 import cc.unitmesh.pick.ext.CodeDataStructUtil
-import cc.unitmesh.pick.builder.InstructionFileJob
+import cc.unitmesh.pick.worker.job.InstructionFileJob
 import cc.unitmesh.core.completion.CompletionBuilderType
 import cc.unitmesh.core.Instruction
-import cc.unitmesh.pick.worker.JobContext
+import cc.unitmesh.pick.worker.job.JobContext
 import cc.unitmesh.core.completion.TypedCompletionIns
-import cc.unitmesh.pick.worker.LangWorker
 import cc.unitmesh.pick.worker.WorkerContext
+import cc.unitmesh.pick.worker.base.LangWorker
 import chapi.ast.javaast.JavaAnalyser
 import kotlinx.coroutines.coroutineScope
+import org.slf4j.Logger
 import java.io.File
 import java.util.EnumMap
 
@@ -27,7 +28,7 @@ import java.util.EnumMap
  * - by Horizontal (with Import File):
  * - by Vertical (with History Change):
  */
-class JavaWorker(private val context: WorkerContext) : LangWorker() {
+class JavaWorker(private val context: WorkerContext) : LangWorker {
     private val jobs: MutableList<InstructionFileJob> = mutableListOf()
     private val fileTree: HashMap<String, InstructionFileJob> = hashMapOf()
 
@@ -35,7 +36,7 @@ class JavaWorker(private val context: WorkerContext) : LangWorker() {
     private val extLength = ".java".length
 
     companion object {
-        val logger = org.slf4j.LoggerFactory.getLogger(JavaWorker::class.java)
+        val logger: Logger = org.slf4j.LoggerFactory.getLogger(JavaWorker::class.java)
     }
 
     override fun addJob(job: InstructionFileJob) {
@@ -88,7 +89,7 @@ class JavaWorker(private val context: WorkerContext) : LangWorker() {
                     job,
                     context.qualityTypes,
                     fileTree,
-                    context.builderConfig,
+                    context.insOutputConfig,
                     context.completionTypes,
                     context.maxCompletionInOneFile
                 )
