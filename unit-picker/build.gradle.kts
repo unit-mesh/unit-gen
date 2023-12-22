@@ -20,6 +20,7 @@ dependencies {
 
     implementation(libs.archguard.scanner.core)
     implementation(libs.archguard.analyser.estimate)
+    implementation(libs.archguard.analyser.sca)
 
     // checkout
     implementation(libs.codedb.checkout)

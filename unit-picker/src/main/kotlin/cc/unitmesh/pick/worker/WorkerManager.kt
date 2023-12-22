@@ -5,8 +5,13 @@ import cc.unitmesh.core.Instruction
 import cc.unitmesh.pick.worker.lang.JavaWorker
 import cc.unitmesh.pick.worker.base.LangWorker
 import org.archguard.rule.common.Language
+import org.archguard.scanner.analyser.ScaAnalyser
 import org.archguard.scanner.analyser.count.LanguageService
+import org.archguard.scanner.core.client.ArchGuardClient
+import org.archguard.scanner.core.client.EmptyArchGuardClient
+import org.archguard.scanner.core.sca.ScaContext
 import org.slf4j.Logger
+import java.io.File
 
 
 class WorkerManager(private val workerContext: WorkerContext) {
@@ -23,6 +28,29 @@ class WorkerManager(private val workerContext: WorkerContext) {
     )
 
     private val logger: Logger = org.slf4j.LoggerFactory.getLogger(WorkerManager::class.java)
+
+    /**
+     * Initializes the project by scanning the specified code directory to retrieve the dependencies.
+     *
+     * @param codeDir The directory where the project code is stored.
+     * @param language The programming language used in the project.
+     *
+     */
+    fun init(codeDir: File, language: String) {
+        val dependencies = ScaAnalyser(object : ScaContext {
+            override val client: ArchGuardClient = EmptyArchGuardClient()
+            override val language: String = language
+            override val path: String = codeDir.absolutePath
+        }).analyse()
+
+        if (dependencies.isEmpty()) {
+            logger.warn("no dependencies found in $codeDir")
+        } else {
+            logger.info("found ${dependencies.size} dependencies in $codeDir")
+        }
+
+        workerContext.compositionDependency = dependencies
+    }
 
     fun addJobByThreshold(job: InstructionFileJob) {
         val summary = job.fileSummary

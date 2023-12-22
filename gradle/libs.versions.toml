@@ -69,6 +69,7 @@ chapi-typescript = { group = "com.phodal.chapi", name = "chapi-ast-typescript", 
 archguard-scanner-core = { group = "org.archguard.scanner", name = "scanner_core", version.ref = "archguard" }
 archguard-lang-kotlin = { group = "org.archguard.scanner", name = "lang_kotlin", version.ref = "archguard" }
 archguard-analyser-estimate = { group = "org.archguard.scanner", name = "analyser_estimate", version.ref = "archguard" }
+archguard-analyser-sca = { group = "org.archguard.scanner", name = "analyser_sca", version.ref = "archguard" }
 
 # ArchGuard Rule Linter
 archguard-rule-core = { group = "org.archguard.scanner", name = "rule-core", version.ref = "archguard" }

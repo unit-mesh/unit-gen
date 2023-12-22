@@ -50,7 +50,6 @@ class JavaSimilarChunker(private val fileTree: HashMap<String, InstructionFileJo
 
         // take the first 3 similar chunks or empty
         val similarChunksText = if (similarChunks.size > 3) {
-            println("score: ${similarChunks.map { it.first }}")
             similarChunks.take(3).map { it.second }
         } else {
             similarChunks.map { it.second }

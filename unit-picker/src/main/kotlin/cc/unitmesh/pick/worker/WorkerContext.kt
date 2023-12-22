@@ -6,6 +6,7 @@ import cc.unitmesh.core.completion.CompletionBuilderType
 import cc.unitmesh.pick.option.InsQualityThreshold
 import cc.unitmesh.quality.CodeQualityType
 import kotlinx.serialization.Serializable
+import org.archguard.scanner.core.sca.CompositionDependency
 
 @Serializable
 data class WorkerContext(
@@ -17,5 +18,6 @@ data class WorkerContext(
     val maxCompletionInOneFile: Int,
     val completionTypeSize: Int,
     val insQualityThreshold: InsQualityThreshold = InsQualityThreshold(),
+    var compositionDependency: List<CompositionDependency> = listOf()
 )
 
