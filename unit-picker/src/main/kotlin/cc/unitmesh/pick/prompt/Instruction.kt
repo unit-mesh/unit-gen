@@ -1,4 +1,4 @@
-package cc.unitmesh.pick.prompt.base
+package cc.unitmesh.pick.prompt
 
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json

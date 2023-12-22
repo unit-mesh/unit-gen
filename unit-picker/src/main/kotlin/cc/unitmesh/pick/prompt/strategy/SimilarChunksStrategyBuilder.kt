@@ -1,8 +1,8 @@
 package cc.unitmesh.pick.prompt.strategy
 
-import cc.unitmesh.pick.prompt.base.CodeStrategyBuilder
-import cc.unitmesh.pick.prompt.base.completionBuilders
+import cc.unitmesh.pick.prompt.completion.completionBuilders
 import cc.unitmesh.pick.prompt.ins.SimilarChunkCompletionIns
+import cc.unitmesh.pick.prompt.strategy.base.CodeStrategyBuilder
 import cc.unitmesh.pick.similar.JavaSimilarChunker
 import cc.unitmesh.pick.worker.JobContext
 

@@ -1,9 +1,7 @@
-package cc.unitmesh.pick.prompt
+package cc.unitmesh.pick.prompt.strategy
 
-import cc.unitmesh.pick.prompt.base.CodeStrategyBuilder
-import cc.unitmesh.pick.prompt.strategy.RelatedCodeStrategyBuilder
-import cc.unitmesh.pick.prompt.strategy.SimilarChunksStrategyBuilder
-import cc.unitmesh.pick.prompt.ins.TypedCompletionIns
+import cc.unitmesh.pick.prompt.strategy.base.CodeStrategyBuilder
+import cc.unitmesh.pick.prompt.ins.base.TypedCompletionIns
 import cc.unitmesh.pick.worker.JobContext
 import kotlinx.serialization.SerializationException
 

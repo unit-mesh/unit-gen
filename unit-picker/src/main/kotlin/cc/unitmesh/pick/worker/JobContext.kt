@@ -2,7 +2,7 @@ package cc.unitmesh.pick.worker
 
 import cc.unitmesh.pick.builder.BuilderConfig
 import cc.unitmesh.pick.builder.InstructionFileJob
-import cc.unitmesh.pick.prompt.base.CompletionBuilderType
+import cc.unitmesh.pick.prompt.completion.CompletionBuilderType
 import cc.unitmesh.quality.CodeQualityType
 
 data class JobContext(

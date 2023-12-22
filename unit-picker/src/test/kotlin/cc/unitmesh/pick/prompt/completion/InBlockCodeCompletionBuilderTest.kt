@@ -2,8 +2,7 @@ package cc.unitmesh.pick.prompt.completion;
 
 import cc.unitmesh.pick.builder.BuilderConfig
 import cc.unitmesh.pick.builder.InstructionFileJob
-import cc.unitmesh.pick.prompt.base.CodeCompletionIns
-import cc.unitmesh.pick.prompt.base.CompletionBuilderType
+import cc.unitmesh.pick.prompt.completion.base.CodeCompletionIns
 import cc.unitmesh.pick.worker.JobContext
 import chapi.domain.core.CodeFunction
 import chapi.domain.core.CodePosition

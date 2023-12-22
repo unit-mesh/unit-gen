@@ -1,8 +1,6 @@
-package cc.unitmesh.pick.prompt.base
+package cc.unitmesh.pick.prompt.completion
 
-import cc.unitmesh.pick.prompt.completion.AfterBlockCodeCompletionBuilder
-import cc.unitmesh.pick.prompt.completion.InBlockCodeCompletionBuilder
-import cc.unitmesh.pick.prompt.completion.InlineCodeCompletionBuilder
+import cc.unitmesh.pick.prompt.completion.base.CompletionBuilder
 import cc.unitmesh.pick.worker.JobContext
 import kotlinx.serialization.SerializationException
 

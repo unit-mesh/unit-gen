@@ -1,8 +1,7 @@
 package cc.unitmesh.pick.prompt.completion
 
-import cc.unitmesh.pick.prompt.base.CodeCompletionIns
-import cc.unitmesh.pick.prompt.base.CompletionBuilder
-import cc.unitmesh.pick.prompt.base.CompletionBuilderType
+import cc.unitmesh.pick.prompt.completion.base.CodeCompletionIns
+import cc.unitmesh.pick.prompt.completion.base.CompletionBuilder
 import cc.unitmesh.pick.worker.JobContext
 import chapi.domain.core.CodeFunction
 
