@@ -39,37 +39,38 @@ class TestFrameworkIdentifier(val language: String, val dependencies: List<Compo
         )
     }
 
+    private val javaTestFrameworkMap: Map<String, String> = mapOf(
+        "junit:junit" to "junit",
+        "org.testng:testng" to "testng",
+        "org.spockframework:spock-core" to "spock",
+        "io.cucumber:cucumber-java" to "cucumber",
+        "com.intuit.karate:karate-junit5" to "karate-junit5",
+        "org.jbehave:jbehave-core" to "jbehave",
+        "org.jgiven:jgiven-junit5" to "jgiven-junit5",
+        "org.concordion:concordion" to "concordion",
+        "org.junit.jupiter:junit-jupiter" to "junit5",
+        "org.assertj:assertj-core" to "assertj",
+        "org.hamcrest:hamcrest" to "hamcrest",
+        "com.google.truth:truth" to "truth",
+        "org.easytesting:fest-assert" to "fest",
+        "org.easetech:easytest-core" to "easytest",
+        "org.jmockit:jmockit" to "jmockit",
+        "org.mockito:mockito-core" to "mockito",
+        "org.powermock:powermock-core" to "powermock",
+        "io.mockk:mockk" to "mockk",
+        "com.github.tomakehurst:wiremock" to "wiremock",
+        "org.springframework.boot:spring-boot-starter-test" to "spring-boot-starter-test"
+    )
+    private val javaFrameworkList = javaTestFrameworkMap.keys.toList()
 
     private fun identifyJava(): List<String> {
         val testFrameworks = mutableListOf<String>()
-        // junit, testng, spock, cucumber, karate, jbehave, jgiven, concordion, junit5, test, assertj, hamcrest, truth, fest, easytest, jmockit, mockito, powermock, mockk, wiremock, rest-assured, restassured, res
-        val frameworkDepName = listOf(
-            "junit:junit",
-            "org.testng:testng",
-            "org.spockframework:spock-core",
-            "io.cucumber:cucumber-java",
-            "com.intuit.karate:karate-junit5",
-            "org.jbehave:jbehave-core",
-            "org.jgiven:jgiven-junit5",
-            "org.concordion:concordion",
-            "org.junit.jupiter:junit-jupiter",
-            "org.assertj:assertj-core",
-            "org.hamcrest:hamcrest",
-            "com.google.truth:truth",
-            "org.easytesting:fest-assert",
-            "org.easetech:easytest-core",
-            "org.jmockit:jmockit",
-            "org.mockito:mockito-core",
-            "org.powermock:powermock-core",
-            "io.mockk:mockk",
-            "com.github.tomakehurst:wiremock",
-            "org.springframework.boot:spring-boot-starter-test",
-        )
 
         for (dep in dependencies) {
-            frameworkDepName.contains(dep.depGroup + ":" + dep.depArtifact).let {
+            val element = dep.depGroup + ":" + dep.depArtifact
+            javaFrameworkList.contains(element).let {
                 if (it) {
-                    testFrameworks.add(dep.depName)
+                    testFrameworks.add(javaTestFrameworkMap[element]!!)
                 }
             }
         }

@@ -1,5 +1,6 @@
 package cc.unitmesh.pick.worker;
 
+import io.kotest.matchers.shouldBe
 import org.archguard.scanner.core.sca.CompositionDependency
 import org.junit.jupiter.api.Test
 
@@ -19,12 +20,7 @@ class TestFrameworkIdentifierTest {
         // when
         val identifiedFrameworks = testFrameworkIdentifier.identify()
 
-        // then
-        val expectedFrameworks = listOf(
-            "junit:junit", "org.mockito:mockito-core",
-            "com.intuit.karate:karate-junit5"
-        )
-        assert(identifiedFrameworks == expectedFrameworks)
+        identifiedFrameworks shouldBe listOf("junit5", "mockito", "karate-junit5")
     }
 
     @Test
