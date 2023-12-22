@@ -6,7 +6,7 @@ import chapi.domain.core.CodeDataStruct
 import chapi.domain.core.CodeFunction
 import chapi.domain.core.CodeImport
 
-class JavaTestCodeHelper(val context: JobContext) : UnitTestService {
+class JavaTestCodeService(val context: JobContext) : UnitTestService {
     override fun findUnderTestFile(dataStruct: CodeDataStruct): List<CodeDataStruct> {
         val fileTree = context.fileTree
         val testClass = dataStruct.NodeName.removeSuffix("Test").removeSuffix("Tests")

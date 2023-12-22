@@ -13,7 +13,7 @@ class JavaTestCodeHelperTest {
         // given
         val fileTree = hashMapOf<String, InstructionFileJob>()
         val context = JobContext.default(fileTree = fileTree)
-        val codeHelper = JavaTestCodeHelper(context)
+        val codeHelper = JavaTestCodeService(context)
         val dataStruct = CodeDataStruct(NodeName = "TestClass")
 
         // when
@@ -45,7 +45,7 @@ class JavaTestCodeHelperTest {
             )
         )
         val context = JobContext.default(fileTree = fileTree)
-        val codeHelper = JavaTestCodeHelper(context)
+        val codeHelper = JavaTestCodeService(context)
         val dataStruct = CodeDataStruct(NodeName = "TestClassTest")
 
         // when
@@ -61,7 +61,7 @@ class JavaTestCodeHelperTest {
         // given
         val fileTree = hashMapOf<String, InstructionFileJob>()
         val context = JobContext.default(fileTree = fileTree)
-        val codeHelper = JavaTestCodeHelper(context)
+        val codeHelper = JavaTestCodeService(context)
         val dataStruct = CodeDataStruct(Imports = emptyList())
 
         // when
@@ -85,7 +85,7 @@ class JavaTestCodeHelperTest {
             )
         )
         val context = JobContext.default(fileTree = fileTree)
-        val codeHelper = JavaTestCodeHelper(context)
+        val codeHelper = JavaTestCodeService(context)
         val dataStruct = CodeDataStruct(
             Imports = listOf(
                 CodeImport(Source = "Import1"),
@@ -130,7 +130,7 @@ class JavaTestCodeHelperTest {
             )
         )
         val context = JobContext.default(fileTree = fileTree)
-        val codeHelper = JavaTestCodeHelper(context)
+        val codeHelper = JavaTestCodeService(context)
         val dataStruct = CodeDataStruct(
             Imports = listOf(
                 CodeImport(Source = "File1.kt"),
@@ -152,7 +152,7 @@ class JavaTestCodeHelperTest {
         // given
         val fileTree = hashMapOf<String, InstructionFileJob>()
         val context = JobContext.default(fileTree = fileTree)
-        val codeHelper = JavaTestCodeHelper(context)
+        val codeHelper = JavaTestCodeService(context)
         val codeFunction = CodeFunction(ReturnType = "ReturnType")
         val dataStruct = CodeDataStruct(Imports = emptyList())
 
@@ -177,7 +177,7 @@ class JavaTestCodeHelperTest {
             )
         )
         val context = JobContext.default(fileTree = fileTree)
-        val codeHelper = JavaTestCodeHelper(context)
+        val codeHelper = JavaTestCodeService(context)
         val codeFunction = CodeFunction(
             ReturnType = "ReturnType",
             Parameters = listOf(
@@ -229,7 +229,7 @@ class JavaTestCodeHelperTest {
             )
         )
         val context = JobContext.default(fileTree = fileTree)
-        val codeHelper = JavaTestCodeHelper(context)
+        val codeHelper = JavaTestCodeService(context)
         val codeFunction = CodeFunction(
             ReturnType = "Class3",
             Parameters = listOf(
@@ -287,7 +287,7 @@ class JavaTestCodeHelperTest {
             CodeImport(Source = "file2.Class2")
         )
         val returnType = "Class1"
-        val codeHelper = JavaTestCodeHelper(JobContext.default(fileTree = fileTree))
+        val codeHelper = JavaTestCodeService(JobContext.default(fileTree = fileTree))
 
         // when
         val result = codeHelper.filterDs(imports, returnType, fileTree)
