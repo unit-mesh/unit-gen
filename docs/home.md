@@ -69,18 +69,11 @@ AutoDev prompt template example:
 Unit Picker prompt should keep the same structure as the AutoDev prompt. Prompt example:
 
 ```kotlin
-Instruction(
-    instruction = "Complete ${it.language} code, return rest code, no explaining",
-    output = it.output,
-    input = """
-    |```${it.language}
-    |${it.relatedCode}
-    |```
-    |
-    |Code:
-    |```${it.language}
-    |${it.beforeCursor}
-    |```""".trimMargin()
+val input = "$relatedCode\n\nCode:\n```${language}\n$beforeCursor\n```"
+return Instruction(
+  instruction = "Complete $language code, return rest code, no explaining",
+  output = output,
+  input = input
 )
 ```
 

@@ -38,7 +38,6 @@ instructionConfig:
 ### Step 2. run Evaluate CLI (Optional)
 
 1.config the `unit-eval.yml` file and `connection.yml`
-
 2.run eval: `java -jar unit-eval.jar`
 
 PS：Connection config: [https://framework.unitmesh.cc/prompt-script/connection-config](https://framework.unitmesh.cc/prompt-script/connection-config)
@@ -51,10 +50,11 @@ see in [config-example](examples/project-example/)
 
 ```groovy
 dependencies {
-    implementation("cc.unitmesh:unit-picker:0.1.5")
-    implementation("cc.unitmesh:code-quality:0.1.5")
+    implementation("cc.unitmesh:unit-picker:0.1.7")
+    implementation("cc.unitmesh:code-quality:0.1.7")
 }
 ```
+
 2.write code
 ```java
 public class App {
