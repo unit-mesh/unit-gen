@@ -1,6 +1,6 @@
 package cc.unitmesh.runner
 
-import cc.unitmesh.pick.SimpleCodePicker
+import cc.unitmesh.pick.SingleProjectCodePicker
 import cc.unitmesh.pick.option.MAX_COMPLETION_EACH_FILE
 import cc.unitmesh.pick.option.InsPickerOption
 import cc.unitmesh.core.Instruction
@@ -57,7 +57,7 @@ class PickerCommand : CliktCommand() {
                         maxLineInCode = maxLineInCode,
                     )
 
-                    val content = SimpleCodePicker(insPickerOption).execute()
+                    val content = SingleProjectCodePicker(insPickerOption).execute()
                     ProcessorResult(
                         repository = code.repository,
                         content = content,

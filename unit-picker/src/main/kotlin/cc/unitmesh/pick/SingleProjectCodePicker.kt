@@ -24,39 +24,33 @@ import java.nio.file.Path
  *
  * @constructor Creates a `SimpleCodePicker` instance with the provided configuration.
  */
-class SimpleCodePicker(private val config: InsPickerOption) {
+class SingleProjectCodePicker(private val config: InsPickerOption) {
     private val logger = org.slf4j.LoggerFactory.getLogger(javaClass)
 
     /**
-     * Executes the code config with the provided configuration.
+     * Executes the code picker with the provided configuration.
      *
      * This method performs the following steps:
      *
      * 1. Checks out the code from the specified URL, branch, and base directory using the `checkoutCode` function.
-     * 2. Creates an instance of the `LanguageWorker` class.
-     * 3. Creates an instance of the `WorkerManager` class and initializes it with the provided builder types.
-     * 4. Creates a channel for file jobs.
-     * 5. Initializes an empty list for storing instructions.
-     * 6. Starts two coroutines to process the code directory:
-     *    - The first coroutine uses the `PickDirectoryWalker` class to recursively walk through the code directory and
+     * 2. Initializes the necessary instances for code processing, such as `LanguageWorker` and `WorkerManager`.
+     * 3. Creates a channel to handle file jobs and initializes an empty list for storing instructions.
+     * 4. Starts two coroutines to process the code directory:
+     *    - The first coroutine recursively walks through the code directory using the `PickDirectoryWalker` class and
      *      sends each file job to the file job channel.
-     *    - The second coroutine processes each file job received from the channel using the `languageWorker` and adds
-     *      the resulting instruction to the `workerManager`.
-     * 7. Waits for both coroutines to finish.
-     * 8. Returns the list of instructions stored in the `summary` variable.
+     *    - The second coroutine processes each file job received from the channel using the `languageWorker`,
+     *      generating instructions and adds them to the `workerManager`.
+     * 5. Waits for both coroutines to finish.
+     * 6. Returns the list of instructions stored in the `summary` variable.
      *
      * Usage:
      *
      * ```kotlin
-     * val codePicker = CodePicker()
-     * codePicker.config.url = "https://example.com/repository.git"
-     * codePicker.config.branch = "main"
-     * codePicker.config.baseDir = "/path/to/code"
+     * val codePicker = SingleProjectCodePicker(url = "https://example.com/repository.git")
      * val instructions = codePicker.execute()
      * ```
      *
      * @return The list of instructions obtained from processing the code directory.
-     *
      * @throws InterruptedException if the execution is interrupted.
      * @throws IOException if an I/O error occurs during code checkout or processing.
      */
@@ -66,10 +60,11 @@ class SimpleCodePicker(private val config: InsPickerOption) {
             Files.createDirectories(tempGitDir)
         }
 
-        val codeDir = GitUtil.checkoutCode(config.url, config.branch, tempGitDir, config.gitDepth)
+        val codeDir = GitUtil
+            .checkoutCode(config.url, config.branch, tempGitDir, config.gitDepth)
             .toFile().canonicalFile
 
-        logger.info("start config")
+        logger.info("start walk $codeDir")
 
         val languageWorker = LanguageWorker()
         val workerManager = WorkerManager(
@@ -108,6 +103,8 @@ class SimpleCodePicker(private val config: InsPickerOption) {
             }
 
         }.join()
+
+        logger.info("finish walk $codeDir")
 
         return@coroutineScope summary
     }
