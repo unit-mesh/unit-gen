@@ -3,6 +3,7 @@ package cc.unitmesh.pick
 import cc.unitmesh.pick.worker.job.InstructionFileJob
 import cc.unitmesh.pick.option.InsPickerOption
 import cc.unitmesh.core.Instruction
+import cc.unitmesh.pick.ext.GitUtil
 import cc.unitmesh.pick.ext.PickDirectoryWalker
 import cc.unitmesh.pick.option.InsQualityThreshold
 import cc.unitmesh.pick.worker.WorkerContext
@@ -10,15 +11,10 @@ import cc.unitmesh.pick.worker.WorkerManager
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
-import org.archguard.action.checkout.GitSourceSettings
-import org.archguard.action.checkout.executeGitCheckout
 import org.archguard.scanner.analyser.count.FileJob
 import org.archguard.scanner.analyser.count.LanguageWorker
 import java.nio.file.Files
 import java.nio.file.Path
-import kotlin.io.path.absolutePathString
-
-interface CodePicker
 
 /**
  * The `SimpleCodePicker` class is responsible for executing the `PickerOption` configuration and obtaining a list of
@@ -28,7 +24,9 @@ interface CodePicker
  *
  * @constructor Creates a `SimpleCodePicker` instance with the provided configuration.
  */
-class SimpleCodePicker(private val config: InsPickerOption) : CodePicker {
+class SimpleCodePicker(private val config: InsPickerOption) {
+    private val logger = org.slf4j.LoggerFactory.getLogger(javaClass)
+
     /**
      * Executes the code config with the provided configuration.
      *
@@ -68,7 +66,7 @@ class SimpleCodePicker(private val config: InsPickerOption) : CodePicker {
             Files.createDirectories(tempGitDir)
         }
 
-        val codeDir = checkoutCode(config.url, config.branch, tempGitDir, config.gitDepth)
+        val codeDir = GitUtil.checkoutCode(config.url, config.branch, tempGitDir, config.gitDepth)
             .toFile().canonicalFile
 
         logger.info("start config")
@@ -113,68 +111,5 @@ class SimpleCodePicker(private val config: InsPickerOption) : CodePicker {
 
         return@coroutineScope summary
     }
-
-    companion object {
-        private val logger = org.slf4j.LoggerFactory.getLogger(javaClass)
-
-        private val gitUrlRegex =
-            """(git@|http://|https://)((?<host>[\w\.@]+)(/|:))(?<owner>[\w,\-\_]+)/(?<repo>[\w,\-,._]+)"""
-                .toRegex()
-
-        /**
-         * Convert git url to path
-         *
-         * for example:
-         *
-         * - `https://github.com/unit-mesh/unit-pick` tobe `github.com/unit-mesh/unit-pick`
-         * - `git://github.com/unit-mesh/unit-pick` tobe `github.com/unit-mesh/unit-pick`
-         * - `git://github.com/unit-mesh/unit-pick.git` tobe `github.com/unit-mesh/unit-pick`
-         * - `http://github.com/unit-mesh/unit-pick` tobe `github.com/unit-mesh/unit-pick`
-         *
-         */
-        fun gitUrlToPath(url: String): String {
-            val trimmedUrl = url.trim()
-                .removeSuffix("/")
-                .removeSuffix(".git")
-
-            val matchResult = gitUrlRegex.find(trimmedUrl) ?: throw IllegalArgumentException("invalid git url: $url")
-
-            val host = matchResult.groups["host"]!!.value
-            val owner = matchResult.groups["owner"]!!.value
-            val repo = matchResult.groups["repo"]!!.value
-
-            return "$host/$owner/$repo"
-        }
-
-        fun checkoutCode(url: String, branch: String, baseDir: Path, depth: Int): Path {
-            if (!gitUrlRegex.matches(url)) {
-                return Path.of(url)
-            }
-
-            val gitDir = gitUrlToPath(url)
-            val targetDir = baseDir.resolve(gitDir)
-            logger.info("targetDir: $targetDir")
-
-            if (targetDir.toFile().exists()) {
-                logger.info("targetDir exists: $targetDir")
-                return targetDir
-            }
-
-            val settings = GitSourceSettings(
-                repository = url,
-                branch = branch,
-                workdir = targetDir.parent.absolutePathString(),
-                fetchDepth = depth
-            )
-
-            try {
-                Files.createDirectories(targetDir.parent)
-            } catch (e: Exception) {
-                logger.info("create dir failed: ${targetDir.parent}")
-            }
-
-            executeGitCheckout(settings)
-            return targetDir
-        }
-    }
 }
+
