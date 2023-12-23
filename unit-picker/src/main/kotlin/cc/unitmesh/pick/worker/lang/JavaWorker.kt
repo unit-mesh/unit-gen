@@ -8,7 +8,7 @@ import cc.unitmesh.pick.worker.job.JobContext
 import cc.unitmesh.core.completion.TypedIns
 import cc.unitmesh.pick.worker.WorkerContext
 import cc.unitmesh.pick.worker.base.LangWorker
-import cc.unitmesh.pick.worker.job.ProjectContext
+import cc.unitmesh.pick.project.ProjectContext
 import chapi.ast.javaast.JavaAnalyser
 import kotlinx.coroutines.coroutineScope
 import org.slf4j.Logger

@@ -1,4 +1,4 @@
-package cc.unitmesh.pick.worker.job
+package cc.unitmesh.pick.project
 
 import cc.unitmesh.core.SupportedLang
 import cc.unitmesh.pick.worker.TestFrameworkIdentifier
@@ -11,10 +11,15 @@ data class ProjectContext(
     var language: SupportedLang = SupportedLang.JAVA,
     var compositionDependency: List<CompositionDependency> = listOf(),
 ) {
-    private var testFramework: List<String> = listOf()
+    var testFrameworks: List<String>
+    var coreFrameworks: List<String>
+
+    private val testStack: TestStack by lazy {
+        ProjectLibrary.prepare(language, compositionDependency)
+    }
 
     init {
-        testFramework = TestFrameworkIdentifier(language, compositionDependency).identify()
-
+        coreFrameworks = testStack.coreFrameworks()
+        testFrameworks = testStack.testFrameworks()
     }
 }
