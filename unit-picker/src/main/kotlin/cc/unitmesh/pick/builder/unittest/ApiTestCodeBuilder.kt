@@ -12,7 +12,7 @@ class ApiTestCodeBuilder(private val context: JobContext) : TestCodeBuilder {
     }
 }
 
-class ApiTestIns(override val type: TestCodeBuilderType) : TypedTestIns {
+class ApiTestIns(override val testType: TestCodeBuilderType) : TypedTestIns() {
     override fun unique(): Instruction {
         TODO("Not yet implemented")
     }

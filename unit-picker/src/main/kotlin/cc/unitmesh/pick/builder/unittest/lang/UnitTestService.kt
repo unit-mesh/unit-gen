@@ -1,5 +1,6 @@
 package cc.unitmesh.pick.builder.unittest.lang
 
+import cc.unitmesh.core.completion.TypedIns
 import cc.unitmesh.pick.SupportedLang
 import cc.unitmesh.pick.worker.job.JobContext
 import chapi.domain.core.CodeDataStruct
@@ -53,6 +54,8 @@ interface UnitTestService {
      * @return A list of code data structures representing the relevant classes found for the given code function and data structure.
      */
     fun lookupRelevantClass(codeFunction: CodeFunction, dataStruct: CodeDataStruct): List<CodeDataStruct>
+
+    fun build(): TypedIns
 
     companion object {
         fun lookup(codeDataStruct: CodeDataStruct, job: JobContext): List<JavaTestCodeService> {
