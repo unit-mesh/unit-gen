@@ -19,5 +19,5 @@ enum class CompletionBuilderType {
     /**
      * generate full file code, like test code, class code, api code
      */
-    FULL_FILE_COMPLETION,
+    TEST_CODE_GEN,
 }

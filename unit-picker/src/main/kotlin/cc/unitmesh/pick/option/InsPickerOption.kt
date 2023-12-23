@@ -69,7 +69,7 @@ data class InsPickerOption(
         CompletionBuilderType.AFTER_BLOCK_COMPLETION,
         CompletionBuilderType.IN_BLOCK_COMPLETION,
         CompletionBuilderType.INLINE_COMPLETION,
-        CompletionBuilderType.FULL_FILE_COMPLETION,
+        CompletionBuilderType.TEST_CODE_GEN,
     ),
     /**
      * The [CodeQualityType], will be like a tree to hold the item.

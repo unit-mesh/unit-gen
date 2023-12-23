@@ -114,7 +114,9 @@ class JavaWorker(private val context: WorkerContext) : LangWorker {
             finalList[it.type] = finalList[it.type]?.plus(it) ?: listOf(it)
         }
 
-        val result = finalList.values.map { it.take(context.completionTypeSize) }.flatten()
+        val result = finalList.keys.map {
+            finalList[it]?.take(context.completionTypeSize) ?: emptyList()
+        }.flatten()
         result.map {
             instructions.add(it.unique())
             outputFile.appendText(it.toString() + "\n")

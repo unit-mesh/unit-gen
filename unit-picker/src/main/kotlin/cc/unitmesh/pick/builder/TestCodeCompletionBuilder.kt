@@ -8,7 +8,7 @@ import cc.unitmesh.pick.worker.job.JobContext
 import chapi.domain.core.CodeDataStruct
 import chapi.domain.core.CodeFunction
 
-class FullFileCodeCompletionBuilder(val context: JobContext) : CompletionBuilder {
+class TestCodeCompletionBuilder(val context: JobContext) : CompletionBuilder {
     override fun build(dataStruct: CodeDataStruct): List<TypedIns> {
         val testIns = UnitTestService.lookup(dataStruct, context).map {
             it.build(dataStruct)
