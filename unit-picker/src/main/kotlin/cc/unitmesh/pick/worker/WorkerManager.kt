@@ -60,7 +60,7 @@ class WorkerManager(private val workerContext: WorkerContext) {
      *
      * @return None.
      */
-    fun addJobByThreshold(job: InstructionFileJob) {
+    fun filterByThreshold(job: InstructionFileJob) {
         val summary = job.fileSummary
         if (!supportedExtensions.contains(summary.extension)) {
             return

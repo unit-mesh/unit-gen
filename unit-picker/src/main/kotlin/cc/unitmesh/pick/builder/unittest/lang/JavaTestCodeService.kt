@@ -12,7 +12,7 @@ class JavaTestCodeService(val context: JobContext) : UnitTestService {
         return dataStruct.NodeName.endsWith("Test") || dataStruct.NodeName.endsWith("Tests")
     }
 
-    override fun findUnderTestFile(dataStruct: CodeDataStruct): List<CodeDataStruct> {
+    fun findUnderTestFile(dataStruct: CodeDataStruct): List<CodeDataStruct> {
         val fileTree = context.fileTree
         val testClass = dataStruct.NodeName.removeSuffix("Test").removeSuffix("Tests")
 
@@ -27,7 +27,7 @@ class JavaTestCodeService(val context: JobContext) : UnitTestService {
         }
     }
 
-    override fun lookupRelevantClass(dataStruct: CodeDataStruct): List<CodeDataStruct> {
+    fun lookupRelevantClass(dataStruct: CodeDataStruct): List<CodeDataStruct> {
         val fileTree = context.fileTree
         val imports = dataStruct.Imports
         return imports.mapNotNull {
@@ -35,7 +35,7 @@ class JavaTestCodeService(val context: JobContext) : UnitTestService {
         }.flatten()
     }
 
-    override fun lookupRelevantClass(codeFunction: CodeFunction, dataStruct: CodeDataStruct): List<CodeDataStruct> {
+    fun lookupRelevantClass(codeFunction: CodeFunction, dataStruct: CodeDataStruct): List<CodeDataStruct> {
         val fileTree = context.fileTree
         val returnType = codeFunction.ReturnType
 
@@ -62,8 +62,9 @@ class JavaTestCodeService(val context: JobContext) : UnitTestService {
         }
     }.flatten()
 
-    override fun build(): TypedTestIns {
-        TODO("Not yet implemented")
+    override fun build(dataStructs: List<CodeDataStruct>): List<TypedTestIns> {
+//        TODO("Not yet implemented")
+        return listOf()
     }
 }
 
