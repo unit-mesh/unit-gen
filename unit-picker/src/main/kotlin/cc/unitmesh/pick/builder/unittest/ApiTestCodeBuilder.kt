@@ -5,9 +5,10 @@ import cc.unitmesh.core.unittest.TestCodeBuilderType
 import cc.unitmesh.core.unittest.TypedTestIns
 import cc.unitmesh.core.unittest.TestCodeBuilder
 import cc.unitmesh.pick.worker.job.JobContext
+import chapi.domain.core.CodeDataStruct
 
 class ApiTestCodeBuilder(private val context: JobContext) : TestCodeBuilder {
-    override fun build(): List<ApiTestIns> {
+    override fun build(dataStruct: CodeDataStruct, underTestFile: CodeDataStruct, relevantClasses: List<CodeDataStruct>): List<ApiTestIns> {
         TODO("Not yet implemented")
     }
 }

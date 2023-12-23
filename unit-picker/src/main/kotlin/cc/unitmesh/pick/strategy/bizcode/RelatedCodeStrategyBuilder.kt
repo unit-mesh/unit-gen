@@ -28,7 +28,7 @@ class RelatedCodeStrategyBuilder(private val context: JobContext) : CodeStrategy
 
         val codeCompletionIns = dataStructs.map { ds ->
             UnitTestService.lookup(ds, context).map {
-                it.build(dataStructs)
+                it.build(ds)
             }
             ds.Functions.map { function ->
                 builders.asSequence().map {

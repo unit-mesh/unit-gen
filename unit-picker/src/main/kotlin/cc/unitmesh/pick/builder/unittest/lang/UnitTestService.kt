@@ -1,6 +1,5 @@
 package cc.unitmesh.pick.builder.unittest.lang
 
-import cc.unitmesh.core.completion.TypedIns
 import cc.unitmesh.core.SupportedLang
 import cc.unitmesh.core.unittest.TypedTestIns
 import cc.unitmesh.pick.worker.job.JobContext
@@ -24,7 +23,7 @@ interface UnitTestService {
      */
     fun isApplicable(dataStruct: CodeDataStruct): Boolean
 
-    fun build(dataStructs: List<CodeDataStruct>): List<TypedTestIns>
+    fun build(dataStruct: CodeDataStruct): List<TypedTestIns>
 
     companion object {
         fun lookup(codeDataStruct: CodeDataStruct, job: JobContext): List<JavaTestCodeService> {
