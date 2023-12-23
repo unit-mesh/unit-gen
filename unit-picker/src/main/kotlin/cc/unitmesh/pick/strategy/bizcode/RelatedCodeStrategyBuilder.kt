@@ -1,5 +1,6 @@
 package cc.unitmesh.pick.strategy.bizcode
 
+import cc.unitmesh.core.completion.TypedIns
 import cc.unitmesh.pick.builder.completionBuilders
 import cc.unitmesh.pick.builder.ins.RelatedCodeIns
 import cc.unitmesh.pick.builder.unittest.lang.UnitTestService
@@ -10,7 +11,7 @@ import chapi.domain.core.CodeDataStruct
 
 class RelatedCodeStrategyBuilder(private val context: JobContext) : CodeStrategyBuilder {
 
-    override fun build(): List<RelatedCodeIns> {
+    override fun build(): List<TypedIns> {
         val language = context.job.fileSummary.language.lowercase()
         val container = context.job.container ?: return emptyList()
         val relatedCode = findRelatedCode(container)
@@ -27,10 +28,10 @@ class RelatedCodeStrategyBuilder(private val context: JobContext) : CodeStrategy
         val builders = completionBuilders(context.completionBuilderTypes, context)
 
         val codeCompletionIns = dataStructs.map { ds ->
-            UnitTestService.lookup(ds, context).map {
+            val blockIns = builders.asSequence().map {
                 it.build(ds)
-            }
-            ds.Functions.map { function ->
+            }.flatten()
+            val functionsIns = ds.Functions.map { function ->
                 builders.asSequence().map {
                     it.build(function)
                 }
@@ -49,6 +50,7 @@ class RelatedCodeStrategyBuilder(private val context: JobContext) : CodeStrategy
                         )
                     }.toList()
             }.flatten()
+            functionsIns + blockIns
         }.flatten()
 
         return codeCompletionIns

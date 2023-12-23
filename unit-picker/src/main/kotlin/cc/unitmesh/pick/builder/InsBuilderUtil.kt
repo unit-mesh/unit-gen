@@ -22,6 +22,7 @@ fun completionBuilder(completionBuilderType: CompletionBuilderType, context: Job
         CompletionBuilderType.INLINE_COMPLETION to InlineCodeCompletionBuilder(context),
         CompletionBuilderType.IN_BLOCK_COMPLETION to InBlockCodeCompletionBuilder(context),
         CompletionBuilderType.AFTER_BLOCK_COMPLETION to AfterBlockCodeCompletionBuilder(context),
+        CompletionBuilderType.FULL_FILE_COMPLETION to FullFileCodeCompletionBuilder(context),
     )[completionBuilderType] ?: throw SerializationException("Unknown message type: $completionBuilderType")
 }
 

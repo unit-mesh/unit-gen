@@ -7,8 +7,6 @@ import cc.unitmesh.core.unittest.TypedTestIns
 import cc.unitmesh.core.unittest.TestCodeBuilder
 import cc.unitmesh.pick.worker.job.JobContext
 import chapi.domain.core.CodeDataStruct
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
 
 class ClassTestCodeBuilder(private val context: JobContext) : TestCodeBuilder {
     /**
@@ -81,13 +79,10 @@ class ClassTestIns(
         input.append(underTestCode)
         input.append("\n```")
 
-        val instruction = Instruction(
+        return Instruction(
             instruction = "Write unit test for following code.",
             input = input.toString(),
             output = generatedCode,
         )
-
-        println("ClassTestIns: ${Json.encodeToString(instruction)}")
-        return instruction
     }
 }

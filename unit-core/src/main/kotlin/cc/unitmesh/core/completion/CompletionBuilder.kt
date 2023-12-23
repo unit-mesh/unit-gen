@@ -4,7 +4,7 @@ import chapi.domain.core.CodeDataStruct
 import chapi.domain.core.CodeFunction
 
 interface CompletionBuilder {
-    fun build(dataStruct: CodeDataStruct): List<CodeCompletionIns> {
+    fun build(dataStruct: CodeDataStruct): List<TypedIns> {
         return listOf()
     }
 

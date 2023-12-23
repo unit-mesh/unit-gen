@@ -1,7 +1,6 @@
 package cc.unitmesh.pick.strategy
 
 import cc.unitmesh.pick.strategy.base.CodeStrategyBuilder
-import cc.unitmesh.core.completion.TypedIns
 import cc.unitmesh.pick.strategy.bizcode.RelatedCodeStrategyBuilder
 import cc.unitmesh.pick.strategy.bizcode.SimilarChunksStrategyBuilder
 import cc.unitmesh.pick.worker.job.JobContext
