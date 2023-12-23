@@ -1,5 +1,6 @@
 package cc.unitmesh.pick.worker;
 
+import cc.unitmesh.pick.ext.from
 import io.kotest.matchers.collections.shouldContain
 import io.kotest.matchers.shouldBe
 import org.archguard.scanner.core.sca.CompositionDependency
@@ -12,9 +13,9 @@ class TestFrameworkIdentifierTest {
         // given
         val language = "java"
         val dependencies = listOf(
-            CompositionDependency.default("junit:junit", "org.junit.jupiter", "junit-jupiter"),
-            CompositionDependency.default("org.mockito:mockito-core", "org.mockito", "mockito-core"),
-            CompositionDependency.default("com.intuit.karate:karate-junit5", "com.intuit.karate", "karate-junit5")
+            CompositionDependency.from("junit:junit", "org.junit.jupiter", "junit-jupiter"),
+            CompositionDependency.from("org.mockito:mockito-core", "org.mockito", "mockito-core"),
+            CompositionDependency.from("com.intuit.karate:karate-junit5", "com.intuit.karate", "karate-junit5")
         )
         val testFrameworkIdentifier = TestFrameworkIdentifier(language, dependencies)
 
@@ -29,9 +30,9 @@ class TestFrameworkIdentifierTest {
         // given
         val language = "typescript"
         val dependencies = listOf(
-            CompositionDependency.default("jest", "some.group", "jest"),
-            CompositionDependency.default("mocha", "another.group", "mocha"),
-            CompositionDependency.default("jasmine", "third.group", "jasmine")
+            CompositionDependency.from("jest", "some.group", "jest"),
+            CompositionDependency.from("mocha", "another.group", "mocha"),
+            CompositionDependency.from("jasmine", "third.group", "jasmine")
         )
         val testFrameworkIdentifier = TestFrameworkIdentifier(language, dependencies)
 
@@ -48,8 +49,8 @@ class TestFrameworkIdentifierTest {
         // given
         val language = "unknown"
         val dependencies = listOf(
-            CompositionDependency.default("dummy", "some.group", "dummy"),
-            CompositionDependency.default("test", "another.group", "test")
+            CompositionDependency.from("dummy", "some.group", "dummy"),
+            CompositionDependency.from("test", "another.group", "test")
         )
         val testFrameworkIdentifier = TestFrameworkIdentifier(language, dependencies)
 
@@ -64,7 +65,7 @@ class TestFrameworkIdentifierTest {
         // given
         val language = "java"
         val dependencies = listOf(
-            CompositionDependency.default("org.springframework.boot:spring-boot-starter-test", "org.springframework.boot", "spring-boot-starter-test"),
+            CompositionDependency.from("org.springframework.boot:spring-boot-starter-test", "org.springframework.boot", "spring-boot-starter-test"),
         )
         val testFrameworkIdentifier = TestFrameworkIdentifier(language, dependencies)
 
@@ -77,22 +78,3 @@ class TestFrameworkIdentifierTest {
     }
 }
 
-private fun CompositionDependency.Companion.default(
-    name: String,
-    group: String,
-    artifactId: String,
-): CompositionDependency {
-    return CompositionDependency(
-        name = name,
-        depName = name,
-        depGroup = group,
-        depArtifact = artifactId,
-        packageManager = "maven",
-        depVersion = "1.0.0",
-        version = "1.0.0",
-        path = "some/path",
-        depScope = "compile",
-        id = "some-id",
-        parentId = "some-parent-id",
-    )
-}
