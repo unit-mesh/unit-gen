@@ -1,4 +1,4 @@
-package cc.unitmesh.pick.prompt.ins
+package cc.unitmesh.pick.builder.ins
 
 import cc.unitmesh.pick.ext.toUml
 import cc.unitmesh.core.completion.CompletionBuilderType

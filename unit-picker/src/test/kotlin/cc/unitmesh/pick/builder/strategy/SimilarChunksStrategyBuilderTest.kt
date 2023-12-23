@@ -1,23 +1,21 @@
-package cc.unitmesh.pick.prompt.strategy
+package cc.unitmesh.pick.builder.strategy;
 
 import cc.unitmesh.pick.option.InsOutputConfig
 import cc.unitmesh.pick.worker.job.InstructionFileJob
-import cc.unitmesh.pick.ext.toUml
 import cc.unitmesh.core.completion.CompletionBuilderType
-import cc.unitmesh.pick.strategy.bizcode.RelatedCodeStrategyBuilder
+import cc.unitmesh.pick.strategy.bizcode.SimilarChunksStrategyBuilder
 import cc.unitmesh.pick.worker.job.JobContext
 import cc.unitmesh.quality.CodeQualityType
 import chapi.ast.javaast.JavaAnalyser
-import chapi.domain.core.CodeDataStruct
+import io.kotest.matchers.shouldBe
 import org.archguard.scanner.analyser.count.FileJob
-import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import java.io.File
 
-class RelatedCodeStrategyBuilderTest {
 
+class SimilarChunksStrategyBuilderTest {
     @Test
-    fun shouldReturnEmptyWhenHasQualityIssue() {
+    fun shouldReturnEmptySimilarChunk() {
         val code = """package com.example.springboot;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HelloController {
 
-	@GetMapping("/blog/get")
+	@GetMapping("/blog")
 	public String index() {
 		return "Greetings from Spring Boot!";
 	}
@@ -48,52 +46,14 @@ public class HelloController {
             completionBuilderTypes = listOf(CompletionBuilderType.IN_BLOCK_COMPLETION),
             maxCompletionInOneFile = 3
         )
-        val builder = RelatedCodeStrategyBuilder(context)
+        val builder = SimilarChunksStrategyBuilder(context)
         val result = builder.build()
 
-        assertEquals(0, result.size)
+        result.size shouldBe 0
     }
 
     @Test
-    fun shouldReturnOneItemWhenNoQualityIssue() {
-        val code = """package com.example.springboot;
-
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-@RestController
-public class HelloController {
-
-	@GetMapping("/")
-	public String index() {
-		return "Greetings from Spring Boot!";
-	}
-
-}"""
-        val container = JavaAnalyser().analysis(code, "HelloController.java")
-        val job = InstructionFileJob(
-            FileJob(
-            ),
-            codeLines = code.lines(),
-            code = code,
-            container = container
-        )
-        val context = JobContext(
-            job = job,
-            qualityTypes = listOf(CodeQualityType.JavaController),
-            fileTree = hashMapOf("" to job),
-            insOutputConfig = InsOutputConfig(),
-            completionBuilderTypes = listOf(CompletionBuilderType.IN_BLOCK_COMPLETION),
-            maxCompletionInOneFile = 3
-        )
-        val builder = RelatedCodeStrategyBuilder(context)
-        val result = builder.build()
-
-        assertEquals(1, result.size)
-    }
-
-    @Test
-    fun shouldReturnEmptyWhenNoImports() {
+    fun shouldBeSimilarChunkByPackageName() {
         val model = File(this.javaClass.classLoader.getResource("related/BlogPost.java")!!.file).readText()
         val modelContainer = JavaAnalyser().analysis(model, "BlogPost.java")
         val repository = File(this.javaClass.classLoader.getResource("related/BlogRepository.java")!!.file).readText()
@@ -134,27 +94,19 @@ public class HelloController {
             maxCompletionInOneFile = 3
         )
 
-        val builder = RelatedCodeStrategyBuilder(context)
+        val builder = SimilarChunksStrategyBuilder(context)
         val result = builder.build()
 
-        assertEquals(result.size, 4)
-        val first = result.first()
+        result.size shouldBe 3
 
-        assertEquals(
-            first.relatedCode.joinToString("\n", transform = CodeDataStruct::toUml), """// class BlogPost {
-//    id: Long
-//    title: String
-//    content: String
-//    author: String
-// 
-//    'getter/setter: setAuthor
-// 
-//  }
-// 
-// class BlogRepository : CrudRepository<BlogPost,Long> {
-// 
-//  }
-// """
-        )
+        result.first().similarChunks shouldBe """
+            // Compare this snippet from cc.unitmesh.testng.repository.BlogRepository
+            // 
+            // @Repository
+            // public interface BlogRepository extends CrudRepository<BlogPost, Long> {
+            // 
+            // }
+            //
+            """.trimIndent()
     }
 }

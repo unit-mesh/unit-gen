@@ -1,4 +1,4 @@
-package cc.unitmesh.pick.strategy.unittest.lang
+package cc.unitmesh.pick.builder.unittest.lang
 
 import chapi.domain.core.CodeDataStruct
 import chapi.domain.core.CodeFunction

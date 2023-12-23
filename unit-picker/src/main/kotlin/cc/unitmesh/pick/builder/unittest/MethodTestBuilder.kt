@@ -1,18 +1,19 @@
-package cc.unitmesh.pick.strategy.unittest
+package cc.unitmesh.pick.builder.unittest
 
 import cc.unitmesh.core.Instruction
 import cc.unitmesh.core.unittest.TestCodeBuilderType
 import cc.unitmesh.core.unittest.TypedTestIns
-import cc.unitmesh.pick.strategy.base.TestStrategyBuilder
+import cc.unitmesh.pick.strategy.base.TestBuilder
 import cc.unitmesh.pick.worker.job.JobContext
 
-class ApiTestStrategyBuilder(private val context: JobContext) : TestStrategyBuilder {
-    override fun build(): List<ApiTestIns> {
+class MethodTestBuilder(private val context: JobContext) : TestBuilder {
+    override fun build(): List<MethodTestIns> {
         TODO("Not yet implemented")
     }
+
 }
 
-class ApiTestIns(override val type: TestCodeBuilderType) : TypedTestIns {
+class MethodTestIns(override val type: TestCodeBuilderType) : TypedTestIns {
     override fun unique(): Instruction {
         TODO("Not yet implemented")
     }

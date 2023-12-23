@@ -1,4 +1,4 @@
-package cc.unitmesh.pick.prompt.completion;
+package cc.unitmesh.pick.builder.bizcode;
 
 import cc.unitmesh.pick.option.InsOutputConfig
 import cc.unitmesh.pick.worker.job.InstructionFileJob
@@ -11,10 +11,10 @@ import io.kotest.matchers.shouldBe
 import org.archguard.scanner.analyser.count.FileJob
 import org.junit.jupiter.api.Test
 
-class InBlockCodeCompletionBuilderTest {
-
+class InlineCodeCompletionBuilderTest {
     @Test
-    fun should_return_single_CodeCompletionIns() {
+    fun should_return_list_of_code_completion_ins() {
+        // Given
         val codeFunction = CodeFunction(
             Position = CodePosition(1, 0, 3)
         )
@@ -30,17 +30,19 @@ class InBlockCodeCompletionBuilderTest {
             code = codeLines.joinToString("\n")
         )
         val jobContext = JobContext(job, emptyList(), hashMapOf("" to job), InsOutputConfig(), emptyList(), 3)
-        val builder = InBlockCodeCompletionBuilder(jobContext)
+        val builder = InlineCodeCompletionBuilder(jobContext)
 
-        // when
+        // When
         val result = builder.build(codeFunction)
 
-        // then
+        // Then
         result.size shouldBe 1
-        result[0] shouldBe CodeCompletionIns(
-            beforeCursor = codeLines.subList(0, 1).joinToString("\n"),
-            afterCursor = codeLines.subList(1, 3).joinToString("\n"),
-            completionBuilderType = CompletionBuilderType.IN_BLOCK_COMPLETION
+        result shouldBe listOf(
+            CodeCompletionIns(
+                beforeCursor = "println(\"",
+                afterCursor = "Hello, world!\")",
+                completionBuilderType = CompletionBuilderType.INLINE_COMPLETION
+            )
         )
     }
 }

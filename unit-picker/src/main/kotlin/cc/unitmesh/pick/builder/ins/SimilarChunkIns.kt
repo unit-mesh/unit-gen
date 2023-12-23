@@ -1,4 +1,4 @@
-package cc.unitmesh.pick.prompt.ins
+package cc.unitmesh.pick.builder.ins
 
 import cc.unitmesh.core.completion.CompletionBuilderType
 import cc.unitmesh.core.Instruction

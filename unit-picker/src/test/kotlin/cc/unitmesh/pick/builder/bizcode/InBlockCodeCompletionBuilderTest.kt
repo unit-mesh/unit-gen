@@ -1,4 +1,4 @@
-package cc.unitmesh.pick.prompt.completion;
+package cc.unitmesh.pick.builder.bizcode;
 
 import cc.unitmesh.pick.option.InsOutputConfig
 import cc.unitmesh.pick.worker.job.InstructionFileJob
@@ -11,10 +11,10 @@ import io.kotest.matchers.shouldBe
 import org.archguard.scanner.analyser.count.FileJob
 import org.junit.jupiter.api.Test
 
-class AfterBlockCodeCompletionBuilderTest {
+class InBlockCodeCompletionBuilderTest {
 
     @Test
-    fun should_success_split_after_block_code() {
+    fun should_return_single_CodeCompletionIns() {
         val codeFunction = CodeFunction(
             Position = CodePosition(1, 0, 3)
         )
@@ -30,16 +30,17 @@ class AfterBlockCodeCompletionBuilderTest {
             code = codeLines.joinToString("\n")
         )
         val jobContext = JobContext(job, emptyList(), hashMapOf("" to job), InsOutputConfig(), emptyList(), 3)
-        val builder = AfterBlockCodeCompletionBuilder(jobContext)
+        val builder = InBlockCodeCompletionBuilder(jobContext)
 
+        // when
         val result = builder.build(codeFunction)
 
-        result shouldBe listOf(
-            CodeCompletionIns(
-                beforeCursor = codeLines.subList(0, 3).joinToString("\n"),
-                afterCursor = "// other code here",
-                completionBuilderType = CompletionBuilderType.AFTER_BLOCK_COMPLETION
-            )
+        // then
+        result.size shouldBe 1
+        result[0] shouldBe CodeCompletionIns(
+            beforeCursor = codeLines.subList(0, 1).joinToString("\n"),
+            afterCursor = codeLines.subList(1, 3).joinToString("\n"),
+            completionBuilderType = CompletionBuilderType.IN_BLOCK_COMPLETION
         )
     }
 }

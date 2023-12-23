@@ -1,4 +1,4 @@
-package cc.unitmesh.pick.prompt.completion
+package cc.unitmesh.pick.builder.bizcode
 
 import cc.unitmesh.core.completion.CodeCompletionIns
 import cc.unitmesh.core.completion.CompletionBuilder

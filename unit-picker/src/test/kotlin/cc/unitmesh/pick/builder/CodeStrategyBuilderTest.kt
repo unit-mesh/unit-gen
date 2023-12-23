@@ -1,4 +1,4 @@
-package cc.unitmesh.pick.prompt;
+package cc.unitmesh.pick.builder;
 
 
 import org.junit.jupiter.api.Test

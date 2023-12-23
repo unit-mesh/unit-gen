@@ -1,7 +1,7 @@
 package cc.unitmesh.pick.strategy.bizcode
 
-import cc.unitmesh.pick.prompt.completion.completionBuilders
-import cc.unitmesh.pick.prompt.ins.RelatedCodeIns
+import cc.unitmesh.pick.builder.completionBuilders
+import cc.unitmesh.pick.builder.ins.RelatedCodeIns
 import cc.unitmesh.pick.strategy.base.CodeStrategyBuilder
 import cc.unitmesh.pick.worker.job.JobContext
 import chapi.domain.core.CodeContainer
