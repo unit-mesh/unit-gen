@@ -1,5 +1,6 @@
 package cc.unitmesh.pick.worker;
 
+import io.kotest.matchers.collections.shouldContain
 import io.kotest.matchers.shouldBe
 import org.archguard.scanner.core.sca.CompositionDependency
 import org.junit.jupiter.api.Test
@@ -57,6 +58,22 @@ class TestFrameworkIdentifierTest {
 
         // then
         assert(identifiedFrameworks.isEmpty())
+    }
+    @Test
+    fun shouldReturnMultipleForSpringTest() {
+        // given
+        val language = "java"
+        val dependencies = listOf(
+            CompositionDependency.default("org.springframework.boot:spring-boot-starter-test", "org.springframework.boot", "spring-boot-starter-test"),
+        )
+        val testFrameworkIdentifier = TestFrameworkIdentifier(language, dependencies)
+
+        // when
+        val identifiedFrameworks = testFrameworkIdentifier.identify()
+
+        // then
+        identifiedFrameworks shouldContain "spring-test"
+        identifiedFrameworks shouldContain "junit"
     }
 }
 

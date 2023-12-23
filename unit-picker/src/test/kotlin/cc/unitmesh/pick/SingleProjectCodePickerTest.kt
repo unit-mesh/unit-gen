@@ -20,9 +20,10 @@ class SingleProjectCodePickerTest {
             )
         )
 
+        val outputFile = File("test.jsonl")
         runBlocking {
             val output: MutableList<Instruction> = picker.execute()
-            File("test.jsonl").writeText(output.joinToString("\n") {
+            outputFile.writeText(output.joinToString("\n") {
                 Json.encodeToString(it)
             })
         }
