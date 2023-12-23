@@ -3,13 +3,13 @@ package cc.unitmesh.pick.builder
 import cc.unitmesh.core.completion.CompletionBuilder
 import cc.unitmesh.core.completion.CompletionBuilderType
 import cc.unitmesh.core.unittest.TestCodeBuilderType
-import cc.unitmesh.pick.strategy.base.TestBuilder
+import cc.unitmesh.core.unittest.TestCodeBuilder
 import cc.unitmesh.pick.builder.bizcode.AfterBlockCodeCompletionBuilder
 import cc.unitmesh.pick.builder.bizcode.InBlockCodeCompletionBuilder
 import cc.unitmesh.pick.builder.bizcode.InlineCodeCompletionBuilder
-import cc.unitmesh.pick.builder.unittest.ApiTestBuilder
-import cc.unitmesh.pick.builder.unittest.ClassTestBuilder
-import cc.unitmesh.pick.builder.unittest.MethodTestBuilder
+import cc.unitmesh.pick.builder.unittest.ApiTestCodeBuilder
+import cc.unitmesh.pick.builder.unittest.ClassTestCodeBuilder
+import cc.unitmesh.pick.builder.unittest.MethodTestCodeBuilder
 import cc.unitmesh.pick.worker.job.JobContext
 import kotlinx.serialization.SerializationException
 
@@ -26,14 +26,14 @@ fun completionBuilder(completionBuilderType: CompletionBuilderType, context: Job
 }
 
 
-fun testBuilders(types: List<TestCodeBuilderType>, context: JobContext) : List<TestBuilder> {
+fun testBuilders(types: List<TestCodeBuilderType>, context: JobContext) : List<TestCodeBuilder> {
     return types.map { testBuilder(it, context) }
 }
 
-fun testBuilder(type: TestCodeBuilderType, context: JobContext): TestBuilder {
+fun testBuilder(type: TestCodeBuilderType, context: JobContext): TestCodeBuilder {
     return mapOf(
-        TestCodeBuilderType.METHOD_UNIT to MethodTestBuilder(context),
-        TestCodeBuilderType.CLASS_UNIT to ClassTestBuilder(context),
-        TestCodeBuilderType.API_UNIT to ApiTestBuilder(context),
+        TestCodeBuilderType.METHOD_UNIT to MethodTestCodeBuilder(context),
+        TestCodeBuilderType.CLASS_UNIT to ClassTestCodeBuilder(context),
+        TestCodeBuilderType.API_UNIT to ApiTestCodeBuilder(context),
     )[type] ?: throw SerializationException("Unknown message type: $type")
 }
