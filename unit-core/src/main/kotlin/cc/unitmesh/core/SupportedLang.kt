@@ -2,6 +2,7 @@ package cc.unitmesh.core
 
 enum class SupportedLang {
     JAVA,
+    TYPESCRIPT,
     ;
 
     companion object {

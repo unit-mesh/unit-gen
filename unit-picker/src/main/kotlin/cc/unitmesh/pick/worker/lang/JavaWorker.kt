@@ -8,6 +8,7 @@ import cc.unitmesh.pick.worker.job.JobContext
 import cc.unitmesh.core.completion.TypedIns
 import cc.unitmesh.pick.worker.WorkerContext
 import cc.unitmesh.pick.worker.base.LangWorker
+import cc.unitmesh.pick.worker.job.ProjectContext
 import chapi.ast.javaast.JavaAnalyser
 import kotlinx.coroutines.coroutineScope
 import org.slf4j.Logger
@@ -91,7 +92,10 @@ class JavaWorker(private val context: WorkerContext) : LangWorker {
                     fileTree,
                     context.insOutputConfig,
                     context.completionTypes,
-                    context.maxCompletionInOneFile
+                    context.maxCompletionInOneFile,
+                    project = ProjectContext(
+                        compositionDependency = context.compositionDependency,
+                    )
                 )
 
             context.codeContextStrategies.map { type ->

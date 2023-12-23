@@ -1,10 +1,11 @@
 package cc.unitmesh.pick.worker
 
+import cc.unitmesh.core.SupportedLang
 import org.archguard.scanner.core.sca.CompositionDependency
 
-class TestFrameworkIdentifier(val language: String, private val dependencies: List<CompositionDependency>) {
+class TestFrameworkIdentifier(val language: SupportedLang, private val dependencies: List<CompositionDependency>) {
     fun identify(): List<String> {
-        return when (language.lowercase()) {
+        return when (language.name.lowercase()) {
             "java" -> identifyJava()
             "typescript" -> identifyTypescript()
             else -> listOf()

@@ -20,6 +20,4 @@ data class WorkerContext(
     val insQualityThreshold: InsQualityThreshold = InsQualityThreshold(),
     var compositionDependency: List<CompositionDependency> = listOf()
 ) {
-    var testFramework: List<String> = listOf()
 }
-

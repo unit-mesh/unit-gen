@@ -1,5 +1,6 @@
 package cc.unitmesh.pick.project
 
+import cc.unitmesh.core.SupportedLang
 import cc.unitmesh.pick.worker.TestFrameworkIdentifier
 import org.archguard.scanner.core.sca.CompositionDependency
 
@@ -25,7 +26,7 @@ object ProjectLibrary {
      * @see TestStack
      * @see CompositionDependency
      */
-    fun prepare(language: String, deps: List<CompositionDependency>): TestStack {
+    fun prepare(language: SupportedLang = SupportedLang.JAVA, deps: List<CompositionDependency>): TestStack {
         val testStack = TestStack()
 
         deps.forEach { dep ->

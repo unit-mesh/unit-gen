@@ -1,5 +1,6 @@
 package cc.unitmesh.pick.worker;
 
+import cc.unitmesh.core.SupportedLang
 import cc.unitmesh.pick.ext.from
 import io.kotest.matchers.collections.shouldContain
 import io.kotest.matchers.shouldBe
@@ -11,7 +12,7 @@ class TestFrameworkIdentifierTest {
     @Test
     fun shouldIdentifyJavaTestFrameworks() {
         // given
-        val language = "java"
+        val language = SupportedLang.JAVA
         val dependencies = listOf(
             CompositionDependency.from("junit:junit", "org.junit.jupiter", "junit-jupiter"),
             CompositionDependency.from("org.mockito:mockito-core", "org.mockito", "mockito-core"),
@@ -28,7 +29,7 @@ class TestFrameworkIdentifierTest {
     @Test
     fun shouldIdentifyTypescriptTestFrameworks() {
         // given
-        val language = "typescript"
+        val language = SupportedLang.TYPESCRIPT
         val dependencies = listOf(
             CompositionDependency.from("jest", "some.group", "jest"),
             CompositionDependency.from("mocha", "another.group", "mocha"),
@@ -45,25 +46,9 @@ class TestFrameworkIdentifierTest {
     }
 
     @Test
-    fun shouldReturnEmptyListForUnknownLanguage() {
-        // given
-        val language = "unknown"
-        val dependencies = listOf(
-            CompositionDependency.from("dummy", "some.group", "dummy"),
-            CompositionDependency.from("test", "another.group", "test")
-        )
-        val testFrameworkIdentifier = TestFrameworkIdentifier(language, dependencies)
-
-        // when
-        val identifiedFrameworks = testFrameworkIdentifier.identify()
-
-        // then
-        assert(identifiedFrameworks.isEmpty())
-    }
-    @Test
     fun shouldReturnMultipleForSpringTest() {
         // given
-        val language = "java"
+        val language = SupportedLang.JAVA
         val dependencies = listOf(
             CompositionDependency.from("org.springframework.boot:spring-boot-starter-test", "org.springframework.boot", "spring-boot-starter-test"),
         )

@@ -30,6 +30,7 @@ interface UnitTestService {
             val testCodeServices = SupportedLang.all().map {
                 when (it) {
                     SupportedLang.JAVA -> JavaTestCodeService(job)
+                    SupportedLang.TYPESCRIPT -> TODO()
                 }
             }
 

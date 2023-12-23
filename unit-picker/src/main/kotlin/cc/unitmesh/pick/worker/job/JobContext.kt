@@ -1,11 +1,11 @@
 package cc.unitmesh.pick.worker.job
 
 import cc.unitmesh.pick.option.InsOutputConfig
-import cc.unitmesh.pick.worker.job.InstructionFileJob
 import cc.unitmesh.core.completion.CompletionBuilderType
 import cc.unitmesh.quality.CodeQualityType
 import kotlinx.serialization.Serializable
 import org.archguard.scanner.analyser.count.FileJob
+
 
 @Serializable
 data class JobContext(
@@ -14,7 +14,8 @@ data class JobContext(
     val fileTree: HashMap<String, InstructionFileJob>,
     val insOutputConfig: InsOutputConfig = InsOutputConfig(),
     val completionBuilderTypes: List<CompletionBuilderType>,
-    val maxCompletionInOneFile: Int
+    val maxCompletionInOneFile: Int,
+    val project: ProjectContext = ProjectContext(),
 ) {
     companion object {
         fun default(fileTree: HashMap<String, InstructionFileJob> = hashMapOf()): JobContext {
