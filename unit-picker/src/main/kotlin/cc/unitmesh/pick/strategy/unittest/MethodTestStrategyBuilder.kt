@@ -3,32 +3,20 @@ package cc.unitmesh.pick.strategy.unittest
 import cc.unitmesh.core.Instruction
 import cc.unitmesh.core.completion.CompletionBuilderType
 import cc.unitmesh.core.completion.TypedIns
+import cc.unitmesh.core.unittest.TestCodeBuilderType
+import cc.unitmesh.core.unittest.TypedTestIns
 import cc.unitmesh.pick.strategy.base.CodeStrategyBuilder
+import cc.unitmesh.pick.strategy.base.TestStrategyBuilder
 import cc.unitmesh.pick.worker.job.JobContext
 
-/**
- *
- * correctly only support junit4, and Java
- */
-class MethodTestStrategyBuilder(private val context: JobContext) : CodeStrategyBuilder {
+class MethodTestStrategyBuilder(private val context: JobContext) : TestStrategyBuilder {
     override fun build(): List<MethodTestIns> {
-        val dataStructures = context.job.container?.DataStructures
-        val isTestFile = dataStructures?.any {
-            it.NodeName.endsWith("Test") || it.NodeName.endsWith("Tests")
-        }
-
-        if (!isTestFile!!) {
-            return emptyList()
-        }
-
-
-
-        return emptyList()
+        TODO("Not yet implemented")
     }
 
 }
 
-class MethodTestIns(override val type: CompletionBuilderType) : TypedIns {
+class MethodTestIns(override val type: TestCodeBuilderType) : TypedTestIns {
     override fun unique(): Instruction {
         TODO("Not yet implemented")
     }

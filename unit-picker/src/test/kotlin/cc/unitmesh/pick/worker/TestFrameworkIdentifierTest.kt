@@ -22,7 +22,7 @@ class TestFrameworkIdentifierTest {
         // when
         val identifiedFrameworks = testFrameworkIdentifier.identify()
 
-        identifiedFrameworks shouldBe listOf("junit5", "mockito", "karate-junit5")
+        identifiedFrameworks shouldBe listOf("JUnit5", "mockito", "Karate JUnit5")
     }
 
     @Test
@@ -73,8 +73,7 @@ class TestFrameworkIdentifierTest {
         val identifiedFrameworks = testFrameworkIdentifier.identify()
 
         // then
-        identifiedFrameworks shouldContain "spring-test"
-        identifiedFrameworks shouldContain "junit"
+        identifiedFrameworks shouldContain "Spring Test"
+        identifiedFrameworks shouldContain "Spring Boot Test"
     }
 }
-
