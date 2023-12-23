@@ -4,7 +4,7 @@ import org.archguard.scanner.core.sca.CompositionDependency
 
 class TestFrameworkIdentifier(val language: String, private val dependencies: List<CompositionDependency>) {
     fun identify(): List<String> {
-        return when (language) {
+        return when (language.lowercase()) {
             "java" -> identifyJava()
             "typescript" -> identifyTypescript()
             else -> listOf()
@@ -40,15 +40,15 @@ class TestFrameworkIdentifier(val language: String, private val dependencies: Li
     }
 
     private val javaTestFrameworkMap: Map<String, List<String>> = mapOf(
-        "junit:junit" to listOf("junit"),
+        "junit:junit" to listOf("JUnit"),
         "org.testng:testng" to listOf("testng"),
         "org.spockframework:spock-core" to listOf("spock"),
         "io.cucumber:cucumber-java" to listOf("cucumber"),
-        "com.intuit.karate:karate-junit5" to listOf("karate-junit5"),
+        "com.intuit.karate:karate-junit5" to listOf("Karate JUnit5"),
         "org.jbehave:jbehave-core" to listOf("jbehave"),
-        "org.jgiven:jgiven-junit5" to listOf("jgiven-junit5"),
+        "org.jgiven:jgiven-junit5" to listOf("JGiven JUnit5"),
         "org.concordion:concordion" to listOf("concordion"),
-        "org.junit.jupiter:junit-jupiter" to listOf("junit5"),
+        "org.junit.jupiter:junit-jupiter" to listOf("JUnit5"),
         "org.assertj:assertj-core" to listOf("assertj"),
         "org.hamcrest:hamcrest" to listOf("hamcrest"),
         "com.google.truth:truth" to listOf("truth"),
@@ -61,7 +61,7 @@ class TestFrameworkIdentifier(val language: String, private val dependencies: Li
         "com.github.tomakehurst:wiremock" to listOf("wiremock"),
         // based on https://central.sonatype.com/artifact/org.springframework.boot/spring-boot-starter-test/dependencies
         "org.springframework.boot:spring-boot-starter-test" to listOf(
-            "spring-test", "spring-boot-test", "junit", "assertj", "hamcrest", "mockito", "jsonassert", "json-path"
+            "Spring Boot Test", "Spring Test"
         )
     )
     private val javaFrameworkList = javaTestFrameworkMap.keys.toList()

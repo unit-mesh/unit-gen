@@ -1,25 +1,38 @@
 package cc.unitmesh.pick.project
 
+import cc.unitmesh.pick.worker.TestFrameworkIdentifier
 import org.archguard.scanner.core.sca.CompositionDependency
 
 object ProjectLibrary {
     /**
+     * Prepare test stack from dependencies.
      *
+     * This method takes a list of dependencies and prepares a test stack based on those dependencies.
+     *
+     * @param language The language of the project.
+     * @param deps The list of dependencies to be used to prepare the test stack.
+     * @return The test stack containing the core and test frameworks.
+     *
+     * Example usage:
      * ```kotlin
+     * val dependencies = listOf(
+     *     CompositionDependency.from("org.springframework.boot:spring-boot-starter-test", "org.springframework.boot", "spring-boot-starter-test")
+     * )
+     * val testStack = ProjectLibrary.prepare(dependencies)
+     * println(testStack)
+     * ```
      *
-     *
+     * @see TestStack
+     * @see CompositionDependency
      */
-    fun prepare(deps: List<CompositionDependency>): TestStack {
+    fun prepare(language: String, deps: List<CompositionDependency>): TestStack {
         val testStack = TestStack()
-        var hasMatchSpringMvc = false
-        var hasMatchSpringData = false
 
         deps.forEach { dep ->
             SpringLibrary.SPRING_MVC.forEach {
                 it.coords.forEach { coord ->
                     if (dep.name.contains(coord)) {
                         testStack.coreFrameworks.putIfAbsent(it.shortText, true)
-                        hasMatchSpringMvc = true
                     }
                 }
             }
@@ -28,31 +41,12 @@ object ProjectLibrary {
                 it.coords.forEach { coord ->
                     if (dep.name.contains(coord)) {
                         testStack.coreFrameworks.putIfAbsent(it.shortText, true)
-                        hasMatchSpringData = true
                     }
                 }
             }
 
-            when {
-                dep.name.contains("org.springframework.boot:spring-boot-test") -> {
-                    testStack.testFrameworks.putIfAbsent("Spring Boot Test", true)
-                }
-
-                dep.name.contains("org.assertj:assertj-core") -> {
-                    testStack.testFrameworks.putIfAbsent("AssertJ", true)
-                }
-
-                dep.name.contains("org.junit.jupiter:junit-jupiter") -> {
-                    testStack.testFrameworks.putIfAbsent("JUnit 5", true)
-                }
-
-                dep.name.contains("org.mockito:mockito-core") -> {
-                    testStack.testFrameworks.putIfAbsent("Mockito", true)
-                }
-
-                dep.name.contains("com.h2database:h2") -> {
-                    testStack.testFrameworks.putIfAbsent("H2", true)
-                }
+            TestFrameworkIdentifier(language, deps).identify().forEach {
+                testStack.testFrameworks.putIfAbsent(it, true)
             }
         }
 
