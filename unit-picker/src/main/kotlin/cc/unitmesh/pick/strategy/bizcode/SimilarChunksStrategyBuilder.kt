@@ -1,14 +1,13 @@
 package cc.unitmesh.pick.strategy.bizcode
 
 import cc.unitmesh.pick.prompt.completion.completionBuilders
-import cc.unitmesh.pick.prompt.ins.SimilarChunkCompletionIns
+import cc.unitmesh.pick.prompt.ins.SimilarChunkIns
 import cc.unitmesh.pick.strategy.base.CodeStrategyBuilder
 import cc.unitmesh.pick.similar.JavaSimilarChunker
 import cc.unitmesh.pick.worker.job.JobContext
 
-class SimilarChunksStrategyBuilder(private val context: JobContext) :
-    CodeStrategyBuilder<SimilarChunkCompletionIns> {
-    override fun build(): List<SimilarChunkCompletionIns> {
+class SimilarChunksStrategyBuilder(private val context: JobContext) : CodeStrategyBuilder {
+    override fun build(): List<SimilarChunkIns> {
         val language = context.job.fileSummary.language.lowercase()
         val container = context.job.container ?: return emptyList()
 
@@ -45,7 +44,7 @@ class SimilarChunksStrategyBuilder(private val context: JobContext) :
                             return@mapNotNull null
                         }
 
-                        SimilarChunkCompletionIns(
+                        SimilarChunkIns(
                             language = language,
                             beforeCursor = it.beforeCursor,
                             similarChunks = similarChunks,

@@ -53,6 +53,13 @@ class WorkerManager(private val workerContext: WorkerContext) {
         workerContext.testFramework = TestFrameworkIdentifier(language, dependencies).identify()
     }
 
+    /**
+     * Adds a job to the worker for processing based on the specified threshold.
+     *
+     * @param job The job to be added.
+     *
+     * @return None.
+     */
     fun addJobByThreshold(job: InstructionFileJob) {
         val summary = job.fileSummary
         if (!supportedExtensions.contains(summary.extension)) {

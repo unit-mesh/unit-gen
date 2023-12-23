@@ -1,5 +1,6 @@
 package cc.unitmesh.pick.strategy.base
 
+import cc.unitmesh.core.completion.TypedIns
 import cc.unitmesh.quality.CodeQualityType
 import cc.unitmesh.quality.QualityAnalyser
 import chapi.domain.core.CodeDataStruct
@@ -22,7 +23,7 @@ import chapi.domain.core.CodeDataStruct
  *
  * Note: The InstructionBuilder interface does not provide documentation for its methods as per the given requirements.
  */
-interface CodeStrategyBuilder<T> {
+interface CodeStrategyBuilder {
     /**
      * In AutoDev or ChocolateFactory, we use Apache Velocity to generate instruction from template. In different cases,
      * the template is different, so we use different builders to build instruction data, aka <T>.
@@ -44,7 +45,7 @@ interface CodeStrategyBuilder<T> {
      *
      * In this case, the instruction data <T> should be included: `lang`, `relatedCode`, `beforeCursor`.
      */
-    fun build(): List<T>
+    fun build(): List<TypedIns>
 
     fun hasIssue(node: CodeDataStruct, types: List<CodeQualityType>): Boolean {
         return QualityAnalyser.create(types).map { analyser ->

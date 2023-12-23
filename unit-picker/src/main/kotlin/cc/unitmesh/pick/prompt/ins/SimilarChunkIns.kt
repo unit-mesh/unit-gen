@@ -1,43 +1,37 @@
 package cc.unitmesh.pick.prompt.ins
 
-import cc.unitmesh.pick.ext.toUml
 import cc.unitmesh.core.completion.CompletionBuilderType
 import cc.unitmesh.core.Instruction
-import cc.unitmesh.core.completion.TypedCompletionIns
+import cc.unitmesh.core.completion.TypedIns
 import cc.unitmesh.pick.option.InsQualityThreshold
-import chapi.domain.core.CodeDataStruct
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 
 @Serializable
-data class RelatedCodeCompletionIns(
+data class SimilarChunkIns(
     val language: String,
     val beforeCursor: String,
-    val relatedCode: List<CodeDataStruct>,
-    // the output aka afterCursor
+    val afterCursor: String,
+    val similarChunks: String,
     val output: String,
     override val type: CompletionBuilderType,
-) : TypedCompletionIns {
+) : TypedIns {
     override fun toString(): String {
         return Json.encodeToString(serializer(), this)
     }
 
     override fun unique(): Instruction {
-        // Related code strategy
-        val relatedCode = if (relatedCode.isNotEmpty()) {
-            // todo: count be similar
-            val relatedCode = relatedCode.take(3).joinToString("\n") {
-                it.toUml()
-            }
-
-            val relatedCodeLines = relatedCode.lines()
+        // Similar chunk strategy
+        val similarChunks = if (similarChunks.isNotBlank() && similarChunks.isNotEmpty()) {
+            // limit similarChunks to 30 lines
+            val similarChunksLines = similarChunks.lines()
             val maxLine = InsQualityThreshold.MAX_RELATED_CODE_LINE
-            if (relatedCodeLines.size > maxLine) {
-                relatedCodeLines.take(maxLine).joinToString("\n")
+            if (similarChunksLines.size > maxLine) {
+                similarChunksLines.take(maxLine).joinToString("\n")
             } else {
-                relatedCode
+                similarChunks
             }
-            "\n// Compare this snippets: \n ```${language}\n${relatedCodeLines.joinToString("\n")}\n```"
+            "\n// Similar chunk:\n ```${language}\n${similarChunksLines.joinToString("\n")}\n```"
         } else {
             ""
         }
@@ -54,12 +48,12 @@ data class RelatedCodeCompletionIns(
             beforeCursor
         }
 
-        val input = "$relatedCode\n\nCode:\n```${language}\n$beforeCursor\n```"
+        val input = "$similarChunks\n\nCode:\n```${language}\n$beforeCursor\n```"
+
         return Instruction(
             instruction = "Complete $language code, return rest code, no explaining",
             output = output,
             input = input
         )
     }
-
 }

@@ -1,7 +1,6 @@
 package cc.unitmesh.pick.strategy
 
 import cc.unitmesh.pick.strategy.base.CodeStrategyBuilder
-import cc.unitmesh.core.completion.TypedCompletionIns
 import cc.unitmesh.pick.strategy.unittest.ApiTestStrategyBuilder
 import cc.unitmesh.pick.strategy.unittest.ClassTestStrategyBuilder
 import cc.unitmesh.pick.strategy.unittest.MethodTestStrategyBuilder
@@ -14,7 +13,7 @@ enum class TestCodeContextStrategy {
     // TODO: spike for api unit test module
     API_UNIT;
 
-    fun builder(context: JobContext): CodeStrategyBuilder<out TypedCompletionIns> {
+    fun builder(context: JobContext): CodeStrategyBuilder {
         return mapOf(
             METHOD_UNIT to MethodTestStrategyBuilder(context),
             CLASS_UNIT to ClassTestStrategyBuilder(context),

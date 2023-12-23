@@ -5,7 +5,7 @@ import cc.unitmesh.pick.ext.CodeDataStructUtil
 import cc.unitmesh.core.completion.CompletionBuilderType
 import cc.unitmesh.core.Instruction
 import cc.unitmesh.pick.worker.job.JobContext
-import cc.unitmesh.core.completion.TypedCompletionIns
+import cc.unitmesh.core.completion.TypedIns
 import cc.unitmesh.pick.worker.WorkerContext
 import cc.unitmesh.pick.worker.base.LangWorker
 import chapi.ast.typescriptast.TypeScriptAnalyser
@@ -59,7 +59,7 @@ class TypescriptWorker(private val context: WorkerContext) : LangWorker {
         }.flatten()
 
         // take context.completionTypeSize for each type
-        val finalList: EnumMap<CompletionBuilderType, TypedCompletionIns> =
+        val finalList: EnumMap<CompletionBuilderType, TypedIns> =
             EnumMap(CompletionBuilderType::class.java)
 
         val instructions: MutableList<Instruction> = mutableListOf()

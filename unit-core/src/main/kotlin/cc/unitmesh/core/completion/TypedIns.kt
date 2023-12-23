@@ -1,9 +1,8 @@
 package cc.unitmesh.core.completion
 
-import cc.unitmesh.core.completion.CompletionBuilderType
 import cc.unitmesh.core.Instruction
 
-interface TypedCompletionIns {
+interface TypedIns {
     val type: CompletionBuilderType
 
     fun unique(): Instruction

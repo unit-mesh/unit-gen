@@ -1,16 +1,15 @@
 package cc.unitmesh.pick.strategy.bizcode
 
 import cc.unitmesh.pick.prompt.completion.completionBuilders
-import cc.unitmesh.pick.prompt.ins.RelatedCodeCompletionIns
+import cc.unitmesh.pick.prompt.ins.RelatedCodeIns
 import cc.unitmesh.pick.strategy.base.CodeStrategyBuilder
 import cc.unitmesh.pick.worker.job.JobContext
 import chapi.domain.core.CodeContainer
 import chapi.domain.core.CodeDataStruct
 
-class RelatedCodeStrategyBuilder(private val context: JobContext) :
-    CodeStrategyBuilder<RelatedCodeCompletionIns> {
+class RelatedCodeStrategyBuilder(private val context: JobContext) : CodeStrategyBuilder {
 
-    override fun build(): List<RelatedCodeCompletionIns> {
+    override fun build(): List<RelatedCodeIns> {
         val language = context.job.fileSummary.language.lowercase()
         val container = context.job.container ?: return emptyList()
         val relatedCode = findRelatedCode(container)
@@ -37,7 +36,7 @@ class RelatedCodeStrategyBuilder(private val context: JobContext) :
                     }
                     .take(context.maxCompletionInOneFile)
                     .map {
-                        RelatedCodeCompletionIns(
+                        RelatedCodeIns(
                             language = language,
                             beforeCursor = it.beforeCursor,
                             relatedCode = relatedCode,

@@ -1,7 +1,7 @@
 package cc.unitmesh.pick.strategy
 
 import cc.unitmesh.pick.strategy.base.CodeStrategyBuilder
-import cc.unitmesh.core.completion.TypedCompletionIns
+import cc.unitmesh.core.completion.TypedIns
 import cc.unitmesh.pick.strategy.bizcode.RelatedCodeStrategyBuilder
 import cc.unitmesh.pick.strategy.bizcode.SimilarChunksStrategyBuilder
 import cc.unitmesh.pick.worker.job.JobContext
@@ -31,7 +31,7 @@ enum class BizCodeContextStrategy {
      */
     RELATED_CODE;
 
-    fun builder(context: JobContext): CodeStrategyBuilder<out TypedCompletionIns> {
+    fun builder(context: JobContext): CodeStrategyBuilder {
         return mapOf(
             SIMILAR_CHUNKS to SimilarChunksStrategyBuilder(context),
             RELATED_CODE to RelatedCodeStrategyBuilder(context),
