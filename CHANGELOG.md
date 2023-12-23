@@ -1,4 +1,58 @@
-# [](https://github.com/unit-mesh/unit-eval/compare/v0.2.0-SNAPSHOT...v) (2023-12-19)
+# [](https://github.com/unit-mesh/unit-eval/compare/v0.2.0...v) (2023-12-23)
+
+
+
+# [0.2.0](https://github.com/unit-mesh/unit-eval/compare/v0.2.0-SNAPSHOT...v0.2.0) (2023-12-23)
+
+
+### Bug Fixes
+
+* add lost super classes ([ebcd6d4](https://github.com/unit-mesh/unit-eval/commit/ebcd6d4ab1b8ab111983f23c2094057c2f613788))
+* fix after block issue & write test for after block ([f7afbc0](https://github.com/unit-mesh/unit-eval/commit/f7afbc0f0b1ece9349895a6e7539d56d5d6257d1))
+* fix blank issue ([dbcca15](https://github.com/unit-mesh/unit-eval/commit/dbcca155b031192de571eaec1c43434bd45f8f99))
+* fix for JavaWorker in error issue ([897b288](https://github.com/unit-mesh/unit-eval/commit/897b288b229a601f2174eb916d74f592e70c098a))
+* fix lfs issue ([aa49873](https://github.com/unit-mesh/unit-eval/commit/aa498732e57e60ad1e7d8ea879e4c96a7ba32c1b))
+* fix option issue ([a56c9c2](https://github.com/unit-mesh/unit-eval/commit/a56c9c2ad0ac517b2a6c744576bb5e1182acf750))
+* fix related code format to instructions issues ([a66d8b1](https://github.com/unit-mesh/unit-eval/commit/a66d8b16e72e9655ec90c7f3ff9a8a62f410e241))
+* fix rename issue ([3cf8175](https://github.com/unit-mesh/unit-eval/commit/3cf8175229aeea1c49782d82451d4b8461fb3177))
+* fix simliar chunk issue ([7aefcae](https://github.com/unit-mesh/unit-eval/commit/7aefcae8b05f009eafbda90f0bf8875fc1b28a6d))
+* fix simliar chunk length issue ([0d0d121](https://github.com/unit-mesh/unit-eval/commit/0d0d121c6dfc5204fa044ae53d1111f4a82c016d))
+* fix tests ([46e9cad](https://github.com/unit-mesh/unit-eval/commit/46e9cad4f952fa70c48ab0a00f9332f6e7d90275))
+* fix tests ([2f8a472](https://github.com/unit-mesh/unit-eval/commit/2f8a4728bc6c6d87cb224b62487c532863db59a3))
+* fix tests ([6ce7891](https://github.com/unit-mesh/unit-eval/commit/6ce7891b26ec9fccd2f03a8210bce22fe85e201d))
+* fix typos ([f3c4024](https://github.com/unit-mesh/unit-eval/commit/f3c402487811e9854092ddfe01673ed8547cd7a7))
+* try to parse deps ([123f904](https://github.com/unit-mesh/unit-eval/commit/123f9048fea8f5bad20cc3c3ca4438c255ec8d14))
+
+
+### Features
+
+* add api server examples ([4ab3ce0](https://github.com/unit-mesh/unit-eval/commit/4ab3ce05472e6b0240b2bfd8437d6a8ad2544c45))
+* add first version deepseek code finetune script ([188bf6d](https://github.com/unit-mesh/unit-eval/commit/188bf6d6869547789d34ca8266aa178f3f71d566))
+* add inline block support ([4acd852](https://github.com/unit-mesh/unit-eval/commit/4acd8527e8d867b2c48b27280ed2105b13ede5be))
+* add limit for each completion type ([87df4b0](https://github.com/unit-mesh/unit-eval/commit/87df4b07744b62f891adbb1ab234a0fd13796e1e))
+* add line as quality threshold ([88898ab](https://github.com/unit-mesh/unit-eval/commit/88898ab98bdabcc4a447abc1a2ddf3c143d40bfc))
+* add shuffle in final output for better display ([6fa98c2](https://github.com/unit-mesh/unit-eval/commit/6fa98c2c0f4b9175fae336e2a62a2acefde5b922))
+* add simple instruction for render in output ([e36ac67](https://github.com/unit-mesh/unit-eval/commit/e36ac67d5fb098f3b87dba53ec7d8ed096f428fc))
+* add simple line count strategy ([744847e](https://github.com/unit-mesh/unit-eval/commit/744847ee487d2f3c46b405fc05805617b4cc00d3))
+* add simple server examples ([b7dde3e](https://github.com/unit-mesh/unit-eval/commit/b7dde3e73a311d16b1719b0c3ebac7e90f1a4f67))
+* add simple test for java coder ([b2efc31](https://github.com/unit-mesh/unit-eval/commit/b2efc31313f2a73de31f7143b688414c5593b362))
+* add simplie completion block filter ([e370bf2](https://github.com/unit-mesh/unit-eval/commit/e370bf29beeeaf466a8a5406c550109af376d41d))
+* **disti:** init module ([f41c95a](https://github.com/unit-mesh/unit-eval/commit/f41c95a767ddc383e0cd4a78428f2267dae0e595))
+* init support lang design ([280ee34](https://github.com/unit-mesh/unit-eval/commit/280ee341554117441b8048450332deeb9dc77c18))
+* make change history ([dbdbc49](https://github.com/unit-mesh/unit-eval/commit/dbdbc493dde13601cda32de26481f5650de5ebb5))
+* make file in cmpletion realy works ([619b83b](https://github.com/unit-mesh/unit-eval/commit/619b83bba69d8a8b5261d4ed1c0bb6fbbf75e194))
+* make instruction in same output for deepseek ([c41c418](https://github.com/unit-mesh/unit-eval/commit/c41c4182a0f3a761007afedb0fe9d044d0af5e83))
+* make option working in output ([2c4f502](https://github.com/unit-mesh/unit-eval/commit/2c4f502c218fe5ea2ce1675f5d2f72ab7cc4a865))
+* parepare for library as context ([30ffcec](https://github.com/unit-mesh/unit-eval/commit/30ffcecbb25e55cbecdfab76a8b928f418848fe1))
+* **server:** add for timeout ([1f9e53c](https://github.com/unit-mesh/unit-eval/commit/1f9e53c222d48cd8f77545e8cab2297da04deaf5))
+* **server:** try to saimple response ([46f9863](https://github.com/unit-mesh/unit-eval/commit/46f9863ab40307c5c93596ad65dcd69c6cd427ca))
+* **test:** add basic rules for generate data ([2e9549a](https://github.com/unit-mesh/unit-eval/commit/2e9549a2a4a995ebd5e350071cf0146b9385ddea))
+* **test:** init first version for class test generate ([33ef46f](https://github.com/unit-mesh/unit-eval/commit/33ef46fdd10176d13f06b006c0f5951f71cd73db))
+* **unitest:** make it works for instructions ([1d5fd62](https://github.com/unit-mesh/unit-eval/commit/1d5fd621497b41feb605fd28a82988d68fae886e))
+* **unittest:** add identify to frameworks ([8c8c327](https://github.com/unit-mesh/unit-eval/commit/8c8c3279ebdb5a6fd45503f1c8ecbac46f8549ea))
+* **unittest:** add simple way to get test framework ([2f5c7dc](https://github.com/unit-mesh/unit-eval/commit/2f5c7dc15b1ef2c694ecde0a6235ac8a3f126d39))
+* **unittest:** add support for one package include multiple results ([4bc3814](https://github.com/unit-mesh/unit-eval/commit/4bc38142bb9950420256cca2843b45d6212e9c0c))
+* **unittest:** enable get SCA from context ([5c64dcc](https://github.com/unit-mesh/unit-eval/commit/5c64dcc78ba31dd6b6a71d8b0821670ad3088e9c))
 
 
 
