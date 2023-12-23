@@ -7,6 +7,8 @@ import cc.unitmesh.core.unittest.TypedTestIns
 import cc.unitmesh.core.unittest.TestCodeBuilder
 import cc.unitmesh.pick.worker.job.JobContext
 import chapi.domain.core.CodeDataStruct
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 
 class ClassTestCodeBuilder(private val context: JobContext) : TestCodeBuilder {
     /**
@@ -49,7 +51,7 @@ class ClassTestIns(
      * the Specification of the test
      */
     val specs: List<String> = listOf(),
-    val relatedCode: List<String> = listOf(),
+    private val relatedCode: List<String> = listOf(),
     override val testType: TestCodeBuilderType,
 ) : TypedTestIns() {
     override fun unique(): Instruction {
@@ -79,10 +81,13 @@ class ClassTestIns(
         input.append(underTestCode)
         input.append("\n```")
 
-        return Instruction(
+        val instruction = Instruction(
             instruction = "Write unit test for following code.",
             input = input.toString(),
             output = generatedCode,
         )
+
+        println("ClassTestIns: ${Json.encodeToString(instruction)}")
+        return instruction
     }
 }

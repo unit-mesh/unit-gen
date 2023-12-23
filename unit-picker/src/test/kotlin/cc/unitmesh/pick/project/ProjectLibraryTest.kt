@@ -24,7 +24,7 @@ class ProjectLibraryTest {
         val testStack = ProjectLibrary.prepare(language, deps)
 
         // then
-        assertEquals("Spring MVC, Spring WebFlux", testStack.coreFrameworks())
-        assertEquals("Spring Boot Test, Spring Test", testStack.testFrameworks())
+        assertEquals("Spring MVC, Spring WebFlux", testStack.coreFrameworks().joinToString(", "))
+        assertEquals("Spring Boot Test, Spring Test", testStack.testFrameworks().joinToString(", "))
     }
 }
