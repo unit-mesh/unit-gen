@@ -37,19 +37,23 @@ class WorkerManager(private val workerContext: WorkerContext) {
      *
      */
     fun init(codeDir: File, language: String) {
-        val dependencies = ScaAnalyser(object : ScaContext {
-            override val client: ArchGuardClient = EmptyArchGuardClient()
-            override val language: String = language
-            override val path: String = codeDir.absolutePath
-        }).analyse()
+        try {
+            val dependencies = ScaAnalyser(object : ScaContext {
+                override val client: ArchGuardClient = EmptyArchGuardClient()
+                override val language: String = language
+                override val path: String = codeDir.absolutePath
+            }).analyse()
 
-        if (dependencies.isEmpty()) {
-            logger.warn("no dependencies found in $codeDir")
-        } else {
-            logger.info("found ${dependencies.size} dependencies in $codeDir")
+            if (dependencies.isEmpty()) {
+                logger.warn("no dependencies found in $codeDir")
+            } else {
+                logger.info("found ${dependencies.size} dependencies in $codeDir")
+            }
+
+            workerContext.compositionDependency = dependencies
+        } catch (e: Exception) {
+            logger.error("failed to init dependencies", e)
         }
-
-        workerContext.compositionDependency = dependencies
     }
 
     /**
