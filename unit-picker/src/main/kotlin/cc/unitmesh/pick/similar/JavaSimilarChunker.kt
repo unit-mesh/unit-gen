@@ -13,10 +13,6 @@ import org.slf4j.Logger
  * This class extends the SimilarChunksWithPaths class, providing additional functionality for handling Java code.
  */
 class JavaSimilarChunker(private val fileTree: HashMap<String, InstructionFileJob>) : SimilarChunker() {
-    companion object {
-        val logger: Logger = org.slf4j.LoggerFactory.getLogger(JavaSimilarChunker::class.java)
-    }
-
     /**
      * Calculates the similar code chunks based on the given text and canonical name.
      *

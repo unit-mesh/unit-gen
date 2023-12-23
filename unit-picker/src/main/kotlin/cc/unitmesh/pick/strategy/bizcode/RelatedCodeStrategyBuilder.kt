@@ -2,6 +2,7 @@ package cc.unitmesh.pick.strategy.bizcode
 
 import cc.unitmesh.pick.builder.completionBuilders
 import cc.unitmesh.pick.builder.ins.RelatedCodeIns
+import cc.unitmesh.pick.builder.unittest.lang.UnitTestService
 import cc.unitmesh.pick.strategy.base.CodeStrategyBuilder
 import cc.unitmesh.pick.worker.job.JobContext
 import chapi.domain.core.CodeContainer
@@ -26,6 +27,9 @@ class RelatedCodeStrategyBuilder(private val context: JobContext) : CodeStrategy
         val builders = completionBuilders(context.completionBuilderTypes, context)
 
         val codeCompletionIns = dataStructs.map { ds ->
+            UnitTestService.lookup(ds, context).map {
+//                it.build(ds)
+            }
             ds.Functions.map { function ->
                 builders.asSequence().map {
                     it.build(function)

@@ -1,5 +1,7 @@
 package cc.unitmesh.pick.builder.unittest.lang
 
+import cc.unitmesh.pick.SupportedLang
+import cc.unitmesh.pick.worker.job.JobContext
 import chapi.domain.core.CodeDataStruct
 import chapi.domain.core.CodeFunction
 
@@ -16,6 +18,11 @@ import chapi.domain.core.CodeFunction
  * for these methods based on the specific requirements of the testing framework or tool being used.
  */
 interface UnitTestService {
+    /**
+     * Checks if the given data structure is a test file.
+     */
+    fun isApplicable(dataStruct: CodeDataStruct): Boolean
+
     /**
      * Finds the files that contain the under test code related to the given data structure.
      *
@@ -46,5 +53,17 @@ interface UnitTestService {
      * @return A list of code data structures representing the relevant classes found for the given code function and data structure.
      */
     fun lookupRelevantClass(codeFunction: CodeFunction, dataStruct: CodeDataStruct): List<CodeDataStruct>
+
+    companion object {
+        fun lookup(codeDataStruct: CodeDataStruct, job: JobContext): List<JavaTestCodeService> {
+            val testCodeServices = SupportedLang.all().map {
+                when (it) {
+                    SupportedLang.JAVA -> JavaTestCodeService(job)
+                }
+            }
+
+            return testCodeServices.filter { it.isApplicable(codeDataStruct) }
+        }
+    }
 }
 

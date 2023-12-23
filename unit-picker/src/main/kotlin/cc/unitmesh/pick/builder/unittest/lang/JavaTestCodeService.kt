@@ -7,6 +7,10 @@ import chapi.domain.core.CodeFunction
 import chapi.domain.core.CodeImport
 
 class JavaTestCodeService(val context: JobContext) : UnitTestService {
+    override fun isApplicable(dataStruct: CodeDataStruct): Boolean {
+        return dataStruct.NodeName.endsWith("Test") || dataStruct.NodeName.endsWith("Tests")
+    }
+
     override fun findUnderTestFile(dataStruct: CodeDataStruct): List<CodeDataStruct> {
         val fileTree = context.fileTree
         val testClass = dataStruct.NodeName.removeSuffix("Test").removeSuffix("Tests")
