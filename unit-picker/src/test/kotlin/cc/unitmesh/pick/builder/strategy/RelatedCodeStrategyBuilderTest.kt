@@ -4,6 +4,7 @@ import cc.unitmesh.pick.option.InsOutputConfig
 import cc.unitmesh.pick.worker.job.InstructionFileJob
 import cc.unitmesh.pick.ext.toUml
 import cc.unitmesh.core.completion.CompletionBuilderType
+import cc.unitmesh.pick.builder.ins.RelatedCodeIns
 import cc.unitmesh.pick.strategy.bizcode.RelatedCodeStrategyBuilder
 import cc.unitmesh.pick.worker.job.JobContext
 import cc.unitmesh.quality.CodeQualityType
@@ -138,7 +139,7 @@ public class HelloController {
         val result = builder.build()
 
         assertEquals(result.size, 4)
-        val first = result.first()
+        val first = result.first() as RelatedCodeIns
 
         assertEquals(
             first.relatedCode.joinToString("\n", transform = CodeDataStruct::toUml), """// class BlogPost {
