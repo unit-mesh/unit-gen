@@ -1,7 +1,7 @@
 package cc.unitmesh.pick.builder.unittest.lang
 
 import cc.unitmesh.core.completion.TypedIns
-import cc.unitmesh.pick.SupportedLang
+import cc.unitmesh.core.SupportedLang
 import cc.unitmesh.pick.worker.job.JobContext
 import chapi.domain.core.CodeDataStruct
 import chapi.domain.core.CodeFunction

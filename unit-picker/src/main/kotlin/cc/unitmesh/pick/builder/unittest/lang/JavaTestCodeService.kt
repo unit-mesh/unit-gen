@@ -1,6 +1,5 @@
 package cc.unitmesh.pick.builder.unittest.lang
 
-import cc.unitmesh.core.completion.TypedIns
 import cc.unitmesh.core.unittest.TypedTestIns
 import cc.unitmesh.pick.worker.job.InstructionFileJob
 import cc.unitmesh.pick.worker.job.JobContext
@@ -51,10 +50,6 @@ class JavaTestCodeService(val context: JobContext) : UnitTestService {
         return outboundType + inboundsType
     }
 
-    override fun build(): TypedTestIns {
-        TODO("Not yet implemented")
-    }
-
     fun filterDs(
         imports: List<CodeImport>,
         returnType: String,
@@ -66,5 +61,9 @@ class JavaTestCodeService(val context: JobContext) : UnitTestService {
             null
         }
     }.flatten()
+
+    override fun build(): TypedTestIns {
+        TODO("Not yet implemented")
+    }
 }
 

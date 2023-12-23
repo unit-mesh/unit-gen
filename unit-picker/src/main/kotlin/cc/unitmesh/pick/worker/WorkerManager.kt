@@ -1,10 +1,10 @@
 package cc.unitmesh.pick.worker
 
-import cc.unitmesh.pick.worker.job.InstructionFileJob
 import cc.unitmesh.core.Instruction
-import cc.unitmesh.pick.worker.lang.JavaWorker
+import cc.unitmesh.core.SupportedLang
 import cc.unitmesh.pick.worker.base.LangWorker
-import org.archguard.rule.common.Language
+import cc.unitmesh.pick.worker.job.InstructionFileJob
+import cc.unitmesh.pick.worker.lang.JavaWorker
 import org.archguard.scanner.analyser.ScaAnalyser
 import org.archguard.scanner.analyser.count.LanguageService
 import org.archguard.scanner.core.client.ArchGuardClient
@@ -15,8 +15,8 @@ import java.io.File
 
 
 class WorkerManager(private val workerContext: WorkerContext) {
-    private val workers: Map<Language, LangWorker> = mapOf(
-        Language.JAVA to JavaWorker(workerContext),
+    private val workers: Map<SupportedLang, LangWorker> = mapOf(
+        SupportedLang.JAVA to JavaWorker(workerContext),
 //        Language.TYPESCRIPT to TypescriptWorker(workerContext),
 //        Language.JAVASCRIPT to TypescriptWorker(workerContext),
     )
@@ -24,7 +24,7 @@ class WorkerManager(private val workerContext: WorkerContext) {
     private val language: LanguageService = LanguageService()
 
     private val supportedExtensions: Set<String> = setOf(
-        language.getExtension(Language.JAVA.name.lowercase()),
+        language.getExtension(SupportedLang.JAVA.name.lowercase()),
     )
 
     private val logger: Logger = org.slf4j.LoggerFactory.getLogger(WorkerManager::class.java)
@@ -89,7 +89,7 @@ class WorkerManager(private val workerContext: WorkerContext) {
 //            return
 //        }
 
-        val language = summary.language.toSupportLanguage()
+        val language = SupportedLang.from(summary.language)
         val worker = workers[language] ?: return
         worker.addJob(job)
     }
@@ -103,18 +103,5 @@ class WorkerManager(private val workerContext: WorkerContext) {
                 emptyList()
             }
         }.flatten()
-    }
-}
-
-private fun String.toSupportLanguage(): Language? {
-    return when (this.lowercase()) {
-        "java" -> Language.JAVA
-        "kotlin" -> Language.KOTLIN
-        "csharp", "c#" -> Language.CSHARP
-        "python" -> Language.PYTHON
-        "go" -> Language.GO
-        "typescript" -> Language.TYPESCRIPT
-        "javascript" -> Language.JAVASCRIPT
-        else -> null
     }
 }
