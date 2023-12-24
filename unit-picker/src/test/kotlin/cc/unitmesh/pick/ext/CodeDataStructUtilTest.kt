@@ -4,7 +4,6 @@ import chapi.ast.javaast.JavaAnalyser
 import chapi.domain.core.CodeDataStruct
 import chapi.domain.core.CodeField
 import chapi.domain.core.CodeFunction
-import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
@@ -40,7 +39,7 @@ class CodeDataStructUtilTest {
             |// 
         """.trimMargin()
 
-        Assertions.assertEquals(expectedUml, uml)
+        assertEquals(expectedUml, uml)
     }
 
     @Test

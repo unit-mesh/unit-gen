@@ -124,7 +124,7 @@ object CodeDataStructUtil {
             if (endLineContent.isBlank()) {
                 0
             } else {
-                endLineContent.length + 1
+                endLineContent.length
             }
         } else {
             position.StopLinePosition
