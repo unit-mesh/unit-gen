@@ -66,6 +66,8 @@ allprojects {
 
 configure(allprojects
     - project(":examples")
+    - project(":unit-cli")
+    - project(":unit-eval")
 ) {
     apply(plugin = "java-library")
     apply(plugin = "maven-publish")
