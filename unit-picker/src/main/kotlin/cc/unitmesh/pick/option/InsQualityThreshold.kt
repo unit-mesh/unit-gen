@@ -23,7 +23,7 @@ data class InsQualityThreshold(
     val badsmellThreshold: Map<String, Int> = BsThresholds().toThresholds(),
 ) {
     companion object {
-        const val MAX_COMPLEXITY: Int = 100
+        const val MAX_COMPLEXITY: Int = 1000
         const val MAX_FILE_SIZE: Int = 1024 * 64
         const val MAX_LINE_IN_CODE: Int = 160
         const val MAX_CHAR_IN_CODE: Int = 1500
