@@ -16,6 +16,9 @@
   <a href="https://openbayes.com/console/signup?r=phodal_uVxU">
     <img src="https://openbayes.com/img/badge-built-with-openbayes.svg" alt="Built with OpenBayes" />
   </a>
+  <a href="https://codecov.io/gh/unit-mesh/unit-eval">
+    <img src="https://codecov.io/gh/unit-mesh/unit-eval/branch/master/graph/badge.svg?token=nt22RX52DV" alt="codecov" />
+  </a>
 </p>
 
 > LLM benchmark/evaluation tools with fine-tuning data engineering, specifically tailored for Unit Mesh tools such as
