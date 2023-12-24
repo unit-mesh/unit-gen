@@ -56,18 +56,19 @@ class ClassTestIns(
     override fun unique(): Instruction {
         val input = StringBuilder()
 
-        input.append(specs.joinToString("\n"))
+        input.append(specs.joinToString("\n") { "- $it" })
+        input.append("\n")
 
         if (coreFrameworks.isNotEmpty()) {
-            input.append("Core frameworks: ${coreFrameworks.joinToString(", ")}\n")
+            input.append("- You are working on a project that uses ${coreFrameworks.joinToString(", ")}\n")
         }
 
         if (testFrameworks.isNotEmpty()) {
-            input.append("Test frameworks: ${testFrameworks.joinToString(", ")}\n")
+            input.append("- This project uses ${testFrameworks.joinToString(", ")} to test code.\n")
         }
 
-        if (coreFrameworks.contains("Spring Boot")) {
-            input.append("Use appropriate Spring test annotations such as `@MockBean`, `@Autowired`, `@WebMvcTest`, `@DataJpaTest`, `@AutoConfigureTestDatabase`, `@AutoConfigureMockMvc`, `@SpringBootTest` etc.")
+        if (coreFrameworks.contains("Spring Boot") || coreFrameworks.contains("Spring Boot Web")) {
+            input.append("- Use appropriate Spring test annotations such as `@MockBean`, `@Autowired`, `@WebMvcTest`, `@DataJpaTest`, `@AutoConfigureTestDatabase`, `@AutoConfigureMockMvc`, `@SpringBootTest` etc.")
         }
 
         if (relatedCode.isNotEmpty()) {

@@ -30,17 +30,16 @@ object ProjectLibrary {
         val testStack = TestStack()
 
         deps.forEach { dep ->
+            val name = dep.depName
             SpringLibrary.SPRING_MVC.forEach {
-                it.coords.forEach { coord ->
-                    if (dep.name.contains(coord)) {
-                        testStack.coreFrameworks.putIfAbsent(it.shortText, true)
-                    }
+                if (name.contains(it.coords)) {
+                    testStack.coreFrameworks.putIfAbsent(it.shortText, true)
                 }
             }
 
             SpringLibrary.SPRING_DATA.forEach {
                 it.coords.forEach { coord ->
-                    if (dep.name.contains(coord)) {
+                    if (name.contains(coord)) {
                         testStack.coreFrameworks.putIfAbsent(it.shortText, true)
                     }
                 }
