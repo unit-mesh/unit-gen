@@ -5,6 +5,7 @@ import cc.unitmesh.core.SupportedLang
 import cc.unitmesh.core.unittest.TestCodeBuilderType
 import cc.unitmesh.core.unittest.TypedTestIns
 import cc.unitmesh.core.unittest.TestCodeBuilder
+import cc.unitmesh.pick.ext.checkNamingStyle
 import cc.unitmesh.pick.ext.toSourceCode
 import cc.unitmesh.pick.worker.job.JobContext
 import chapi.domain.core.CodeDataStruct
@@ -21,6 +22,7 @@ class ClassTestCodeBuilder(private val context: JobContext) : TestCodeBuilder {
         relevantClasses: List<CodeDataStruct>,
     ): List<ClassTestIns> {
         val generatedCode = dataStruct.toSourceCode()
+        val namingStyle = dataStruct.checkNamingStyle()
 
         return listOf(
             ClassTestIns(
@@ -31,8 +33,7 @@ class ClassTestCodeBuilder(private val context: JobContext) : TestCodeBuilder {
                 testFrameworks = context.project.testFrameworks,
                 testType = TestCodeBuilderType.CLASS_UNIT,
                 specs = listOf(
-                    "Test file should be complete and compilable, without need for further actions.",
-                    "Instead of using `@BeforeEach` methods for setup, include all necessary code initialization within each individual test method, do not write parameterized tests."
+                    "Test class should be named `${namingStyle}`."
                 )
             )
         )
@@ -64,10 +65,6 @@ class ClassTestIns(
 
         if (testFrameworks.isNotEmpty()) {
             input.append("- This project uses ${testFrameworks.joinToString(", ")} to test code.\n")
-        }
-
-        if (coreFrameworks.contains("Spring Boot") || coreFrameworks.contains("Spring Boot Web")) {
-            input.append("- Use appropriate Spring test annotations such as `@MockBean`, `@Autowired`, `@WebMvcTest`, `@DataJpaTest`, `@AutoConfigureTestDatabase`, `@AutoConfigureMockMvc`, `@SpringBootTest` etc.")
         }
 
         if (relatedCode.isNotEmpty()) {
