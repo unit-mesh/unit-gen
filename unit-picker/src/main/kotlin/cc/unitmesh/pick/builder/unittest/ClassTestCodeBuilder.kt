@@ -21,9 +21,9 @@ class ClassTestCodeBuilder(private val context: JobContext) : TestCodeBuilder {
         underTestFile: CodeDataStruct,
         relevantClasses: List<CodeDataStruct>,
     ): List<BasicTestIns> {
-        var generatedCode = dataStruct.toSourceCode()
+        val generatedCode = dataStruct.toSourceCode()
         if (generatedCode.lines().size > context.insQualityThreshold.maxLineInCode) {
-            generatedCode = generatedCode.lines().take(context.insQualityThreshold.maxLineInCode).joinToString("\n")
+            return emptyList()
         }
 
         val namingStyle = dataStruct.checkNamingStyle()
