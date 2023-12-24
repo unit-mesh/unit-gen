@@ -13,8 +13,9 @@ fun CodeContainer.buildSourceCode(codeLines: List<String>) {
             // in Chapi, the position of function is not correct, so we need to fix it
             val position = it.Position
             if (it.Annotations.isNotEmpty()) {
-                position.StartLine -= 1
-                position.StartLinePosition = 0
+                val annotationPos = it.Annotations.first().Position
+                position.StartLine = annotationPos.StartLine
+                position.StartLinePosition = annotationPos.StartLinePosition
             }
             it.Content = CodeDataStructUtil.contentByPosition(codeLines, it.Position)
         }

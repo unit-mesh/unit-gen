@@ -11,7 +11,6 @@ import cc.unitmesh.pick.worker.job.JobContext
 import cc.unitmesh.quality.CodeQualityType
 import chapi.ast.javaast.JavaAnalyser
 import io.kotest.matchers.shouldBe
-import io.kotest.matchers.shouldNotBe
 import io.kotest.matchers.string.shouldContain
 import org.archguard.scanner.analyser.count.FileJob
 import org.junit.jupiter.api.Test
