@@ -22,10 +22,10 @@ class MethodTestCodeBuilder(private val context: JobContext) : TestCodeBuilder {
         // test canonicalName map BasicTestIns
         val results: HashMap<String, List<BasicTestIns>> = hashMapOf()
 
-        val underTestFunctionMap = underTestFile.Functions.map {
+        val underTestFunctionMap = underTestFile.Functions.associate {
             val canonicalName = underTestFile.Package + "." + underTestFile.NodeName + ":" + it.Name
             canonicalName to it.Content
-        }.toMap()
+        }
 
         // analysis test code, and find original function content, put to results
         dataStruct.Functions.map { function ->
