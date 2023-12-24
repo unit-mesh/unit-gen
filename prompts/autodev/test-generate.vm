@@ -1,7 +1,8 @@
 Write unit test for following code.
 
-${context.coc}
-${context.framework}
+${context.testFramework}
+${context.coreFramework}
+${context.testSpec}
 
 ${context.related_model}
 
