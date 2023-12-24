@@ -65,7 +65,9 @@ allprojects {
 }
 
 configure(allprojects
+    - project(":")
     - project(":examples")
+    - project(":examples:project-example")
     - project(":unit-cli")
     - project(":unit-eval")
 ) {
