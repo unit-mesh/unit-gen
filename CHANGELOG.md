@@ -1,8 +1,8 @@
-# [](https://github.com/unit-mesh/unit-eval/compare/v0.2.0...v) (2023-12-23)
+# [](https://github.com/unit-mesh/unit-eval/compare/v0.3.0...v) (2023-12-24)
 
 
 
-# [0.2.0](https://github.com/unit-mesh/unit-eval/compare/v0.2.0-SNAPSHOT...v0.2.0) (2023-12-23)
+# [0.3.0](https://github.com/unit-mesh/unit-eval/compare/v0.2.0-SNAPSHOT...v0.3.0) (2023-12-24)
 
 
 ### Bug Fixes
@@ -10,22 +10,28 @@
 * add lost super classes ([ebcd6d4](https://github.com/unit-mesh/unit-eval/commit/ebcd6d4ab1b8ab111983f23c2094057c2f613788))
 * fix after block issue & write test for after block ([f7afbc0](https://github.com/unit-mesh/unit-eval/commit/f7afbc0f0b1ece9349895a6e7539d56d5d6257d1))
 * fix blank issue ([dbcca15](https://github.com/unit-mesh/unit-eval/commit/dbcca155b031192de571eaec1c43434bd45f8f99))
+* fix empty issue ([c8706eb](https://github.com/unit-mesh/unit-eval/commit/c8706eba1a9875984b62aef2f963eba2ac1c215b))
+* fix empty tests issue ([9b916e0](https://github.com/unit-mesh/unit-eval/commit/9b916e08c985e26bf650a016068b6eabb7e3424c))
 * fix for JavaWorker in error issue ([897b288](https://github.com/unit-mesh/unit-eval/commit/897b288b229a601f2174eb916d74f592e70c098a))
 * fix lfs issue ([aa49873](https://github.com/unit-mesh/unit-eval/commit/aa498732e57e60ad1e7d8ea879e4c96a7ba32c1b))
 * fix option issue ([a56c9c2](https://github.com/unit-mesh/unit-eval/commit/a56c9c2ad0ac517b2a6c744576bb5e1182acf750))
+* fix origin code error issues ([f342793](https://github.com/unit-mesh/unit-eval/commit/f34279366f9f01ac4567283f61814559ddd6d85f))
 * fix related code format to instructions issues ([a66d8b1](https://github.com/unit-mesh/unit-eval/commit/a66d8b16e72e9655ec90c7f3ff9a8a62f410e241))
 * fix rename issue ([3cf8175](https://github.com/unit-mesh/unit-eval/commit/3cf8175229aeea1c49782d82451d4b8461fb3177))
 * fix simliar chunk issue ([7aefcae](https://github.com/unit-mesh/unit-eval/commit/7aefcae8b05f009eafbda90f0bf8875fc1b28a6d))
 * fix simliar chunk length issue ([0d0d121](https://github.com/unit-mesh/unit-eval/commit/0d0d121c6dfc5204fa044ae53d1111f4a82c016d))
+* fix tests ([5291a00](https://github.com/unit-mesh/unit-eval/commit/5291a002aa4c4e66324dd2b450a19cd3383ec55f))
 * fix tests ([46e9cad](https://github.com/unit-mesh/unit-eval/commit/46e9cad4f952fa70c48ab0a00f9332f6e7d90275))
 * fix tests ([2f8a472](https://github.com/unit-mesh/unit-eval/commit/2f8a4728bc6c6d87cb224b62487c532863db59a3))
 * fix tests ([6ce7891](https://github.com/unit-mesh/unit-eval/commit/6ce7891b26ec9fccd2f03a8210bce22fe85e201d))
+* fix typos ([8e0e911](https://github.com/unit-mesh/unit-eval/commit/8e0e9113de27c3be3fba77393d4a29793772919a))
 * fix typos ([f3c4024](https://github.com/unit-mesh/unit-eval/commit/f3c402487811e9854092ddfe01673ed8547cd7a7))
 * try to parse deps ([123f904](https://github.com/unit-mesh/unit-eval/commit/123f9048fea8f5bad20cc3c3ca4438c255ec8d14))
 
 
 ### Features
 
+* add add check naming style function name ([c52bc1c](https://github.com/unit-mesh/unit-eval/commit/c52bc1c1708c8899bd62002c6d9cc0022c84a17e))
 * add api server examples ([4ab3ce0](https://github.com/unit-mesh/unit-eval/commit/4ab3ce05472e6b0240b2bfd8437d6a8ad2544c45))
 * add first version deepseek code finetune script ([188bf6d](https://github.com/unit-mesh/unit-eval/commit/188bf6d6869547789d34ca8266aa178f3f71d566))
 * add inline block support ([4acd852](https://github.com/unit-mesh/unit-eval/commit/4acd8527e8d867b2c48b27280ed2105b13ede5be))
@@ -38,6 +44,7 @@
 * add simple test for java coder ([b2efc31](https://github.com/unit-mesh/unit-eval/commit/b2efc31313f2a73de31f7143b688414c5593b362))
 * add simplie completion block filter ([e370bf2](https://github.com/unit-mesh/unit-eval/commit/e370bf29beeeaf466a8a5406c550109af376d41d))
 * **disti:** init module ([f41c95a](https://github.com/unit-mesh/unit-eval/commit/f41c95a767ddc383e0cd4a78428f2267dae0e595))
+* **fintune:** update for batch size for 4090 ([19a9eb7](https://github.com/unit-mesh/unit-eval/commit/19a9eb72f1a2cb13e0d491444eb2d151c7b85d8c))
 * init support lang design ([280ee34](https://github.com/unit-mesh/unit-eval/commit/280ee341554117441b8048450332deeb9dc77c18))
 * make change history ([dbdbc49](https://github.com/unit-mesh/unit-eval/commit/dbdbc493dde13601cda32de26481f5650de5ebb5))
 * make file in cmpletion realy works ([619b83b](https://github.com/unit-mesh/unit-eval/commit/619b83bba69d8a8b5261d4ed1c0bb6fbbf75e194))
@@ -48,6 +55,8 @@
 * **server:** try to saimple response ([46f9863](https://github.com/unit-mesh/unit-eval/commit/46f9863ab40307c5c93596ad65dcd69c6cd427ca))
 * **test:** add basic rules for generate data ([2e9549a](https://github.com/unit-mesh/unit-eval/commit/2e9549a2a4a995ebd5e350071cf0146b9385ddea))
 * **test:** init first version for class test generate ([33ef46f](https://github.com/unit-mesh/unit-eval/commit/33ef46fdd10176d13f06b006c0f5951f71cd73db))
+* **unitest:** add ins quality threshold for test size ([8591675](https://github.com/unit-mesh/unit-eval/commit/8591675f906eb402e7751d02fbed20f2a79dd28d))
+* **unitest:** add test support ([1ebea0e](https://github.com/unit-mesh/unit-eval/commit/1ebea0e59cf15311a645bd6d34555db6e73bf256))
 * **unitest:** make it works for instructions ([1d5fd62](https://github.com/unit-mesh/unit-eval/commit/1d5fd621497b41feb605fd28a82988d68fae886e))
 * **unittest:** add identify to frameworks ([8c8c327](https://github.com/unit-mesh/unit-eval/commit/8c8c3279ebdb5a6fd45503f1c8ecbac46f8549ea))
 * **unittest:** add simple way to get test framework ([2f5c7dc](https://github.com/unit-mesh/unit-eval/commit/2f5c7dc15b1ef2c694ecde0a6235ac8a3f126d39))
