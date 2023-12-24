@@ -21,6 +21,43 @@ os.environ["NCCL_P2P_DISABLE"] = "1"
 os.environ["NCCL_IB_DISABLE"] = "1"
 ```
 
+### 4090
+
+```bash
+DATA_PATH="/openbayes/home/summary.jsonl"
+OUTPUT_PATH="/openbayes/home/output"
+
+# NotImplementedError: Using RTX 3090 or 4000 series doesn't support faster communication broadband via P2P or IB. Please
+# set `NCCL_P2P_DISABLE="1"` and `NCCL_IB_DISABLE="1" or use `accelerate launch` which will do this automatically.
+# 
+# !NCCL_P2P_DISABLE=1
+# !NCCL_IB_DISABLE=1
+
+MODEL_PATH="/openbayes/home/deepseek-coder-6.7b-instruct"
+
+!cd DeepSeek-Coder/finetune && deepspeed finetune_deepseekcoder.py \
+    --model_name_or_path $MODEL_PATH \
+    --data_path $DATA_PATH \
+    --output_dir $OUTPUT_PATH \
+    --num_train_epochs 1 \
+    --model_max_length 512 \
+    --per_device_train_batch_size 4 \
+    --per_device_eval_batch_size 1 \
+    --gradient_accumulation_steps 4 \
+    --evaluation_strategy "no" \
+    --save_strategy "steps" \
+    --save_steps 300 \
+    --save_total_limit 1 \
+    --learning_rate 4e-5 \
+    --warmup_steps 10 \
+    --logging_steps 1 \
+    --lr_scheduler_type "cosine" \
+    --gradient_checkpointing True \
+    --report_to "tensorboard" \
+    --deepspeed configs/ds_config_zero3.json \
+    --bf16 True
+```
+
 ## Server
 
 1.install requirements
