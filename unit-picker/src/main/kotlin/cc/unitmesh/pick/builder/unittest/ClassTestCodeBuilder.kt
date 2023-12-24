@@ -5,6 +5,7 @@ import cc.unitmesh.core.SupportedLang
 import cc.unitmesh.core.unittest.TestCodeBuilderType
 import cc.unitmesh.core.unittest.TypedTestIns
 import cc.unitmesh.core.unittest.TestCodeBuilder
+import cc.unitmesh.pick.ext.toSourceCode
 import cc.unitmesh.pick.worker.job.JobContext
 import chapi.domain.core.CodeDataStruct
 
@@ -19,11 +20,12 @@ class ClassTestCodeBuilder(private val context: JobContext) : TestCodeBuilder {
         underTestFile: CodeDataStruct,
         relevantClasses: List<CodeDataStruct>,
     ): List<ClassTestIns> {
+        val generatedCode = dataStruct.toSourceCode()
         return listOf(
             ClassTestIns(
                 lang = context.project.language,
                 underTestCode = underTestFile.Content,
-                generatedCode = dataStruct.Content,
+                generatedCode = generatedCode,
                 coreFrameworks = context.project.coreFrameworks,
                 testFrameworks = context.project.testFrameworks,
                 testType = TestCodeBuilderType.CLASS_UNIT,
@@ -36,7 +38,6 @@ class ClassTestCodeBuilder(private val context: JobContext) : TestCodeBuilder {
             )
         )
     }
-
 }
 
 class ClassTestIns(

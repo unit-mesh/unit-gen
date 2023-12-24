@@ -66,7 +66,9 @@ class JavaTestCodeService(val context: JobContext) : UnitTestService {
     override fun build(dataStruct: CodeDataStruct): List<TypedTestIns> {
         val underTestFile = this.findUnderTestFile(dataStruct).firstOrNull() ?: return emptyList()
         val relevantClasses = this.lookupRelevantClass(dataStruct)
-        val classTestIns = ClassTestCodeBuilder(context).build(dataStruct, underTestFile, relevantClasses)
+        val classTestIns = ClassTestCodeBuilder(context)
+            .build(dataStruct, underTestFile, relevantClasses)
+
         // todo: add method level support
         return classTestIns
     }

@@ -1,7 +1,39 @@
 package cc.unitmesh.pick.ext
 
+import chapi.domain.core.CodeContainer
 import chapi.domain.core.CodeDataStruct
 import chapi.domain.core.CodePosition
+
+fun CodeContainer.buildSourceCode(codeLines: List<String>) {
+    this.DataStructures.map { ds ->
+        ds.Imports = this.Imports
+
+        ds.Content = CodeDataStructUtil.contentByPosition(codeLines, ds.Position)
+        ds.Functions.map {
+            it.apply {
+                it.Content = CodeDataStructUtil.contentByPosition(codeLines, it.Position)
+            }
+        }
+    }
+}
+
+fun CodeDataStruct.toSourceCode(): String {
+    val result = StringBuilder()
+    result.append("package ${this.Package};\n\n")
+    this.Imports.forEach {
+        result.append("import ${it.Source};\n")
+    }
+
+    result.append("\n")
+
+    this.Annotations.forEach {
+        result.append("@${it.Name}\n")
+    }
+    result.append(this.Content)
+
+    return result.toString()
+}
+
 
 fun CodeDataStruct.toUml(): String {
     val output = StringBuilder()
@@ -82,7 +114,7 @@ object CodeDataStructUtil {
             if (startLineContent.isBlank()) {
                 0
             } else {
-                startLineContent.length - 1
+                startLineContent.length
             }
         } else {
             position.StartLinePosition
@@ -92,20 +124,21 @@ object CodeDataStructUtil {
             if (endLineContent.isBlank()) {
                 0
             } else {
-                endLineContent.length - 1
+                endLineContent.length + 1
             }
         } else {
             position.StopLinePosition
         }
 
         val start = startLineContent.substring(startColumn)
-        val end = endLineContent.substring(0, endColumn)
+        val end = endLineContent.substring(endColumn)
 
-        // start + ... + end
-        return if (startLine == endLine) {
+        val code = if (startLine == endLine) {
             start
         } else {
-            start + lines.subList(startLine + 1, endLine).joinToString("") + end
+            start + "\n" + lines.subList(startLine + 1, endLine).joinToString("\n") + "\n" + end
         }
+
+        return code
     }
 }

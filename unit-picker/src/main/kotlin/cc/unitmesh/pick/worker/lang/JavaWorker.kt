@@ -6,10 +6,12 @@ import cc.unitmesh.core.completion.CompletionBuilderType
 import cc.unitmesh.core.Instruction
 import cc.unitmesh.pick.worker.job.JobContext
 import cc.unitmesh.core.completion.TypedIns
+import cc.unitmesh.pick.ext.buildSourceCode
 import cc.unitmesh.pick.worker.WorkerContext
 import cc.unitmesh.pick.worker.base.LangWorker
 import cc.unitmesh.pick.project.ProjectContext
 import chapi.ast.javaast.JavaAnalyser
+import chapi.domain.core.CodeContainer
 import kotlinx.coroutines.coroutineScope
 import org.slf4j.Logger
 import java.io.File
@@ -47,16 +49,7 @@ class JavaWorker(private val context: WorkerContext) : LangWorker {
         // since the Java Analyser imports will be in data structures
         val container = JavaAnalyser().analysis(job.code, job.fileSummary.location)
         job.codeLines = job.code.lines()
-        container.DataStructures.map { ds ->
-            ds.Imports = container.Imports
-
-            ds.Content = CodeDataStructUtil.contentByPosition(job.codeLines, ds.Position)
-            ds.Functions.map {
-                it.apply {
-                    it.Content = CodeDataStructUtil.contentByPosition(job.codeLines, it.Position)
-                }
-            }
-        }
+        container.buildSourceCode(job.codeLines)
 
         job.container = container
     }
