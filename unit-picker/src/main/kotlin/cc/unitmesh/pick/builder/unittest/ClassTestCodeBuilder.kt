@@ -21,6 +21,7 @@ class ClassTestCodeBuilder(private val context: JobContext) : TestCodeBuilder {
         relevantClasses: List<CodeDataStruct>,
     ): List<ClassTestIns> {
         val generatedCode = dataStruct.toSourceCode()
+
         return listOf(
             ClassTestIns(
                 lang = context.project.language,
@@ -30,8 +31,6 @@ class ClassTestCodeBuilder(private val context: JobContext) : TestCodeBuilder {
                 testFrameworks = context.project.testFrameworks,
                 testType = TestCodeBuilderType.CLASS_UNIT,
                 specs = listOf(
-                    "You MUST use should_xx_xx style for test method name.",
-                    "You MUST use given-when-then style.",
                     "Test file should be complete and compilable, without need for further actions.",
                     "Instead of using `@BeforeEach` methods for setup, include all necessary code initialization within each individual test method, do not write parameterized tests."
                 )

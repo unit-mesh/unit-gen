@@ -66,4 +66,56 @@ class CodeDataStructUtilTest {
 
         assertEquals(originCode, codeContainer.DataStructures[0].toSourceCode())
     }
+
+    @Test
+    fun should_return_camel_case_when_all_function_names_are_in_camel_case() {
+        // given
+        val sourceCode = """
+            package com.example.springboot;
+            
+            import org.springframework.web.bind.annotation.GetMapping;
+            import org.springframework.web.bind.annotation.RestController;
+            
+            @RestController
+            class HelloController {
+            	@GetMapping("/blog/get")
+            	public String index() {
+            		return "Greetings from Spring Boot!";
+            	}
+            }
+            """.trimIndent()
+
+        val codeDataStruct = JavaAnalyser().analysis(sourceCode, "").DataStructures[0]
+        // when
+        val result = codeDataStruct.checkNamingStyle()
+
+        // then
+        assertEquals("CamelCase", result)
+    }
+
+    @Test
+    fun should_return_snake_case_when_all_function_names_are_in_snake_case() {
+        // given
+        val sourceCode = """
+            package com.example.springboot;
+            
+            import org.springframework.web.bind.annotation.GetMapping;
+            import org.springframework.web.bind.annotation.RestController;
+            
+            @RestController
+            class HelloController {
+            	@GetMapping("/blog/get")
+            	public String index_name() {
+            		return "Greetings from Spring Boot!";
+            	}
+            }
+            """.trimIndent()
+
+        val codeDataStruct = JavaAnalyser().analysis(sourceCode, "").DataStructures[0]
+        // when
+        val result = codeDataStruct.checkNamingStyle()
+
+        // then
+        assertEquals("snake_case", result)
+    }
 }
