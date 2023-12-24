@@ -70,11 +70,10 @@ class JavaTestCodeService(val context: JobContext) : UnitTestService {
         val classTestIns = ClassTestCodeBuilder(context)
             .build(dataStruct, underTestFile, relevantClasses)
 
-        MethodTestCodeBuilder(context)
+        val methodTests = MethodTestCodeBuilder(context)
             .build(dataStruct, underTestFile, relevantClasses)
 
-        // todo: add method level support
-        return classTestIns
+        return classTestIns + methodTests
     }
 }
 

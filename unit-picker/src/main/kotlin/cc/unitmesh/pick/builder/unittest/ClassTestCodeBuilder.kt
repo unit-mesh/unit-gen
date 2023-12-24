@@ -20,7 +20,7 @@ class ClassTestCodeBuilder(private val context: JobContext) : TestCodeBuilder {
         dataStruct: CodeDataStruct,
         underTestFile: CodeDataStruct,
         relevantClasses: List<CodeDataStruct>,
-    ): List<ClassTestIns> {
+    ): List<BasicTestIns> {
         val generatedCode = dataStruct.toSourceCode()
         if (generatedCode.lines().size > context.insQualityThreshold.maxLineInCode) {
             return emptyList()
@@ -29,7 +29,7 @@ class ClassTestCodeBuilder(private val context: JobContext) : TestCodeBuilder {
         val namingStyle = dataStruct.checkNamingStyle()
 
         return listOf(
-            ClassTestIns(
+            BasicTestIns(
                 lang = context.project.language,
                 underTestCode = underTestFile.Content,
                 generatedCode = generatedCode,
@@ -44,7 +44,7 @@ class ClassTestCodeBuilder(private val context: JobContext) : TestCodeBuilder {
     }
 }
 
-class ClassTestIns(
+class BasicTestIns(
     val lang: SupportedLang,
     val underTestCode: String,
     val generatedCode: String,
