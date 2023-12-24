@@ -1,6 +1,5 @@
 package cc.unitmesh.pick.worker.lang
 
-import cc.unitmesh.pick.ext.CodeDataStructUtil
 import cc.unitmesh.pick.worker.job.InstructionFileJob
 import cc.unitmesh.core.completion.CompletionBuilderType
 import cc.unitmesh.core.Instruction
@@ -11,7 +10,6 @@ import cc.unitmesh.pick.worker.WorkerContext
 import cc.unitmesh.pick.worker.base.LangWorker
 import cc.unitmesh.pick.project.ProjectContext
 import chapi.ast.javaast.JavaAnalyser
-import chapi.domain.core.CodeContainer
 import kotlinx.coroutines.coroutineScope
 import org.slf4j.Logger
 import java.io.File
@@ -78,18 +76,18 @@ class JavaWorker(private val context: WorkerContext) : LangWorker {
         }
 
         val lists = jobs.map { job ->
-            val jobContext =
-                JobContext(
-                    job,
-                    context.qualityTypes,
-                    fileTree,
-                    context.insOutputConfig,
-                    context.completionTypes,
-                    context.maxCompletionInOneFile,
-                    project = ProjectContext(
-                        compositionDependency = context.compositionDependency,
-                    )
-                )
+            val jobContext = JobContext(
+                job,
+                context.qualityTypes,
+                fileTree,
+                context.insOutputConfig,
+                context.completionTypes,
+                context.maxCompletionInOneFile,
+                project = ProjectContext(
+                    compositionDependency = context.compositionDependency,
+                ),
+                context.insQualityThreshold
+            )
 
             context.codeContextStrategies.map { type ->
                 val codeStrategyBuilder = type.builder(jobContext)

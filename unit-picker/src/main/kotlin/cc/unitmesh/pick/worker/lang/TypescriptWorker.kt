@@ -51,7 +51,15 @@ class TypescriptWorker(private val context: WorkerContext) : LangWorker {
 
         val lists = jobs.map { job ->
             val jobContext =
-                JobContext(job, context.qualityTypes, fileTree, context.insOutputConfig, context.completionTypes, 3)
+                JobContext(
+                    job,
+                    context.qualityTypes,
+                    fileTree,
+                    context.insOutputConfig,
+                    context.completionTypes,
+                    3,
+                    insQualityThreshold = context.insQualityThreshold
+                )
 
             context.codeContextStrategies.map { type ->
                 type.builder(jobContext).build()

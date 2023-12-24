@@ -29,7 +29,15 @@ class InBlockCodeCompletionBuilderTest {
             codeLines = codeLines,
             code = codeLines.joinToString("\n")
         )
-        val jobContext = JobContext(job, emptyList(), hashMapOf("" to job), InsOutputConfig(), emptyList(), 3)
+        val jobContext = JobContext(
+            job,
+            emptyList(),
+            hashMapOf("" to job),
+            InsOutputConfig(),
+            emptyList(),
+            3,
+            insQualityThreshold = context.insQualityThreshold
+        )
         val builder = InBlockCodeCompletionBuilder(jobContext)
 
         // when

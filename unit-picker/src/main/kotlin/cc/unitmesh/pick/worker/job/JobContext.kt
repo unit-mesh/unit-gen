@@ -2,6 +2,7 @@ package cc.unitmesh.pick.worker.job
 
 import cc.unitmesh.pick.option.InsOutputConfig
 import cc.unitmesh.core.completion.CompletionBuilderType
+import cc.unitmesh.pick.option.InsQualityThreshold
 import cc.unitmesh.pick.project.ProjectContext
 import cc.unitmesh.quality.CodeQualityType
 import kotlinx.serialization.Serializable
@@ -17,6 +18,7 @@ data class JobContext(
     val completionBuilderTypes: List<CompletionBuilderType>,
     val maxCompletionInOneFile: Int,
     val project: ProjectContext = ProjectContext(),
+    val insQualityThreshold: InsQualityThreshold,
 ) {
     companion object {
         fun default(fileTree: HashMap<String, InstructionFileJob> = hashMapOf()): JobContext {
@@ -27,7 +29,8 @@ data class JobContext(
                 qualityTypes = listOf(),
                 fileTree = fileTree,
                 completionBuilderTypes = listOf(),
-                maxCompletionInOneFile = 3
+                maxCompletionInOneFile = 3,
+                insQualityThreshold = InsQualityThreshold()
             )
         }
     }

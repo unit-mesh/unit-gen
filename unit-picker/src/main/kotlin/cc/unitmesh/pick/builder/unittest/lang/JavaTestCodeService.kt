@@ -2,6 +2,7 @@ package cc.unitmesh.pick.builder.unittest.lang
 
 import cc.unitmesh.core.unittest.TypedTestIns
 import cc.unitmesh.pick.builder.unittest.ClassTestCodeBuilder
+import cc.unitmesh.pick.builder.unittest.MethodTestCodeBuilder
 import cc.unitmesh.pick.worker.job.InstructionFileJob
 import cc.unitmesh.pick.worker.job.JobContext
 import chapi.domain.core.CodeDataStruct
@@ -67,6 +68,9 @@ class JavaTestCodeService(val context: JobContext) : UnitTestService {
         val underTestFile = this.findUnderTestFile(dataStruct).firstOrNull() ?: return emptyList()
         val relevantClasses = this.lookupRelevantClass(dataStruct)
         val classTestIns = ClassTestCodeBuilder(context)
+            .build(dataStruct, underTestFile, relevantClasses)
+
+        MethodTestCodeBuilder(context)
             .build(dataStruct, underTestFile, relevantClasses)
 
         // todo: add method level support

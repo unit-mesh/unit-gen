@@ -60,15 +60,15 @@ data class InsPickerOption(
      */
     val codeContextStrategies: List<BizCodeContextStrategy> = listOf(
         BizCodeContextStrategy.RELATED_CODE,
-        BizCodeContextStrategy.SIMILAR_CHUNKS,
+//        BizCodeContextStrategy.SIMILAR_CHUNKS,
     ),
     /**
      * The [CompletionBuilderType], which will according you IDE strategy to generate the type.
      */
     val completionTypes: List<CompletionBuilderType> = listOf(
-        CompletionBuilderType.AFTER_BLOCK_COMPLETION,
-        CompletionBuilderType.IN_BLOCK_COMPLETION,
-        CompletionBuilderType.INLINE_COMPLETION,
+//        CompletionBuilderType.AFTER_BLOCK_COMPLETION,
+//        CompletionBuilderType.IN_BLOCK_COMPLETION,
+//        CompletionBuilderType.INLINE_COMPLETION,
         CompletionBuilderType.TEST_CODE_GEN,
     ),
     /**

@@ -44,7 +44,8 @@ public class HelloController {
             fileTree = hashMapOf("" to job),
             insOutputConfig = InsOutputConfig(),
             completionBuilderTypes = listOf(CompletionBuilderType.IN_BLOCK_COMPLETION),
-            maxCompletionInOneFile = 3
+            maxCompletionInOneFile = 3,
+            insQualityThreshold = context.insQualityThreshold
         )
         val builder = SimilarChunksStrategyBuilder(context)
         val result = builder.build()
@@ -91,7 +92,8 @@ public class HelloController {
             ),
             insOutputConfig = InsOutputConfig(),
             completionBuilderTypes = listOf(CompletionBuilderType.IN_BLOCK_COMPLETION),
-            maxCompletionInOneFile = 3
+            maxCompletionInOneFile = 3,
+            insQualityThreshold = context.insQualityThreshold
         )
 
         val builder = SimilarChunksStrategyBuilder(context)
