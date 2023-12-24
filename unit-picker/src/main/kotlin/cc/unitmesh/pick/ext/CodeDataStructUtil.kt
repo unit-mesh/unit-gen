@@ -10,6 +10,12 @@ fun CodeContainer.buildSourceCode(codeLines: List<String>) {
 
         ds.Content = CodeDataStructUtil.contentByPosition(codeLines, ds.Position)
         ds.Functions.map {
+            // in Chapi, the position of function is not correct, so we need to fix it
+            val position = it.Position
+            if (it.Annotations.isNotEmpty()) {
+                position.StartLine -= 1
+                position.StartLinePosition = 0
+            }
             it.Content = CodeDataStructUtil.contentByPosition(codeLines, it.Position)
         }
     }

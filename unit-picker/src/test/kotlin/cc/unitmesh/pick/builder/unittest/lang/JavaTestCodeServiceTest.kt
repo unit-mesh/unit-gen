@@ -189,7 +189,7 @@ public class CompanyService {
         assertEquals(3, result.size)
         val typedTestIns = result[1] as BasicTestIns
         typedTestIns.testType shouldBe TestCodeBuilderType.METHOD_UNIT
-//        typedTestIns.generatedCode shouldContain "@Test"
-//        typedTestIns.underTestCode.length shouldNotBe 0
+        typedTestIns.generatedCode shouldContain "@Test"
+        typedTestIns.underTestCode shouldContain "companyMongoRepository.findAll()"
     }
 }
