@@ -10,9 +10,7 @@ fun CodeContainer.buildSourceCode(codeLines: List<String>) {
 
         ds.Content = CodeDataStructUtil.contentByPosition(codeLines, ds.Position)
         ds.Functions.map {
-            it.apply {
-                it.Content = CodeDataStructUtil.contentByPosition(codeLines, it.Position)
-            }
+            it.Content = CodeDataStructUtil.contentByPosition(codeLines, it.Position)
         }
     }
 }

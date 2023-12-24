@@ -5,6 +5,7 @@ import cc.unitmesh.pick.worker.job.InstructionFileJob
 import cc.unitmesh.pick.ext.toUml
 import cc.unitmesh.core.completion.CompletionBuilderType
 import cc.unitmesh.pick.builder.ins.RelatedCodeIns
+import cc.unitmesh.pick.option.InsQualityThreshold
 import cc.unitmesh.pick.strategy.bizcode.RelatedCodeStrategyBuilder
 import cc.unitmesh.pick.worker.job.JobContext
 import cc.unitmesh.quality.CodeQualityType
@@ -48,7 +49,7 @@ public class HelloController {
             insOutputConfig = InsOutputConfig(),
             completionBuilderTypes = listOf(CompletionBuilderType.IN_BLOCK_COMPLETION),
             maxCompletionInOneFile = 3,
-            insQualityThreshold = context.insQualityThreshold
+            insQualityThreshold = InsQualityThreshold()
         )
         val builder = RelatedCodeStrategyBuilder(context)
         val result = builder.build()
@@ -87,7 +88,7 @@ public class HelloController {
             insOutputConfig = InsOutputConfig(),
             completionBuilderTypes = listOf(CompletionBuilderType.IN_BLOCK_COMPLETION),
             maxCompletionInOneFile = 3,
-            insQualityThreshold = context.insQualityThreshold
+            insQualityThreshold = InsQualityThreshold()
         )
         val builder = RelatedCodeStrategyBuilder(context)
         val result = builder.build()
@@ -135,7 +136,7 @@ public class HelloController {
             insOutputConfig = InsOutputConfig(),
             completionBuilderTypes = listOf(CompletionBuilderType.IN_BLOCK_COMPLETION),
             maxCompletionInOneFile = 3,
-            insQualityThreshold = context.insQualityThreshold
+            insQualityThreshold = InsQualityThreshold()
         )
 
         val builder = RelatedCodeStrategyBuilder(context)

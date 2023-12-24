@@ -3,6 +3,7 @@ package cc.unitmesh.pick.builder.strategy;
 import cc.unitmesh.pick.option.InsOutputConfig
 import cc.unitmesh.pick.worker.job.InstructionFileJob
 import cc.unitmesh.core.completion.CompletionBuilderType
+import cc.unitmesh.pick.option.InsQualityThreshold
 import cc.unitmesh.pick.strategy.bizcode.SimilarChunksStrategyBuilder
 import cc.unitmesh.pick.worker.job.JobContext
 import cc.unitmesh.quality.CodeQualityType
@@ -45,7 +46,7 @@ public class HelloController {
             insOutputConfig = InsOutputConfig(),
             completionBuilderTypes = listOf(CompletionBuilderType.IN_BLOCK_COMPLETION),
             maxCompletionInOneFile = 3,
-            insQualityThreshold = context.insQualityThreshold
+            insQualityThreshold = InsQualityThreshold()
         )
         val builder = SimilarChunksStrategyBuilder(context)
         val result = builder.build()
@@ -93,7 +94,7 @@ public class HelloController {
             insOutputConfig = InsOutputConfig(),
             completionBuilderTypes = listOf(CompletionBuilderType.IN_BLOCK_COMPLETION),
             maxCompletionInOneFile = 3,
-            insQualityThreshold = context.insQualityThreshold
+            insQualityThreshold = InsQualityThreshold()
         )
 
         val builder = SimilarChunksStrategyBuilder(context)
