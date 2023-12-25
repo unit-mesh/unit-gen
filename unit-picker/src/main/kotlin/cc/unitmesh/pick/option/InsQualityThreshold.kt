@@ -17,18 +17,18 @@ data class InsQualityThreshold(
      */
     val maxCharInCode: Int = MAX_CHAR_IN_CODE,
     /**
-     * Our token length is 1024, so we can use 40 * 2048 / 512 = 160
+     * Our token length is 1024, so we can use 40 * 2048 / 512 = 320
      */
     val maxLineInCode: Int = MAX_LINE_IN_CODE,
     val badsmellThreshold: Map<String, Int> = BsThresholds().toThresholds(),
     val maxTokenLength: Int = MAX_TOKEN_LENGTH,
 ) {
     companion object {
-        const val MAX_TOKEN_LENGTH: Int = 1024
+        const val MAX_TOKEN_LENGTH: Int = 2048
         const val MAX_COMPLEXITY: Int = 1000
         const val MAX_FILE_SIZE: Int = 1024 * 64
-        const val MAX_LINE_IN_CODE: Int = 160
-        const val MAX_CHAR_IN_CODE: Int = 1500
+        const val MAX_LINE_IN_CODE: Int = 320
+        const val MAX_CHAR_IN_CODE: Int = 3000
         const val MAX_RELATED_CODE_LINE: Int = 30
     }
 }
