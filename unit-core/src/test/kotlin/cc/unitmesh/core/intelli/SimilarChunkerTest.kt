@@ -56,7 +56,7 @@ class SimilarChunkerTest {
         val set2 = setOf("word2", "word3", "word4")
 
         // When
-        val result = similarChunker.similarityScore(set1, set2)
+        val result = SimilarChunker.similarityScore(set1, set2)
 
         // Then
         val expected = 0.5
@@ -69,7 +69,7 @@ class SimilarChunkerTest {
         val path = "unit-picker/src/main/kotlin/cc/unitmesh/pick/similar/JavaSimilarChunks.kt"
 
         // When
-        val result = similarChunker.pathTokenize(path)
+        val result = SimilarChunker.pathTokenize(path)
 
         // Then
         val expected = listOf(
@@ -97,7 +97,7 @@ class SimilarChunkerTest {
         val text = "src/main/java/com/example/BlogService.java"
 
         // when
-        val result = similarChunker.pathLevelJaccardSimilarity(chunks, text)
+        val result = SimilarChunker.pathLevelJaccardSimilarity(chunks, text)
 
         // then
         // assert the size of the result is equal to the size of chunks

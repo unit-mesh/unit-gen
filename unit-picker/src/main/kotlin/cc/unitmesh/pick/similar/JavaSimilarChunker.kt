@@ -38,7 +38,7 @@ class JavaSimilarChunker(private val fileTree: HashMap<String, InstructionFileJo
 
         val similarChunks: List<Pair<Double, String>> = allRelatedChunks.map {
             val tokenize = tokenize(it)
-            val score = similarityScore(tokenize.toSet(), tokenize(beforeCursor).toSet())
+            val score = Companion.similarityScore(tokenize.toSet(), tokenize(beforeCursor).toSet())
             score to it
         }.sortedByDescending { it.first }
             .filter { it.first > codeScoreThreshold }
@@ -61,7 +61,7 @@ class JavaSimilarChunker(private val fileTree: HashMap<String, InstructionFileJo
         val packageName = packageNameTokenize(text)
         return chunks.mapNotNull { chunk ->
             val chunkPackageName = packageNameTokenize(chunk)
-            val score = similarityScore(packageName.toSet(), chunkPackageName.toSet())
+            val score = Companion.similarityScore(packageName.toSet(), chunkPackageName.toSet())
             if (score >= packageScoreThreshold) {
                 score to chunk
             } else {

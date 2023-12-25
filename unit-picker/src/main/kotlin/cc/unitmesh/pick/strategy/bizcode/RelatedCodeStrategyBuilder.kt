@@ -1,9 +1,9 @@
 package cc.unitmesh.pick.strategy.bizcode
 
 import cc.unitmesh.core.completion.TypedIns
+import cc.unitmesh.core.intelli.SimilarChunker
 import cc.unitmesh.pick.builder.completionBuilders
 import cc.unitmesh.pick.builder.ins.RelatedCodeIns
-import cc.unitmesh.pick.builder.unittest.lang.UnitTestService
 import cc.unitmesh.pick.strategy.base.CodeStrategyBuilder
 import cc.unitmesh.pick.worker.job.JobContext
 import chapi.domain.core.CodeContainer
@@ -14,9 +14,8 @@ class RelatedCodeStrategyBuilder(private val context: JobContext) : CodeStrategy
     override fun build(): List<TypedIns> {
         val language = context.job.fileSummary.language.lowercase()
         val container = context.job.container ?: return emptyList()
-        val relatedCode = findRelatedCode(container)
 
-        // 3. checks with rule specified in config
+        // 1. checks with rule specified in config
         val dataStructs = container.DataStructures.filter {
             hasIssue(it, context.qualityTypes)
         }
@@ -25,6 +24,21 @@ class RelatedCodeStrategyBuilder(private val context: JobContext) : CodeStrategy
             return emptyList()
         }
 
+        val currentPath = container.DataStructures[0].FilePath
+
+        // 2. get name to calculate similarity to take the most similar 3
+        val findRelatedCodeDs = findRelatedCode(container)
+        val relatedCodePath = findRelatedCodeDs.map { it.FilePath }
+        val jaccardSimilarity = SimilarChunker.pathLevelJaccardSimilarity(relatedCodePath, currentPath)
+        val relatedCode = jaccardSimilarity.mapIndexed { index, d ->
+            findRelatedCodeDs[index] to d
+        }.sortedByDescending {
+            it.second
+        }.take(3).map {
+            it.first
+        }
+
+        // 3. build completion instruction
         val builders = completionBuilders(context.completionBuilderTypes, context)
 
         val codeCompletionIns = dataStructs.map { ds ->
