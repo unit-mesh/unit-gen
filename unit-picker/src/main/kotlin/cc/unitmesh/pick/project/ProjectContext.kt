@@ -1,9 +1,7 @@
 package cc.unitmesh.pick.project
 
 import cc.unitmesh.core.SupportedLang
-import cc.unitmesh.pick.worker.TestFrameworkIdentifier
 import kotlinx.serialization.Serializable
-import org.archguard.rule.common.Language
 import org.archguard.scanner.core.sca.CompositionDependency
 
 @Serializable

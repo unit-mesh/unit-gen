@@ -1,4 +1,4 @@
-package cc.unitmesh.pick.worker
+package cc.unitmesh.pick.project.frameworks
 
 import cc.unitmesh.core.SupportedLang
 import org.archguard.scanner.core.sca.CompositionDependency

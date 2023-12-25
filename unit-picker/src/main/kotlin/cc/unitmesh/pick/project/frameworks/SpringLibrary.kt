@@ -1,4 +1,4 @@
-package cc.unitmesh.pick.project
+package cc.unitmesh.pick.project.frameworks
 
 data class SpringDataLibraryDescriptor(val shortText: String, val coords: List<String>)
 data class LibraryDescriptor(val shortText: String, val coords: String)
