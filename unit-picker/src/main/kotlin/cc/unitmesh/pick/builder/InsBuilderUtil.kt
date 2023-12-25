@@ -7,7 +7,6 @@ import cc.unitmesh.core.unittest.TestCodeBuilder
 import cc.unitmesh.pick.builder.bizcode.AfterBlockCodeCompletionBuilder
 import cc.unitmesh.pick.builder.bizcode.InBlockCodeCompletionBuilder
 import cc.unitmesh.pick.builder.bizcode.InlineCodeCompletionBuilder
-import cc.unitmesh.pick.builder.unittest.ApiTestCodeBuilder
 import cc.unitmesh.pick.builder.unittest.ClassTestCodeBuilder
 import cc.unitmesh.pick.builder.unittest.MethodTestCodeBuilder
 import cc.unitmesh.pick.worker.job.JobContext
@@ -35,6 +34,5 @@ fun testBuilder(type: TestCodeBuilderType, context: JobContext): TestCodeBuilder
     return mapOf(
         TestCodeBuilderType.METHOD_UNIT to MethodTestCodeBuilder(context),
         TestCodeBuilderType.CLASS_UNIT to ClassTestCodeBuilder(context),
-        TestCodeBuilderType.API_UNIT to ApiTestCodeBuilder(context),
     )[type] ?: throw SerializationException("Unknown message type: $type")
 }
