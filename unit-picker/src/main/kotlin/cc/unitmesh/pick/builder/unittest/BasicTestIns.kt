@@ -5,9 +5,11 @@ import cc.unitmesh.core.SupportedLang
 import cc.unitmesh.core.unittest.TestCodeBuilderType
 import cc.unitmesh.core.unittest.TypedTestIns
 import cc.unitmesh.pick.builder.ins.RelatedCodeIns
+import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 
-class BasicTestIns(
+@Serializable
+data class BasicTestIns(
     val lang: SupportedLang,
     val underTestCode: String,
     val generatedCode: String,
@@ -21,7 +23,7 @@ class BasicTestIns(
     override val testType: TestCodeBuilderType,
 ) : TypedTestIns() {
     override fun toString(): String {
-        return Json.encodeToString(RelatedCodeIns.serializer(), this)
+        return Json.encodeToString(serializer(), this)
     }
 
     override fun unique(): Instruction {
