@@ -28,7 +28,7 @@ data class InsQualityThreshold(
         const val MAX_COMPLEXITY: Int = 1000
         const val MAX_FILE_SIZE: Int = 1024 * 64
         const val MAX_LINE_IN_CODE: Int = 320
-        const val MAX_CHAR_IN_CODE: Int = 3000
+        const val MAX_CHAR_IN_CODE: Int = 1500
         const val MAX_RELATED_CODE_LINE: Int = 30
     }
 }
