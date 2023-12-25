@@ -22,7 +22,7 @@ class PickerCommand : CliktCommand() {
     private val gitDepth by option(help = "Git depth").int().default(1)
 
     private val projectTypedCompletionSize by option(help = "Limit each CompletionType size").int()
-        .default(InsQualityThreshold.MAX_COMPLEXITY)
+        .default(InsQualityThreshold.MAX_PROJECT_TYPED_COMPLETION_SIZE)
     private val maxCompletionEachFile by option(help = "Max completion / file").int().default(
         MAX_COMPLETION_EACH_FILE
     )
@@ -72,7 +72,12 @@ class PickerCommand : CliktCommand() {
             results.forEach { result ->
                 finalResult.addAll(result.content)
 
-                File(outputDir, result.outputName).writeText(result.content.joinToString("\n") {
+                val file = File(outputDir, result.outputName)
+                if (file.exists()) {
+                    file.delete()
+                }
+
+                file.writeText(result.content.joinToString("\n") {
                     it.render(mergeInput = instructionConfig.mergeInput)
                 })
             }

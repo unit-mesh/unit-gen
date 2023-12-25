@@ -26,6 +26,7 @@ data class InsQualityThreshold(
     companion object {
         const val MAX_TOKEN_LENGTH: Int = 2048
         const val MAX_COMPLEXITY: Int = 1000
+        const val MAX_PROJECT_TYPED_COMPLETION_SIZE: Int = 1000
         const val MAX_FILE_SIZE: Int = 1024 * 64
         const val MAX_LINE_IN_CODE: Int = 320
         const val MAX_CHAR_IN_CODE: Int = 1500

@@ -11,7 +11,7 @@ import cc.unitmesh.quality.testbadsmell.TestBadsmellAnalyser
 import kotlinx.serialization.Serializable
 import java.io.File
 
-const val MAX_COMPLETION_EACH_FILE = 3
+const val MAX_COMPLETION_EACH_FILE = 10
 
 /**
  * Represents an option for picking a code repository.
@@ -92,7 +92,7 @@ data class InsPickerOption(
     /**
      * the default instruction size for each completion type
      */
-    val completionTypeSize: Int = 1000,
+    val completionTypeSize: Int = InsQualityThreshold.MAX_PROJECT_TYPED_COMPLETION_SIZE,
     /**
      * https://docs.sweep.dev/blogs/chunking-2m-files
      * This is because the average token to a character ratio for code is ~1:5(300 tokens), and embedding models are
