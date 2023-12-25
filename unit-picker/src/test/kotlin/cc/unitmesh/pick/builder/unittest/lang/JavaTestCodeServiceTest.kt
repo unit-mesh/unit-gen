@@ -174,7 +174,7 @@ public class CompanyService {
                 "com.rest.springbootemployee.service.CompanyServiceTest" to testFileJob,
             ),
             insOutputConfig = InsOutputConfig(),
-            completionBuilderTypes = listOf(CompletionBuilderType.IN_BLOCK_COMPLETION),
+            completionBuilderTypes = listOf(CompletionBuilderType.TEST_CODE_GEN),
             maxCompletionInOneFile = 3,
             insQualityThreshold = InsQualityThreshold()
         )
