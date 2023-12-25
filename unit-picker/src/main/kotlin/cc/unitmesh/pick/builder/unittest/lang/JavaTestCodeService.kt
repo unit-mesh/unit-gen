@@ -1,6 +1,8 @@
 package cc.unitmesh.pick.builder.unittest.lang
 
+import cc.unitmesh.core.completion.CompletionBuilderType
 import cc.unitmesh.core.unittest.TypedTestIns
+import cc.unitmesh.pick.builder.testBuilders
 import cc.unitmesh.pick.builder.unittest.ClassTestCodeBuilder
 import cc.unitmesh.pick.builder.unittest.MethodTestCodeBuilder
 import cc.unitmesh.pick.worker.job.InstructionFileJob
@@ -65,6 +67,10 @@ class JavaTestCodeService(val context: JobContext) : UnitTestService {
     }.flatten()
 
     override fun build(dataStruct: CodeDataStruct): List<TypedTestIns> {
+        if (!context.completionBuilderTypes.contains(CompletionBuilderType.TEST_CODE_GEN)) {
+            return emptyList()
+        }
+
         val underTestFile = this.findUnderTestFile(dataStruct).firstOrNull() ?: return emptyList()
         val relevantClasses = this.lookupRelevantClass(dataStruct)
         val classTestIns = ClassTestCodeBuilder(context)

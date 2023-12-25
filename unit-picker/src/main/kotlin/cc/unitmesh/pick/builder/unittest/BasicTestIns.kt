@@ -4,7 +4,6 @@ import cc.unitmesh.core.Instruction
 import cc.unitmesh.core.SupportedLang
 import cc.unitmesh.core.unittest.TestCodeBuilderType
 import cc.unitmesh.core.unittest.TypedTestIns
-import cc.unitmesh.pick.builder.ins.RelatedCodeIns
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 
