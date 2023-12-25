@@ -58,7 +58,7 @@ class TypescriptWorker(private val context: WorkerContext) : LangWorker {
                     context.insOutputConfig,
                     context.completionTypes,
                     3,
-                    insQualityThreshold = context.insQualityThreshold
+                    insQualityThreshold = context.qualityThreshold
                 )
 
             context.codeContextStrategies.map { type ->

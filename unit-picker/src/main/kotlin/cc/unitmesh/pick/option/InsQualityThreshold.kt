@@ -21,8 +21,10 @@ data class InsQualityThreshold(
      */
     val maxLineInCode: Int = MAX_LINE_IN_CODE,
     val badsmellThreshold: Map<String, Int> = BsThresholds().toThresholds(),
+    val maxTokenLength: Int = MAX_TOKEN_LENGTH,
 ) {
     companion object {
+        const val MAX_TOKEN_LENGTH: Int = 1024
         const val MAX_COMPLEXITY: Int = 1000
         const val MAX_FILE_SIZE: Int = 1024 * 64
         const val MAX_LINE_IN_CODE: Int = 160

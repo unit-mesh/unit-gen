@@ -17,7 +17,7 @@ data class WorkerContext(
     val completionTypes: List<CompletionBuilderType>,
     val maxCompletionInOneFile: Int,
     val completionTypeSize: Int,
-    val insQualityThreshold: InsQualityThreshold = InsQualityThreshold(),
-    var compositionDependency: List<CompositionDependency> = listOf()
+    val qualityThreshold: InsQualityThreshold = InsQualityThreshold(),
+    var compositionDependency: List<CompositionDependency> = listOf(),
 ) {
 }

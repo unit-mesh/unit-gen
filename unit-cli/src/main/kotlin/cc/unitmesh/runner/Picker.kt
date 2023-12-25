@@ -28,6 +28,7 @@ class PickerCommand : CliktCommand() {
     )
     private val maxCharInCode by option(help = "Max char in code").int().default(InsQualityThreshold.MAX_CHAR_IN_CODE)
     private val maxLineInCode by option(help = "Max line in code").int().default(InsQualityThreshold.MAX_LINE_IN_CODE)
+    private val maxTokenLength by option(help = "Max token length").int().default(InsQualityThreshold.MAX_TOKEN_LENGTH)
 
     override fun run() {
         val outputDir = File("datasets" + File.separator + "origin")

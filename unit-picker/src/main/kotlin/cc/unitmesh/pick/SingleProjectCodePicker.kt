@@ -75,7 +75,7 @@ class SingleProjectCodePicker(private val config: InsPickerOption) {
                 config.completionTypes,
                 config.maxCompletionEachFile,
                 config.completionTypeSize,
-                insQualityThreshold = InsQualityThreshold(
+                qualityThreshold = InsQualityThreshold(
                     complexity = InsQualityThreshold.MAX_COMPLEXITY,
                     fileSize = InsQualityThreshold.MAX_FILE_SIZE,
                     maxLineInCode = config.maxLineInCode,

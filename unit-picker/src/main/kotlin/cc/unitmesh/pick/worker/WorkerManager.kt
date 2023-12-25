@@ -5,6 +5,10 @@ import cc.unitmesh.core.SupportedLang
 import cc.unitmesh.pick.worker.base.LangWorker
 import cc.unitmesh.pick.worker.job.InstructionFileJob
 import cc.unitmesh.pick.worker.lang.JavaWorker
+import com.knuddels.jtokkit.Encodings
+import com.knuddels.jtokkit.api.Encoding
+import com.knuddels.jtokkit.api.EncodingRegistry
+import com.knuddels.jtokkit.api.EncodingType
 import org.archguard.scanner.analyser.ScaAnalyser
 import org.archguard.scanner.analyser.count.LanguageService
 import org.archguard.scanner.core.client.ArchGuardClient
@@ -14,9 +18,12 @@ import org.slf4j.Logger
 import java.io.File
 
 
-class WorkerManager(private val workerContext: WorkerContext) {
+class WorkerManager(private val context: WorkerContext) {
+    var registry: EncodingRegistry = Encodings.newDefaultEncodingRegistry()
+    var enc: Encoding = registry.getEncoding(EncodingType.CL100K_BASE)
+
     private val workers: Map<SupportedLang, LangWorker> = mapOf(
-        SupportedLang.JAVA to JavaWorker(workerContext),
+        SupportedLang.JAVA to JavaWorker(context),
 //        Language.TYPESCRIPT to TypescriptWorker(workerContext),
 //        Language.JAVASCRIPT to TypescriptWorker(workerContext),
     )
@@ -50,7 +57,7 @@ class WorkerManager(private val workerContext: WorkerContext) {
                 logger.info("found ${dependencies.size} dependencies in $codeDir")
             }
 
-            workerContext.compositionDependency = dependencies
+            context.compositionDependency = dependencies
         } catch (e: Exception) {
             logger.error("failed to init dependencies", e)
         }
@@ -69,7 +76,7 @@ class WorkerManager(private val workerContext: WorkerContext) {
             return
         }
 
-        if (summary.complexity > workerContext.insQualityThreshold.complexity) {
+        if (summary.complexity > context.qualityThreshold.complexity) {
             logger.info("skip file ${summary.location} for complexity ${summary.complexity}")
             return;
         }
@@ -79,18 +86,18 @@ class WorkerManager(private val workerContext: WorkerContext) {
         }
 
         // if the file size is too large, we just try 64k
-        if (summary.bytes > workerContext.insQualityThreshold.fileSize) {
+        if (summary.bytes > context.qualityThreshold.fileSize) {
             logger.info("skip file ${summary.location} for size ${summary.bytes}")
             return
         }
 
-//        val encoded = enc.encode(job.code)
-//        val length = encoded.size
-//        if (length > 4000) {
-////            logger.info("skip file ${summary.location} for over 4000 tokens")
-//            println("| filename: ${summary.filename} |  tokens: $length | complexity: ${summary.complexity} | code: ${summary.lines} | size: ${summary.bytes} | location: ${summary.location} |")
-//            return
-//        }
+        val encoded = enc.encode(job.code)
+        val length = encoded.size
+        if (length > context.qualityThreshold.maxTokenLength) {
+            logger.info("skip file ${summary.location} for over ${context.qualityThreshold.maxTokenLength} tokens")
+            println("| filename: ${summary.filename} |  tokens: $length | complexity: ${summary.complexity} | code: ${summary.lines} | size: ${summary.bytes} | location: ${summary.location} |")
+            return
+        }
 
         val language = SupportedLang.from(summary.language)
         val worker = workers[language] ?: return

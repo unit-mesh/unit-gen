@@ -86,7 +86,7 @@ class JavaWorker(private val context: WorkerContext) : LangWorker {
                 project = ProjectContext(
                     compositionDependency = context.compositionDependency,
                 ),
-                context.insQualityThreshold
+                context.qualityThreshold
             )
 
             context.codeContextStrategies.map { type ->
