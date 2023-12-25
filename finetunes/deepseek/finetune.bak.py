@@ -19,7 +19,6 @@ EOT_TOKEN = "<|EOT|>"
 
 def build_instruction_prompt(instruction: str):
     return '''
-You are an AI programming assistant by UnitMesh team.
 ### Instruction:
 {}
 ### Response:
