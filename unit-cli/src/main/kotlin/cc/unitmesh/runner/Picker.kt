@@ -56,6 +56,7 @@ class PickerCommand : CliktCommand() {
                         completionTypeSize = projectTypedCompletionSize,
                         maxCharInCode = maxCharInCode,
                         maxLineInCode = maxLineInCode,
+                        maxTokenLength = maxTokenLength,
                     )
 
                     val content = SingleProjectCodePicker(insPickerOption).execute()

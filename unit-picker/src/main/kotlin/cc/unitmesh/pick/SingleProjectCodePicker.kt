@@ -80,6 +80,7 @@ class SingleProjectCodePicker(private val config: InsPickerOption) {
                     fileSize = InsQualityThreshold.MAX_FILE_SIZE,
                     maxLineInCode = config.maxLineInCode,
                     maxCharInCode = config.maxCharInCode,
+                    maxTokenLength = config.maxTokenLength,
                 )
             )
         )

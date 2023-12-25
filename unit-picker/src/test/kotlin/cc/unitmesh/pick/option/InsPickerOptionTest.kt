@@ -26,7 +26,7 @@ class InsPickerOptionTest {
             url = "https://github.com/example/repo.git",
             branch = "main",
             completionTypeSize  = 10,
-            maxCharInCode = 100
+            maxCharInCode = 100,
         )
 
         // When
@@ -42,7 +42,7 @@ class InsPickerOptionTest {
         val insPickerOption = InsPickerOption(
             url = "https://github.com/example/repo*:?<>.|",
             completionTypeSize  = 10,
-            maxCharInCode = 100
+            maxCharInCode = 100,
         )
 
         // When

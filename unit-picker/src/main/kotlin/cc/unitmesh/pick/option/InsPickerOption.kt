@@ -106,6 +106,7 @@ data class InsPickerOption(
      * Our token length is 2048, so we can use 40 * 2048 / 512 = 160, but java has a lot of new lines, so we double it
      */
     val maxLineInCode: Int = InsQualityThreshold.MAX_LINE_IN_CODE,
+    val maxTokenLength: Int = InsQualityThreshold.MAX_TOKEN_LENGTH,
 ) {
     fun pureDataFileName(): String {
         return baseDir + File.separator + repoFileName() + ".jsonl"

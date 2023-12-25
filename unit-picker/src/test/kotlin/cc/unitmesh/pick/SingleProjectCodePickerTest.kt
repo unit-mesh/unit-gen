@@ -16,7 +16,7 @@ class SingleProjectCodePickerTest {
             InsPickerOption(
                 url = "https://github.com/unit-mesh/unit-eval-testing",
                 completionTypeSize  = 10,
-                maxCharInCode = 100
+                maxCharInCode = 100,
             )
         )
 
