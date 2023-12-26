@@ -9,6 +9,13 @@ permalink: /quick-start
 
 for examples, see: [examples](https://github.com/unit-mesh/unit-eval/tree/master/examples) folder
 
+## use in IDE
+
+1. config project by `processor.yml`
+2. run `PickerKt` 
+
+or run in `unit-cli/src/main/kotlin/cc/unitmesh/runner/Picker.kt`
+
 ## use CLI
 
 see in [config-examples](https://github.com/unit-mesh/unit-eval/tree/master/examples/config-examples/)
