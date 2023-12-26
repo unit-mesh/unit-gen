@@ -18,26 +18,16 @@ import java.io.File
 import java.util.EnumMap
 
 /**
- * A repository will be like this:
- *
- * | CommitID    | AController | AService | BRepository| ARepository|
- * |------------|-------------|----------|------------|------------|
- * | a67c24fd   | 1           | 1        | 1          | 1           |
- * | b05d38f6   | 1           | 1        | 1          | 1           |
- * | 99ac469e   | 1           | 1        | 1          | 1           |
- *
- * We have different strategies to build the pick datasets.
- *
- * - by Horizontal (with Import File):
- * - by Vertical (with History Change):
+ * The JavaWorker class is an implementation of the LangWorker interface.
+ * It provides functionality for handling Java based instruction file jobs.
  */
-class JavaWorker(override val context: WorkerContext) : LangWorker {
+open class JavaWorker(override val context: WorkerContext) : LangWorker {
     override val jobs: MutableList<InstructionFileJob> = mutableListOf()
     override val fileTree: HashMap<String, InstructionFileJob> = hashMapOf()
     override val logger: Logger = org.slf4j.LoggerFactory.getLogger(JavaWorker::class.java)
 
-    private val packageRegex = Regex("package\\s+([a-zA-Z0-9_.]+);")
-    private val extLength = ".java".length
+    protected open val packageRegex = Regex("package\\s+([a-zA-Z0-9_.]+);")
+    protected open val extLength = ".java".length
 
     /**
      * Adds a job to the list of instruction file jobs.
@@ -47,7 +37,7 @@ class JavaWorker(override val context: WorkerContext) : LangWorker {
     override fun prepareJob(job: InstructionFileJob) {
         this.jobs.add(job)
 
-        try{
+        try {
             tryAddClassToTree(job.code, job)
             // since the Java Analyser imports will be in data structures
             val container = JavaAnalyser().analysis(job.code, job.fileSummary.location)
@@ -61,7 +51,7 @@ class JavaWorker(override val context: WorkerContext) : LangWorker {
         }
     }
 
-    private fun tryAddClassToTree(code: String, job: InstructionFileJob) {
+    fun tryAddClassToTree(code: String, job: InstructionFileJob) {
         val packageMatch = packageRegex.find(code)
         if (packageMatch != null) {
             val packageName = packageMatch.groupValues[1]

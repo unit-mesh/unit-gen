@@ -9,6 +9,25 @@ import kotlinx.coroutines.coroutineScope
 import org.slf4j.Logger
 import java.io.File
 
+/**
+ * The `LangWorker` interface represents a worker responsible for preparing and executing instruction file jobs.
+ *
+ * It provides access to the context, file tree, logger, and list of jobs.
+ * The `prepareJob` method is used to prepare a given instruction file job for execution.
+ *
+ * The `start` method is responsible for starting the execution of the job processing. It processes each job in the `jobs` list
+ * and writes the output to a file specified in the `pureDataFileName` property of the `context`.
+ *
+ * @property context The worker context associated with the LangWorker.
+ * @property fileTree A hashmap representing the file tree associated with the LangWorker.
+ * @property logger The logger to be used for logging.
+ * @property jobs A mutable list of instruction file jobs to be processed.
+ *
+ * @see WorkerContext
+ * @see InstructionFileJob
+ * @see Logger
+ * @see TypedIns
+ */
 interface LangWorker {
     val context: WorkerContext
     val fileTree: HashMap<String, InstructionFileJob>
