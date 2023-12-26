@@ -11,15 +11,22 @@ import com.knuddels.jtokkit.api.EncodingType
 import org.archguard.scanner.analyser.count.LanguageService
 import org.slf4j.Logger
 
+/**
+ * The `ThresholdChecker` class is responsible for determining whether a given job or instruction
+ * meets the threshold criteria for processing. It utilizes various criteria, including file type,
+ * code complexity, file size, and token length, to make these determinations.
+ *
+ * @property context The worker context providing configuration settings for the threshold checks.
+ */
 class ThresholdChecker(private val context: WorkerContext) {
     private var registry: EncodingRegistry = Encodings.newDefaultEncodingRegistry()
     private var enc: Encoding = registry.getEncoding(EncodingType.CL100K_BASE)
 
     private val language: LanguageService = LanguageService()
 
-    private val supportedExtensions: Set<String> = setOf(
-        language.getExtension(SupportedLang.JAVA.name.lowercase()),
-    )
+    private val supportedExtensions: Set<String> = SupportedLang.all().map {
+        language.getExtension(it.name.lowercase())
+    }.toSet()
 
     private val logger: Logger = org.slf4j.LoggerFactory.getLogger(ThresholdChecker::class.java)
 
