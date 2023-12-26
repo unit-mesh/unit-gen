@@ -15,7 +15,6 @@ class InstructionFileJob(
     companion object {
         fun from(fileJob: FileJob): InstructionFileJob {
             val content = removeMultipleComments(fileJob.language, fileJob.content.decodeToString())
-            // todo : remove comments
             return InstructionFileJob(
                 code = content,
                 fileSummary = fileJob
@@ -38,8 +37,6 @@ fun removeMultipleComments(language: String, code: String): String {
     return when (language.lowercase()) {
         "java" -> {
             val matcher = pattern.matcher(code)
-
-            // 用空字符串替换注释
             return matcher.replaceAll("")
         }
 

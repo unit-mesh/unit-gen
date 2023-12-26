@@ -1,13 +1,12 @@
 package cc.unitmesh.pick.worker.job
 
-import cc.unitmesh.pick.option.InsOutputConfig
 import cc.unitmesh.core.completion.CompletionBuilderType
-import cc.unitmesh.pick.threshold.InsQualityThreshold
+import cc.unitmesh.pick.option.InsOutputConfig
 import cc.unitmesh.pick.project.ProjectContext
+import cc.unitmesh.pick.threshold.InsQualityThreshold
 import cc.unitmesh.quality.CodeQualityType
 import kotlinx.serialization.Serializable
 import org.archguard.scanner.analyser.count.FileJob
-
 
 @Serializable
 data class JobContext(
@@ -16,7 +15,7 @@ data class JobContext(
     val fileTree: HashMap<String, InstructionFileJob>,
     val insOutputConfig: InsOutputConfig = InsOutputConfig(),
     val completionBuilderTypes: List<CompletionBuilderType>,
-    val maxCompletionInOneFile: Int,
+    val maxTypedCompletionSize: Int,
     val project: ProjectContext = ProjectContext(),
     val insQualityThreshold: InsQualityThreshold,
 ) {
@@ -29,7 +28,7 @@ data class JobContext(
                 qualityTypes = listOf(),
                 fileTree = fileTree,
                 completionBuilderTypes = listOf(),
-                maxCompletionInOneFile = 3,
+                maxTypedCompletionSize = InsQualityThreshold.MAX_PROJECT_TYPED_COMPLETION_SIZE,
                 insQualityThreshold = InsQualityThreshold()
             )
         }

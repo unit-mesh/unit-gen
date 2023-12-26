@@ -175,7 +175,7 @@ public class CompanyService {
             ),
             insOutputConfig = InsOutputConfig(),
             completionBuilderTypes = listOf(CompletionBuilderType.TEST_CODE_GEN),
-            maxCompletionInOneFile = 3,
+            maxTypedCompletionSize = 3,
             insQualityThreshold = InsQualityThreshold()
         )
 

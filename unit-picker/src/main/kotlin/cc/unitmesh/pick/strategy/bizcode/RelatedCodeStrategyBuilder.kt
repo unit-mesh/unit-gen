@@ -53,7 +53,7 @@ class RelatedCodeStrategyBuilder(private val context: JobContext) : CodeStrategy
                     .filter {
                         it.afterCursor.isNotBlank() && it.beforeCursor.isNotBlank()
                     }
-                    .take(context.maxCompletionInOneFile)
+                    .take(context.maxTypedCompletionSize)
                     .map {
                         RelatedCodeIns(
                             language = language,
