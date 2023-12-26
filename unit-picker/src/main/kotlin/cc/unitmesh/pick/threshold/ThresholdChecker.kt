@@ -1,5 +1,6 @@
 package cc.unitmesh.pick.threshold
 
+import cc.unitmesh.core.Instruction
 import cc.unitmesh.core.SupportedLang
 import cc.unitmesh.pick.worker.WorkerContext
 import cc.unitmesh.pick.worker.job.InstructionFileJob
@@ -50,6 +51,16 @@ class ThresholdChecker(private val context: WorkerContext) {
         if (length > context.qualityThreshold.maxTokenLength) {
             logger.info("skip file ${summary.location} for over ${context.qualityThreshold.maxTokenLength} tokens")
             println("| filename: ${summary.filename} |  tokens: $length | complexity: ${summary.complexity} | code: ${summary.lines} | size: ${summary.bytes} | location: ${summary.location} |")
+            return false
+        }
+
+        return true
+    }
+
+    fun isMetThreshold(ins: Instruction): Boolean {
+        val totalToken = enc.encode(ins.instruction + ins.input + ins.output).size
+        if (totalToken > context.qualityThreshold.maxTokenLength) {
+            logger.info("skip instruction ${ins.instruction} for over ${context.qualityThreshold.maxTokenLength} tokens")
             return false
         }
 

@@ -29,16 +29,13 @@ import java.util.EnumMap
  * - by Horizontal (with Import File):
  * - by Vertical (with History Change):
  */
-class JavaWorker(private val context: WorkerContext) : LangWorker {
-    private val jobs: MutableList<InstructionFileJob> = mutableListOf()
-    private val fileTree: HashMap<String, InstructionFileJob> = hashMapOf()
+class JavaWorker(override val context: WorkerContext) : LangWorker {
+    override val jobs: MutableList<InstructionFileJob> = mutableListOf()
+    override val fileTree: HashMap<String, InstructionFileJob> = hashMapOf()
+    override val logger: Logger = org.slf4j.LoggerFactory.getLogger(JavaWorker::class.java)
 
     private val packageRegex = Regex("package\\s+([a-zA-Z0-9_.]+);")
     private val extLength = ".java".length
-
-    companion object {
-        val logger: Logger = org.slf4j.LoggerFactory.getLogger(JavaWorker::class.java)
-    }
 
     override fun addJob(job: InstructionFileJob) {
         this.jobs.add(job)
@@ -61,58 +58,5 @@ class JavaWorker(private val context: WorkerContext) : LangWorker {
             val fullClassName = "$packageName.$className"
             fileTree[fullClassName] = job
         }
-    }
-
-    override suspend fun start(): Collection<Instruction> = coroutineScope {
-        val outputFile = File(context.pureDataFileName)
-        if (!outputFile.exists()) {
-            try {
-                outputFile.createNewFile()
-            } catch (e: Exception) {
-                logger.error("create file error: $outputFile")
-                e.printStackTrace()
-                return@coroutineScope emptyList()
-            }
-        }
-
-        val lists = jobs.map { job ->
-            val jobContext = JobContext(
-                job,
-                context.qualityTypes,
-                fileTree,
-                context.insOutputConfig,
-                context.completionTypes,
-                context.maxCompletionInOneFile,
-                project = ProjectContext(
-                    compositionDependency = context.compositionDependency,
-                ),
-                context.qualityThreshold
-            )
-
-            context.codeContextStrategies.map { type ->
-                val codeStrategyBuilder = type.builder(jobContext)
-                codeStrategyBuilder.build()
-            }.flatten()
-        }.flatten()
-
-        // take context.completionTypeSize for each type
-        val finalList: EnumMap<CompletionBuilderType, List<TypedIns>> =
-            EnumMap(CompletionBuilderType::class.java)
-
-        val instructions: MutableList<Instruction> = mutableListOf()
-
-        lists.map {
-            finalList[it.type] = finalList[it.type]?.plus(it) ?: listOf(it)
-        }
-
-        val result = finalList.keys.map {
-            finalList[it]?.take(context.completionTypeSize) ?: emptyList()
-        }.flatten()
-        result.map {
-            instructions.add(it.unique())
-            outputFile.appendText(it.toString() + "\n")
-        }
-
-        return@coroutineScope instructions
     }
 }

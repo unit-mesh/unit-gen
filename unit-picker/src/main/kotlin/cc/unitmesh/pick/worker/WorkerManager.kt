@@ -2,6 +2,8 @@ package cc.unitmesh.pick.worker
 
 import cc.unitmesh.core.Instruction
 import cc.unitmesh.core.SupportedLang
+import cc.unitmesh.core.completion.CompletionBuilderType
+import cc.unitmesh.core.completion.TypedIns
 import cc.unitmesh.pick.threshold.ThresholdChecker
 import cc.unitmesh.pick.worker.base.LangWorker
 import cc.unitmesh.pick.worker.job.InstructionFileJob
@@ -12,6 +14,7 @@ import org.archguard.scanner.core.client.EmptyArchGuardClient
 import org.archguard.scanner.core.sca.ScaContext
 import org.slf4j.Logger
 import java.io.File
+import java.util.*
 
 
 class WorkerManager(private val context: WorkerContext) {
@@ -79,6 +82,21 @@ class WorkerManager(private val context: WorkerContext) {
             }
         }.flatten()
 
-        return results
+        // take context.completionTypeSize for each type
+        val finalList: EnumMap<CompletionBuilderType, List<Instruction>> =
+            EnumMap(CompletionBuilderType::class.java)
+
+        results.mapNotNull {
+            val ins = it.unique()
+            if (thresholdChecker.isMetThreshold(ins)) {
+                finalList[it.type] = finalList[it.type]?.plus(ins) ?: listOf(ins)
+            } else {
+                null
+            }
+        }
+
+        return finalList.keys.map {
+            finalList[it]?.take(context.completionTypeSize) ?: emptyList()
+        }.flatten()
     }
 }
