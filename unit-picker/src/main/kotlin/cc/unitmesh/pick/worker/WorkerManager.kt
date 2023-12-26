@@ -59,16 +59,18 @@ class WorkerManager(private val context: WorkerContext) {
      *
      * @param job The job to be added. It should be an instance of InstructionFileJob.
      *
-     * @return None.
+     * @return true if the job is successfully added to the worker, false otherwise.
      */
-    fun addJobByThreshold(job: InstructionFileJob) {
+    fun tryAddJobByThreshold(job: InstructionFileJob): Boolean {
         if (!thresholdChecker.isMetThreshold(job)) {
-            return
+            return false
         }
 
         val language = SupportedLang.from(job.fileSummary.language)
-        val worker = workers[language] ?: return
+        val worker = workers[language] ?: return false
         worker.prepareJob(job)
+
+        return true
     }
 
     suspend fun runAll(): List<Instruction> {
@@ -85,6 +87,7 @@ class WorkerManager(private val context: WorkerContext) {
         val finalList: EnumMap<CompletionBuilderType, List<Instruction>> =
             EnumMap(CompletionBuilderType::class.java)
 
+        // filter output by threshold
         results.mapNotNull {
             val ins = it.unique()
             if (thresholdChecker.isMetThreshold(ins)) {
@@ -94,6 +97,7 @@ class WorkerManager(private val context: WorkerContext) {
             }
         }
 
+        // take context.completionTypeSize for each type
         return finalList.keys.map {
             finalList[it]?.take(context.completionTypeSize) ?: emptyList()
         }.flatten()

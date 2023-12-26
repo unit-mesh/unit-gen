@@ -97,7 +97,7 @@ class SingleProjectCodePicker(private val config: InsPickerOption) {
             launch {
                 for (fileJob in walkdirChannel) {
                     languageWorker.processFile(fileJob)?.let {
-                        workerManager.addJobByThreshold(InstructionFileJob.from(it))
+                        workerManager.tryAddJobByThreshold(InstructionFileJob.from(it))
                     }
                 }
 
