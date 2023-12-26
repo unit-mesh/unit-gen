@@ -2,15 +2,11 @@ package cc.unitmesh.pick.worker
 
 import cc.unitmesh.core.Instruction
 import cc.unitmesh.core.SupportedLang
+import cc.unitmesh.pick.threshold.ThresholdChecker
 import cc.unitmesh.pick.worker.base.LangWorker
 import cc.unitmesh.pick.worker.job.InstructionFileJob
 import cc.unitmesh.pick.worker.lang.JavaWorker
-import com.knuddels.jtokkit.Encodings
-import com.knuddels.jtokkit.api.Encoding
-import com.knuddels.jtokkit.api.EncodingRegistry
-import com.knuddels.jtokkit.api.EncodingType
 import org.archguard.scanner.analyser.ScaAnalyser
-import org.archguard.scanner.analyser.count.LanguageService
 import org.archguard.scanner.core.client.ArchGuardClient
 import org.archguard.scanner.core.client.EmptyArchGuardClient
 import org.archguard.scanner.core.sca.ScaContext
@@ -19,20 +15,13 @@ import java.io.File
 
 
 class WorkerManager(private val context: WorkerContext) {
-    var registry: EncodingRegistry = Encodings.newDefaultEncodingRegistry()
-    var enc: Encoding = registry.getEncoding(EncodingType.CL100K_BASE)
-
     private val workers: Map<SupportedLang, LangWorker> = mapOf(
         SupportedLang.JAVA to JavaWorker(context),
 //        Language.TYPESCRIPT to TypescriptWorker(workerContext),
 //        Language.JAVASCRIPT to TypescriptWorker(workerContext),
     )
 
-    private val language: LanguageService = LanguageService()
-
-    private val supportedExtensions: Set<String> = setOf(
-        language.getExtension(SupportedLang.JAVA.name.lowercase()),
-    )
+    private val thresholdChecker: ThresholdChecker = ThresholdChecker(context)
 
     private val logger: Logger = org.slf4j.LoggerFactory.getLogger(WorkerManager::class.java)
 
@@ -70,44 +59,18 @@ class WorkerManager(private val context: WorkerContext) {
      *
      * @return None.
      */
-    fun filterByThreshold(job: InstructionFileJob) {
-        val summary = job.fileSummary
-        if (!supportedExtensions.contains(summary.extension)) {
+    fun addJobByThreshold(job: InstructionFileJob) {
+        if (!thresholdChecker.isMetThreshold(job)) {
             return
         }
 
-        if (summary.complexity > context.qualityThreshold.complexity) {
-            logger.info("skip file ${summary.location} for complexity ${summary.complexity}")
-            return
-        }
-
-        // like js minified file
-        if (summary.binary || summary.generated || summary.minified) {
-            return
-        }
-
-        // if the file size is too large, we just try 64k
-        if (summary.bytes > context.qualityThreshold.fileSize) {
-            logger.info("skip file ${summary.location} for size ${summary.bytes}")
-            return
-        }
-
-        // limit by token length
-        val encoded = enc.encode(job.code)
-        val length = encoded.size
-        if (length > context.qualityThreshold.maxTokenLength) {
-            logger.info("skip file ${summary.location} for over ${context.qualityThreshold.maxTokenLength} tokens")
-            println("| filename: ${summary.filename} |  tokens: $length | complexity: ${summary.complexity} | code: ${summary.lines} | size: ${summary.bytes} | location: ${summary.location} |")
-            return
-        }
-
-        val language = SupportedLang.from(summary.language)
+        val language = SupportedLang.from(job.fileSummary.language)
         val worker = workers[language] ?: return
         worker.addJob(job)
     }
 
     suspend fun runAll(): List<Instruction> {
-        return workers.map { (_, worker) ->
+        val results = workers.map { (_, worker) ->
             try {
                 worker.start()
             } catch (e: Exception) {
@@ -115,5 +78,7 @@ class WorkerManager(private val context: WorkerContext) {
                 emptyList()
             }
         }.flatten()
+
+        return results
     }
 }
