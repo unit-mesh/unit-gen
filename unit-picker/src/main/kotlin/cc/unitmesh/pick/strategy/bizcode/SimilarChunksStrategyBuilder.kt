@@ -7,6 +7,23 @@ import cc.unitmesh.pick.similar.JavaSimilarChunker
 import cc.unitmesh.pick.worker.job.JobContext
 
 class SimilarChunksStrategyBuilder(private val context: JobContext) : CodeStrategyBuilder {
+    /**
+     * Builds a list of SimilarChunkIns objects.
+     *
+     * This method is responsible for generating a list of SimilarChunkIns objects based on the provided context,
+     * container, and rule configuration. It performs the following steps:
+     *
+     * 1. Checks with the rule specified in the configuration to identify data structures with issues.
+     * 2. Collects all data structures with similar data structure.
+     * 3. Builds completion builders for each function in the identified data structures.
+     * 4. Filters out completion builders with empty before and after cursors.
+     * 5. Calculates similar chunks for block completions using the JavaSimilarChunker.
+     * 6. Creates SimilarChunkIns objects for each completion builder, with relevant information on language, before cursor,
+     *    similar chunks, after cursor, output, and type.
+     * 7. Returns the list of generated SimilarChunkIns objects.
+     *
+     * @return a list of SimilarChunkIns objects representing code completions with similar chunks
+     */
     override fun build(): List<SimilarChunkIns> {
         val language = context.job.fileSummary.language.lowercase()
         val container = context.job.container ?: return emptyList()

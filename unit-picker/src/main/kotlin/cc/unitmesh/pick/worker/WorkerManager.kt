@@ -66,7 +66,7 @@ class WorkerManager(private val context: WorkerContext) {
     /**
      * Adds a job to the worker for processing based on the specified threshold.
      *
-     * @param job The job to be added.
+     * @param job The job to be added. It should be an instance of InstructionFileJob.
      *
      * @return None.
      */
@@ -78,9 +78,10 @@ class WorkerManager(private val context: WorkerContext) {
 
         if (summary.complexity > context.qualityThreshold.complexity) {
             logger.info("skip file ${summary.location} for complexity ${summary.complexity}")
-            return;
+            return
         }
 
+        // like js minified file
         if (summary.binary || summary.generated || summary.minified) {
             return
         }
@@ -91,6 +92,7 @@ class WorkerManager(private val context: WorkerContext) {
             return
         }
 
+        // limit by token length
         val encoded = enc.encode(job.code)
         val length = encoded.size
         if (length > context.qualityThreshold.maxTokenLength) {
