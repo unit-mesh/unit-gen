@@ -23,6 +23,12 @@ class ThresholdChecker(private val context: WorkerContext) {
 
     private val logger: Logger = org.slf4j.LoggerFactory.getLogger(ThresholdChecker::class.java)
 
+    /**
+     * Checks if the given job meets the threshold criteria for processing.
+     *
+     * @param job The instruction file job to be checked.
+     * @return Returns true if the job meets the threshold criteria, false otherwise.
+     */
     fun isMetThreshold(job: InstructionFileJob): Boolean {
         val summary = job.fileSummary
         if (!supportedExtensions.contains(summary.extension)) {
@@ -57,6 +63,12 @@ class ThresholdChecker(private val context: WorkerContext) {
         return true
     }
 
+    /**
+     * Determines whether the given instruction meets the threshold criteria.
+     *
+     * @param ins the instruction to be evaluated
+     * @return true if the instruction meets the threshold criteria, false otherwise
+     */
     fun isMetThreshold(ins: Instruction): Boolean {
         val totalToken = enc.encode(ins.instruction + ins.input + ins.output).size
         if (totalToken > context.qualityThreshold.maxTokenLength) {
