@@ -11,6 +11,8 @@ import cc.unitmesh.pick.worker.base.LangWorker
 import cc.unitmesh.pick.project.ProjectContext
 import chapi.ast.javaast.JavaAnalyser
 import kotlinx.coroutines.coroutineScope
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import org.slf4j.Logger
 import java.io.File
 import java.util.EnumMap
@@ -44,14 +46,19 @@ class JavaWorker(override val context: WorkerContext) : LangWorker {
      */
     override fun prepareJob(job: InstructionFileJob) {
         this.jobs.add(job)
-        tryAddClassToTree(job.code, job)
 
-        // since the Java Analyser imports will be in data structures
-        val container = JavaAnalyser().analysis(job.code, job.fileSummary.location)
-        job.codeLines = job.code.lines()
-        container.buildSourceCode(job.codeLines)
+        try{
+            tryAddClassToTree(job.code, job)
+            // since the Java Analyser imports will be in data structures
+            val container = JavaAnalyser().analysis(job.code, job.fileSummary.location)
+            job.codeLines = job.code.lines()
+            container.buildSourceCode(job.codeLines)
 
-        job.container = container
+            job.container = container
+        } catch (e: Exception) {
+            logger.error("failed to prepare job: ${job.fileSummary.location}")
+            e.printStackTrace()
+        }
     }
 
     private fun tryAddClassToTree(code: String, job: InstructionFileJob) {
