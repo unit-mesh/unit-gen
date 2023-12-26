@@ -67,10 +67,10 @@ data class InsPickerOption(
      * The [CompletionBuilderType], which will according you IDE strategy to generate the type.
      */
     val completionTypes: List<CompletionBuilderType> = listOf(
-//        CompletionBuilderType.AFTER_BLOCK_COMPLETION,
-//        CompletionBuilderType.IN_BLOCK_COMPLETION,
-//        CompletionBuilderType.INLINE_COMPLETION,
-        CompletionBuilderType.TEST_CODE_GEN,
+        CompletionBuilderType.AFTER_BLOCK_COMPLETION,
+        CompletionBuilderType.IN_BLOCK_COMPLETION,
+        CompletionBuilderType.INLINE_COMPLETION,
+//        CompletionBuilderType.TEST_CODE_GEN,
     ),
     /**
      * The [CodeQualityType], will be like a tree to hold the item.

@@ -87,15 +87,19 @@ class WorkerManager(private val context: WorkerContext) {
         val finalList: EnumMap<CompletionBuilderType, List<Instruction>> =
             EnumMap(CompletionBuilderType::class.java)
 
+        var skipCount = 0
         // filter output by threshold
         results.mapNotNull {
             val ins = it.unique()
             if (thresholdChecker.isMetThreshold(ins)) {
                 finalList[it.type] = finalList[it.type]?.plus(ins) ?: listOf(ins)
             } else {
+                skipCount++
                 null
             }
         }
+
+        logger.info("skip $skipCount / ${results.size} instructions, ")
 
         // take context.completionTypeSize for each type
         return finalList.keys.map {
