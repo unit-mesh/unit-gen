@@ -15,7 +15,27 @@ interface LangWorker {
     val logger: Logger
     val jobs: MutableList<InstructionFileJob>
 
-    fun addJob(job: InstructionFileJob)
+    /**
+     * Prepares the given instruction file job for execution.
+     *
+     * @param job The instruction file job to be prepared.
+     */
+    fun prepareJob(job: InstructionFileJob)
+
+    /**
+     * Starts the execution of the job processing.
+     *
+     * This method processes each job in the `jobs` list and writes the output to a file specified in the
+     * `pureDataFileName` property of the `context`.
+     *
+     * If the file does not exist, it will be created. If there are any errors while creating the file,
+     * an error message will be logged and an empty list will be returned.
+     *
+     * The method uses a coroutine scope for suspending the execution and allows concurrent processing of jobs.
+     *
+     * @return a list of `TypedIns` objects representing the output of the job processing. An empty list
+     * will be returned if there are any errors.
+     */
     suspend fun start(): List<TypedIns> = coroutineScope {
         val outputFile = File(context.pureDataFileName)
         if (!outputFile.exists()) {

@@ -12,7 +12,7 @@ class TypescriptWorker(override val context: WorkerContext) : LangWorker {
     override val fileTree: HashMap<String, InstructionFileJob> = hashMapOf()
     override val logger: Logger = org.slf4j.LoggerFactory.getLogger(TypescriptWorker::class.java)
 
-    override fun addJob(job: InstructionFileJob) {
+    override fun prepareJob(job: InstructionFileJob) {
         this.jobs.add(job)
 
         // since the Java Analyser imports will be in data structures

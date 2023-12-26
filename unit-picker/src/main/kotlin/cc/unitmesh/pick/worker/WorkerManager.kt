@@ -3,7 +3,6 @@ package cc.unitmesh.pick.worker
 import cc.unitmesh.core.Instruction
 import cc.unitmesh.core.SupportedLang
 import cc.unitmesh.core.completion.CompletionBuilderType
-import cc.unitmesh.core.completion.TypedIns
 import cc.unitmesh.pick.threshold.ThresholdChecker
 import cc.unitmesh.pick.worker.base.LangWorker
 import cc.unitmesh.pick.worker.job.InstructionFileJob
@@ -69,7 +68,7 @@ class WorkerManager(private val context: WorkerContext) {
 
         val language = SupportedLang.from(job.fileSummary.language)
         val worker = workers[language] ?: return
-        worker.addJob(job)
+        worker.prepareJob(job)
     }
 
     suspend fun runAll(): List<Instruction> {
