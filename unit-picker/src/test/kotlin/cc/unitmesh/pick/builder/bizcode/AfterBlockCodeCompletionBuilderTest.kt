@@ -4,7 +4,7 @@ import cc.unitmesh.pick.option.InsOutputConfig
 import cc.unitmesh.pick.worker.job.InstructionFileJob
 import cc.unitmesh.core.completion.CodeCompletionIns
 import cc.unitmesh.core.completion.CompletionBuilderType
-import cc.unitmesh.pick.option.InsQualityThreshold
+import cc.unitmesh.pick.threshold.InsQualityThreshold
 import cc.unitmesh.pick.worker.job.JobContext
 import chapi.domain.core.CodeFunction
 import chapi.domain.core.CodePosition

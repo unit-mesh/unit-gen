@@ -3,7 +3,7 @@ package cc.unitmesh.pick.builder.ins
 import cc.unitmesh.core.completion.CompletionBuilderType
 import cc.unitmesh.core.Instruction
 import cc.unitmesh.core.completion.TypedIns
-import cc.unitmesh.pick.option.InsQualityThreshold
+import cc.unitmesh.pick.threshold.InsQualityThreshold
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 

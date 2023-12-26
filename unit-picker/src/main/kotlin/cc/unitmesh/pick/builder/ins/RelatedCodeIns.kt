@@ -4,7 +4,7 @@ import cc.unitmesh.pick.ext.toUml
 import cc.unitmesh.core.completion.CompletionBuilderType
 import cc.unitmesh.core.Instruction
 import cc.unitmesh.core.completion.TypedIns
-import cc.unitmesh.pick.option.InsQualityThreshold
+import cc.unitmesh.pick.threshold.InsQualityThreshold
 import chapi.domain.core.CodeDataStruct
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json

@@ -5,7 +5,7 @@ import cc.unitmesh.pick.option.InsPickerOption
 import cc.unitmesh.core.Instruction
 import cc.unitmesh.pick.ext.GitUtil
 import cc.unitmesh.pick.ext.PickDirectoryWalker
-import cc.unitmesh.pick.option.InsQualityThreshold
+import cc.unitmesh.pick.threshold.InsQualityThreshold
 import cc.unitmesh.pick.worker.WorkerContext
 import cc.unitmesh.pick.worker.WorkerManager
 import kotlinx.coroutines.channels.Channel

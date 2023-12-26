@@ -5,7 +5,7 @@ import cc.unitmesh.core.unittest.TestCodeBuilderType
 import cc.unitmesh.pick.builder.unittest.BasicTestIns
 import cc.unitmesh.pick.ext.buildSourceCode
 import cc.unitmesh.pick.option.InsOutputConfig
-import cc.unitmesh.pick.option.InsQualityThreshold
+import cc.unitmesh.pick.threshold.InsQualityThreshold
 import cc.unitmesh.pick.worker.job.InstructionFileJob
 import cc.unitmesh.pick.worker.job.JobContext
 import cc.unitmesh.quality.CodeQualityType

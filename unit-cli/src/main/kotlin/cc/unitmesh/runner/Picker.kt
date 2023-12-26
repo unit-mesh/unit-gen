@@ -4,7 +4,7 @@ import cc.unitmesh.pick.SingleProjectCodePicker
 import cc.unitmesh.pick.option.MAX_COMPLETION_EACH_FILE
 import cc.unitmesh.pick.option.InsPickerOption
 import cc.unitmesh.core.Instruction
-import cc.unitmesh.pick.option.InsQualityThreshold
+import cc.unitmesh.pick.threshold.InsQualityThreshold
 import cc.unitmesh.runner.cli.ProcessorResult
 import cc.unitmesh.runner.cli.ProcessorUtils
 import com.github.ajalt.clikt.core.CliktCommand

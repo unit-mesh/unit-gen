@@ -2,7 +2,7 @@ package cc.unitmesh.pick.worker.job
 
 import cc.unitmesh.pick.option.InsOutputConfig
 import cc.unitmesh.core.completion.CompletionBuilderType
-import cc.unitmesh.pick.option.InsQualityThreshold
+import cc.unitmesh.pick.threshold.InsQualityThreshold
 import cc.unitmesh.pick.project.ProjectContext
 import cc.unitmesh.quality.CodeQualityType
 import kotlinx.serialization.Serializable

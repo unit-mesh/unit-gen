@@ -1,4 +1,4 @@
-package cc.unitmesh.pick.option
+package cc.unitmesh.pick.threshold
 
 import cc.unitmesh.quality.badsmell.BsThresholds
 import kotlinx.serialization.Serializable

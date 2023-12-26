@@ -2,6 +2,7 @@ package cc.unitmesh.pick.option
 
 import cc.unitmesh.pick.strategy.BizCodeContextStrategy
 import cc.unitmesh.core.completion.CompletionBuilderType
+import cc.unitmesh.pick.threshold.InsQualityThreshold
 import cc.unitmesh.quality.CodeQualityType
 import cc.unitmesh.quality.badsmell.BadsmellAnalyser
 import cc.unitmesh.quality.extension.JavaControllerAnalyser
