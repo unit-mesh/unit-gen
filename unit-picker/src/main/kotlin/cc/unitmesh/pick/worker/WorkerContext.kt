@@ -7,6 +7,7 @@ import cc.unitmesh.pick.threshold.InsQualityThreshold
 import cc.unitmesh.quality.CodeQualityType
 import kotlinx.serialization.Serializable
 import org.archguard.scanner.core.sca.CompositionDependency
+import org.jetbrains.annotations.TestOnly
 
 @Serializable
 data class WorkerContext(
@@ -20,4 +21,21 @@ data class WorkerContext(
     val qualityThreshold: InsQualityThreshold = InsQualityThreshold(),
     var compositionDependency: List<CompositionDependency> = listOf(),
 ) {
+
+    companion object {
+        @TestOnly
+        fun default(): WorkerContext {
+            return WorkerContext(
+                codeContextStrategies = listOf(),
+                qualityTypes = listOf(),
+                insOutputConfig = InsOutputConfig(),
+                pureDataFileName = "",
+                completionTypes = listOf(),
+                maxCompletionInOneFile = 0,
+                completionTypeSize = 0,
+                qualityThreshold = InsQualityThreshold(),
+                compositionDependency = listOf(),
+            )
+        }
+    }
 }

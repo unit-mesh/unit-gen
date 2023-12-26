@@ -17,7 +17,7 @@ data class SimpleInstruction(
 data class Instruction(
     var instruction: String,
     var input: String,
-    val output: String,
+    var output: String,
 ) {
     override fun toString(): String {
         throw Exception("we don't support toString() for Instruction, please call render()")
