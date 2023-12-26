@@ -21,7 +21,6 @@ data class WorkerContext(
     val qualityThreshold: InsQualityThreshold = InsQualityThreshold(),
     var compositionDependency: List<CompositionDependency> = listOf(),
 ) {
-
     companion object {
         @TestOnly
         fun default(): WorkerContext {

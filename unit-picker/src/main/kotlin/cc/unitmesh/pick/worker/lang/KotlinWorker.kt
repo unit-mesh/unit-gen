@@ -11,7 +11,7 @@ class KotlinWorker(override val context: WorkerContext) : JavaWorker(context), L
     override val jobs: MutableList<InstructionFileJob> = mutableListOf()
 
     override val fileTree: HashMap<String, InstructionFileJob> = hashMapOf()
-    override val logger: Logger = org.slf4j.LoggerFactory.getLogger(JavaWorker::class.java)
+    override val logger: Logger = org.slf4j.LoggerFactory.getLogger(KotlinWorker::class.java)
 
     override val packageRegex = Regex("package\\s+([a-zA-Z0-9_.]+)")
     override val extLength = ".kt".length

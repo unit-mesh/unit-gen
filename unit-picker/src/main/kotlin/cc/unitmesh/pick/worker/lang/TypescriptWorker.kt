@@ -14,8 +14,6 @@ class TypescriptWorker(override val context: WorkerContext) : LangWorker {
 
     override fun prepareJob(job: InstructionFileJob) {
         this.jobs.add(job)
-
-        // since the Java Analyser imports will be in data structures
         try {
             val container = TypeScriptAnalyser().analysis(job.code, job.fileSummary.location)
             job.codeLines = job.code.lines()
