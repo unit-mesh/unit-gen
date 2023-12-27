@@ -105,7 +105,7 @@ class WorkerManager(private val context: WorkerContext) {
 
         // take context.completionTypeSize for each type
         return finalList.keys.map {
-            finalList[it]?.take(context.completionTypeSize) ?: emptyList()
+            finalList[it]?.shuffled()?.take(context.completionTypeSize) ?: emptyList()
         }.flatten()
     }
 }
