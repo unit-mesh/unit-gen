@@ -48,7 +48,7 @@ class PickerCommand : CliktCommand() {
                 async {
                     logger.info("Start to process ${code.repository}")
                     val insPickerOption = InsPickerOption(
-                        url = code.repository,
+                        url = code.repository.trimEnd('/'),
                         branch = code.branch,
                         language = code.language,
                         maxCompletionEachFile = maxCompletionEachFile,
