@@ -27,7 +27,7 @@ class ClassTestCodeBuilder(private val context: JobContext) : TestCodeBuilder {
 
         return listOf(
             BasicTestIns(
-                lang = context.project.language,
+                language = context.project.language,
                 underTestCode = underTestFile.Content,
                 generatedCode = generatedCode,
                 coreFrameworks = context.project.coreFrameworks,

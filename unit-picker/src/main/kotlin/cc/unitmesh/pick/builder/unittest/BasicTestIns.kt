@@ -9,7 +9,7 @@ import kotlinx.serialization.json.Json
 
 @Serializable
 data class BasicTestIns(
-    val lang: SupportedLang,
+    val language: SupportedLang,
     val underTestCode: String,
     val generatedCode: String,
     val coreFrameworks: List<String> = listOf(),
@@ -47,12 +47,22 @@ data class BasicTestIns(
         input.append("\n###")
 
         input.append("Code under test:\n")
-        input.append("```${lang.name.lowercase()}\n")
+        input.append("```${language.name.lowercase()}\n")
         input.append(underTestCode)
         input.append("\n```")
 
+        when(testType) {
+            TestCodeBuilderType.CLASS_UNIT -> {
+                input.append("\nStart test code with `package` syntax here: \n")
+            }
+            TestCodeBuilderType.METHOD_UNIT -> {
+                input.append("\nStart test code with `@Test` syntax here: \n")
+            }
+            else -> {}
+        }
+
         return Instruction(
-            instruction = "Write unit test for following code.",
+            instruction = """Write $language unit test for following code.""",
             input = input.toString(),
             output = generatedCode,
         )

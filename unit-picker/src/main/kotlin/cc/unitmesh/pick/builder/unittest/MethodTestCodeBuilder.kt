@@ -36,7 +36,7 @@ class MethodTestCodeBuilder(private val context: JobContext) : TestCodeBuilder {
 
                     if (originalContent.isNotBlank() && function.Content.isNotBlank()) {
                         val testIns = BasicTestIns(
-                            lang = context.project.language,
+                            language = context.project.language,
                             underTestCode = originalContent,
                             generatedCode = function.Content,
                             coreFrameworks = context.project.coreFrameworks,
