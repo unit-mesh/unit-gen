@@ -7,6 +7,7 @@ import cc.unitmesh.pick.threshold.ThresholdChecker
 import cc.unitmesh.pick.worker.base.LangWorker
 import cc.unitmesh.pick.worker.job.InstructionFileJob
 import cc.unitmesh.pick.worker.lang.JavaWorker
+import cc.unitmesh.pick.worker.lang.TypescriptWorker
 import org.archguard.scanner.analyser.ScaAnalyser
 import org.archguard.scanner.core.client.ArchGuardClient
 import org.archguard.scanner.core.client.EmptyArchGuardClient
@@ -19,8 +20,7 @@ import java.util.*
 class WorkerManager(private val context: WorkerContext) {
     private val workers: Map<SupportedLang, LangWorker> = mapOf(
         SupportedLang.JAVA to JavaWorker(context),
-//        Language.TYPESCRIPT to TypescriptWorker(workerContext),
-//        Language.JAVASCRIPT to TypescriptWorker(workerContext),
+        SupportedLang.TYPESCRIPT to TypescriptWorker(context),
     )
 
     private val thresholdChecker: ThresholdChecker = ThresholdChecker(context)
@@ -99,7 +99,9 @@ class WorkerManager(private val context: WorkerContext) {
             }
         }
 
-        logger.info("skip $skipCount / ${results.size} instructions, ")
+        if (skipCount > 0) {
+            logger.info("skip $skipCount / ${results.size} instructions, ")
+        }
 
         // take context.completionTypeSize for each type
         return finalList.keys.map {
