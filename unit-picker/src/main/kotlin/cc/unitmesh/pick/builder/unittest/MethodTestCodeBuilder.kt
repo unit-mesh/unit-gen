@@ -32,9 +32,9 @@ class MethodTestCodeBuilder(private val context: JobContext) : TestCodeBuilder {
             function.FunctionCalls.map {
                 if (it.NodeName == underTestFile.NodeName) {
                     val canonicalName = it.Package + "." + it.NodeName + ":" + it.FunctionName
-                    val originalContent = underTestFunctionMap[canonicalName]
+                    val originalContent = underTestFunctionMap[canonicalName] ?: return@map
 
-                    if (originalContent != null) {
+                    if (originalContent.isNotBlank() && function.Content.isNotBlank()) {
                         val testIns = BasicTestIns(
                             lang = context.project.language,
                             underTestCode = originalContent,
