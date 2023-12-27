@@ -23,7 +23,7 @@ total_count = 0
 MAX_INPUT_TOKEN_LENGTH = int(os.getenv("MAX_INPUT_TOKEN_LENGTH", "2048"))
 
 if torch.cuda.is_available():
-    model_id = "./output/checkpoint-125"
+    model_id = "./output/checkpoint-250"
     model = AutoModelForCausalLM.from_pretrained(model_id, torch_dtype=torch.bfloat16, device_map="auto")
     tokenizer = AutoTokenizer.from_pretrained(model_id)
     tokenizer.use_default_system_prompt = False
@@ -68,6 +68,7 @@ async def stream_generate(
                 os.system("nvidia-smi")
 
             conversation = [chat_history[-1]]
+            print(conversation)
 
             input_ids = tokenizer.apply_chat_template(conversation, return_tensors="pt")
             if input_ids.shape[1] > MAX_INPUT_TOKEN_LENGTH:
@@ -90,21 +91,18 @@ async def stream_generate(
             t = Thread(target=model.generate, kwargs=generate_kwargs)
             t.start()
 
+            print("start to response")
             result = ""
-            outputs = []
+            outputs = ""
             for text in streamer:
-                outputs.append(text)
-                result = "".join(outputs)
-                # result = "".join(outputs).replace("<|EOT|>", "")
+                content = "" + text.replace("<|EOT|>", "")
+                if len(content) > 0:
+                    print (content, end = "")
+                    outputs += content
+                    yield 'data:' + ChatResponse(choices=[MessageInResponseChat(message=Message(role='assistant', content="" + text))], model="autodev-deepseek").model_dump_json()
+                    yield '\n\n'
 
-            yield 'data:' + ChatResponse(
-                choices=[MessageInResponseChat(message=Message(role='assistant', content=result))],
-                model="autodev-deepseek").model_dump_json()
-
-            yield '\n\n'
-            time.sleep(0.2)
             yield 'data:[DONE]'
-            print(result)
 
         except asyncio.TimeoutError:
             raise HTTPException(status_code=504, detail="Stream timed out")
