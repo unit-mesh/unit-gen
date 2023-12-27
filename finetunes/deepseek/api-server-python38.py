@@ -18,13 +18,12 @@ import async_timeout
 import asyncio
 import time
 
-MAX_MAX_NEW_TOKENS = 4096
-DEFAULT_MAX_NEW_TOKENS = 1024
+MAX_MAX_NEW_TOKENS = 512
 total_count = 0
-MAX_INPUT_TOKEN_LENGTH = int(os.getenv("MAX_INPUT_TOKEN_LENGTH", "4096"))
+MAX_INPUT_TOKEN_LENGTH = int(os.getenv("MAX_INPUT_TOKEN_LENGTH", "2048"))
 
 if torch.cuda.is_available():
-    model_id = "/openbayes/input/input0/"
+    model_id = "./output/checkpoint-2000"
     model = AutoModelForCausalLM.from_pretrained(model_id, torch_dtype=torch.bfloat16, device_map="auto")
     tokenizer = AutoTokenizer.from_pretrained(model_id)
     tokenizer.use_default_system_prompt = False
@@ -55,8 +54,8 @@ GENERATION_TIMEOUT_SEC = 480
 
 async def stream_generate(
         chat_history: List[Message],
-        max_new_tokens: int = 512,
-        temperature: float = 0.1,
+        max_new_tokens: int = MAX_MAX_NEW_TOKENS,
+        temperature: float = 0.6,
         top_p: float = 0.9,
         top_k: int = 50,
         repetition_penalty: float = 1,
