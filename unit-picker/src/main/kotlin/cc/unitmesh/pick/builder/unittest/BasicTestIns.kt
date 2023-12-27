@@ -28,6 +28,7 @@ data class BasicTestIns(
     override fun unique(): Instruction {
         val input = StringBuilder()
 
+        input.append("\n###")
         input.append(specs.joinToString("\n") { "- $it" })
         input.append("\n")
 
@@ -43,6 +44,7 @@ data class BasicTestIns(
             input.append("Related code:\n")
             input.append(relatedCode.joinToString("\n"))
         }
+        input.append("\n###")
 
         input.append("Code under test:\n")
         input.append("```${lang.name.lowercase()}\n")
