@@ -26,16 +26,16 @@ interface UnitTestService {
     fun build(dataStruct: CodeDataStruct): List<TypedTestIns>
 
     companion object {
-        fun lookup(codeDataStruct: CodeDataStruct, job: JobContext): List<JavaTestCodeService> {
+        fun lookup(codeDataStruct: CodeDataStruct, job: JobContext): List<UnitTestService> {
             val testCodeServices = SupportedLang.all().map {
                 when (it) {
                     SupportedLang.JAVA -> JavaTestCodeService(job)
-                    SupportedLang.TYPESCRIPT -> TODO()
+                    SupportedLang.TYPESCRIPT -> TypeScriptTestCodeService(job)
                 }
             }
 
             return testCodeServices.filter { it.isApplicable(codeDataStruct) }
         }
+
     }
 }
-
