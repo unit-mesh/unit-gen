@@ -18,12 +18,12 @@ import async_timeout
 import asyncio
 import time
 
-MAX_MAX_NEW_TOKENS = 512
+MAX_MAX_NEW_TOKENS = 1024
 total_count = 0
 MAX_INPUT_TOKEN_LENGTH = int(os.getenv("MAX_INPUT_TOKEN_LENGTH", "2048"))
 
 if torch.cuda.is_available():
-    model_id = "./output/checkpoint-2000"
+    model_id = "./output/checkpoint-125"
     model = AutoModelForCausalLM.from_pretrained(model_id, torch_dtype=torch.bfloat16, device_map="auto")
     tokenizer = AutoTokenizer.from_pretrained(model_id)
     tokenizer.use_default_system_prompt = False
@@ -67,7 +67,7 @@ async def stream_generate(
             if total_count % 50 == 0:
                 os.system("nvidia-smi")
 
-            conversation = chat_history
+            conversation = [chat_history[-1]]
 
             input_ids = tokenizer.apply_chat_template(conversation, return_tensors="pt")
             if input_ids.shape[1] > MAX_INPUT_TOKEN_LENGTH:
