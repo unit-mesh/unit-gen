@@ -18,12 +18,17 @@ class ClassTestCodeBuilder(private val context: JobContext) : TestCodeBuilder {
         underTestFile: CodeDataStruct,
         relevantClasses: List<CodeDataStruct>,
     ): List<BasicTestIns> {
-        val generatedCode = dataStruct.toSourceCode()
+        var generatedCode = dataStruct.toSourceCode()
         if (generatedCode.lines().size > context.insQualityThreshold.maxLineInCode) {
             return emptyList()
         }
 
         val namingStyle = dataStruct.checkNamingStyle()
+
+        // remove all `import` statements
+        generatedCode = generatedCode.lines().filter {
+            !(it.startsWith("import") && it.endsWith(";"))
+        }.joinToString("\n")
 
         return listOf(
             BasicTestIns(
