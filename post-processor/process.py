@@ -1,5 +1,6 @@
 import json
 
+
 def process_jsonl(input_file, output_file):
     with open(input_file, 'r') as f:
         lines = f.readlines()
@@ -21,6 +22,8 @@ def process_jsonl(input_file, output_file):
         for record in filtered_records:
             f.write(json.dumps(record) + '\n')
 
+
+
 def merge_jsonl(input_file1, input_file2, input_file3, output_file):
     with open(input_file1, 'r') as f1, open(input_file2, 'r') as f2, open(input_file3, 'r') as f3:
         lines1 = f1.readlines()
@@ -29,23 +32,26 @@ def merge_jsonl(input_file1, input_file2, input_file3, output_file):
 
     records = []
 
-    # 处理第一个文件的记录
-    for line in lines1[:2000]:
-        data = json.loads(line)
-        records.append(data)
-
-    # 处理第二个文件的记录
-    for line in lines2[:2000]:
+    # Process the records from the first file
+    for line in lines1[:4000]:
         data = json.loads(line)
         records.append(data)
 
 
-    # 处理第三个文件的记录
-    for line in lines3[:2000]:
+    random.shuffle(lines2)
+    # Process the records from the second file
+    for line in lines2[:1000]:
         data = json.loads(line)
         records.append(data)
 
-    # 写入合并后的记录到输出文件
+    random.shuffle(lines3)
+    # Process the records from the third file
+    for line in lines3[:1000]:
+        data = json.loads(line)
+        records.append(data)
+
+    random.shuffle(records)
+    # Write the merged records to the output file
     with open(output_file, 'w') as f:
         for record in records:
             f.write(json.dumps(record) + '\n')

@@ -78,11 +78,6 @@ class ThresholdChecker(private val context: WorkerContext) {
      */
     fun isMetThreshold(ins: Instruction): Boolean {
         val totalToken = enc.encode(ins.instruction + ins.input + ins.output).size
-        if (totalToken > context.qualityThreshold.maxTokenLength) {
-            logger.info("skip instruction ${ins.instruction} for over ${context.qualityThreshold.maxTokenLength} tokens")
-            return false
-        }
-
-        return true
+        return totalToken <= context.qualityThreshold.maxTokenLength
     }
 }

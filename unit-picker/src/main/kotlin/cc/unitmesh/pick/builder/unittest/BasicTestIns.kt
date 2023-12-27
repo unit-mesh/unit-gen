@@ -58,7 +58,6 @@ data class BasicTestIns(
             TestCodeBuilderType.METHOD_UNIT -> {
                 input.append("\nStart test code with `@Test` syntax here: \n")
             }
-            else -> {}
         }
 
         return Instruction(
