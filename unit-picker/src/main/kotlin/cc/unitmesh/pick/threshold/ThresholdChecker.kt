@@ -63,7 +63,6 @@ class ThresholdChecker(private val context: WorkerContext) {
         val length = encoded.size
         if (length > context.qualityThreshold.maxTokenLength) {
             logger.info("skip file ${summary.location} for over ${context.qualityThreshold.maxTokenLength} tokens")
-            println("| filename: ${summary.filename} |  tokens: $length | complexity: ${summary.complexity} | code: ${summary.lines} | size: ${summary.bytes} | location: ${summary.location} |")
             return false
         }
 
@@ -77,6 +76,12 @@ class ThresholdChecker(private val context: WorkerContext) {
      * @return true if the instruction meets the threshold criteria, false otherwise
      */
     fun isMetThreshold(ins: Instruction): Boolean {
+        // skip empty instruction
+        if (ins.input.isEmpty() || ins.output.isEmpty()) {
+            return false
+        }
+
+        // limit by token length
         val totalToken = enc.encode(ins.instruction + ins.input + ins.output).size
         return totalToken <= context.qualityThreshold.maxTokenLength
     }
