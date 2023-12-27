@@ -14,7 +14,6 @@ data class RelatedCodeIns(
     val language: String,
     val beforeCursor: String,
     val relatedCode: List<CodeDataStruct>,
-    // the output aka afterCursor
     val output: String,
     override val type: CompletionBuilderType,
 ) : TypedIns {
@@ -34,9 +33,8 @@ data class RelatedCodeIns(
             val maxLine = InsQualityThreshold.MAX_RELATED_CODE_LINE
             if (relatedCodeLines.size > maxLine) {
                 relatedCodeLines.take(maxLine).joinToString("\n")
-            } else {
-                relatedCode
             }
+
             "\n// Compare this snippets: \n ```${language}\n${relatedCodeLines.joinToString("\n")}\n```"
         } else {
             ""
@@ -46,6 +44,7 @@ data class RelatedCodeIns(
         val maxLine = InsQualityThreshold.MAX_LINE_IN_CODE
         val beforeCursorLine = beforeCursor.count { it == '\n' }
         val afterCursorLine = output.count { it == '\n' }
+
         // drop from the start of beforeCursor
         val beforeCursor = if (beforeCursorLine + afterCursorLine > maxLine) {
             val dropLine = beforeCursorLine + afterCursorLine - maxLine
