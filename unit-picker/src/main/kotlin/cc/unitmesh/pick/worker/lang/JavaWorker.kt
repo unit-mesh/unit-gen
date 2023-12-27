@@ -1,21 +1,11 @@
 package cc.unitmesh.pick.worker.lang
 
 import cc.unitmesh.pick.worker.job.InstructionFileJob
-import cc.unitmesh.core.completion.CompletionBuilderType
-import cc.unitmesh.core.Instruction
-import cc.unitmesh.pick.worker.job.JobContext
-import cc.unitmesh.core.completion.TypedIns
 import cc.unitmesh.pick.ext.buildSourceCode
 import cc.unitmesh.pick.worker.WorkerContext
 import cc.unitmesh.pick.worker.base.LangWorker
-import cc.unitmesh.pick.project.ProjectContext
 import chapi.ast.javaast.JavaAnalyser
-import kotlinx.coroutines.coroutineScope
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
 import org.slf4j.Logger
-import java.io.File
-import java.util.EnumMap
 
 /**
  * The JavaWorker class is an implementation of the LangWorker interface.
@@ -38,7 +28,7 @@ open class JavaWorker(override val context: WorkerContext) : LangWorker {
         this.jobs.add(job)
 
         try {
-            tryAddClassToTree(job.code, job)
+            tryAddClassToTree(job)
             // since the Java Analyser imports will be in data structures
             val container = JavaAnalyser().analysis(job.code, job.fileSummary.location)
             job.codeLines = job.code.lines()
@@ -51,8 +41,17 @@ open class JavaWorker(override val context: WorkerContext) : LangWorker {
         }
     }
 
-    fun tryAddClassToTree(code: String, job: InstructionFileJob) {
-        val packageMatch = packageRegex.find(code)
+    /**
+     * Tries to add a class to the file tree.
+     *
+     * This method takes an InstructionFileJob object as a parameter and attempts to add the class represented by the job to the file tree.
+     * It extracts the package name from the code of the job, and if a package name is found, it constructs the full class name using the package name and the filename of the job.
+     * The method then adds the full class name as a key to the file tree, with the job as its corresponding value.
+     *
+     * @param job the InstructionFileJob object representing the class to be added to the file tree
+     */
+    override fun tryAddClassToTree(job: InstructionFileJob) {
+        val packageMatch = packageRegex.find(job.code)
         if (packageMatch != null) {
             val packageName = packageMatch.groupValues[1]
             // in Java the filename is the class name

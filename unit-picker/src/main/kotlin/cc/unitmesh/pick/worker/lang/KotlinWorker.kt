@@ -20,7 +20,7 @@ class KotlinWorker(override val context: WorkerContext) : JavaWorker(context), L
         this.jobs.add(job)
 
         try {
-            tryAddClassToTree(job.code, job)
+            tryAddClassToTree(job)
             // since the Java Analyser imports will be in data structures
             val container = KotlinAnalyser().analysis(job.code, job.fileSummary.location)
             job.codeLines = job.code.lines()

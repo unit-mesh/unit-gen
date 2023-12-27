@@ -42,6 +42,20 @@ interface LangWorker {
     fun prepareJob(job: InstructionFileJob)
 
     /**
+     * Tries to add a class to the file tree.
+     *
+     * This method is used to add a class to the file tree based on the information provided by the `InstructionFileJob` object.
+     * The file tree is a data structure used to store classes, where the key is the full class name which consists of
+     * the package name and the class name.
+     *
+     * In Java, Kotlin, and Scala, the key for the file tree is the full class name.
+     * In Typescript, the path import is converted to the full class name.
+     *
+     * @param job the InstructionFileJob object representing the class to be added to the file tree
+     */
+    fun tryAddClassToTree(job: InstructionFileJob) {}
+
+    /**
      * Starts the execution of the job processing.
      *
      * This method processes each job in the `jobs` list and writes the output to a file specified in the
