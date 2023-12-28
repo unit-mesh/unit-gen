@@ -3,6 +3,7 @@ package cc.unitmesh.core
 enum class SupportedLang(val extension: String) {
     JAVA("java"),
     TYPESCRIPT("ts"),
+    KOTLIN("kt"),
     ;
 
     companion object {
@@ -10,12 +11,13 @@ enum class SupportedLang(val extension: String) {
             return when (value.lowercase()) {
                 "java" -> JAVA
                 "typescript" -> TYPESCRIPT
+                "kotlin" -> KOTLIN
                 else -> null
             }
         }
 
         fun all(): List<SupportedLang> {
-            return listOf(JAVA, TYPESCRIPT)
+            return listOf(JAVA, TYPESCRIPT, KOTLIN)
         }
     }
 }

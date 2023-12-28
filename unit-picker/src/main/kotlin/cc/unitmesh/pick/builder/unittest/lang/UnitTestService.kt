@@ -31,6 +31,7 @@ interface UnitTestService {
                 when (it) {
                     SupportedLang.JAVA -> JavaTestCodeService(job)
                     SupportedLang.TYPESCRIPT -> TypeScriptTestCodeService(job)
+                    SupportedLang.KOTLIN -> KotlinTestCodeService(job)
                 }
             }
 

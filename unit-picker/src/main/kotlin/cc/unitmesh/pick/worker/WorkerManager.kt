@@ -20,7 +20,8 @@ import java.util.*
 class WorkerManager(private val context: WorkerContext) {
     private val workers: Map<SupportedLang, LangWorker> = mapOf(
         SupportedLang.JAVA to JavaWorker(context),
-//        SupportedLang.TYPESCRIPT to TypescriptWorker(context),
+        SupportedLang.KOTLIN to JavaWorker(context),
+        SupportedLang.TYPESCRIPT to TypescriptWorker(context),
     )
 
     private val thresholdChecker: ThresholdChecker = ThresholdChecker(context)
@@ -34,11 +35,11 @@ class WorkerManager(private val context: WorkerContext) {
      * @param language The programming language used in the project.
      *
      */
-    fun init(codeDir: File, language: String) {
+    fun init(codeDir: File, language: SupportedLang) {
         try {
             val dependencies = ScaAnalyser(object : ScaContext {
                 override val client: ArchGuardClient = EmptyArchGuardClient()
-                override val language: String = language
+                override val language: String = language.name.lowercase()
                 override val path: String = codeDir.absolutePath
             }).analyse()
 
@@ -61,13 +62,17 @@ class WorkerManager(private val context: WorkerContext) {
      *
      * @return true if the job is successfully added to the worker, false otherwise.
      */
-    fun tryAddJobByThreshold(job: InstructionFileJob): Boolean {
+    fun tryAddJobByThreshold(job: InstructionFileJob, supportedLangs: SupportedLang): Boolean {
         if (!thresholdChecker.isMetThreshold(job)) {
             return false
         }
 
-        val language = SupportedLang.from(job.fileSummary.language)
-        val worker = workers[language] ?: return false
+        val parsedLanguage = SupportedLang.from(job.fileSummary.language) ?: return false
+        if (parsedLanguage != supportedLangs) {
+            return false
+        }
+
+        val worker = workers[parsedLanguage] ?: return false
         worker.prepareJob(job)
 
         return true
