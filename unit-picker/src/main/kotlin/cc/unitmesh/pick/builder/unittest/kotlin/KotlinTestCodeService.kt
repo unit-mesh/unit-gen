@@ -7,6 +7,9 @@ import cc.unitmesh.pick.builder.unittest.java.JavaTestCodeService
 import cc.unitmesh.pick.worker.job.JobContext
 import chapi.domain.core.CodeDataStruct
 
+/**
+ * 为给定的 CodeDataStruct 的每个 CodeFunction 生成测试指令。
+ */
 class KotlinTestCodeService(override val context: JobContext) : JavaTestCodeService(context) {
     override fun build(dataStruct: CodeDataStruct): List<TypedTestIns> {
         val underTestFile = this.findUnderTestFile(dataStruct).firstOrNull() ?: return emptyList()

@@ -8,12 +8,8 @@ import cc.unitmesh.pick.builder.unittest.base.BasicTestIns
 import cc.unitmesh.pick.ext.checkNamingStyle
 import cc.unitmesh.pick.ext.toSourceCode
 import cc.unitmesh.pick.ext.toUml
-import cc.unitmesh.pick.worker.job.InstructionFileJob
 import cc.unitmesh.pick.worker.job.JobContext
-import chapi.domain.core.CodeCall
 import chapi.domain.core.CodeDataStruct
-
-private const val PRIMARY_CONSTRUCTOR = "PrimaryConstructor"
 
 /**
  * 为给定的 CodeDataStruct 的每个 CodeFunction 生成测试指令。
