@@ -67,10 +67,6 @@ open class JavaTestCodeService(open val context: JobContext) : UnitTestService {
     }.flatten()
 
     override fun build(dataStruct: CodeDataStruct): List<TypedTestIns> {
-        if (!context.completionBuilderTypes.contains(CompletionBuilderType.TEST_CODE_GEN)) {
-            return emptyList()
-        }
-
         val underTestFile = this.findUnderTestFile(dataStruct).firstOrNull() ?: return emptyList()
         val relevantClasses = this.lookupRelevantClass(dataStruct)
         val classTestIns = ClassTestCodeBuilder(context)
