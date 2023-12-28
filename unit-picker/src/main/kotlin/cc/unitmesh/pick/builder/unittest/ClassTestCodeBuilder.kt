@@ -32,6 +32,10 @@ class ClassTestCodeBuilder(private val context: JobContext) : TestCodeBuilder {
 
         return listOf(
             BasicTestIns(
+                identifier = NodeIdentifier(
+                    type = NodeType.CLASS,
+                    name = dataStruct.NodeName,
+                ),
                 language = context.project.language,
                 underTestCode = underTestFile.Content,
                 generatedCode = generatedCode,

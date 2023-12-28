@@ -24,7 +24,7 @@ class ThresholdChecker(private val context: WorkerContext) {
 
     private val language: LanguageService = LanguageService()
 
-    private val supportedExtensions: Set<String> = SupportedLang.all().map {
+    val supportedExtensions: Set<String> = SupportedLang.all().map {
         language.getExtension(it.extension)
     }.toSet()
 

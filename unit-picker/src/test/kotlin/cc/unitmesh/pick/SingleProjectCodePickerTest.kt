@@ -32,12 +32,12 @@ class SingleProjectCodePickerTest {
 
     @Test
     fun should_handle_for_kotlin_test_gen() {
+        val root = File(".").canonicalPath
         val picker = SingleProjectCodePicker(
             InsPickerOption(
                 language = "kotlin",
-                url = "https://github.com/unit-mesh/unit-eval",
-                completionTypeSize = 10,
-                maxCharInCode = 100,
+                url = root,
+                maxTokenLength = 8192,
                 completionTypes = listOf(
                     CompletionBuilderType.TEST_CODE_GEN
                 ),

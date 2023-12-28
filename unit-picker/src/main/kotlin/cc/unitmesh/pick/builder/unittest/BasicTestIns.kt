@@ -7,8 +7,22 @@ import cc.unitmesh.core.unittest.TypedTestIns
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 
+enum class NodeType {
+    CLASS,
+    METHOD,
+    ;
+}
+
+
+@Serializable
+data class NodeIdentifier(
+    val type: NodeType,
+    val name: String,
+)
+
 @Serializable
 data class BasicTestIns(
+    val identifier: NodeIdentifier,
     val language: SupportedLang,
     val underTestCode: String,
     val generatedCode: String,
@@ -61,7 +75,7 @@ data class BasicTestIns(
         }
 
         return Instruction(
-            instruction = """Write $language unit test for following code.""",
+            instruction = """Write $language unit test for ${identifier.name}'s ${identifier.type} code.""",
             input = input.toString(),
             output = generatedCode,
         )
