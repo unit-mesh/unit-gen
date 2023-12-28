@@ -12,6 +12,8 @@ import cc.unitmesh.pick.worker.job.JobContext
 import chapi.domain.core.CodeCall
 import chapi.domain.core.CodeDataStruct
 
+private const val PRIMARY_CONSTRUCTOR = "PrimaryConstructor"
+
 /**
  * 为给定的 CodeDataStruct 的每个 CodeFunction 生成测试指令。
  *
@@ -43,6 +45,9 @@ class KotlinMethodTestCodeBuilder(private val context: JobContext) : TestCodeBui
                 } else {
                     it.Package + "." + it.NodeName + ":" + it.FunctionName
                 }
+
+                // skip for testing primary constructor
+                if (canonicalName.endsWith(PRIMARY_CONSTRUCTOR)) return@map
 
                 if (it.NodeName != underTestFile.NodeName) return@map
                 val originalContent = underTestFunctionMap[canonicalName] ?: return@map
@@ -78,15 +83,17 @@ class KotlinMethodTestCodeBuilder(private val context: JobContext) : TestCodeBui
     ): String? {
         val maybeCreator = codeCall.FunctionName[0].isUpperCase()
         if (maybeCreator) {
-           val pkg = testFile.Package
+            val pkg = testFile.Package
             val nodeName = pkg + "." + codeCall.FunctionName
             val node = fileTree[nodeName]?.container?.DataStructures?.firstOrNull() ?: return null
 
-            codeCall.Package = node.Package
-            codeCall.NodeName = node.NodeName
-            codeCall.FunctionName = "PrimaryConstructor"
+            if (codeCall.Package == "") {
+                codeCall.Package = node.Package
+                codeCall.NodeName = node.NodeName
+                codeCall.FunctionName = PRIMARY_CONSTRUCTOR
+            }
 
-            return node.Package + "." + node.NodeName + ":" + "PrimaryConstructor"
+            return node.Package + "." + node.NodeName + ":" + PRIMARY_CONSTRUCTOR
         }
 
         return null
