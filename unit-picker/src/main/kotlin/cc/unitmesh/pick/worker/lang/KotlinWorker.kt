@@ -1,10 +1,12 @@
 package cc.unitmesh.pick.worker.lang
 
+import cc.unitmesh.core.completion.CompletionBuilderType
 import cc.unitmesh.pick.ext.buildSourceCode
 import cc.unitmesh.pick.worker.WorkerContext
 import cc.unitmesh.pick.worker.base.LangWorker
 import cc.unitmesh.pick.worker.job.InstructionFileJob
 import chapi.ast.kotlinast.KotlinAnalyser
+import chapi.parser.ParseMode
 import org.slf4j.Logger
 
 class KotlinWorker(override val context: WorkerContext) : JavaWorker(context), LangWorker {
@@ -22,7 +24,12 @@ class KotlinWorker(override val context: WorkerContext) : JavaWorker(context), L
         try {
             tryAddClassToTree(job)
             // since the Java Analyser imports will be in data structures
-            val container = KotlinAnalyser().analysis(job.code, job.fileSummary.location)
+            val container = if (context.completionTypes.contains(CompletionBuilderType.TEST_CODE_GEN)) {
+                KotlinAnalyser().analysis(job.code, job.fileSummary.location)
+            } else {
+                KotlinAnalyser().analysis(job.code, job.fileSummary.location, ParseMode.Full)
+            }
+
             job.codeLines = job.code.lines()
             container.buildSourceCode(job.codeLines)
 
