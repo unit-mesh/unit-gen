@@ -1,4 +1,4 @@
-package cc.unitmesh.pick.builder.unittest
+package cc.unitmesh.pick.builder.unittest.base
 
 import cc.unitmesh.core.Instruction
 import cc.unitmesh.core.SupportedLang

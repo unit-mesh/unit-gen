@@ -1,8 +1,9 @@
-package cc.unitmesh.pick.builder.unittest.lang;
+package cc.unitmesh.pick.builder.unittest.typescript;
 
 import cc.unitmesh.core.completion.CompletionBuilderType
 import cc.unitmesh.core.unittest.TestCodeBuilderType
-import cc.unitmesh.pick.builder.unittest.BasicTestIns
+import cc.unitmesh.pick.builder.unittest.base.BasicTestIns
+import cc.unitmesh.pick.builder.unittest.java.JavaTestCodeService
 import cc.unitmesh.pick.ext.buildSourceCode
 import cc.unitmesh.pick.option.InsOutputConfig
 import cc.unitmesh.pick.threshold.InsQualityThreshold

@@ -1,8 +1,7 @@
-package cc.unitmesh.pick.builder.unittest.lang
+package cc.unitmesh.pick.builder.unittest.java
 
 import cc.unitmesh.core.unittest.TypedTestIns
-import cc.unitmesh.pick.builder.unittest.ClassTestCodeBuilder
-import cc.unitmesh.pick.builder.unittest.MethodTestCodeBuilder
+import cc.unitmesh.pick.builder.unittest.base.UnitTestService
 import cc.unitmesh.pick.worker.job.InstructionFileJob
 import cc.unitmesh.pick.worker.job.JobContext
 import chapi.domain.core.CodeDataStruct
@@ -91,7 +90,7 @@ open class JavaTestCodeService(open val context: JobContext) : UnitTestService {
         val classTestIns = ClassTestCodeBuilder(context)
             .build(dataStruct, underTestFile, relevantClasses)
 
-        val methodTests = MethodTestCodeBuilder(context)
+        val methodTests = JavaMethodTestCodeBuilder(context)
             .build(dataStruct, underTestFile, relevantClasses)
 
         return classTestIns + methodTests

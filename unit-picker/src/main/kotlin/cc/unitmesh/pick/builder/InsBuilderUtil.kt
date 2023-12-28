@@ -7,8 +7,8 @@ import cc.unitmesh.core.unittest.TestCodeBuilder
 import cc.unitmesh.pick.builder.bizcode.AfterBlockCodeCompletionBuilder
 import cc.unitmesh.pick.builder.bizcode.InBlockCodeCompletionBuilder
 import cc.unitmesh.pick.builder.bizcode.InlineCodeCompletionBuilder
-import cc.unitmesh.pick.builder.unittest.ClassTestCodeBuilder
-import cc.unitmesh.pick.builder.unittest.MethodTestCodeBuilder
+import cc.unitmesh.pick.builder.unittest.java.ClassTestCodeBuilder
+import cc.unitmesh.pick.builder.unittest.java.JavaMethodTestCodeBuilder
 import cc.unitmesh.pick.worker.job.JobContext
 import kotlinx.serialization.SerializationException
 
@@ -33,7 +33,7 @@ fun testBuilders(types: List<TestCodeBuilderType>, context: JobContext) : List<T
 
 fun testBuilder(type: TestCodeBuilderType, context: JobContext): TestCodeBuilder {
     return mapOf(
-        TestCodeBuilderType.METHOD_UNIT to MethodTestCodeBuilder(context),
+        TestCodeBuilderType.METHOD_UNIT to JavaMethodTestCodeBuilder(context),
         TestCodeBuilderType.CLASS_UNIT to ClassTestCodeBuilder(context),
     )[type] ?: throw SerializationException("Unknown message type: $type")
 }

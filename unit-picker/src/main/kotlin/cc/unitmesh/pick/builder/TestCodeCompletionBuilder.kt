@@ -3,7 +3,7 @@ package cc.unitmesh.pick.builder
 import cc.unitmesh.core.completion.CodeCompletionIns
 import cc.unitmesh.core.completion.CompletionBuilder
 import cc.unitmesh.core.completion.TypedIns
-import cc.unitmesh.pick.builder.unittest.lang.UnitTestService
+import cc.unitmesh.pick.builder.unittest.base.UnitTestService
 import cc.unitmesh.pick.worker.job.JobContext
 import chapi.domain.core.CodeDataStruct
 import chapi.domain.core.CodeFunction

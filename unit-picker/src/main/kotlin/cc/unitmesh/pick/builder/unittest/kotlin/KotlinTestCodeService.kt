@@ -1,8 +1,9 @@
-package cc.unitmesh.pick.builder.unittest.lang
+package cc.unitmesh.pick.builder.unittest.kotlin
 
 import cc.unitmesh.core.unittest.TypedTestIns
-import cc.unitmesh.pick.builder.unittest.ClassTestCodeBuilder
-import cc.unitmesh.pick.builder.unittest.MethodTestCodeBuilder
+import cc.unitmesh.pick.builder.unittest.java.ClassTestCodeBuilder
+import cc.unitmesh.pick.builder.unittest.java.JavaMethodTestCodeBuilder
+import cc.unitmesh.pick.builder.unittest.java.JavaTestCodeService
 import cc.unitmesh.pick.worker.job.JobContext
 import chapi.domain.core.CodeDataStruct
 
@@ -14,7 +15,7 @@ class KotlinTestCodeService(override val context: JobContext) : JavaTestCodeServ
         val classTestIns = ClassTestCodeBuilder(context)
             .build(dataStruct, underTestFile, relevantClasses)
 
-        val methodTests = MethodTestCodeBuilder(context)
+        val methodTests = JavaMethodTestCodeBuilder(context)
             .build(dataStruct, underTestFile, relevantClasses)
 
         return classTestIns + methodTests
