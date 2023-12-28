@@ -9,10 +9,9 @@ import chapi.domain.core.CodeDataStruct
 import chapi.domain.core.CodeFunction
 
 /**
- * zh-cn: 为给定的 CodeDataStruct 的每个 CodeFunction 生成测试指令。
- * en: Generate test instructions for each CodeFunction of the given CodeDataStruct.
+ * 为给定的 CodeDataStruct 的每个 CodeFunction 生成测试指令。
  *
- * @param context The JobContext object that provides the context for generating test instructions.
+ * @property context 生成测试指令的上下文
  */
 class MethodTestCodeBuilder(private val context: JobContext) : TestCodeBuilder {
 
