@@ -38,11 +38,13 @@ class ThresholdChecker(private val context: WorkerContext) {
      */
     fun isMetThreshold(job: InstructionFileJob): Boolean {
         val summary = job.fileSummary
+        val qualityThreshold = context.qualityThreshold
+
         if (!supportedExtensions.contains(summary.extension)) {
             return false
         }
 
-        if (summary.complexity > context.qualityThreshold.complexity) {
+        if (summary.complexity > qualityThreshold.complexity) {
             logger.info("skip file ${summary.location} for complexity ${summary.complexity}")
             return false
         }
@@ -53,7 +55,7 @@ class ThresholdChecker(private val context: WorkerContext) {
         }
 
         // if the file size is too large, we just try 64k
-        if (summary.bytes > context.qualityThreshold.fileSize) {
+        if (summary.bytes > qualityThreshold.fileSize) {
             logger.info("skip file ${summary.location} for size ${summary.bytes}")
             return false
         }
@@ -62,8 +64,8 @@ class ThresholdChecker(private val context: WorkerContext) {
         val encoded = enc.encode(job.code)
         val length = encoded.size
         val codeWithBuffer = 1.25 // maybe has comments, long imports or others
-        if (length > context.qualityThreshold.maxTokenLength * codeWithBuffer) {
-            logger.info("skip file ${summary.location} for over ${context.qualityThreshold.maxTokenLength} tokens")
+        if (length > qualityThreshold.maxTokenLength * codeWithBuffer) {
+            logger.info("skip file ${summary.location} for over ${qualityThreshold.maxTokenLength} tokens")
             return false
         }
 
