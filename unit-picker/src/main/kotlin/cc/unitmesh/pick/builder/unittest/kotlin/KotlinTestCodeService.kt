@@ -15,7 +15,7 @@ class KotlinTestCodeService(override val context: JobContext) : JavaTestCodeServ
         val classTestIns = ClassTestCodeBuilder(context)
             .build(dataStruct, underTestFile, relevantClasses)
 
-        val methodTests = JavaMethodTestCodeBuilder(context)
+        val methodTests = KotlinMethodTestCodeBuilder(context)
             .build(dataStruct, underTestFile, relevantClasses)
 
         return classTestIns + methodTests
