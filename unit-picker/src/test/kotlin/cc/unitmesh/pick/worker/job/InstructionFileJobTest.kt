@@ -1,9 +1,9 @@
-package cc.unitmesh.pick.worker.job;
+package cc.unitmesh.pick.worker.job
 
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test;
 
-public class InstructionFileJobTest {
+class InstructionFileJobTest {
 
     @Test
     fun shouldRemoveCommentsInJava() {

@@ -9,8 +9,15 @@ import cc.unitmesh.pick.worker.job.JobContext
 import chapi.domain.core.CodeContainer
 import chapi.domain.core.CodeDataStruct
 
+/**
+ * The `RelatedCodeStrategyBuilder` class is responsible for building a list of completion instructions for related code.
+ * It implements the `CodeStrategyBuilder` interface.
+ *
+ * @property context The job context containing the necessary information for code completion.
+ *
+ * @constructor Creates a `RelatedCodeStrategyBuilder` with the specified job context.
+ */
 class RelatedCodeStrategyBuilder(private val context: JobContext) : CodeStrategyBuilder {
-
     override fun build(): List<TypedIns> {
         val language = context.job.fileSummary.language.lowercase()
         val container = context.job.container ?: return emptyList()

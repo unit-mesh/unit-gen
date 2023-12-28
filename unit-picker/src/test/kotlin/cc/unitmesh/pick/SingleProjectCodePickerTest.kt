@@ -1,4 +1,4 @@
-package cc.unitmesh.pick;
+package cc.unitmesh.pick
 
 import cc.unitmesh.core.Instruction
 import cc.unitmesh.core.completion.CompletionBuilderType
@@ -31,7 +31,7 @@ class SingleProjectCodePickerTest {
     }
 
     @Test
-    fun shouldCheckoutTestCodeWithBadSmell() {
+    fun should_handle_for_kotlin_test_gen() {
         val picker = SingleProjectCodePicker(
             InsPickerOption(
                 language = "kotlin",

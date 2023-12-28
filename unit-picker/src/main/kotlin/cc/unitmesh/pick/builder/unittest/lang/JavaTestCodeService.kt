@@ -1,8 +1,6 @@
 package cc.unitmesh.pick.builder.unittest.lang
 
-import cc.unitmesh.core.completion.CompletionBuilderType
 import cc.unitmesh.core.unittest.TypedTestIns
-import cc.unitmesh.pick.builder.testBuilders
 import cc.unitmesh.pick.builder.unittest.ClassTestCodeBuilder
 import cc.unitmesh.pick.builder.unittest.MethodTestCodeBuilder
 import cc.unitmesh.pick.worker.job.InstructionFileJob

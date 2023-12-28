@@ -1,4 +1,4 @@
-package cc.unitmesh.pick.option;
+package cc.unitmesh.pick.option
 
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
