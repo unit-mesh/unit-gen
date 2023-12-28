@@ -6,20 +6,43 @@ import cc.unitmesh.pick.ext.checkNamingStyle
 import cc.unitmesh.pick.ext.toSourceCode
 import cc.unitmesh.pick.worker.job.JobContext
 import chapi.domain.core.CodeDataStruct
+import chapi.domain.core.CodeFunction
 
+/**
+ * zh-cn: 为给定的 CodeDataStruct 的每个 CodeFunction 生成测试指令。
+ * en: Generate test instructions for each CodeFunction of the given CodeDataStruct.
+ *
+ * @param context The JobContext object that provides the context for generating test instructions.
+ */
 class MethodTestCodeBuilder(private val context: JobContext) : TestCodeBuilder {
+
+    /**
+     * 针对给定的 [CodeDataStruct] 的每个 [CodeFunction] 生成 [BasicTestIns]
+     *
+     * @param dataStruct 要生成测试指令的 [CodeDataStruct]
+     * @param underTestFile 表示被测试的文件的 [CodeDataStruct]
+     * @param relevantClasses 表示相关类的 [CodeDataStruct] 列表
+     * @return 返回生成的 [BasicTestIns]
+     *
+     * 主要处理逻辑：
+     *
+     * 1. 判断给定的 [CodeDataStruct] 是否符合质量阈值，如果不符合则返回空列表。
+     * 2. 从 [CodeDataStruct] 中提取出所有的 [CodeFunction]，并对每个 [CodeFunction] 进行如下操作：
+     *    - 从测试代码中提取出所有的函数调用，对于每个函数调用，如果函数调用的 [CodeDataStruct] 不是 [underTestFile]，则跳过。
+     *    - 如果函数调用的 [CodeDataStruct] 是 [underTestFile]，则提取出原始函数的代码内容，生成 [BasicTestIns]。
+     *    - 将生成的 [BasicTestIns] 放入结果列表中
+     * 额外逻辑：
+     * 1. 生成命名风格，以便于后续生成测试代码时使用。
+     */
     override fun build(
         dataStruct: CodeDataStruct,
         underTestFile: CodeDataStruct,
         relevantClasses: List<CodeDataStruct>,
     ): List<BasicTestIns> {
         val generatedCode = dataStruct.toSourceCode()
-        if (generatedCode.lines().size > context.insQualityThreshold.maxLineInCode) {
-            return emptyList()
-        }
+        if (generatedCode.lines().size > context.insQualityThreshold.maxLineInCode) return emptyList()
 
         val namingStyle = dataStruct.checkNamingStyle()
-        // test canonicalName map BasicTestIns
         val results: HashMap<String, List<BasicTestIns>> = hashMapOf()
 
         val underTestFunctionMap = underTestFile.Functions.associate {
@@ -27,33 +50,32 @@ class MethodTestCodeBuilder(private val context: JobContext) : TestCodeBuilder {
             canonicalName to it.Content
         }
 
-        // analysis test code, and find original function content, put to results
-        dataStruct.Functions.map { function ->
+        // 分析测试代码，找到原始函数的代码内容，放到结果中
+        dataStruct.Functions.mapIndexed { _, function ->
             function.FunctionCalls.map {
-                if (it.NodeName == underTestFile.NodeName) {
-                    val canonicalName = it.Package + "." + it.NodeName + ":" + it.FunctionName
-                    val originalContent = underTestFunctionMap[canonicalName] ?: return@map
+                val canonicalName = it.Package + "." + it.NodeName + ":" + it.FunctionName
 
-                    if (originalContent.isNotBlank() && function.Content.isNotBlank()) {
-                        val testIns = BasicTestIns(
-                            identifier = NodeIdentifier(
-                                type = NodeType.METHOD,
-                                name = it.FunctionName,
-                            ),
-                            language = context.project.language,
-                            underTestCode = originalContent,
-                            generatedCode = function.Content,
-                            coreFrameworks = context.project.coreFrameworks,
-                            testFrameworks = context.project.testFrameworks,
-                            testType = TestCodeBuilderType.METHOD_UNIT,
-                            specs = listOf(
-                                "Test class should be named `${namingStyle}`."
-                            )
-                        )
+                if (it.NodeName != underTestFile.NodeName) return@map
+                val originalContent = underTestFunctionMap[canonicalName] ?: return@map
+                if (originalContent.isBlank() || function.Content.isBlank()) return@map
 
-                        results[canonicalName] = results[canonicalName]?.plus(testIns) ?: listOf(testIns)
-                    }
-                }
+                val testIns = BasicTestIns(
+                    identifier = NodeIdentifier(
+                        type = NodeType.METHOD,
+                        name = it.FunctionName,
+                    ),
+                    language = context.project.language,
+                    underTestCode = originalContent,
+                    generatedCode = function.Content,
+                    coreFrameworks = context.project.coreFrameworks,
+                    testFrameworks = context.project.testFrameworks,
+                    testType = TestCodeBuilderType.METHOD_UNIT,
+                    specs = listOf(
+                        "Test class should be named `${namingStyle}`."
+                    )
+                )
+
+                results[canonicalName] = results[canonicalName]?.plus(testIns) ?: listOf(testIns)
             }
         }
 
