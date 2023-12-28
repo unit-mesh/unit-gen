@@ -90,6 +90,7 @@ interface LangWorker {
                 context.completionTypes,
                 context.maxCompletionInOneFile,
                 project = ProjectContext(
+                    language = context.project.language,
                     compositionDependency = context.compositionDependency,
                 ),
                 context.qualityThreshold

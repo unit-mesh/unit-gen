@@ -39,8 +39,7 @@ class SingleProjectCodePickerTest {
                 completionTypeSize = 10,
                 maxCharInCode = 100,
                 completionTypes = listOf(
-                    CompletionBuilderType.IN_BLOCK_COMPLETION,
-//                    CompletionBuilderType.TEST_CODE_GEN, CompletionBuilderType.DOCUMENTATION
+                    CompletionBuilderType.TEST_CODE_GEN
                 ),
             )
         )

@@ -6,6 +6,7 @@ import cc.unitmesh.core.Instruction
 import cc.unitmesh.core.SupportedLang
 import cc.unitmesh.pick.ext.GitUtil
 import cc.unitmesh.pick.ext.PickDirectoryWalker
+import cc.unitmesh.pick.project.ProjectContext
 import cc.unitmesh.pick.threshold.InsQualityThreshold
 import cc.unitmesh.pick.worker.WorkerContext
 import cc.unitmesh.pick.worker.WorkerManager
@@ -67,6 +68,8 @@ class SingleProjectCodePicker(private val config: InsPickerOption) {
         logger.info("start walk $codeDir")
 
         val languageWorker = LanguageWorker()
+        val language = SupportedLang.from(config.language.lowercase()) ?: throw IllegalArgumentException("unsupported language: ${config.language}")
+
         val workerManager = WorkerManager(
             WorkerContext(
                 config.codeContextStrategies,
@@ -82,12 +85,14 @@ class SingleProjectCodePicker(private val config: InsPickerOption) {
                     maxLineInCode = config.maxLineInCode,
                     maxCharInCode = config.maxCharInCode,
                     maxTokenLength = config.maxTokenLength,
+                ),
+                project = ProjectContext(
+                    language = language
                 )
             )
         )
 
 
-        val language = SupportedLang.from(config.language.lowercase()) ?: throw IllegalArgumentException("unsupported language: ${config.language}")
         workerManager.init(codeDir, language)
 
         val walkdirChannel = Channel<FileJob>()

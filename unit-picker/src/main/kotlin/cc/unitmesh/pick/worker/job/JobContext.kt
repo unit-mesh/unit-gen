@@ -7,6 +7,7 @@ import cc.unitmesh.pick.threshold.InsQualityThreshold
 import cc.unitmesh.quality.CodeQualityType
 import kotlinx.serialization.Serializable
 import org.archguard.scanner.analyser.count.FileJob
+import org.jetbrains.annotations.TestOnly
 
 @Serializable
 data class JobContext(
@@ -20,6 +21,7 @@ data class JobContext(
     val insQualityThreshold: InsQualityThreshold,
 ) {
     companion object {
+        @TestOnly
         fun default(fileTree: HashMap<String, InstructionFileJob> = hashMapOf()): JobContext {
             return JobContext(
                 job = InstructionFileJob(
