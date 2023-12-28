@@ -113,7 +113,8 @@ fun CodeDataStruct.toUml(): String {
                 method.Parameters.joinToString(", ") { parameter ->
                     "${parameter.TypeValue}: ${parameter.TypeType}"
                 }
-            "   + ${method.Name}($params)" + if (method.ReturnType.isNotBlank()) ": ${method.ReturnType}" else ""
+            val returnType = method.ReturnType.replace("kotlin.", "")
+            "   + ${method.Name}($params)" + if (returnType.isNotBlank()) ": $returnType" else ""
         }
 
     if (methodCodes.isNotBlank()) {

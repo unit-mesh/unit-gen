@@ -50,21 +50,26 @@ data class BasicTestIns(
         input.append("\n###")
 
         input.append("Code under test:\n")
-        input.append("```${language.name.lowercase()}\n")
+        val languageName = language.name.lowercase()
+        input.append("```$languageName\n")
         input.append(underTestCode)
         input.append("\n```")
 
-        when(testType) {
+        when (testType) {
             TestCodeBuilderType.CLASS_UNIT -> {
                 input.append("\nStart test code with `package` syntax here: \n")
             }
+
             TestCodeBuilderType.METHOD_UNIT -> {
                 input.append("\nStart test code with `@Test` syntax here: \n")
             }
         }
 
+        val id = identifier.name
+        val typeName = identifier.type.name.lowercase()
+
         return Instruction(
-            instruction = """Write $language unit test for ${identifier.name}'s ${identifier.type} code.""",
+            instruction = """Write $languageName language unit test for $id's $typeName.""",
             input = input.toString(),
             output = generatedCode,
         )

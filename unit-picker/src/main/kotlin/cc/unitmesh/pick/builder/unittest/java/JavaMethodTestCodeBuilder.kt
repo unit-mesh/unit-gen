@@ -7,6 +7,7 @@ import cc.unitmesh.core.unittest.TestCodeBuilderType
 import cc.unitmesh.pick.builder.unittest.base.BasicTestIns
 import cc.unitmesh.pick.ext.checkNamingStyle
 import cc.unitmesh.pick.ext.toSourceCode
+import cc.unitmesh.pick.ext.toUml
 import cc.unitmesh.pick.worker.job.JobContext
 import chapi.domain.core.CodeDataStruct
 import chapi.domain.core.CodeFunction
@@ -52,6 +53,7 @@ class JavaMethodTestCodeBuilder(private val context: JobContext) : TestCodeBuild
             canonicalName to it.Content
         }
 
+        val currentUml = """// Current file: ${underTestFile.toUml()}"""
         // 分析测试代码，找到原始函数的代码内容，放到结果中
         dataStruct.Functions.mapIndexed { _, function ->
             function.FunctionCalls.map {
@@ -72,6 +74,7 @@ class JavaMethodTestCodeBuilder(private val context: JobContext) : TestCodeBuild
                     coreFrameworks = context.project.coreFrameworks,
                     testFrameworks = context.project.testFrameworks,
                     testType = TestCodeBuilderType.METHOD_UNIT,
+                    relatedCode = listOf(currentUml),
                     specs = listOf(
                         "Test class should be named `${namingStyle}`."
                     )

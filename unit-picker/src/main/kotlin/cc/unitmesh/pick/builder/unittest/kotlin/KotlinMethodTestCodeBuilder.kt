@@ -7,6 +7,7 @@ import cc.unitmesh.core.unittest.TestCodeBuilderType
 import cc.unitmesh.pick.builder.unittest.base.BasicTestIns
 import cc.unitmesh.pick.ext.checkNamingStyle
 import cc.unitmesh.pick.ext.toSourceCode
+import cc.unitmesh.pick.ext.toUml
 import cc.unitmesh.pick.worker.job.InstructionFileJob
 import cc.unitmesh.pick.worker.job.JobContext
 import chapi.domain.core.CodeCall
@@ -22,7 +23,9 @@ private const val PRIMARY_CONSTRUCTOR = "PrimaryConstructor"
 class KotlinMethodTestCodeBuilder(private val context: JobContext) : TestCodeBuilder {
 
     override fun build(
+        // 测试类，即当前类
         dataStruct: CodeDataStruct,
+        // 待测试类
         underTestFile: CodeDataStruct,
         relevantClasses: List<CodeDataStruct>,
     ): List<BasicTestIns> {
@@ -32,70 +35,36 @@ class KotlinMethodTestCodeBuilder(private val context: JobContext) : TestCodeBui
         val namingStyle = dataStruct.checkNamingStyle()
         val results: HashMap<String, List<BasicTestIns>> = hashMapOf()
 
-        val underTestFunctionMap = underTestFile.Functions.associate {
-            val canonicalName = underTestFile.Package + "." + underTestFile.NodeName + ":" + it.Name
-            canonicalName to it.Content
-        }
+        val currentUml = "\n// Current file:\n ${underTestFile.toUml()}"
 
         // 分析测试代码，找到原始函数的代码内容，放到结果中
         dataStruct.Functions.mapIndexed { _, function ->
-            function.FunctionCalls.map {
-                val canonicalName = if (it.Package == "") {
-                    lookupCanonicalName(context.fileTree, dataStruct, it) ?: return@map
-                } else {
-                    it.Package + "." + it.NodeName + ":" + it.FunctionName
+            underTestFile.Functions.map {
+                if (!function.Content.contains("." + it.Name + "(")) {
+                    return@map
                 }
-
-                // skip for testing primary constructor
-                if (canonicalName.endsWith(PRIMARY_CONSTRUCTOR)) return@map
-
-                if (it.NodeName != underTestFile.NodeName) return@map
-                val originalContent = underTestFunctionMap[canonicalName] ?: return@map
-                if (originalContent.isBlank() || function.Content.isBlank()) return@map
 
                 val testIns = BasicTestIns(
                     identifier = NodeIdentifier(
                         type = NodeType.METHOD,
-                        name = it.FunctionName,
+                        name = underTestFile.NodeName + " Class' " + it.Name,
                     ),
                     language = context.project.language,
-                    underTestCode = originalContent,
+                    underTestCode = it.Content,
                     generatedCode = function.Content,
                     coreFrameworks = context.project.coreFrameworks,
                     testFrameworks = context.project.testFrameworks,
                     testType = TestCodeBuilderType.METHOD_UNIT,
+                    relatedCode = listOf(currentUml),
                     specs = listOf(
                         "Test class should be named `${namingStyle}`."
                     )
                 )
 
-                results[canonicalName] = results[canonicalName]?.plus(testIns) ?: listOf(testIns)
+                results[it.Name] = listOf(testIns)
             }
         }
 
         return results.values.flatten()
-    }
-
-    private fun lookupCanonicalName(
-        fileTree: java.util.HashMap<String, InstructionFileJob>,
-        testFile: CodeDataStruct,
-        codeCall: CodeCall,
-    ): String? {
-        val maybeCreator = codeCall.FunctionName[0].isUpperCase()
-        if (maybeCreator) {
-            val pkg = testFile.Package
-            val nodeName = pkg + "." + codeCall.FunctionName
-            val node = fileTree[nodeName]?.container?.DataStructures?.firstOrNull() ?: return null
-
-            if (codeCall.Package == "") {
-                codeCall.Package = node.Package
-                codeCall.NodeName = node.NodeName
-                codeCall.FunctionName = PRIMARY_CONSTRUCTOR
-            }
-
-            return node.Package + "." + node.NodeName + ":" + PRIMARY_CONSTRUCTOR
-        }
-
-        return null
     }
 }
