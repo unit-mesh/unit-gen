@@ -1,5 +1,7 @@
 package cc.unitmesh.pick.builder.unittest
 
+import cc.unitmesh.core.ast.NodeIdentifier
+import cc.unitmesh.core.ast.NodeType
 import cc.unitmesh.core.unittest.TestCodeBuilderType
 import cc.unitmesh.core.unittest.TestCodeBuilder
 import cc.unitmesh.pick.ext.checkNamingStyle

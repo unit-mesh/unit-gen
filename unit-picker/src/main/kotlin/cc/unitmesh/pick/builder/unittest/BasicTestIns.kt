@@ -2,23 +2,12 @@ package cc.unitmesh.pick.builder.unittest
 
 import cc.unitmesh.core.Instruction
 import cc.unitmesh.core.SupportedLang
+import cc.unitmesh.core.ast.NodeIdentifier
 import cc.unitmesh.core.unittest.TestCodeBuilderType
 import cc.unitmesh.core.unittest.TypedTestIns
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 
-enum class NodeType {
-    CLASS,
-    METHOD,
-    ;
-}
-
-
-@Serializable
-data class NodeIdentifier(
-    val type: NodeType,
-    val name: String,
-)
 
 @Serializable
 data class BasicTestIns(
