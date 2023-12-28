@@ -61,7 +61,7 @@ data class InsPickerOption(
      */
     val codeContextStrategies: List<BizCodeContextStrategy> = listOf(
         BizCodeContextStrategy.RELATED_CODE,
-//        BizCodeContextStrategy.SIMILAR_CHUNKS,
+        BizCodeContextStrategy.SIMILAR_CHUNKS,
     ),
     /**
      * The [CompletionBuilderType], which will according you IDE strategy to generate the type.
@@ -70,7 +70,8 @@ data class InsPickerOption(
         CompletionBuilderType.AFTER_BLOCK_COMPLETION,
         CompletionBuilderType.IN_BLOCK_COMPLETION,
         CompletionBuilderType.INLINE_COMPLETION,
-//        CompletionBuilderType.TEST_CODE_GEN,
+        CompletionBuilderType.TEST_CODE_GEN,
+        CompletionBuilderType.DOCUMENTATION,
     ),
     /**
      * The [CodeQualityType], will be like a tree to hold the item.
@@ -115,7 +116,12 @@ data class InsPickerOption(
 
     fun repoFileName() = "${encodeFileName(url)}_${encodeFileName(branch)}_${language}.jsonl"
 
-    // for / \ : * ? " < > |, which is not allowed in file name
+    /**
+     * Encodes a given string to be used as a file name by replacing characters that are not allowed in file names.
+     *
+     * @param string the string to be encoded
+     * @return the encoded string with characters such as / \ : * ? " < > | replaced with underscores (_)
+     */
     fun encodeFileName(string: String): String {
         return string.replace("/", "_")
             .replace("\\", "_")
