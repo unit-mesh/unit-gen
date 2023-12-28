@@ -20,7 +20,7 @@ import java.util.*
 class WorkerManager(private val context: WorkerContext) {
     private val workers: Map<SupportedLang, LangWorker> = mapOf(
         SupportedLang.JAVA to JavaWorker(context),
-        SupportedLang.TYPESCRIPT to TypescriptWorker(context),
+//        SupportedLang.TYPESCRIPT to TypescriptWorker(context),
     )
 
     private val thresholdChecker: ThresholdChecker = ThresholdChecker(context)
@@ -100,7 +100,7 @@ class WorkerManager(private val context: WorkerContext) {
         }
 
         if (skipCount > 0) {
-            logger.info("skip $skipCount / ${results.size} instructions, ")
+            logger.info("skip $skipCount / ${results.size} instructions of ${context.pureDataFileName} ")
         }
 
         // take context.completionTypeSize for each type

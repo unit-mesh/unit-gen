@@ -61,7 +61,8 @@ class ThresholdChecker(private val context: WorkerContext) {
         // limit by token length
         val encoded = enc.encode(job.code)
         val length = encoded.size
-        if (length > context.qualityThreshold.maxTokenLength) {
+        val codeWithBuffer = 1.25 // maybe has comments, long imports or others
+        if (length > context.qualityThreshold.maxTokenLength * codeWithBuffer) {
             logger.info("skip file ${summary.location} for over ${context.qualityThreshold.maxTokenLength} tokens")
             return false
         }
