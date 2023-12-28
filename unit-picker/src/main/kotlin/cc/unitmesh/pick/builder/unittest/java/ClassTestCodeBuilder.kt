@@ -48,7 +48,7 @@ class ClassTestCodeBuilder(private val context: JobContext) : TestCodeBuilder {
             BasicTestIns(
                 identifier = NodeIdentifier(
                     type = NodeType.CLASS,
-                    name = dataStruct.NodeName,
+                    name = underTestFile.NodeName,
                 ),
                 language = context.project.language,
                 underTestCode = underTestFile.Content,

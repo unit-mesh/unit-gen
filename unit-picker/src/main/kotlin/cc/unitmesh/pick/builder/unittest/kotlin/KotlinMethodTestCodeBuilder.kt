@@ -10,6 +10,7 @@ import cc.unitmesh.pick.ext.toSourceCode
 import cc.unitmesh.pick.ext.toUml
 import cc.unitmesh.pick.worker.job.JobContext
 import chapi.domain.core.CodeDataStruct
+import chapi.domain.core.DataStructType
 
 /**
  * 为给定的 CodeDataStruct 的每个 CodeFunction 生成测试指令。
@@ -36,7 +37,9 @@ class KotlinMethodTestCodeBuilder(private val context: JobContext) : TestCodeBui
         // 分析测试代码，找到原始函数的代码内容，放到结果中
         dataStruct.Functions.mapIndexed { _, function ->
             underTestFile.Functions.map {
-                if (!function.Content.contains("." + it.Name + "(")) {
+                val isNotClassCall = underTestFile.Type == DataStructType.CLASS && !function.Content.contains("." + it.Name + "(")
+                val isNotObjectCall = underTestFile.Type == DataStructType.OBJECT && !function.Content.contains(it.Name + "(")
+                if (isNotClassCall || isNotObjectCall) {
                     return@map
                 }
 

@@ -1,5 +1,6 @@
 package cc.unitmesh.pick.builder.unittest.java
 
+import cc.unitmesh.core.SupportedLang
 import cc.unitmesh.core.unittest.TypedTestIns
 import cc.unitmesh.pick.builder.unittest.base.UnitTestService
 import cc.unitmesh.pick.worker.job.InstructionFileJob
@@ -10,7 +11,7 @@ import chapi.domain.core.CodeImport
 
 open class JavaTestCodeService(open val context: JobContext) : UnitTestService {
     override fun isApplicable(dataStruct: CodeDataStruct): Boolean {
-        return dataStruct.NodeName.endsWith("Test") || dataStruct.NodeName.endsWith("Tests")
+        return context.project.language == SupportedLang.JAVA && dataStruct.NodeName.endsWith("Test") || dataStruct.NodeName.endsWith("Tests")
     }
 
     /**
