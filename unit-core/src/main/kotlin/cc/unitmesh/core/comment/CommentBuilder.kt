@@ -25,12 +25,6 @@ import chapi.domain.core.CodeContainer
  * @see DocInstruction
  */
 interface CommentBuilder {
-    /// for match start with comment: `/**`
-    val commentStart: String
-
-    /// for match end with comment: `*/`
-    val commentEnd: String
-
     /// for generate instruction
     val docInstruction: DocInstruction
     fun build(code: String, container: CodeContainer): List<TypedIns>
