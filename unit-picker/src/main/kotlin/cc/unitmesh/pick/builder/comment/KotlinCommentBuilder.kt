@@ -30,7 +30,7 @@ class KotlinCommentBuilder : CommentBuilder {
 
         container.DataStructures.forEach { dataStruct ->
             val classComment = startLineCommentMap[dataStruct.Position.StartLine - 1]
-            classComment?.let { comments.add(ClassCommentIns(dataStruct, it, language = "kotlin")) }
+            classComment?.let { comments.add(ClassCommentIns(docInstruction, dataStruct, it, language = "kotlin")) }
 
             dataStruct.Functions
                 .filter { it.Name != "constructor" && it.Name != "PrimaryConstructor" }
@@ -39,6 +39,7 @@ class KotlinCommentBuilder : CommentBuilder {
                     functionComment?.let {
                         comments.add(
                             MethodCommentIns(
+                                docInstruction,
                                 function,
                                 it,
                                 dataStruct,
@@ -106,6 +107,7 @@ class KotlinCommentBuilder : CommentBuilder {
 
 @Serializable
 data class ClassCommentIns(
+    val docInstruction: DocInstruction,
     val dataStructure: CodeDataStruct,
     val comment: CodeComment,
     val language: String,
@@ -123,6 +125,7 @@ data class ClassCommentIns(
 
 @Serializable
 data class MethodCommentIns(
+    val docInstruction: DocInstruction,
     val function: CodeFunction,
     val comment: CodeComment,
     val currentDataStruct: CodeDataStruct,

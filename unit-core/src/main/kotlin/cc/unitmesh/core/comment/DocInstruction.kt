@@ -7,5 +7,5 @@ enum class DocInstruction(val value: String) {
     PHP("PHPDoc"),
     GO("Go Doc"),
     RUBY("YARD documentation"),
-    KOTLIN("YARD KDoc")
+    KOTLIN("KDoc")
 }

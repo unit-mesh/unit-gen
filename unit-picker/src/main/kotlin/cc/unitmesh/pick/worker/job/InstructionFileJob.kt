@@ -13,8 +13,14 @@ class InstructionFileJob(
     var codeLines: List<String> = listOf(),
 ) {
     companion object {
-        fun from(fileJob: FileJob): InstructionFileJob {
-            val content = removeMultipleComments(fileJob.language, fileJob.content.decodeToString())
+        fun from(fileJob: FileJob, canRemoveComment: Boolean): InstructionFileJob {
+            val contentString = fileJob.content.decodeToString()
+            val content = if (canRemoveComment) {
+                removeMultipleComments(fileJob.language, contentString)
+            } else {
+                contentString
+            }
+
             return InstructionFileJob(
                 code = content,
                 fileSummary = fileJob

@@ -61,7 +61,7 @@ data class InsPickerOption(
      */
     val buildPlan: List<BuildPlanType> = listOf(
         BuildPlanType.RELATED_CODE,
-        BuildPlanType.SIMILAR_CHUNKS,
+//        BuildPlanType.SIMILAR_CHUNKS,
     ),
     /**
      * The [CompletionBuilderType], which will according you IDE strategy to generate the type.

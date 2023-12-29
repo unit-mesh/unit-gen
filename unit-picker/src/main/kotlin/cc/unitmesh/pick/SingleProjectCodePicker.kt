@@ -4,6 +4,7 @@ import cc.unitmesh.pick.worker.job.InstructionFileJob
 import cc.unitmesh.pick.option.InsPickerOption
 import cc.unitmesh.core.Instruction
 import cc.unitmesh.core.SupportedLang
+import cc.unitmesh.core.completion.CompletionBuilderType
 import cc.unitmesh.pick.ext.GitUtil
 import cc.unitmesh.pick.ext.PickDirectoryWalker
 import cc.unitmesh.pick.project.ProjectContext
@@ -28,6 +29,7 @@ import java.nio.file.Path
  */
 class SingleProjectCodePicker(private val config: InsPickerOption) {
     private val logger = org.slf4j.LoggerFactory.getLogger(javaClass)
+
     /**
      * Executes the code picker with the provided configuration.
      *
@@ -68,7 +70,8 @@ class SingleProjectCodePicker(private val config: InsPickerOption) {
         logger.info("start walk $codeDir")
 
         val languageWorker = LanguageWorker()
-        val language = SupportedLang.from(config.language.lowercase()) ?: throw IllegalArgumentException("unsupported language: ${config.language}")
+        val language = SupportedLang.from(config.language.lowercase())
+            ?: throw IllegalArgumentException("unsupported language: ${config.language}")
 
         val workerManager = WorkerManager(
             WorkerContext(
@@ -98,6 +101,8 @@ class SingleProjectCodePicker(private val config: InsPickerOption) {
         val walkdirChannel = Channel<FileJob>()
         val summary = mutableListOf<Instruction>()
 
+        val canRemoveComment = !config.completionTypes.contains(CompletionBuilderType.DOCUMENTATION)
+
         launch {
             launch {
                 PickDirectoryWalker(walkdirChannel).start(codeDir.toString())
@@ -106,7 +111,7 @@ class SingleProjectCodePicker(private val config: InsPickerOption) {
             launch {
                 for (fileJob in walkdirChannel) {
                     languageWorker.processFile(fileJob)?.let {
-                        workerManager.tryAddJobByThreshold(InstructionFileJob.from(it), language)
+                        workerManager.tryAddJobByThreshold(InstructionFileJob.from(it, canRemoveComment), language)
                     }
                 }
 

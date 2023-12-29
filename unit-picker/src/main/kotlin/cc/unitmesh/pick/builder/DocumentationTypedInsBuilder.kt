@@ -1,13 +1,11 @@
 package cc.unitmesh.pick.builder
 
 import cc.unitmesh.core.SupportedLang
-import cc.unitmesh.core.completion.CodeCompletionIns
 import cc.unitmesh.core.completion.TypedIns
 import cc.unitmesh.core.completion.TypedInsBuilder
 import cc.unitmesh.pick.builder.comment.KotlinCommentBuilder
 import cc.unitmesh.pick.worker.job.JobContext
 import chapi.domain.core.CodeContainer
-import chapi.domain.core.CodeFunction
 
 class DocumentationTypedInsBuilder(val context: JobContext) : TypedInsBuilder {
     private val kotlinCommentBuilder = KotlinCommentBuilder()

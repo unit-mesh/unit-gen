@@ -47,9 +47,9 @@ class RelatedCodeStrategyBuilder(private val context: JobContext) : CodeStrategy
 
         // 3. build completion instruction
         val builders = completionBuilders(context.completionBuilderTypes, context)
-        builders.asSequence().forEach {
+        val containerIns = builders.asSequence().map {
             it.build(container)
-        }
+        }.flatten()
 
         val codeCompletionIns = dataStructs.map { ds ->
             val blockIns = builders.asSequence().map {
@@ -78,7 +78,7 @@ class RelatedCodeStrategyBuilder(private val context: JobContext) : CodeStrategy
             functionsIns + blockIns
         }.flatten()
 
-        return codeCompletionIns
+        return codeCompletionIns + containerIns
     }
 
     private fun findRelatedCode(container: CodeContainer): List<CodeDataStruct> {

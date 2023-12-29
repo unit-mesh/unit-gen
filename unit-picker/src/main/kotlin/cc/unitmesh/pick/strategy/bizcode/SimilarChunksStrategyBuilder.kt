@@ -1,12 +1,13 @@
 package cc.unitmesh.pick.strategy.bizcode
 
 import cc.unitmesh.core.SupportedLang
+import cc.unitmesh.core.completion.TypedIns
 import cc.unitmesh.core.intelli.SimilarChunker
 import cc.unitmesh.pick.builder.completionBuilders
-import cc.unitmesh.pick.strategy.ins.SimilarChunkIns
 import cc.unitmesh.pick.similar.JavaSimilarChunker
 import cc.unitmesh.pick.similar.TypeScriptSimilarChunker
 import cc.unitmesh.pick.strategy.base.CodeStrategyBuilder
+import cc.unitmesh.pick.strategy.ins.SimilarChunkIns
 import cc.unitmesh.pick.worker.job.JobContext
 
 class SimilarChunksStrategyBuilder(private val context: JobContext) : CodeStrategyBuilder {
@@ -27,7 +28,7 @@ class SimilarChunksStrategyBuilder(private val context: JobContext) : CodeStrate
      *
      * @return a list of SimilarChunkIns objects representing code completions with similar chunks
      */
-    override fun build(): List<SimilarChunkIns> {
+    override fun build(): List<TypedIns> {
         val language = context.job.fileSummary.language.lowercase()
         val container = context.job.container ?: return emptyList()
 
@@ -47,9 +48,9 @@ class SimilarChunksStrategyBuilder(private val context: JobContext) : CodeStrate
         }
 
         val builders = completionBuilders(context.completionBuilderTypes, context)
-        builders.asSequence().forEach {
+        val containerIns = builders.asSequence().map {
             it.build(container)
-        }
+        }.flatten()
 
         // 2. collect all with similar data structure
         val codeCompletionIns = dataStructs.map { ds ->
@@ -84,6 +85,6 @@ class SimilarChunksStrategyBuilder(private val context: JobContext) : CodeStrate
             }.flatten()
         }.flatten()
 
-        return codeCompletionIns
+        return codeCompletionIns + containerIns
     }
 }
