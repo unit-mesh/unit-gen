@@ -1,7 +1,7 @@
 package cc.unitmesh.pick.strategy
 
 import cc.unitmesh.pick.strategy.base.CodeStrategyBuilder
-import cc.unitmesh.pick.strategy.bizcode.EmptyContextStrategyBuilder
+import cc.unitmesh.pick.strategy.bizcode.CommentsStrategyBuilder
 import cc.unitmesh.pick.strategy.bizcode.RelatedCodeStrategyBuilder
 import cc.unitmesh.pick.strategy.bizcode.SimilarChunksStrategyBuilder
 import cc.unitmesh.pick.worker.job.JobContext
@@ -41,7 +41,7 @@ enum class BizCodeContextStrategy {
         return mapOf(
             SIMILAR_CHUNKS to SimilarChunksStrategyBuilder(context),
             RELATED_CODE to RelatedCodeStrategyBuilder(context),
-            EMPTY_CONTEXT to EmptyContextStrategyBuilder(context),
+            EMPTY_CONTEXT to CommentsStrategyBuilder(context),
         )[this] ?: throw SerializationException("Unknown message type: $this")
     }
 }

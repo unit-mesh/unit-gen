@@ -1,9 +1,12 @@
 package cc.unitmesh.pick.strategy.bizcode
 
+import cc.unitmesh.core.SupportedLang
+import cc.unitmesh.core.intelli.SimilarChunker
 import cc.unitmesh.pick.builder.completionBuilders
 import cc.unitmesh.pick.builder.ins.SimilarChunkIns
-import cc.unitmesh.pick.strategy.base.CodeStrategyBuilder
 import cc.unitmesh.pick.similar.JavaSimilarChunker
+import cc.unitmesh.pick.similar.TypeScriptSimilarChunker
+import cc.unitmesh.pick.strategy.base.CodeStrategyBuilder
 import cc.unitmesh.pick.worker.job.JobContext
 
 class SimilarChunksStrategyBuilder(private val context: JobContext) : CodeStrategyBuilder {
@@ -37,7 +40,12 @@ class SimilarChunksStrategyBuilder(private val context: JobContext) : CodeStrate
             return emptyList()
         }
 
-        val similarChunker = JavaSimilarChunker(context.fileTree)
+        val similarChunker: SimilarChunker = when(context.project.language) {
+            SupportedLang.JAVA -> JavaSimilarChunker(context.fileTree)
+            SupportedLang.KOTLIN -> JavaSimilarChunker(context.fileTree)
+            SupportedLang.TYPESCRIPT -> TypeScriptSimilarChunker(context.fileTree)
+        }
+
         val builders = completionBuilders(context.completionBuilderTypes, context)
 
         // 2. collect all with similar data structure
