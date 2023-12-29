@@ -12,7 +12,7 @@ import io.kotest.matchers.shouldBe
 import org.archguard.scanner.analyser.count.FileJob
 import org.junit.jupiter.api.Test
 
-class InBlockCodeCompletionBuilderTest {
+class InBlockCodeTypedInsBuilderTest {
 
     @Test
     fun should_return_single_CodeCompletionIns() {
@@ -39,7 +39,7 @@ class InBlockCodeCompletionBuilderTest {
             3,
             insQualityThreshold = InsQualityThreshold()
         )
-        val builder = InBlockCodeCompletionBuilder(jobContext)
+        val builder = InBlockCodeTypedInsBuilder(jobContext)
 
         // when
         val result = builder.build(codeFunction)

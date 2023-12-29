@@ -1,28 +1,28 @@
 package cc.unitmesh.pick.builder
 
-import cc.unitmesh.core.completion.CompletionBuilder
+import cc.unitmesh.core.completion.TypedInsBuilder
 import cc.unitmesh.core.completion.CompletionBuilderType
 import cc.unitmesh.core.unittest.TestCodeBuilder
 import cc.unitmesh.core.unittest.TestCodeBuilderType
-import cc.unitmesh.pick.builder.bizcode.AfterBlockCodeCompletionBuilder
-import cc.unitmesh.pick.builder.bizcode.InBlockCodeCompletionBuilder
-import cc.unitmesh.pick.builder.bizcode.InlineCodeCompletionBuilder
+import cc.unitmesh.pick.builder.bizcode.AfterBlockCodeTypedInsBuilder
+import cc.unitmesh.pick.builder.bizcode.InBlockCodeTypedInsBuilder
+import cc.unitmesh.pick.builder.bizcode.InlineCodeTypedInsBuilder
 import cc.unitmesh.pick.builder.unittest.java.ClassTestCodeBuilder
 import cc.unitmesh.pick.builder.unittest.java.JavaMethodTestCodeBuilder
 import cc.unitmesh.pick.worker.job.JobContext
 import kotlinx.serialization.SerializationException
 
-fun completionBuilders(types: List<CompletionBuilderType>, context: JobContext) : List<CompletionBuilder> {
+fun completionBuilders(types: List<CompletionBuilderType>, context: JobContext) : List<TypedInsBuilder> {
     return types.map { completionBuilder(it, context) }
 }
 
-fun completionBuilder(completionBuilderType: CompletionBuilderType, context: JobContext): CompletionBuilder {
+fun completionBuilder(completionBuilderType: CompletionBuilderType, context: JobContext): TypedInsBuilder {
     return mapOf(
-        CompletionBuilderType.INLINE_COMPLETION to InlineCodeCompletionBuilder(context),
-        CompletionBuilderType.IN_BLOCK_COMPLETION to InBlockCodeCompletionBuilder(context),
-        CompletionBuilderType.AFTER_BLOCK_COMPLETION to AfterBlockCodeCompletionBuilder(context),
-        CompletionBuilderType.TEST_CODE_GEN to TestCodeCompletionBuilder(context),
-        CompletionBuilderType.DOCUMENTATION to DocumentationCompletionBuilder(context),
+        CompletionBuilderType.INLINE_COMPLETION to InlineCodeTypedInsBuilder(context),
+        CompletionBuilderType.IN_BLOCK_COMPLETION to InBlockCodeTypedInsBuilder(context),
+        CompletionBuilderType.AFTER_BLOCK_COMPLETION to AfterBlockCodeTypedInsBuilder(context),
+        CompletionBuilderType.TEST_CODE_GEN to TestCodeTypedInsBuilder(context),
+        CompletionBuilderType.DOCUMENTATION to DocumentationTypedInsBuilder(context),
     )[completionBuilderType] ?: throw SerializationException("Unknown message type: $completionBuilderType")
 }
 

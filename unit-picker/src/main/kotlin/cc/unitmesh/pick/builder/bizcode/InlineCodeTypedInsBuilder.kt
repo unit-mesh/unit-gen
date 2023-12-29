@@ -1,12 +1,12 @@
 package cc.unitmesh.pick.builder.bizcode
 
 import cc.unitmesh.core.completion.CodeCompletionIns
-import cc.unitmesh.core.completion.CompletionBuilder
+import cc.unitmesh.core.completion.TypedInsBuilder
 import cc.unitmesh.core.completion.CompletionBuilderType
 import cc.unitmesh.pick.worker.job.JobContext
 import chapi.domain.core.CodeFunction
 
-class InlineCodeCompletionBuilder(val context: JobContext) : CompletionBuilder {
+class InlineCodeTypedInsBuilder(val context: JobContext) : TypedInsBuilder {
     private fun isValidTypeOver(char: Char): Boolean {
         return char == ')' || char == ']' || char == '}' || char == '"' || char == '\'' || char == '>' || char == ';' || char == ','
     }

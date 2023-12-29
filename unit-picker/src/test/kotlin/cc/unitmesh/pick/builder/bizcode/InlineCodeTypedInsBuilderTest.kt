@@ -12,10 +12,10 @@ import io.kotest.matchers.shouldBe
 import org.archguard.scanner.analyser.count.FileJob
 import org.junit.jupiter.api.Test
 
-class AfterBlockCodeCompletionBuilderTest {
-
+class InlineCodeTypedInsBuilderTest {
     @Test
-    fun should_success_split_after_block_code() {
+    fun should_return_list_of_code_completion_ins() {
+        // Given
         val codeFunction = CodeFunction(
             Position = CodePosition(1, 0, 3)
         )
@@ -39,15 +39,18 @@ class AfterBlockCodeCompletionBuilderTest {
             3,
             insQualityThreshold = InsQualityThreshold()
         )
-        val builder = AfterBlockCodeCompletionBuilder(jobContext)
+        val builder = InlineCodeTypedInsBuilder(jobContext)
 
+        // When
         val result = builder.build(codeFunction)
 
+        // Then
+        result.size shouldBe 1
         result shouldBe listOf(
             CodeCompletionIns(
-                beforeCursor = codeLines.subList(0, 3).joinToString("\n"),
-                afterCursor = "// other code here",
-                completionBuilderType = CompletionBuilderType.AFTER_BLOCK_COMPLETION
+                beforeCursor = "println(\"",
+                afterCursor = "Hello, world!\")",
+                completionBuilderType = CompletionBuilderType.INLINE_COMPLETION
             )
         )
     }

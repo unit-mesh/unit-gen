@@ -47,6 +47,9 @@ class SimilarChunksStrategyBuilder(private val context: JobContext) : CodeStrate
         }
 
         val builders = completionBuilders(context.completionBuilderTypes, context)
+        builders.asSequence().forEach {
+            it.build(container)
+        }
 
         // 2. collect all with similar data structure
         val codeCompletionIns = dataStructs.map { ds ->

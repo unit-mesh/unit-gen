@@ -47,11 +47,15 @@ class RelatedCodeStrategyBuilder(private val context: JobContext) : CodeStrategy
 
         // 3. build completion instruction
         val builders = completionBuilders(context.completionBuilderTypes, context)
+        builders.asSequence().forEach {
+            it.build(container)
+        }
 
         val codeCompletionIns = dataStructs.map { ds ->
             val blockIns = builders.asSequence().map {
                 it.build(ds)
             }.flatten()
+
             val functionsIns = ds.Functions.map { function ->
                 builders.asSequence().map {
                     it.build(function)
