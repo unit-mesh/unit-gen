@@ -31,7 +31,7 @@ data class SimilarChunkIns(
             } else {
                 similarChunks
             }
-            "\n// Similar chunk:\n ```${language}\n${similarChunksLines.joinToString("\n")}\n```"
+            "\n// Similar chunk:\n```${language}\n${similarChunksLines.joinToString("\n")}\n```"
         } else {
             ""
         }

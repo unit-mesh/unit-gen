@@ -102,14 +102,33 @@ public class HelloController {
 
         result.size shouldBe 3
 
-        result.first().similarChunks shouldBe """
-            // Compare this snippet from cc.unitmesh.testng.repository.BlogRepository
-            // 
-            // @Repository
-            // public interface BlogRepository extends CrudRepository<BlogPost, Long> {
-            // 
-            // }
-            //
-            """.trimIndent()
+        result.first().unique().input shouldBe """
+// Similar chunk:
+```
+// Compare this snippet from cc.unitmesh.testng.repository.BlogRepository
+// 
+// @Repository
+// public interface BlogRepository extends CrudRepository<BlogPost, Long> {
+// 
+// }
+//
+```
+
+Code:
+```
+package cc.unitmesh.testng.service;
+
+import cc.unitmesh.testng.entity.BlogPost;
+import cc.unitmesh.testng.repository.BlogRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class BlogService {
+    @Autowired
+    BlogRepository blogRepository;
+
+    public BlogPost createBlog(BlogPost blogDto) {
+```"""
     }
 }
