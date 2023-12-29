@@ -1,13 +1,13 @@
 ---
 layout: default
-title: Similar Code Completion
+title: SimilarChunks Strategy
 parent: Instruction Builder
 nav_order: 2
 ---
 
-# Similar Code Completion
+# SimilarChunks Strategy
 
-Implement class: SimilarChunksCompletionBuilder
+Implement class: SimilarChunks Strategy 
 
 ## Core Logic
 

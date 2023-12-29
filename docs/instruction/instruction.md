@@ -23,6 +23,7 @@ for example:
 | InBlockCompletion    |                  |             |
 | AfterBlockCompletion |                  |             |
 | TestCode             |                  |             |
+| Documentation        | lines >= 5       |             |
 
 If you want to add a new instruction, you need to add a new CodeContextStrategy and CompletionBuilderType.
 

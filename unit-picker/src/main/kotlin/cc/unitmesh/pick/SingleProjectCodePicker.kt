@@ -75,7 +75,7 @@ class SingleProjectCodePicker(private val config: InsPickerOption) {
 
         val workerManager = WorkerManager(
             WorkerContext(
-                config.buildPlan,
+                config.codeStrategyTypes,
                 config.codeQualityTypes,
                 config.insOutputConfig,
                 pureDataFileName = config.pureDataFileName(),

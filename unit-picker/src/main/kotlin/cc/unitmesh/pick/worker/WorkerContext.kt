@@ -1,7 +1,7 @@
 package cc.unitmesh.pick.worker
 
 import cc.unitmesh.pick.option.InsOutputConfig
-import cc.unitmesh.pick.strategy.BuildPlanType
+import cc.unitmesh.pick.strategy.CodeStrategyType
 import cc.unitmesh.core.completion.CompletionBuilderType
 import cc.unitmesh.pick.project.ProjectContext
 import cc.unitmesh.pick.threshold.InsQualityThreshold
@@ -12,7 +12,7 @@ import org.jetbrains.annotations.TestOnly
 
 @Serializable
 data class WorkerContext(
-    val codeContextStrategies: List<BuildPlanType>,
+    val codeContextStrategies: List<CodeStrategyType>,
     val qualityTypes: List<CodeQualityType>,
     val insOutputConfig: InsOutputConfig,
     val pureDataFileName: String,

@@ -10,16 +10,16 @@ import kotlinx.serialization.SerializationException
  * The `BuildPlanType` enum class represents different strategies for generating code context in AutoDev.
  *
  * There are two available strategies:
- * 1. [BuildPlanType.SIMILAR_CHUNKS]: This prompt is used with pre-built context for unsupported languages.
+ * 1. [CodeStrategyType.SIMILAR_CHUNKS]: This prompt is used with pre-built context for unsupported languages.
  * It allows AutoDev to generate code context with similar code chunks builder.
- * 2. [BuildPlanType.RELATED_CODE]: This prompt is used with pre-built context. It allows AutoDev to
+ * 2. [CodeStrategyType.RELATED_CODE]: This prompt is used with pre-built context. It allows AutoDev to
  * generate code context with similar code builder.
  *
  * The strategies are used through the `builder` function, which takes an `InstructionContext` parameter and returns an `InstructionBuilder` object.
  *
  * Note that the `builder` function throws a `SerializationException` if the prompt is unknown.
  */
-enum class BuildPlanType {
+enum class CodeStrategyType {
     /**
      * the AutoDev with pre-build context for un-support language
      */
