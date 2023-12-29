@@ -19,10 +19,24 @@ import chapi.domain.core.DataStructType
  */
 class KotlinMethodTestCodeBuilder(private val context: JobContext) : TestCodeBuilder {
 
+    /**
+     * 结合给定的Kotlin类、被测试的Kotlin类、相关类生成测试指令。
+     *
+     * 主要逻辑：
+     * 1. 判断给定的 [CodeDataStruct] 是否符合质量阈值，如果不符合则返回空列表。
+     * 2. 从 [CodeDataStruct] 中提取出所有的 [CodeFunction]，并对每个 [CodeFunction] 进行如下操作：
+     *   - 从测试代码中提取出所有的函数调用，对于每个函数调用，如果函数调用的 [CodeDataStruct] 不是 [underTestFile]，则跳过。
+     *   - 如果函数调用的 [CodeDataStruct] 是 [underTestFile]，则提取出原始函数的代码内容，生成 [BasicTestIns]。
+     *
+     * @param dataStruct The test class, which is the current class.
+     * @param underTestFile The class to be tested.
+     * @param relevantClasses A list of relevant classes.
+     * @return A list of basic test instructions.
+     */
     override fun build(
-        // 测试类，即当前类
+        /// 测试类，即当前类
         dataStruct: CodeDataStruct,
-        // 待测试类
+        /// 待测试类
         underTestFile: CodeDataStruct,
         relevantClasses: List<CodeDataStruct>,
     ): List<BasicTestIns> {
@@ -36,9 +50,13 @@ class KotlinMethodTestCodeBuilder(private val context: JobContext) : TestCodeBui
 
         // 分析测试代码，找到原始函数的代码内容，放到结果中
         dataStruct.Functions.mapIndexed { _, function ->
+            val content = function.Content
+            val dataStructType = underTestFile.Type
+
             underTestFile.Functions.map {
-                val isNotClassCall = underTestFile.Type == DataStructType.CLASS && !function.Content.contains("." + it.Name + "(")
-                val isNotObjectCall = underTestFile.Type == DataStructType.OBJECT && !function.Content.contains(it.Name + "(")
+
+                val isNotClassCall = dataStructType == DataStructType.CLASS && !content.contains("." + it.Name + "(")
+                val isNotObjectCall = dataStructType == DataStructType.OBJECT && !content.contains(it.Name + "(")
                 if (isNotClassCall || isNotObjectCall) {
                     return@map
                 }
@@ -50,7 +68,7 @@ class KotlinMethodTestCodeBuilder(private val context: JobContext) : TestCodeBui
                     ),
                     language = context.project.language,
                     underTestCode = it.Content,
-                    generatedCode = function.Content,
+                    generatedCode = content,
                     coreFrameworks = context.project.coreFrameworks,
                     testFrameworks = context.project.testFrameworks,
                     testType = TestCodeBuilderType.METHOD_UNIT,
