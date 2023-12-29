@@ -1,6 +1,6 @@
 package cc.unitmesh.pick.option
 
-import cc.unitmesh.pick.strategy.BizCodeContextStrategy
+import cc.unitmesh.pick.strategy.BuildPlanType
 import cc.unitmesh.core.completion.CompletionBuilderType
 import cc.unitmesh.pick.threshold.InsQualityThreshold
 import cc.unitmesh.quality.CodeQualityType
@@ -25,7 +25,7 @@ const val MAX_COMPLETION_EACH_FILE = 10
  * @property branch The branch of the repository. Default value is "master".
  * @property language The programming language of the code in the repository. Default value is "java".
  * @property baseDir The base directory where the datasets are stored. Default value is "datasets".
- * @property codeContextStrategies The strategies to determine the code context. Default value is [BizCodeContextStrategy.RELATED_CODE].
+ * @property buildPlan The strategies to determine the code context. Default value is [BuildPlanType.RELATED_CODE].
  *        Possible values are:
  *        - [CodeContextStrategy.SIMILAR_CHUNKS]: Determines the code context based on similar code chunks.
  *        - [CodeContextStrategy.RELATED_CODE]: Determines the code context based on related code.
@@ -53,15 +53,16 @@ data class InsPickerOption(
     val language: String = "java",
     val baseDir: String = "datasets",
     /**
-     * The [BizCodeContextStrategy], suggest to be one of:.
+     * The [BuildPlanType], suggest to be one of:.
      *
-     * - [BizCodeContextStrategy.SIMILAR_CHUNKS]
-     * - [BizCodeContextStrategy.RELATED_CODE]
+     * - [BuildPlanType.SIMILAR_CHUNKS]
+     * - [BuildPlanType.RELATED_CODE]
      *
      */
-    val codeContextStrategies: List<BizCodeContextStrategy> = listOf(
-        BizCodeContextStrategy.RELATED_CODE,
-        BizCodeContextStrategy.SIMILAR_CHUNKS,
+    val buildPlan: List<BuildPlanType> = listOf(
+//        BuildPlanType.RELATED_CODE,
+//        BuildPlanType.SIMILAR_CHUNKS,
+        BuildPlanType.COMMENT,
     ),
     /**
      * The [CompletionBuilderType], which will according you IDE strategy to generate the type.

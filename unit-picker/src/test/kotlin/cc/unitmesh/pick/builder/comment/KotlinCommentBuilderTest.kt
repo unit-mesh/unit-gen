@@ -35,7 +35,7 @@ class Group<T>(val name: String) {
     @Test
     fun `should extract KDoc comments when valid code provided`() {
         // When
-        val result = KotlinCommentBuilder.extractKdocComments(kotlinCode)
+        val result = KotlinCommentBuilder().extractKdocComments(kotlinCode)
 
         // Then
         result.size shouldBe 3
@@ -77,6 +77,13 @@ class Group<T>(val name: String) {
              * @param T the type of a member in this group.
              * @property name the name of this group.
              * @constructor Creates an empty group.
+             */
+        """.trimIndent()
+
+        result[1].unique().output shouldBe """
+            /**
+             * Adds a [member] to this group.
+             * @return the new size of the group.
              */
         """.trimIndent()
     }

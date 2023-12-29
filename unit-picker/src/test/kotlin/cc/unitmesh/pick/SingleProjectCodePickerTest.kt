@@ -3,6 +3,7 @@ package cc.unitmesh.pick
 import cc.unitmesh.core.Instruction
 import cc.unitmesh.core.completion.CompletionBuilderType
 import cc.unitmesh.pick.option.InsPickerOption
+import cc.unitmesh.pick.strategy.BuildPlanType
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
@@ -38,8 +39,9 @@ class SingleProjectCodePickerTest {
                 language = "kotlin",
                 url = root,
                 maxTokenLength = 8192,
+                buildPlan = listOf(BuildPlanType.COMMENT),
                 completionTypes = listOf(
-                    CompletionBuilderType.TEST_CODE_GEN
+                    CompletionBuilderType.DOCUMENTATION
                 ),
             )
         )

@@ -8,19 +8,19 @@ import cc.unitmesh.pick.worker.job.JobContext
 import kotlinx.serialization.SerializationException
 
 /**
- * The `CodeContextStrategy` enum class represents different strategies for generating code context in AutoDev.
+ * The `BuildPlanType` enum class represents different strategies for generating code context in AutoDev.
  *
  * There are two available strategies:
- * 1. [BizCodeContextStrategy.SIMILAR_CHUNKS]: This prompt is used with pre-built context for unsupported languages.
+ * 1. [BuildPlanType.SIMILAR_CHUNKS]: This prompt is used with pre-built context for unsupported languages.
  * It allows AutoDev to generate code context with similar code chunks builder.
- * 2. [BizCodeContextStrategy.RELATED_CODE]: This prompt is used with pre-built context. It allows AutoDev to
+ * 2. [BuildPlanType.RELATED_CODE]: This prompt is used with pre-built context. It allows AutoDev to
  * generate code context with similar code builder.
  *
  * The strategies are used through the `builder` function, which takes an `InstructionContext` parameter and returns an `InstructionBuilder` object.
  *
  * Note that the `builder` function throws a `SerializationException` if the prompt is unknown.
  */
-enum class BizCodeContextStrategy {
+enum class BuildPlanType {
     /**
      * the AutoDev with pre-build context for un-support language
      */
@@ -34,14 +34,14 @@ enum class BizCodeContextStrategy {
     /**
      * the AutoDev with pre-build context
      */
-    EMPTY_CONTEXT
+    COMMENT
     ;
 
     fun builder(context: JobContext): CodeStrategyBuilder {
         return mapOf(
             SIMILAR_CHUNKS to SimilarChunksStrategyBuilder(context),
             RELATED_CODE to RelatedCodeStrategyBuilder(context),
-            EMPTY_CONTEXT to CommentsStrategyBuilder(context),
+            COMMENT to CommentsStrategyBuilder(context),
         )[this] ?: throw SerializationException("Unknown message type: $this")
     }
 }
