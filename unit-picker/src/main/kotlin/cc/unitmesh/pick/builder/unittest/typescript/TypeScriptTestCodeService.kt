@@ -5,7 +5,7 @@ import cc.unitmesh.pick.builder.unittest.base.UnitTestService
 import cc.unitmesh.pick.worker.job.JobContext
 import chapi.domain.core.CodeDataStruct
 
-class TypeScriptTestCodeService(job: JobContext): UnitTestService {
+class TypeScriptTestCodeService(val job: JobContext): UnitTestService {
     override fun isApplicable(dataStruct: CodeDataStruct): Boolean {
         return false
     }
