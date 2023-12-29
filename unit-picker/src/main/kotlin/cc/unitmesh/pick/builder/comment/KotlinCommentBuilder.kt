@@ -9,6 +9,8 @@ import chapi.domain.core.CodeFunction
 import chapi.domain.core.CodePosition
 import kotlinx.serialization.Serializable
 
+private const val DOC_THRESHOLD = 5
+
 class KotlinCommentBuilder : CommentBuilder {
     override val commentStart: String = "/**"
     override val commentEnd: String = "*/"
@@ -21,7 +23,9 @@ class KotlinCommentBuilder : CommentBuilder {
             emptyList()
         }
 
-        val startLineCommentMap: Map<Int, CodeComment> = posComments.associateBy {
+        val startLineCommentMap: Map<Int, CodeComment> = posComments
+            .filter { it.content.isNotBlank() && it.content.length >= DOC_THRESHOLD }
+            .associateBy {
             it.position.StopLine
         }
 
