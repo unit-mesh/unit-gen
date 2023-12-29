@@ -39,9 +39,9 @@ class SingleProjectCodePickerTest {
                 language = "kotlin",
                 url = root,
                 maxTokenLength = 8192,
-                buildPlan = listOf(BuildPlanType.COMMENT),
+                buildPlan = listOf(BuildPlanType.COMMENT, BuildPlanType.RELATED_CODE),
                 completionTypes = listOf(
-                    CompletionBuilderType.DOCUMENTATION
+                    CompletionBuilderType.DOCUMENTATION, CompletionBuilderType.TEST_CODE_GEN
                 ),
             )
         )
