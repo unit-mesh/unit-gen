@@ -33,5 +33,5 @@ interface CommentBuilder {
 
     /// for generate instruction
     val docInstruction: DocInstruction
-    fun build(container: CodeContainer): List<TypedIns>
+    fun build(code: String, container: CodeContainer): List<TypedIns>
 }

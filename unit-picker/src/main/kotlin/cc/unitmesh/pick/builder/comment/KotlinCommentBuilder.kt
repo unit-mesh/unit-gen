@@ -2,8 +2,10 @@ package cc.unitmesh.pick.builder.comment
 
 import cc.unitmesh.core.Instruction
 import cc.unitmesh.core.comment.*
+import cc.unitmesh.pick.ext.toUml
 import chapi.domain.core.CodeContainer
 import chapi.domain.core.CodeDataStruct
+import chapi.domain.core.CodeFunction
 import chapi.domain.core.CodePosition
 import kotlinx.serialization.Serializable
 
@@ -12,8 +14,28 @@ class KotlinCommentBuilder : CommentBuilder {
     override val commentEnd: String = "*/"
     override val docInstruction: DocInstruction = DocInstruction.KOTLIN
 
-    override fun build(container: CodeContainer): List<TypedCommentIns> {
-        return listOf()
+    override fun build(code: String, container: CodeContainer): List<TypedCommentIns> {
+        val posComments = extractKdocComments(code)
+        val startLineCommentMap: Map<Int, CodeComment> = posComments.associateBy {
+            it.position.StopLine
+        }
+
+
+        val comments = mutableListOf<TypedCommentIns>()
+
+        container.DataStructures.forEach { dataStruct ->
+            val classComment = startLineCommentMap[dataStruct.Position.StartLine - 1]
+            classComment?.let { comments.add(ClassCommentIns(dataStruct, it)) }
+
+            dataStruct.Functions
+                .filter { it.Name != "constructor" && it.Name != "PrimaryConstructor" }
+                .forEach { function ->
+                    val functionComment = startLineCommentMap[function.Position.StartLine - 1]
+                    functionComment?.let { comments.add(MethodCommentIns(function, it, dataStruct)) }
+                }
+        }
+
+        return comments
     }
 
     companion object {
@@ -57,6 +79,23 @@ data class ClassCommentIns(
     override fun unique(): Instruction {
         val instruction = "Write documentation for given class " + dataStructure.NodeName + " ."
         val input = dataStructure.Content
+        val output = comment.content
+
+        return Instruction(instruction, input, output)
+    }
+}
+
+@Serializable
+data class MethodCommentIns(
+    val function: CodeFunction,
+    val comment: CodeComment,
+    val currentDataStruct: CodeDataStruct,
+) : TypedCommentIns() {
+    override val builderLevel: CommentBuilderType = CommentBuilderType.METHOD_LEVEL
+
+    override fun unique(): Instruction {
+        val instruction = "Write documentation for given method" + function.Name + " ."
+        val input = "\n### Current class:\n" + currentDataStruct.toUml() + "\n###" + function.Content
         val output = comment.content
 
         return Instruction(instruction, input, output)
