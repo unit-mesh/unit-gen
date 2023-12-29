@@ -2,7 +2,7 @@ package cc.unitmesh.pick.builder.unittest.kotlin
 
 import cc.unitmesh.core.ast.NodeIdentifier
 import cc.unitmesh.core.ast.NodeType
-import cc.unitmesh.core.comments.CommentsBuilder
+import cc.unitmesh.core.unittest.TestCodeBuilder
 import cc.unitmesh.core.unittest.TestCodeBuilderType
 import cc.unitmesh.pick.builder.unittest.base.BasicTestIns
 import cc.unitmesh.pick.ext.checkNamingStyle
@@ -17,7 +17,7 @@ import chapi.domain.core.DataStructType
  *
  * @property context 生成测试指令的上下文
  */
-class KotlinMethodTestCodeBuilder(private val context: JobContext) : CommentsBuilder {
+class KotlinMethodTestCodeBuilder(private val context: JobContext) : TestCodeBuilder {
 
     override fun build(
         // 测试类，即当前类

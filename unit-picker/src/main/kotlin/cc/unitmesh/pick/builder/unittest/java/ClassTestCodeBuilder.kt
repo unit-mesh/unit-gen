@@ -2,8 +2,8 @@ package cc.unitmesh.pick.builder.unittest.java
 
 import cc.unitmesh.core.ast.NodeIdentifier
 import cc.unitmesh.core.ast.NodeType
+import cc.unitmesh.core.unittest.TestCodeBuilder
 import cc.unitmesh.core.unittest.TestCodeBuilderType
-import cc.unitmesh.core.comments.CommentsBuilder
 import cc.unitmesh.pick.builder.unittest.base.BasicTestIns
 import cc.unitmesh.pick.ext.checkNamingStyle
 import cc.unitmesh.pick.ext.toSourceCode
@@ -17,7 +17,7 @@ import chapi.domain.core.CodeDataStruct
  * @constructor Creates a `ClassTestCodeBuilder` with the specified job context.
  * @param context the job context for the test code generation
  */
-class ClassTestCodeBuilder(private val context: JobContext) : CommentsBuilder {
+class ClassTestCodeBuilder(private val context: JobContext) : TestCodeBuilder {
     /**
      * 为给定的 CodeDataStruct 生成测试指令。
      *

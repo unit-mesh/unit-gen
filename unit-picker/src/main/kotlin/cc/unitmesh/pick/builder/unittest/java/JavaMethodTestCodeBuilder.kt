@@ -2,7 +2,7 @@ package cc.unitmesh.pick.builder.unittest.java
 
 import cc.unitmesh.core.ast.NodeIdentifier
 import cc.unitmesh.core.ast.NodeType
-import cc.unitmesh.core.comments.CommentsBuilder
+import cc.unitmesh.core.unittest.TestCodeBuilder
 import cc.unitmesh.core.unittest.TestCodeBuilderType
 import cc.unitmesh.pick.builder.unittest.base.BasicTestIns
 import cc.unitmesh.pick.ext.checkNamingStyle
@@ -17,7 +17,7 @@ import chapi.domain.core.CodeFunction
  *
  * @property context 生成测试指令的上下文
  */
-class JavaMethodTestCodeBuilder(private val context: JobContext) : CommentsBuilder {
+class JavaMethodTestCodeBuilder(private val context: JobContext) : TestCodeBuilder {
 
     /**
      * 针对给定的 [CodeDataStruct] 的每个 [CodeFunction] 生成 [BasicTestIns]
