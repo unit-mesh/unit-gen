@@ -4,7 +4,7 @@ import cc.unitmesh.pick.option.InsOutputConfig
 import cc.unitmesh.pick.worker.job.InstructionFileJob
 import cc.unitmesh.pick.ext.toUml
 import cc.unitmesh.core.completion.CompletionBuilderType
-import cc.unitmesh.pick.builder.ins.RelatedCodeIns
+import cc.unitmesh.pick.strategy.ins.RelatedCodeIns
 import cc.unitmesh.pick.threshold.InsQualityThreshold
 import cc.unitmesh.pick.strategy.bizcode.RelatedCodeStrategyBuilder
 import cc.unitmesh.pick.worker.job.JobContext

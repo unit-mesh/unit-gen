@@ -3,7 +3,7 @@ package cc.unitmesh.pick.strategy.bizcode
 import cc.unitmesh.core.completion.TypedIns
 import cc.unitmesh.core.intelli.SimilarChunker
 import cc.unitmesh.pick.builder.completionBuilders
-import cc.unitmesh.pick.builder.ins.RelatedCodeIns
+import cc.unitmesh.pick.strategy.ins.RelatedCodeIns
 import cc.unitmesh.pick.strategy.base.CodeStrategyBuilder
 import cc.unitmesh.pick.worker.job.JobContext
 import chapi.domain.core.CodeContainer

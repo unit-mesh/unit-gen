@@ -3,7 +3,7 @@ package cc.unitmesh.pick.strategy.bizcode
 import cc.unitmesh.core.SupportedLang
 import cc.unitmesh.core.intelli.SimilarChunker
 import cc.unitmesh.pick.builder.completionBuilders
-import cc.unitmesh.pick.builder.ins.SimilarChunkIns
+import cc.unitmesh.pick.strategy.ins.SimilarChunkIns
 import cc.unitmesh.pick.similar.JavaSimilarChunker
 import cc.unitmesh.pick.similar.TypeScriptSimilarChunker
 import cc.unitmesh.pick.strategy.base.CodeStrategyBuilder

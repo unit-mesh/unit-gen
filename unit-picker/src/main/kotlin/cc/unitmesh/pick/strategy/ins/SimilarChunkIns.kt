@@ -1,4 +1,4 @@
-package cc.unitmesh.pick.builder.ins
+package cc.unitmesh.pick.strategy.ins
 
 import cc.unitmesh.core.completion.CompletionBuilderType
 import cc.unitmesh.core.Instruction
