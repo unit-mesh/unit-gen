@@ -8,8 +8,10 @@ import chapi.domain.core.CodePosition
 
 private const val DOC_THRESHOLD = 5
 
-class KotlinCommentBuilder : CommentBuilder {
-    override val docInstruction: DocInstruction = DocInstruction.KOTLIN
+class JvmCommentBuilder(
+    val language: String,
+    override val docInstruction: DocInstruction = DocInstruction.KOTLIN,
+) : CommentBuilder {
 
     override fun build(code: String, container: CodeContainer): List<TypedCommentIns> {
         val posComments = try {
@@ -29,7 +31,7 @@ class KotlinCommentBuilder : CommentBuilder {
 
         container.DataStructures.forEach { dataStruct ->
             val classComment = startLineCommentMap[dataStruct.Position.StartLine - 1]
-            classComment?.let { comments.add(ClassCommentIns(docInstruction, dataStruct, it, language = "kotlin")) }
+            classComment?.let { comments.add(ClassCommentIns(docInstruction, dataStruct, it, language = language)) }
 
             dataStruct.Functions
                 .filter { it.Name != "constructor" && it.Name != "PrimaryConstructor" }
@@ -42,7 +44,7 @@ class KotlinCommentBuilder : CommentBuilder {
                                 function,
                                 it,
                                 dataStruct,
-                                language = "kotlin"
+                                language = language
                             )
                         )
                     }

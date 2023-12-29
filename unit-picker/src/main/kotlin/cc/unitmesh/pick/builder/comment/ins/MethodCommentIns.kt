@@ -22,8 +22,14 @@ data class MethodCommentIns(
 
     override fun unique(): Instruction {
         val instruction = "Write ${docInstruction.value} for given method " + function.Name + " .\n"
-        val input =
-            "### Current class:\n" + currentDataStruct.toUml() + "\n###\n" + "Code:\n```$language\n" + currentDataStruct.Content + "\n```"
+        val input = """### Current class:
+${currentDataStruct.toUml()}
+###
+Code:
+```$language
+${currentDataStruct.Content}
+```
+"""
         val output = comment.content
 
         return Instruction(instruction, input, output)

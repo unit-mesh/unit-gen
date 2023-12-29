@@ -4,7 +4,7 @@ import chapi.ast.kotlinast.KotlinAnalyser
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 
-class KotlinCommentBuilderTest {
+class JvmCommentBuilderTest {
     // Given
     private val kotlinCode = """
 /**
@@ -35,7 +35,7 @@ class Group<T>(val name: String) {
     @Test
     fun `should extract KDoc comments when valid code provided`() {
         // When
-        val result = KotlinCommentBuilder().extractKdocComments(kotlinCode)
+        val result = JvmCommentBuilder("kotlin").extractKdocComments(kotlinCode)
 
         // Then
         result.size shouldBe 3
@@ -64,7 +64,7 @@ class Group<T>(val name: String) {
         val codeContainer = KotlinAnalyser().analysis(kotlinCode, "test.kt")
 
         // When
-        val result = KotlinCommentBuilder().build(kotlinCode, codeContainer)
+        val result = JvmCommentBuilder("kotlin").build(kotlinCode, codeContainer)
 
         // Then
         result.size shouldBe 3
