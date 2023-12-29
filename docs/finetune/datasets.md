@@ -5,7 +5,16 @@ parent: FineTune
 nav_order: 98
 ---
 
-## 测试数据集
+## 开源数据集
+
+
+中文数据集：
+
+- https://github.com/Denilah/CoLLaMA
+- 
+
+
+## 内部数据集
 
 应用类：根据组织内部选择
 
