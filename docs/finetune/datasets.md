@@ -11,7 +11,7 @@ nav_order: 98
 中文数据集：
 
 - https://github.com/Denilah/CoLLaMA
-- 
+- https://github.com/sahil280114/codealpaca
 
 
 ## 内部数据集
