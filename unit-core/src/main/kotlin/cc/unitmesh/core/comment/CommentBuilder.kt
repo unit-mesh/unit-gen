@@ -2,7 +2,6 @@ package cc.unitmesh.core.comment
 
 import cc.unitmesh.core.completion.TypedIns
 import chapi.domain.core.CodeContainer
-import chapi.domain.core.CodeDataStruct
 
 /**
  * The CommentBuilder interface represents a builder for generating comments in code.
@@ -35,5 +34,4 @@ interface CommentBuilder {
     /// for generate instruction
     val docInstruction: DocInstruction
     fun build(container: CodeContainer): List<TypedIns>
-    fun build(codeDataStruct: CodeDataStruct): List<TypedIns>
 }

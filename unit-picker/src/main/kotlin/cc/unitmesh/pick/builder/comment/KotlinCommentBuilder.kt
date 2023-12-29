@@ -1,13 +1,11 @@
 package cc.unitmesh.pick.builder.comment
 
-import cc.unitmesh.core.comment.CodeComment
-import cc.unitmesh.core.comment.CommentBuilder
-import cc.unitmesh.core.comment.DocInstruction
-import cc.unitmesh.core.comment.TypedCommentIns
-import cc.unitmesh.core.completion.TypedIns
+import cc.unitmesh.core.Instruction
+import cc.unitmesh.core.comment.*
 import chapi.domain.core.CodeContainer
 import chapi.domain.core.CodeDataStruct
 import chapi.domain.core.CodePosition
+import kotlinx.serialization.Serializable
 
 class KotlinCommentBuilder : CommentBuilder {
     override val commentStart: String = "/**"
@@ -18,11 +16,9 @@ class KotlinCommentBuilder : CommentBuilder {
         return listOf()
     }
 
-    override fun build(codeDataStruct: CodeDataStruct): List<TypedIns> {
-        return listOf()
-    }
-
     companion object {
+        private val commentPattern = Regex("""\s+/\*\*([^*]|(\*+[^*/]))*\*+/""")
+
         /**
          * Extracts the Kotlin documentation comments (KDoc) from the given code.
          *
@@ -30,8 +26,7 @@ class KotlinCommentBuilder : CommentBuilder {
          * @return a list of pairs, where each pair contains the line number and the extracted KDoc comment
          */
         fun extractKdocComments(code: String): List<CodeComment> {
-            val pattern = Regex("""\s+/\*\*([^*]|(\*+[^*/]))*\*+/""")
-            val matches = pattern.findAll(code)
+            val matches = commentPattern.findAll(code)
 
             val comments = mutableListOf<CodeComment>()
 
@@ -49,5 +44,21 @@ class KotlinCommentBuilder : CommentBuilder {
 
             return comments
         }
+    }
+}
+
+@Serializable
+data class ClassCommentIns(
+    val dataStructure: CodeDataStruct,
+    val comment: CodeComment,
+) : TypedCommentIns() {
+    override val builderLevel: CommentBuilderType = CommentBuilderType.CLASS_LEVEL
+
+    override fun unique(): Instruction {
+        val instruction = "Write documentation for given class " + dataStructure.NodeName + " ."
+        val input = dataStructure.Content
+        val output = comment.content
+
+        return Instruction(instruction, input, output)
     }
 }
