@@ -1,4 +1,63 @@
-# [](https://github.com/unit-mesh/unit-eval/compare/v0.3.0...v) (2023-12-24)
+# [](https://github.com/unit-mesh/unit-eval/compare/v0.3.2...v) (2023-12-30)
+
+
+
+## [0.3.2](https://github.com/unit-mesh/unit-eval/compare/v0.3.1...v0.3.2) (2023-12-30)
+
+
+### Bug Fixes
+
+* fix error worker manager ([93aeb6b](https://github.com/unit-mesh/unit-eval/commit/93aeb6bbbcc6fd10e4f3961450f7abdd1e1ba787))
+* fix not working togther issue [#1](https://github.com/unit-mesh/unit-eval/issues/1) ([cc9e5b3](https://github.com/unit-mesh/unit-eval/commit/cc9e5b374ac9bca9181aa8a418de6972ee95fe20))
+* fix tests ([0c2d62e](https://github.com/unit-mesh/unit-eval/commit/0c2d62ee0dd93ee4347b60f0eb1c895551acceb3))
+* **kotlin:** add seperate type for class and method test [#1](https://github.com/unit-mesh/unit-eval/issues/1) ([edb76d9](https://github.com/unit-mesh/unit-eval/commit/edb76d9e9d9546063334e644df928dac00d10b90))
+* **kotlin:** fix kotlin test method issue [#1](https://github.com/unit-mesh/unit-eval/issues/1) ([0ecb7b8](https://github.com/unit-mesh/unit-eval/commit/0ecb7b87f365a70ed9a65b16f51641d1515e5e7e))
+* **kotlin:** fix naming issue [#1](https://github.com/unit-mesh/unit-eval/issues/1) ([a0185f8](https://github.com/unit-mesh/unit-eval/commit/a0185f87d72c2528e0e9c73a4fc500d7ee2bbffe))
+* **kotlin:** try to resolve lost test gen cases [#1](https://github.com/unit-mesh/unit-eval/issues/1) ([67275f6](https://github.com/unit-mesh/unit-eval/commit/67275f6e1d3c395151a2b020e56e269c0bd0dd01))
+
+
+### Features
+
+* add support for java comments ([8f0b49d](https://github.com/unit-mesh/unit-eval/commit/8f0b49d0a499dca51ea4fdcdf0594cc160e41158))
+* **comment:** add handle for kotlin comment [#1](https://github.com/unit-mesh/unit-eval/issues/1) ([ebd5610](https://github.com/unit-mesh/unit-eval/commit/ebd561086e87b1c9c56c36f1c40b97c22d8f538b))
+* **comment:** align comment to Ins [#1](https://github.com/unit-mesh/unit-eval/issues/1) ([d9d33d4](https://github.com/unit-mesh/unit-eval/commit/d9d33d4f74bed3ff58de18574826dc0ff54b5026))
+* **comment:** make kotlin comment support works [#1](https://github.com/unit-mesh/unit-eval/issues/1) ([1e411a7](https://github.com/unit-mesh/unit-eval/commit/1e411a71e7965e6754bf5300cfa98c12069796b0))
+* **comment:** make parse kotlin comments work [#1](https://github.com/unit-mesh/unit-eval/issues/1) ([61f99ab](https://github.com/unit-mesh/unit-eval/commit/61f99ab6659038e4ad58e726bf018f3cd3819fc2))
+* **comments:** init comments for [#1](https://github.com/unit-mesh/unit-eval/issues/1) ([1d60f8d](https://github.com/unit-mesh/unit-eval/commit/1d60f8d8853fedf723e700887ff88f22ae168d62))
+* **doc:** init builder for build in Kotlin ([e03dd14](https://github.com/unit-mesh/unit-eval/commit/e03dd148f8c19f3e6dd9237e926d48ba4bd0689a))
+* **kotlin:** fix for display issues [#1](https://github.com/unit-mesh/unit-eval/issues/1) ([d9a12b0](https://github.com/unit-mesh/unit-eval/commit/d9a12b036b47280353b8daabbc15283509ab2288))
+* **kotlin:** init test services ([5d26c16](https://github.com/unit-mesh/unit-eval/commit/5d26c165628e9e492276fafecf32a0bdd04814db))
+* **kotlin:** try to handle for call tree ([03644a5](https://github.com/unit-mesh/unit-eval/commit/03644a5059a3284172f266b348733b2d8df3743d))
+* **kotlin:** try to parse for method test in Kotlin [#1](https://github.com/unit-mesh/unit-eval/issues/1) ([464773d](https://github.com/unit-mesh/unit-eval/commit/464773db20570657f3f67898adb8cf13a0b8e7f2))
+
+
+
+## [0.3.1](https://github.com/unit-mesh/unit-eval/compare/v0.3.0...v0.3.1) (2023-12-27)
+
+
+### Bug Fixes
+
+* add simple catch for Chapi error ([cbc4f3e](https://github.com/unit-mesh/unit-eval/commit/cbc4f3e4224d8d09be20e6adb49bc91dcb2cea81))
+* fix content error issue ([c31cd93](https://github.com/unit-mesh/unit-eval/commit/c31cd9328ea7396a8d5b40a710d28bc4552c0723))
+* fix copy issue ([dd25185](https://github.com/unit-mesh/unit-eval/commit/dd2518555f0a45c33493f0debfb0b89644da1020))
+* fix issue ([eb0d128](https://github.com/unit-mesh/unit-eval/commit/eb0d1288d39648662a444d1552b3a7107c42f0f5))
+* fix lost for teseting in spring ([7476c0e](https://github.com/unit-mesh/unit-eval/commit/7476c0e1d6b86ab448ebad6085e23f0c3003e9fa))
+* fix more options issues ([77ae49b](https://github.com/unit-mesh/unit-eval/commit/77ae49b35f95de1190af9ba996ab937a85c04ae7))
+* fix repository ends with / ([0d33de6](https://github.com/unit-mesh/unit-eval/commit/0d33de6a02d06d7dcf665a7fb985db039e769a81))
+* fix tets ([ae7b669](https://github.com/unit-mesh/unit-eval/commit/ae7b6692d0bb0c656fd88d256292b8bb6381d795))
+* fix: add lost tokens ([ba61736](https://github.com/unit-mesh/unit-eval/commit/ba6173614aa1cc80d17f66f502884c2d640b72c3))
+
+
+### Features
+
+* add check for token length ([9a200fa](https://github.com/unit-mesh/unit-eval/commit/9a200faff67799a826fe6587ab31bbc04e145586))
+* add remove multiple comments, so that we can get more codes ([c63e862](https://github.com/unit-mesh/unit-eval/commit/c63e862dfec3fb3afc756837f9699dfbfa3fcc9b))
+* Init kotlin worker ([301af44](https://github.com/unit-mesh/unit-eval/commit/301af44a0630a4da4dead32bfeb9e833b69ff1f4))
+* remove import for better output in 6b model ([8aa9744](https://github.com/unit-mesh/unit-eval/commit/8aa97445a2883643d54d44f24ce3a181ce90f1b7))
+* **server:** update for samples ([c1f86f8](https://github.com/unit-mesh/unit-eval/commit/c1f86f8c22a11ca9746fbb019e9a56a3776319f2))
+* take related datastrcture by related ([70a4c03](https://github.com/unit-mesh/unit-eval/commit/70a4c03ecdd17702aac5422ab1aabb486adadf2b))
+* **typescript:** init basic lang worker ([d339a0f](https://github.com/unit-mesh/unit-eval/commit/d339a0f735ee7e8ce813a4b85c0132b2d29a836f))
+* **typescript:** init for test services ([17cf2ef](https://github.com/unit-mesh/unit-eval/commit/17cf2ef96c75c0e345bd36e6d3d4ac306faa5502))
 
 
 
