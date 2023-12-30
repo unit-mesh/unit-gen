@@ -89,7 +89,7 @@ configure(allprojects
                     }
                 }
                 pom {
-                    name.set("Unit Eval")
+                    name.set("Unit Sets")
                     description.set("Unit Mesh Eval")
                     url.set("https://github.com/unit-mesh/")
                     licenses {
