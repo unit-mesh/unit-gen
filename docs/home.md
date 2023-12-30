@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Home
-description: UnitEval 是一个充分针对 Unit Mesh 工具（如AutoDev、Studio B3和DevOps）进行的 LLM 基准测试/评估工具和精细调整的数据工程，具体定制了特定功能。其亮点在于 UnitEval 功能，它可以自动选择和评估真实项目中的代码。
+description: Unit Eval 是一个代码微调数据框架，能够从您当前的代码库中生成数据。此外，它还提供了一个大语言模型 (LLM) 基准测试和评估工具。
 nav_order: 1
 permalink: /
 ---
@@ -20,8 +20,7 @@ permalink: /
   </a>
 </p>
 
-> LLM benchmark/evaluation tools with fine-tuning data engineering, specifically tailored for Unit Mesh tools such as
-> AutoDev, Studio B3, and DevOps Genius.
+> Unit Eval 是一个代码微调的数据框架，能够从您当前的代码库中生成数据。此外，它还提供了一个大语言模型 (LLM) 基准测试和评估工具。
 
 Examples:
 
@@ -32,7 +31,8 @@ Examples:
 
 Features:
 
-- Code context strategy: [Related code completion](https://eval.unitmesh.cc/instruction/related-code-completion), [Similar Code Completion](https://eval.unitmesh.cc/instruction/similar-code-completion)
+- Code context
+  strategy: [Related code completion](https://eval.unitmesh.cc/instruction/related-code-completion), [Similar Code Completion](https://eval.unitmesh.cc/instruction/similar-code-completion)
 - Completion type: inline, block, after block
 - [Code quality](https://eval.unitmesh.cc/quality) filter and pipeline. Code smell, test smell, estimation nd more.
 
@@ -71,9 +71,9 @@ Unit Picker prompt should keep the same structure as the AutoDev prompt. Prompt 
 ```kotlin
 val input = "$relatedCode\n\nCode:\n```${language}\n$beforeCursor\n```"
 return Instruction(
-  instruction = "Complete $language code, return rest code, no explaining",
-  output = output,
-  input = input
+    instruction = "Complete $language code, return rest code, no explaining",
+    output = output,
+    input = input
 )
 ```
 

@@ -1,4 +1,4 @@
-<h1 align="center">Unit Eval</h1>
+<h1 align="center">Unit Eval - Data Framework</h1>
 
 <p align="center">
   <a href="https://github.com/unit-mesh/unit-eval/actions/workflows/build.yml">
@@ -21,8 +21,8 @@
   </a>
 </p>
 
-> LLM benchmark/evaluation tools with fine-tuning data engineering, specifically tailored for Unit Mesh tools such as
-> AutoDev, Studio B3, and DevOps Genius.
+> Unit Eval is a code fine-tuning data framework that generates data from your existing codebase. Additionally, it
+> includes benchmarking and evaluation tools for code LLM.
 
 Docs: [https://eval.unitmesh.cc/](https://eval.unitmesh.cc/)
 
