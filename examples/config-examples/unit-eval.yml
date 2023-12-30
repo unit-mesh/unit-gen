@@ -1,5 +1,5 @@
 name: "Eval Units"
-description: "A sample of Unit Sets"
+description: "A sample of unit eval"
 
 jobs:
   prompt-evaluate:

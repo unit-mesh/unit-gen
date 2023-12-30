@@ -1,4 +1,4 @@
-<h1 align="center">Unit Sets - Data Framework</h1>
+<h1 align="center">Unit Eval - Data Framework</h1>
 
 <p align="center">
   <a href="https://github.com/unit-mesh/unit-eval/actions/workflows/build.yml">
@@ -21,7 +21,7 @@
   </a>
 </p>
 
-> Unit Sets is a code fine-tuning data framework that generates data from your existing codebase. Additionally, it
+> Unit Eval is a code fine-tuning data framework that generates data from your existing codebase. Additionally, it
 > includes benchmarking and evaluation tools for code LLM.
 
 Docs: [https://eval.unitmesh.cc/](https://eval.unitmesh.cc/)
@@ -50,9 +50,9 @@ Features:
 
 ### Unique Prompt
 
-![Unit Sets Overview](https://unitmesh.cc/uniteval/overview.png)
+![Unit Eval Overview](https://unitmesh.cc/uniteval/overview.png)
 
-Keep the same prompt: AutoDev <-> Unit Picker <-> Unit Sets
+Keep the same prompt: AutoDev <-> Unit Picker <-> Unit Eval
 
 #### AutoDev prompt
 
@@ -90,9 +90,9 @@ Instruction(
 )
 ```
 
-#### Unit Sets prompt
+#### Unit Eval prompt
 
-Unit Sets prompt should keep the same structure as the AutoDev prompt. Prompt example:
+Unit Eval prompt should keep the same structure as the AutoDev prompt. Prompt example:
 
     Complete ${language} code, return rest code, no explaining
     
