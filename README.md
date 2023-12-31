@@ -35,8 +35,6 @@ Examples:
 | DeepSeek 6.7B | [unit-mesh/autodev-deepseek-6.7b-finetunes](https://huggingface.co/unit-mesh/autodev-deepseek-6.7b-finetunes) | [finetune.ipynb](finetunes/deepseek) | [OpenBayes](https://openbayes.com/console/phodal/containers/mzEofYrqrfc) | [deepseek-coder-6.7b-instruct-finetune-100steps](https://openbayes.com/console/phodal/models/XAyeQEC0h4Q/1/overview) |
 | CodeGeeX2 6B  | TODO                                                                                                          | TODO                                 | TODO                                                                     |
 
-![Architecture](docs/architecture.svg)
-
 Features:
 
 - Code context
@@ -44,7 +42,11 @@ Features:
 - Completion type: inline, block, after block
 - [Code quality](https://eval.unitmesh.cc/quality) filter and pipeline. Code smell, test smell, estimation nd more.
 
-## Design Philosophy
+## Architecture
+
+![Architecture](docs/architecture.svg)
+
+### Design Philosophy
 
 - Unique prompt. Integrated use of fine-tuning, evaluation, and tooling.
 - Code quality pipeline. With estimate with code complex, bad smell, test bad smell, and more rules.
