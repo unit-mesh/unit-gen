@@ -7,8 +7,8 @@
         <g id="Group-2">
             <g id="Group">
                 <rect id="Rectangle" fill="#6D7278" x="0" y="0" width="946" height="68"></rect>
-                <text id="unit-gen" font-family="Comfortaa-SemiBold, Comfortaa" font-size="24" font-weight="500" fill="#FFFFFF">
-                    <tspan x="416.334175" y="40">UnitGen</tspan>
+                <text id="UnitGen" font-family="Comfortaa-SemiBold, Comfortaa" font-size="24" font-weight="500" fill="#FFFFFF">
+                    <tspan x="421.575406" y="40">UnitGen</tspan>
                 </text>
             </g>
             <g id="Group" transform="translate(0.000000, 331.346723)">
@@ -18,34 +18,25 @@
                 </text>
             </g>
             <rect id="Rectangle" fill="#6B9E78" x="0" y="237.632135" width="945" height="82.0295983"></rect>
-            <rect id="Rectangle" fill="#48A178" x="274" y="158.985201" width="436" height="67.653277"></rect>
-            <rect id="Rectangle" fill="#DA4167" x="275" y="79.4926004" width="436" height="67.653277"></rect>
-            <rect id="Rectangle" fill="#6D7278" x="275" y="79.4926004" width="436" height="67.653277"></rect>
-            <rect id="Rectangle" fill="#6D7278" x="732" y="78.6469345" width="214" height="67.653277"></rect>
+            <rect id="Rectangle" fill="#48A178" x="484" y="159.4926" width="460" height="67.653277"></rect>
+            <rect id="Rectangle" fill="#6D7278" x="484" y="80" width="461" height="67.653277"></rect>
             <rect id="Rectangle" fill="#013D4F" x="145" y="245.243129" width="782" height="67.653277"></rect>
             <text id="Chapi" font-family="Comfortaa-Bold, Comfortaa" font-size="24" font-weight="bold" fill="#FFFFFF">
                 <tspan x="34.32" y="286.146934">Chapi</tspan>
             </text>
-            <text id="Prompt-Eval" font-family="Comfortaa-Bold, Comfortaa" font-size="24" font-weight="bold" fill="#FFFFFF">
-                <tspan x="766.396" y="121">Prompt Eval</tspan>
-            </text>
-            <text id="PromptScript" font-family="Comfortaa-Bold, Comfortaa" font-size="24" font-weight="bold" fill="#FFFFFF">
-                <tspan x="755.416" y="199.889006">PromptScript</tspan>
-            </text>
-            <rect id="Rectangle" fill="#6B9E78" x="731" y="159" width="214" height="68"></rect>
-            <text id="Chocolate-Factory" font-family="Comfortaa-Bold, Comfortaa" font-size="24" font-weight="bold" fill="#FFFFFF">
-                <tspan x="777.604" y="186">Chocolate</tspan>
-                <tspan x="794.476" y="213">Factory</tspan>
-            </text>
             <text id="ArchGuard" font-family="Comfortaa-Bold, Comfortaa" font-size="24" font-weight="bold" fill="#FFFFFF">
-                <tspan x="419.448" y="200.734672">ArchGuard</tspan>
+                <tspan x="650.448" y="201.242072">ArchGuard</tspan>
             </text>
             <text id="QualityChecker" font-family="Comfortaa-Bold, Comfortaa" font-size="24" font-weight="bold" fill="#FFFFFF">
-                <tspan x="395.364" y="121">QualityChecker</tspan>
+                <tspan x="626.364" y="121.5074">QualityChecker</tspan>
             </text>
-            <rect id="Rectangle" fill="#6D7278" x="0" y="79.4926004" width="253" height="146"></rect>
+            <rect id="Rectangle" fill="#6D7278" x="1" y="159" width="461" height="68"></rect>
             <text id="LanguageWorker" font-family="Comfortaa-Bold, Comfortaa" font-size="24" font-weight="bold" fill="#FFFFFF">
-                <tspan x="17.776" y="166">LanguageWorker</tspan>
+                <tspan x="122.776" y="201">LanguageWorker</tspan>
+            </text>
+            <rect id="Rectangle" fill="#6D7278" x="2" y="80" width="461" height="68"></rect>
+            <text id="Context-Strategy" font-family="Comfortaa-Bold, Comfortaa" font-size="24" font-weight="bold" fill="#FFFFFF">
+                <tspan x="126.284" y="122">Context Strategy</tspan>
             </text>
             <text id="Common-Hierarchical" font-family="Comfortaa-SemiBold, Comfortaa" font-size="20" font-weight="500" fill="#FFFFFF">
                 <tspan x="253.779324" y="287">Common Hierarchical Abstract Parser &amp;&amp; Information</tspan>
