@@ -1,6 +1,6 @@
 remote_theme: pmarsceill/just-the-docs
 
-title: Unit Eval
+title: UnitGen
 description: UnitEval 是一个充分针对 Unit Mesh 工具（如AutoDev、Studio B3和DevOps）进行的 LLM 基准测试/评估工具和精细调整的数据工程，具体定制了特定功能。其亮点在于 UnitEval 功能，它可以自动选择和评估真实项目中的代码。
 
 heading_anchors: true

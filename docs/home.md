@@ -1,12 +1,12 @@
 ---
 layout: default
 title: Home
-description: Unit Eval 是一个代码微调数据框架，能够从您当前的代码库中生成数据。此外，它还提供了一个大语言模型 (LLM) 基准测试和评估工具。
+description: UnitGen 是一个代码微调数据框架，能够从您当前的代码库中生成数据。此外，它还提供了一个大语言模型 (LLM) 基准测试和评估工具。
 nav_order: 1
 permalink: /
 ---
 
-<h1 align="center">Unit Eval - Intent-Driven Development</h1>
+<h1 align="center">UnitGen - Intent-Driven Development</h1>
 
 <p align="center">
   <a href="https://github.com/unit-mesh/unit-eval/actions/workflows/build.yml">
@@ -20,7 +20,7 @@ permalink: /
   </a>
 </p>
 
-> Unit Eval 是一个代码微调的数据框架，能够从您当前的代码库中生成数据。此外，它还提供了一个大语言模型 (LLM) 基准测试和评估工具。
+> UnitGen 是一个代码微调的数据框架，能够从您当前的代码库中生成数据。此外，它还提供了一个大语言模型 (LLM) 基准测试和评估工具。
 
 Examples:
 
@@ -48,9 +48,9 @@ Features:
 
 ### Unique Prompt
 
-![Unit Eval Overview](https://unitmesh.cc/uniteval/overview.png)
+![UnitGen Overview](https://unitmesh.cc/uniteval/overview.png)
 
-Keep the same prompt: AutoDev <-> Unit Picker <-> Unit Eval
+Keep the same prompt: AutoDev <-> Unit Picker <-> UnitGen
 
 #### AutoDev prompt
 
@@ -81,9 +81,9 @@ return Instruction(
 )
 ```
 
-#### Unit Eval prompt
+#### UnitGen prompt
 
-Unit Eval prompt should keep the same structure as the AutoDev prompt. Prompt example:
+UnitGen prompt should keep the same structure as the AutoDev prompt. Prompt example:
 
     Complete ${language} code, return rest code, no explaining
     

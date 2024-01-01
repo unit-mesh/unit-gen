@@ -11,8 +11,7 @@ plugins {
 include(
     "unit-core",
     "unit-picker",
-    "unit-eval",
-    "unit-cli",
+    "unit-gen",
 
     "unit-distillation",
 

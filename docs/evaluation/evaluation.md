@@ -49,7 +49,7 @@ permalink: /evaluation
 
 ### Code completion 
 
-- Unit Eval
+- UnitGen
 
 ## TypeScript
 

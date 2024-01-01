@@ -68,8 +68,7 @@ configure(allprojects
     - project(":")
     - project(":examples")
     - project(":examples:project-example")
-    - project(":unit-cli")
-    - project(":unit-eval")
+    - project(":unit-gen")
 ) {
     apply(plugin = "java-library")
     apply(plugin = "maven-publish")
@@ -89,7 +88,7 @@ configure(allprojects
                     }
                 }
                 pom {
-                    name.set("Unit Eval")
+                    name.set("UnitGen")
                     description.set("Unit Mesh Eval")
                     url.set("https://github.com/unit-mesh/")
                     licenses {
@@ -112,9 +111,9 @@ configure(allprojects
                         }
                     }
                     scm {
-                        connection.set("scm:git:git://github.com/unit-mesh/unit-pick.git")
-                        developerConnection.set("scm:git:ssh://github.com/unit-mesh/unit-pick.git")
-                        url.set("https://github.com/unit-mesh/unit-eval/")
+                        connection.set("scm:git:git://github.com/unit-mesh/unit-gen.git")
+                        developerConnection.set("scm:git:ssh://github.com/unit-mesh/unit-gen.git")
+                        url.set("https://github.com/unit-mesh/unit-gen/")
                     }
                 }
             }

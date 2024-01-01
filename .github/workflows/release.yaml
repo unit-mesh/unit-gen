@@ -11,8 +11,7 @@ jobs:
     strategy:
       matrix:
         assets:
-          - unit-cli/build/libs/unit-cli-*-all.jar
-          - unit-eval/build/libs/unit-eval-*-all.jar
+          - unit-gen/build/libs/unit-gen-*-all.jar
 
     permissions:
       contents: write
