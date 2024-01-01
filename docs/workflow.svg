@@ -1,24 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="1213px" height="557px" viewBox="0 0 1213 557" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 62 (91390) - https://sketch.com -->
-    <title>Group 2</title>
+<svg width="1204px" height="557px" viewBox="0 0 1204 557" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>UnitGen Workflow</title>
     <desc>Created with Sketch.</desc>
     <defs>
         <rect id="path-1" x="0" y="0" width="170" height="50"></rect>
-        <rect id="path-3" x="1" y="1" width="168" height="48"></rect>
+        <rect id="path-3" x="0" y="0" width="170" height="50"></rect>
         <rect id="path-5" x="0" y="0" width="170" height="50"></rect>
-        <rect id="path-7" x="1" y="1" width="168" height="48"></rect>
-        <rect id="path-9" x="0" y="0" width="170" height="50"></rect>
-        <rect id="path-11" x="1" y="1" width="168" height="48"></rect>
     </defs>
     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g id="Group-2">
             <g id="Group" transform="translate(68.000000, 0.000000)">
                 <rect id="Rectangle" fill="#011C32" fill-rule="nonzero" x="0" y="0" width="64" height="64"></rect>
-                <g id="&lt;/&gt;" transform="translate(13.000000, 19.000000)" fill="#FFFFFF" font-family="Comfortaa-Medium, Comfortaa" font-size="24" font-weight="400">
-                    <text>
-                        <tspan x="0.244" y="21">&lt;/&gt;</tspan>
-                    </text>
+                <g id="&lt;/&gt;" transform="translate(13.000000, 19.000000)" fill="#FFFFFF" font-family="Comfortaa-Regular, Comfortaa" font-size="24" font-weight="normal">
+                    <g id="Group">
+                        <text id="&lt;/&gt;">
+                            <tspan x="0.244" y="21">&lt;/&gt;</tspan>
+                        </text>
+                    </g>
                 </g>
             </g>
             <text id="code" fill="#011C32" font-family="Comfortaa-Regular, Comfortaa" font-size="18" font-weight="normal">
@@ -36,7 +34,7 @@
                 <tspan x="112" y="217">(complexity, bytes, tokens)</tspan>
             </text>
             <text id="(tokens)" fill="#011C32" font-family="Comfortaa-Regular, Comfortaa" font-size="12" font-weight="normal">
-                <tspan x="1166" y="233">(tokens)</tspan>
+                <tspan x="1155" y="307">(tokens)</tspan>
             </text>
             <rect id="Rectangle" fill="#48A178" fill-rule="nonzero" x="0" y="277" width="200" height="48"></rect>
             <text id="ContextStrategy" fill="#FFFFFF" font-family="Comfortaa-Regular, Comfortaa" font-size="18" font-weight="normal">
@@ -52,8 +50,8 @@
             <rect id="Rectangle" fill="#48A178" fill-rule="nonzero" x="0" y="405" width="200" height="48"></rect>
             <rect id="Rectangle" fill="#48A178" fill-rule="nonzero" x="345" y="246" width="141" height="48"></rect>
             <rect id="Rectangle" fill="#48A178" fill-rule="nonzero" x="346" y="63" width="141" height="48"></rect>
-            <text id="Documentation" fill="#FFFFFF" font-family="Comfortaa-Bold, Comfortaa" font-size="14" font-weight="bold">
-                <tspan x="360.174" y="91">Documentation</tspan>
+            <text id="Scene-.." fill="#FFFFFF" font-family="Comfortaa-Bold, Comfortaa" font-size="14" font-weight="bold">
+                <tspan x="389" y="90">Scene ..</tspan>
             </text>
             <text id="Completion" fill="#FFFFFF" font-family="Comfortaa-Bold, Comfortaa" font-size="14" font-weight="bold">
                 <tspan x="374.482" y="267">Completion</tspan>
@@ -68,127 +66,149 @@
             <text id="BuilderType" fill="#FFFFFF" font-family="Comfortaa-Regular, Comfortaa" font-size="18" font-weight="normal">
                 <tspan x="45.286" y="435">BuilderType</tspan>
             </text>
-            <g transform="translate(560.000000, 111.000000)">
+            <g id="Group" transform="translate(560.000000, 111.000000)">
                 <rect id="Rectangle" fill="#013D4F" fill-rule="nonzero" x="0" y="0" width="168" height="48"></rect>
                 <g id="Controller" transform="translate(48.000000, 18.000000)" fill="#FFFFFF" font-family="Comfortaa-Regular, Comfortaa" font-size="14" font-weight="normal">
-                    <text>
-                        <tspan x="0.435" y="12">Controller</tspan>
-                    </text>
+                    <g id="Group">
+                        <text id="Controller">
+                            <tspan x="0.435" y="12">Controller</tspan>
+                        </text>
+                    </g>
                 </g>
             </g>
-            <g transform="translate(768.000000, 111.000000)">
+            <g id="Group" transform="translate(768.000000, 111.000000)">
                 <rect id="Rectangle" fill="#DA4167" fill-rule="nonzero" x="0" y="0" width="168" height="48"></rect>
                 <g id="API-Rule-Checker" transform="translate(54.000000, 9.000000)" fill="#FFFFFF" font-family="Comfortaa-Regular, Comfortaa" font-size="14" font-weight="normal">
-                    <text id="API-Rule">
-                        <tspan x="1.961" y="12">API Rule</tspan>
-                    </text>
-                    <text id="Checker">
-                        <tspan x="0.414" y="27">Checker</tspan>
-                    </text>
+                    <g id="API-Rule" transform="translate(1.000000, 0.000000)">
+                        <text>
+                            <tspan x="0.961" y="12">API Rule</tspan>
+                        </text>
+                    </g>
+                    <g id="Checker" transform="translate(0.000000, 15.000000)">
+                        <text>
+                            <tspan x="0.414" y="12">Checker</tspan>
+                        </text>
+                    </g>
                 </g>
             </g>
-            <g transform="translate(767.000000, 176.000000)">
+            <g id="Group" transform="translate(767.000000, 176.000000)">
                 <g id="Rectangle" opacity="0.5">
                     <g id="path-1-Clipped">
-                        <mask id="mask-2" fill="white">
-                            <use xlink:href="#path-1"></use>
-                        </mask>
-                        <g id="Rectangle"></g>
-                        <rect id="path-1" stroke="#011C32" stroke-width="2" fill="#DA4167" fill-rule="nonzero" mask="url(#mask-2)" x="1" y="1" width="168" height="48"></rect>
-                        <mask id="mask-4" fill="white">
-                            <use xlink:href="#path-3"></use>
-                        </mask>
-                        <g id="path-1"></g>
+                        <g>
+                            <mask id="mask-2" fill="white">
+                                <use xlink:href="#path-1"></use>
+                            </mask>
+                            <g id="path-1"></g>
+                            <rect id="path-1" stroke="#011C32" stroke-width="2" fill="#DA4167" fill-rule="nonzero" mask="url(#mask-2)" x="1" y="1" width="168" height="48"></rect>
+                        </g>
                     </g>
                 </g>
                 <g id="Service-Rule-Checker" transform="translate(41.000000, 10.000000)" fill="#FFFFFF" font-family="Comfortaa-Regular, Comfortaa" font-size="14" font-weight="normal">
-                    <text id="Service-Rule">
-                        <tspan x="0.117" y="12">Service Rule</tspan>
-                    </text>
-                    <text id="Checker">
-                        <tspan x="13.914" y="27">Checker</tspan>
-                    </text>
+                    <g id="Service-Rule">
+                        <text>
+                            <tspan x="0.117" y="12">Service Rule</tspan>
+                        </text>
+                    </g>
+                    <g id="Checker" transform="translate(13.000000, 15.000000)">
+                        <text>
+                            <tspan x="0.914" y="12">Checker</tspan>
+                        </text>
+                    </g>
                 </g>
             </g>
-            <g transform="translate(768.000000, 242.000000)">
+            <g id="Group" transform="translate(768.000000, 242.000000)">
                 <rect id="Rectangle" fill="#DA4167" fill-rule="nonzero" x="0" y="0" width="168" height="48"></rect>
                 <g id="SQL-Rule-Checker" transform="translate(51.000000, 9.000000)" fill="#FFFFFF" font-family="Comfortaa-Regular, Comfortaa" font-size="14" font-weight="normal">
-                    <text id="SQL-Rule">
-                        <tspan x="0.1" y="12">SQL Rule</tspan>
-                    </text>
-                    <text id="Checker">
-                        <tspan x="2.914" y="27">Checker</tspan>
-                    </text>
+                    <g id="SQL-Rule">
+                        <text>
+                            <tspan x="0.1" y="12">SQL Rule</tspan>
+                        </text>
+                    </g>
+                    <g id="Checker" transform="translate(2.000000, 15.000000)">
+                        <text>
+                            <tspan x="0.914" y="12">Checker</tspan>
+                        </text>
+                    </g>
                 </g>
             </g>
-            <g transform="translate(1036.000000, 242.000000)">
+            <g id="Group" transform="translate(1036.000000, 242.000000)">
                 <rect id="Rectangle" fill="#DA4167" fill-rule="nonzero" x="0" y="0" width="168" height="48"></rect>
                 <g id="Post-Quality-Thresho" transform="translate(39.000000, 9.000000)" fill="#FFFFFF" font-family="Comfortaa-Regular, Comfortaa" font-size="14" font-weight="normal">
-                    <text id="Post-Quality">
-                        <tspan x="0.081" y="12">Post-Quality</tspan>
-                    </text>
-                    <text id="Threshold">
-                        <tspan x="7.998" y="27">Threshold</tspan>
-                    </text>
+                    <g id="Post-Quality">
+                        <text>
+                            <tspan x="0.081" y="12">Post-Quality</tspan>
+                        </text>
+                    </g>
+                    <g id="Threshold" transform="translate(8.000000, 15.000000)">
+                        <text>
+                            <tspan x="-0.002" y="12">Threshold</tspan>
+                        </text>
+                    </g>
                 </g>
             </g>
-            <g transform="translate(1026.000000, 58.000000)">
+            <g id="Group" transform="translate(1026.000000, 58.000000)">
                 <rect id="Rectangle" fill="#011C32" fill-rule="nonzero" x="0" y="0" width="168" height="48"></rect>
                 <g id="Datasets" transform="translate(51.000000, 17.000000)" fill="#FFFFFF" font-family="Comfortaa-Regular, Comfortaa" font-size="14" font-weight="normal">
-                    <text>
-                        <tspan x="0.66" y="12">Datasets</tspan>
-                    </text>
+                    <g id="Group">
+                        <text id="Datasets">
+                            <tspan x="0.66" y="12">Datasets</tspan>
+                        </text>
+                    </g>
                 </g>
             </g>
-            <g transform="translate(767.000000, 305.000000)">
+            <g id="Group" transform="translate(767.000000, 305.000000)">
                 <g id="Rectangle" opacity="0.5">
                     <g id="path-3-Clipped">
-                        <mask id="mask-6" fill="white">
-                            <use xlink:href="#path-5"></use>
-                        </mask>
-                        <g id="Rectangle"></g>
-                        <rect id="path-3" stroke="#011C32" stroke-width="2" fill="#DA4167" fill-rule="nonzero" mask="url(#mask-6)" x="1" y="1" width="168" height="48"></rect>
-                        <mask id="mask-8" fill="white">
-                            <use xlink:href="#path-7"></use>
-                        </mask>
-                        <g id="path-3"></g>
+                        <g>
+                            <mask id="mask-4" fill="white">
+                                <use xlink:href="#path-3"></use>
+                            </mask>
+                            <g id="path-5"></g>
+                            <rect id="path-3" stroke="#011C32" stroke-width="2" fill="#DA4167" fill-rule="nonzero" mask="url(#mask-4)" x="1" y="1" width="168" height="48"></rect>
+                        </g>
                     </g>
                 </g>
                 <g id="Exception-Rule-Check" transform="translate(31.000000, 10.000000)" fill="#FFFFFF" font-family="Comfortaa-Regular, Comfortaa" font-size="14" font-weight="normal">
-                    <text id="Exception-Rule">
-                        <tspan x="0.705" y="12">Exception Rule</tspan>
-                    </text>
-                    <text id="Checker">
-                        <tspan x="24.414" y="27">Checker</tspan>
-                    </text>
+                    <g id="Exception-Rule">
+                        <text>
+                            <tspan x="0.705" y="12">Exception Rule</tspan>
+                        </text>
+                    </g>
+                    <g id="Checker" transform="translate(24.000000, 15.000000)">
+                        <text>
+                            <tspan x="0.414" y="12">Checker</tspan>
+                        </text>
+                    </g>
                 </g>
             </g>
-            <g transform="translate(767.000000, 367.000000)">
-                <g id="Rectangle" opacity="0.5" stroke-dasharray="12,12">
+            <g id="Group" transform="translate(767.000000, 367.000000)">
+                <g id="Rectangle" opacity="0.5">
                     <g id="path-5-Clipped">
-                        <mask id="mask-10" fill="white">
-                            <use xlink:href="#path-9"></use>
-                        </mask>
-                        <g id="Rectangle"></g>
-                        <path d="M1,1 L169,1 L169,49 L1,49 L1,1 Z" id="path-5" stroke="#011C32" stroke-width="2" fill="#DA4167" fill-rule="nonzero" mask="url(#mask-10)"></path>
-                        <mask id="mask-12" fill="white">
-                            <use xlink:href="#path-11"></use>
-                        </mask>
-                        <g id="path-5"></g>
+                        <g>
+                            <mask id="mask-6" fill="white">
+                                <use xlink:href="#path-5"></use>
+                            </mask>
+                            <g id="path-9"></g>
+                            <polygon id="path-5" stroke="#011C32" stroke-width="2" fill="#DA4167" fill-rule="nonzero" mask="url(#mask-6)" points="1 1 169 1 169 49 1 49"></polygon>
+                        </g>
                     </g>
                 </g>
                 <g id="…" transform="translate(80.000000, 18.000000)" fill="#FFFFFF" font-family="Comfortaa-Regular, Comfortaa" font-size="14" font-weight="normal">
-                    <text>
-                        <tspan x="0.579" y="12">…</tspan>
-                    </text>
+                    <g id="Group">
+                        <text id="…">
+                            <tspan x="0.579" y="12">…</tspan>
+                        </text>
+                    </g>
                 </g>
             </g>
             <g id="Group-3" transform="translate(560.000000, 177.000000)">
                 <rect id="Rectangle" fill="#013D4F" fill-rule="nonzero" x="0" y="0" width="168" height="48"></rect>
                 <g id="Service" transform="translate(58.000000, 18.000000)" fill="#FFFFFF" font-family="Comfortaa-Regular, Comfortaa" font-size="14" font-weight="normal">
-                    <text>
-                        <tspan x="0.505" y="12">Service</tspan>
-                    </text>
+                    <g id="Group">
+                        <text id="Service">
+                            <tspan x="0.505" y="12">Service</tspan>
+                        </text>
+                    </g>
                 </g>
             </g>
             <g id="Group-5" transform="translate(560.000000, 242.000000)">
@@ -196,33 +216,41 @@
                     <rect id="Rectangle" x="0" y="0" width="168" height="48"></rect>
                 </g>
                 <g id="Repository" transform="translate(46.000000, 18.000000)" fill="#FFFFFF" font-family="Comfortaa-Regular, Comfortaa" font-size="14" font-weight="normal">
-                    <text>
-                        <tspan x="0.297" y="12">Repository</tspan>
-                    </text>
+                    <g id="Group">
+                        <text id="Repository">
+                            <tspan x="0.297" y="12">Repository</tspan>
+                        </text>
+                    </g>
                 </g>
             </g>
             <g id="Group-6" transform="translate(560.000000, 305.000000)">
                 <rect id="Rectangle" fill="#013D4F" fill-rule="nonzero" x="0" y="0" width="168" height="48"></rect>
                 <g id="Exception" transform="translate(49.000000, 18.000000)" fill="#FFFFFF" font-family="Comfortaa-Regular, Comfortaa" font-size="14" font-weight="normal">
-                    <text>
-                        <tspan x="0.093" y="12">Exception</tspan>
-                    </text>
+                    <g id="Group">
+                        <text id="Exception">
+                            <tspan x="0.093" y="12">Exception</tspan>
+                        </text>
+                    </g>
                 </g>
             </g>
             <g id="Group-4" transform="translate(560.000000, 368.000000)">
                 <rect id="Rectangle" fill="#013D4F" fill-rule="nonzero" x="0" y="0" width="168" height="48"></rect>
                 <g id="…" transform="translate(80.000000, 14.000000)" fill="#FFFFFF" font-family="Comfortaa-Regular, Comfortaa" font-size="18" font-weight="normal">
-                    <text>
-                        <tspan x="0" y="16">…</tspan>
-                    </text>
+                    <g id="Group">
+                        <text id="…">
+                            <tspan x="0" y="16">…</tspan>
+                        </text>
+                    </g>
                 </g>
             </g>
             <g id="Group-4" transform="translate(560.000000, 449.000000)">
-                <rect id="Rectangle" fill="#CC850A" fill-rule="nonzero" x="0" y="0" width="168" height="48"></rect>
+                <rect id="Rectangle" fill="#DA4167" fill-rule="nonzero" x="0" y="0" width="168" height="48"></rect>
                 <g id="Tests" transform="translate(65.000000, 18.000000)" fill="#FFFFFF" font-family="Comfortaa-Regular, Comfortaa" font-size="14" font-weight="normal">
-                    <text>
-                        <tspan x="0.757" y="12">Tests</tspan>
-                    </text>
+                    <g id="Group">
+                        <text id="Tests">
+                            <tspan x="0.757" y="12">Tests</tspan>
+                        </text>
+                    </g>
                 </g>
             </g>
             <text id="--SimilarChunk" fill="#011C32" font-family="Comfortaa-Regular, Comfortaa" font-size="16" font-weight="normal">
@@ -246,17 +274,14 @@
             <text id="--Documentation" fill="#011C32" font-family="Comfortaa-Regular, Comfortaa" font-size="16" font-weight="normal">
                 <tspan x="2" y="556">- Documentation</tspan>
             </text>
-            <text id="CodeSmell" fill="#011C32" font-family="Comfortaa-Bold, Comfortaa" font-size="14" font-weight="bold">
-                <tspan x="617.21" y="91">CodeSmell</tspan>
+            <text id="ArchGuard-CodeSmell*" fill="#011C32" font-family="Comfortaa-Bold, Comfortaa" font-size="14" font-weight="bold">
+                <tspan x="560" y="94">ArchGuard CodeSmell*</tspan>
             </text>
-            <text id="*" fill="#011C32" font-family="Comfortaa-Bold, Comfortaa" font-size="18" font-weight="bold">
-                <tspan x="695.932" y="91">*</tspan>
+            <text id="ArchGuard-Linter*" fill="#011C32" font-family="Comfortaa-Bold, Comfortaa" font-size="14" font-weight="bold">
+                <tspan x="787.439" y="94">ArchGuard Linter*</tspan>
             </text>
-            <text id="ArchGuard-Linter" fill="#011C32" font-family="Comfortaa-Bold, Comfortaa" font-size="14" font-weight="bold">
-                <tspan x="787.439" y="94">ArchGuard Linter</tspan>
-            </text>
-            <text id="TestCodeSmell*" fill="#011C32" font-family="Comfortaa-Bold, Comfortaa" font-size="14" font-weight="bold">
-                <tspan x="602.39" y="520">TestCodeSmell*</tspan>
+            <text id="ArchGuard-TestCodeSmell*" fill="#011C32" font-family="Comfortaa-Bold, Comfortaa" font-size="14" font-weight="bold">
+                <tspan x="560" y="520">ArchGuard TestCodeSmell*</tspan>
             </text>
             <polygon id="Line-3" fill="#6D7278" fill-rule="nonzero" points="562.487707 125.949016 562.504878 128.615627 562.623083 146.972806 562.632741 148.472775 559.632804 148.492092 559.623145 146.992123 559.541 134.362 554.57848 143.319294 487.312071 264.726958 486.585113 266.03903 483.96097 264.585113 484.687929 263.273042 551.954338 141.865377 556.917 132.907 546.165427 139.53582 544.88857 140.32299 543.31423 137.769276 544.591087 136.982106 560.217739 127.348429"></polygon>
             <polygon id="Line-3" fill="#6D7278" fill-rule="nonzero" points="562.487707 125.949016 562.504878 128.615627 562.623083 146.972806 562.632741 148.472775 559.632804 148.492092 559.623145 146.992123 559.541 134.362 554.57848 143.319294 487.312071 264.726958 486.585113 266.03903 483.96097 264.585113 484.687929 263.273042 551.954338 141.865377 556.917 132.907 546.165427 139.53582 544.88857 140.32299 543.31423 137.769276 544.591087 136.982106 560.217739 127.348429"></polygon>
@@ -275,9 +300,10 @@
             <polygon id="Line-4" fill="#6D7278" fill-rule="nonzero" points="748.428029 380.957245 749.735392 381.692637 765.735392 390.692637 768.059593 392 765.735392 393.307363 749.735392 402.307363 748.428029 403.042755 746.957245 400.428029 748.264608 399.692637 759.273 393.5 726.5 393.5 726.5 390.5 759.273 390.5 748.264608 384.307363 746.957245 383.571971"></polygon>
             <polygon id="Line-4" fill="#6D7278" fill-rule="nonzero" points="748.428029 189.957245 749.735392 190.692637 765.735392 199.692637 768.059593 201 765.735392 202.307363 749.735392 211.307363 748.428029 212.042755 746.957245 209.428029 748.264608 208.692637 759.273 202.5 726.5 202.5 726.5 199.5 759.273 199.5 748.264608 193.307363 746.957245 192.571971"></polygon>
             <polygon id="Line-4" fill="#6D7278" fill-rule="nonzero" points="748.428029 123.957245 749.735392 124.692637 765.735392 133.692637 768.059593 135 765.735392 136.307363 749.735392 145.307363 748.428029 146.042755 746.957245 143.428029 748.264608 142.692637 759.272 136.5 726.5 136.5 726.5 133.5 759.275 133.5 748.264608 127.307363 746.957245 126.571971"></polygon>
-            <path id="Line-2" d="M347.067564,81.7552648 L347.376066,84.4040262 L349.499826,102.638325 L349.673359,104.128253 L346.693502,104.475319 L346.519969,102.98539 L345.058,90.439 L341.141102,99.7975439 L202.883661,430.079207 L202.304454,431.462869 L199.537131,430.304454 L200.116339,428.920793 L338.373779,98.6391296 L342.292,89.279 L332.327962,97.0445504 L331.144784,97.9665531 L329.300779,95.6001964 L330.483957,94.6781937 L344.964135,83.3943807 L347.067564,81.7552648 Z" fill="#6D7278" fill-rule="nonzero"></path>
-            <path id="Line-2" d="M348.197047,264.465822 L347.630067,267.071517 L343.72693,285.009341 L343.408003,286.475044 L340.476597,285.837191 L340.795523,284.371488 L343.481,272.028 L336.715144,279.640761 L202.621114,430.496546 L201.624568,431.61766 L199.38234,429.624568 L200.378886,428.503454 L334.472917,277.64767 L341.238,270.036 L329.296426,274.150069 L327.878223,274.638637 L326.901087,271.802229 L328.319291,271.313662 L345.675796,265.334387 L348.197047,264.465822 Z" fill="#6D7278" fill-rule="nonzero"></path>
-            <path id="Line-2" d="M200.468095,427.646578 L201.910758,428.057337 L331.511915,464.957666 L341.364,467.762 L332.472627,458.792448 L331.416616,457.727159 L333.547194,455.615137 L334.603205,456.680425 L347.527064,469.717828 L349.404418,471.611674 L346.811051,472.232608 L328.958091,476.507166 L327.499322,476.856441 L326.800772,473.938903 L328.259541,473.589628 L340.545,470.648 L330.690398,467.842993 L201.089242,430.942663 L199.646578,430.531905 L200.468095,427.646578 Z" fill="#6D7278" fill-rule="nonzero"></path>
+            <polygon id="Line-2" fill="#6D7278" fill-rule="nonzero" points="347.067564 81.7552648 347.376066 84.4040262 349.499826 102.638325 349.673359 104.128253 346.693502 104.475319 346.519969 102.98539 345.058 90.439 341.141102 99.7975439 202.883661 430.079207 202.304454 431.462869 199.537131 430.304454 200.116339 428.920793 338.373779 98.6391296 342.292 89.279 332.327962 97.0445504 331.144784 97.9665531 329.300779 95.6001964 330.483957 94.6781937 344.964135 83.3943807"></polygon>
+            <polygon id="Line-2" fill="#6D7278" fill-rule="nonzero" points="348.197047 264.465822 347.630067 267.071517 343.72693 285.009341 343.408003 286.475044 340.476597 285.837191 340.795523 284.371488 343.481 272.028 336.715144 279.640761 202.621114 430.496546 201.624568 431.61766 199.38234 429.624568 200.378886 428.503454 334.472917 277.64767 341.238 270.036 329.296426 274.150069 327.878223 274.638637 326.901087 271.802229 328.319291 271.313662 345.675796 265.334387"></polygon>
+            <polygon id="Line-2" fill="#6D7278" fill-rule="nonzero" points="1036 262.151838 1035.61138 264.162792 1032.93611 278.006369 1032.71751 279.13753 1030.70828 278.645265 1030.92688 277.514103 1032.76755 267.987975 1028.13012 273.863149 936.219908 390.286614 935.536859 391.151838 934 389.613662 934.683049 388.748439 1026.59326 272.324974 1031.23016 266.450642 1023.04521 269.625689 1022.07315 270.002743 1021.40341 267.813735 1022.37547 267.436682 1034.27189 262.822156"></polygon>
+            <polygon id="Line-2" fill="#6D7278" fill-rule="nonzero" points="200.468095 427.646578 201.910758 428.057337 331.511915 464.957666 341.364 467.762 332.472627 458.792448 331.416616 457.727159 333.547194 455.615137 334.603205 456.680425 347.527064 469.717828 349.404418 471.611674 346.811051 472.232608 328.958091 476.507166 327.499322 476.856441 326.800772 473.938903 328.259541 473.589628 340.545 470.648 330.690398 467.842993 201.089242 430.942663 199.646578 430.531905"></polygon>
         </g>
     </g>
 </svg>
