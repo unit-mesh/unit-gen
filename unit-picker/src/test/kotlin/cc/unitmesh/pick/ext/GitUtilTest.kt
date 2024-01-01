@@ -7,8 +7,8 @@ class GitUtilTest {
     @Test
     fun should_return_unique_path() {
         assertEquals(
-            "github.com/unit-mesh/unit-eval",
-            GitUtil.gitUrlToPath("https://github.com/unit-mesh/unit-eval")
+            "github.com/unit-mesh/unit-gen",
+            GitUtil.gitUrlToPath("https://github.com/unit-mesh/unit-gen")
         )
         assertEquals(
             "bitbucket.org/moylop260/odoo-mexico",

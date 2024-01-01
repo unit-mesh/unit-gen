@@ -6,4 +6,4 @@ has_children: true
 ---
 
 - CodeGeeX 6b
-- [DeepSeek 6.6b](https://github.com/unit-mesh/unit-eval/tree/master/finetunes/deepseek)
+- [DeepSeek 6.6b](https://github.com/unit-mesh/unit-gen/tree/master/finetunes/deepseek)

@@ -28,7 +28,7 @@ public class App {
         completionTypes.add(CompletionBuilderType.AFTER_BLOCK_COMPLETION);
 
         PickerOption pickerOption = new PickerOption(
-                "https://github.com/unit-mesh/unit-eval-testing", "master", "java",
+                "https://github.com/unit-mesh/unit-gen-testing", "master", "java",
                 ".", instructionTypes, completionTypes, codeQualityTypes, builderConfig
         );
 

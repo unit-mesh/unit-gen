@@ -9,8 +9,8 @@ permalink: /
 <h1 align="center">UnitGen - Intent-Driven Development</h1>
 
 <p align="center">
-  <a href="https://github.com/unit-mesh/unit-eval/actions/workflows/build.yml">
-    <img src="https://github.com/unit-mesh/unit-eval/actions/workflows/build.yml/badge.svg" alt="CI/CD" />
+  <a href="https://github.com/unit-mesh/unit-gen/actions/workflows/build.yml">
+    <img src="https://github.com/unit-mesh/unit-gen/actions/workflows/build.yml/badge.svg" alt="CI/CD" />
   </a>
   <a href="https://github.com/unit-mesh/chocolate-factory">
     <img src="https://img.shields.io/badge/powered_by-chocolate_factory-blue?logo=kotlin&logoColor=fff" alt="Powered By" />
@@ -32,9 +32,9 @@ Examples:
 Features:
 
 - Code context
-  strategy: [Related code completion](https://eval.unitmesh.cc/instruction/related-code-completion), [Similar Code Completion](https://eval.unitmesh.cc/instruction/similar-code-completion)
+  strategy: [Related code completion](https://gen.unitmesh.cc/instruction/related-code-completion), [Similar Code Completion](https://gen.unitmesh.cc/instruction/similar-code-completion)
 - Completion type: inline, block, after block
-- [Code quality](https://eval.unitmesh.cc/quality) filter and pipeline. Code smell, test smell, estimation nd more.
+- [Code quality](https://gen.unitmesh.cc/quality) filter and pipeline. Code smell, test smell, estimation nd more.
 
 ## Architecture
 

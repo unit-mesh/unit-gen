@@ -14,7 +14,7 @@ last_edit_time_format: "%b %e %Y at %I:%M %p" # uses ruby's time format: https:/
 # Footer "Edit this page on GitHub" link text
 gh_edit_link: true # show or hide edit this page link
 gh_edit_link_text: "Edit this page on GitHub."
-gh_edit_repository: "https://github.com/unit-mesh/unit-eval" # the github URL for your repo
+gh_edit_repository: "https://github.com/unit-mesh/unit-gen" # the github URL for your repo
 gh_edit_branch: "master" # the branch that your docs are served from
 gh_edit_source: docs # the source that your files originate from
 gh_edit_view_mode: "tree" # "tree" or "edit" if you want the user to jump into the editor immediately
@@ -74,12 +74,12 @@ back_to_top_text: "Back to top"
 ga_tracking: G-JR0EZ3NLE1
 ga_tracking_anonymize_ip: true # Use GDPR compliant Google Analytics settings (true by default)
 
-url: "https://eval.unitmesh.cc" # the base hostname & protocol for your site
+url: "https://gen.unitmesh.cc" # the base hostname & protocol for your site
 
 # Aux links for the upper right navigation
 aux_links:
   "View in on GitHub":
-    - "//github.com/unit-mesh/unit-eval"
+    - "//github.com/unit-mesh/unit-gen"
 
 # Makes Aux links open in a new tab. Default is false
 aux_links_new_tab: true

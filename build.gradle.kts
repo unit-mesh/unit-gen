@@ -94,13 +94,13 @@ configure(allprojects
                     licenses {
                         license {
                             name.set("MIT")
-                            url.set("https://raw.githubusercontent.com/unit-mesh/unit-eval/master/LICENSE")
+                            url.set("https://raw.githubusercontent.com/unit-mesh/unit-gen/master/LICENSE")
                         }
                     }
                     licenses {
                         license {
                             name.set("MIT")
-                            url.set("https://github.com/unit-mesh/unit-eval/raw/master/LICENSE")
+                            url.set("https://github.com/unit-mesh/unit-gen/raw/master/LICENSE")
                         }
                     }
                     developers {

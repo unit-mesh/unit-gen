@@ -7,7 +7,7 @@
         <g id="Group-2">
             <g id="Group">
                 <rect id="Rectangle" fill="#6D7278" x="0" y="0" width="946" height="68"></rect>
-                <text id="Unit-Eval" font-family="Comfortaa-SemiBold, Comfortaa" font-size="24" font-weight="500" fill="#FFFFFF">
+                <text id="unit-gen" font-family="Comfortaa-SemiBold, Comfortaa" font-size="24" font-weight="500" fill="#FFFFFF">
                     <tspan x="416.334175" y="40">UnitGen</tspan>
                 </text>
             </g>

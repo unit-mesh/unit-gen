@@ -1,8 +1,8 @@
-<h1 align="center">UnitGen - Data Framework</h1>
+<h1 align="center">UnitGen - Code Fine-tuning Data Framework</h1>
 
 <p align="center">
-  <a href="https://github.com/unit-mesh/unit-eval/actions/workflows/build.yml">
-    <img src="https://github.com/unit-mesh/unit-eval/actions/workflows/build.yml/badge.svg" alt="CI/CD" />
+  <a href="https://github.com/unit-mesh/unit-gen/actions/workflows/build.yml">
+    <img src="https://github.com/unit-mesh/unit-gen/actions/workflows/build.yml/badge.svg" alt="CI/CD" />
   </a>
   <a href="https://github.com/unit-mesh/chocolate-factory">
     <img src="https://img.shields.io/badge/powered_by-chocolate_factory-blue?logo=kotlin&logoColor=fff" alt="Powered By" />
@@ -16,14 +16,14 @@
   <a href="https://openbayes.com/console/signup?r=phodal_uVxU">
     <img src="https://openbayes.com/img/badge-built-with-openbayes.svg" alt="Built with OpenBayes" />
   </a>
-  <a href="https://codecov.io/gh/unit-mesh/unit-eval">
-    <img src="https://codecov.io/gh/unit-mesh/unit-eval/branch/master/graph/badge.svg?token=nt22RX52DV" alt="codecov" />
+  <a href="https://codecov.io/gh/unit-mesh/unit-gen">
+    <img src="https://codecov.io/gh/unit-mesh/unit-gen/branch/master/graph/badge.svg?token=nt22RX52DV" alt="codecov" />
   </a>
 </p>
 
 > UnitGen is a code data framework that generates fine-tuning data from your existing codebase.
 
-Docs: [https://eval.unitmesh.cc/](https://eval.unitmesh.cc/)
+Docs: [https://gen.unitmesh.cc/](https://gen.unitmesh.cc/)
 
 Thanks to [OpenBayes](https://openbayes.com/console/signup?r=phodal_uVxU) for providing computing resources.
 
@@ -37,9 +37,9 @@ Examples:
 Features:
 
 - Code context
-  strategy: [Related code completion](https://eval.unitmesh.cc/instruction/related-code-completion), [Similar Code Completion](https://eval.unitmesh.cc/instruction/similar-code-completion)
+  strategy: [Related code completion](https://gen.unitmesh.cc/instruction/related-code-completion), [Similar Code Completion](https://gen.unitmesh.cc/instruction/similar-code-completion)
 - Completion type: inline, block, after block
-- [Code quality](https://eval.unitmesh.cc/quality) filter and pipeline. Code smell, test smell, estimation nd more.
+- [Code quality](https://gen.unitmesh.cc/quality) filter and pipeline. Code smell, test smell, estimation nd more.
 
 ## Architecture
 
@@ -161,27 +161,18 @@ val issues = WebApiRuleVisitor(apis).visitor(listOf(ruleset))
 
 ## Quick Start
 
-for examples, see: [examples](https://github.com/unit-mesh/unit-eval/tree/master/examples) folder
+for examples, see: [examples](https://github.com/unit-mesh/unit-gen/tree/master/examples) folder
 
 ### use CLI
 
-see in [config-examples](https://github.com/unit-mesh/unit-eval/tree/master/examples/config-examples/)
+see in [config-examples](https://github.com/unit-mesh/unit-gen/tree/master/examples/config-examples/)
 
-download the latest version from [GitHub Release](https://github.com/unit-mesh/unit-eval/releases)
+download the latest version from [GitHub Release](https://github.com/unit-mesh/unit-gen/releases)
 
-#### Step 1. Generate Instructions
+#### Generate Instructions
 
 1. config project by `processor.yml`
-2. run picker: `java -jar unit-cli.jar`
-
-### Step 2. run Evaluate CLI (Optional)
-
-1.config the `unit-eval.yml` file and `connection.yml`
-
-2.run eval: `java -jar unit-eval.jar`
-
-PS：Connection
-config: [https://framework.unitmesh.cc/prompt-script/connection-config](https://framework.unitmesh.cc/prompt-script/connection-config)
+2. run picker: `java -jar unit-gen.jar`
 
 ### use Java API
 
@@ -196,7 +187,7 @@ dependencies {
 }
 ```
 
-2.config the `unit-eval.yml` file and `connection.yml`
+2.config the `unit-gen.yml` file and `connection.yml`
 
 3.write code
 
@@ -211,7 +202,7 @@ public class App {
         codeQualityTypes.add(CodeQualityType.JavaService);
 
         PickerOption pickerOption = new PickerOption(
-                "https://github.com/unit-mesh/unit-eval-testing", "master", "java",
+                "https://github.com/unit-mesh/unit-gen-testing", "master", "java",
                 ".", builderTypes, codeQualityTypes, new BuilderConfig()
         );
 

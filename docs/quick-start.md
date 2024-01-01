@@ -7,7 +7,7 @@ permalink: /quick-start
 
 # Quick Start
 
-for examples, see: [examples](https://github.com/unit-mesh/unit-eval/tree/master/examples) folder
+for examples, see: [examples](https://github.com/unit-mesh/unit-gen/tree/master/examples) folder
 
 ## use in IDE
 
@@ -18,14 +18,16 @@ or run in `unit-cli/src/main/kotlin/cc/unitmesh/runner/Picker.kt`
 
 ## use CLI
 
-see in [config-examples](https://github.com/unit-mesh/unit-eval/tree/master/examples/config-examples/)
+### use CLI
 
-download the latest version from [GitHub Release](https://github.com/unit-mesh/unit-eval/releases)
+see in [config-examples](https://github.com/unit-mesh/unit-gen/tree/master/examples/config-examples/)
 
-### Step 1. Generate Instructions
+download the latest version from [GitHub Release](https://github.com/unit-mesh/unit-gen/releases)
+
+#### Generate Instructions
 
 1. config project by `processor.yml`
-2. run picker: `java -jar unit-cli.jar`
+2. run picker: `java -jar unit-gen.jar`
 
 Processor.yml examples:
 
@@ -34,20 +36,13 @@ projects:
   - repository: https://github.com/domain-driven-design/ddd-lite-example
     branch: main
     language: java
-  - repository: https://github.com/unit-mesh/unit-eval-testing
+  - repository: https://github.com/unit-mesh/unit-gen-testing
     branch: main
     language: java
 
 instructionConfig:
   mergeInput: true # if the LLM don't support separate input, you can set it to true, will merge input to instruction.  
 ```
-
-### Step 2. run Evaluate CLI (Optional)
-
-1.config the `unit-eval.yml` file and `connection.yml`
-2.run eval: `java -jar unit-eval.jar`
-
-PS：Connection config: [https://framework.unitmesh.cc/prompt-script/connection-config](https://framework.unitmesh.cc/prompt-script/connection-config)
 
 ## use Java API
 
@@ -81,7 +76,7 @@ public class App {
         completionTypes.add(CompletionBuilderType.AFTER_BLOCK_COMPLETION);
 
         PickerOption pickerOption = new PickerOption(
-                "https://github.com/unit-mesh/unit-eval-testing", "master", "java",
+                "https://github.com/unit-mesh/unit-gen-testing", "master", "java",
                 ".", instructionTypes, completionTypes, codeQualityTypes, builderConfig
         );
 
@@ -93,4 +88,3 @@ public class App {
     }
 }
 ```
-
