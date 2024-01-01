@@ -2,7 +2,7 @@
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
-rootProject.name = "UnitGen"
+rootProject.name = "AutoDevUnitGen"
 
 plugins {
     id("org.gradle.toolchains.foojay-resolver-convention") version "0.5.0"

@@ -114,10 +114,7 @@ UnitGen prompt should keep the same structure as the AutoDev prompt. Prompt exam
 
 ### Code quality pipeline
 
-Before Check:
-
-- FileSize: 64k
-- Complexity: 1000
+![Code Quality Workflow](docs/workflow.svg)
 
 ### Extendable customize quality thresholds
 

@@ -102,7 +102,7 @@ UnitGen prompt should keep the same structure as the AutoDev prompt. Prompt exam
 
 ### Code quality pipeline
 
-![Code Quality Workflow](https://unitmesh.cc/uniteval/code-quality-workflow.png)
+![Code Quality Workflow](workflow.svg)
 
 ### Extendable customize quality thresholds
 
