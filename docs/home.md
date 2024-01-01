@@ -6,7 +6,7 @@ nav_order: 1
 permalink: /
 ---
 
-<h1 align="center">UnitGen - Intent-Driven Development</h1>
+<h1 align="center">UnitGen - Code Fine-tuning Data Framework</h1>
 
 <p align="center">
   <a href="https://github.com/unit-mesh/unit-gen/actions/workflows/build.yml">
@@ -20,7 +20,7 @@ permalink: /
   </a>
 </p>
 
-> UnitGen 是一个代码微调的数据框架，能够从您当前的代码库中生成数据。此外，它还提供了一个大语言模型 (LLM) 基准测试和评估工具。
+> UnitGen 是一个代码微调的数据框架，可以直接从你的代码库中生成微调数据：代码补全、测试生成、文档生成等。
 
 Examples:
 

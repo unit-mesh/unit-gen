@@ -21,7 +21,7 @@
   </a>
 </p>
 
-> UnitGen is a code data framework that generates fine-tuning data from your existing codebase.
+> UnitGen 是一个代码微调的数据框架，可以直接从你的代码库中生成微调数据：代码补全、测试生成、文档生成等。
 
 Docs: [https://gen.unitmesh.cc/](https://gen.unitmesh.cc/)
 
