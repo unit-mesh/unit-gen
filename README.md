@@ -43,7 +43,13 @@ Features:
 
 ## Architecture
 
+Layered Architecture
+
 ![Architecture](docs/architecture.svg)
+
+Workflow
+
+![UnitGen Workflow](docs/workflow.svg)
 
 ### Design Philosophy
 
@@ -53,9 +59,7 @@ Features:
 
 ### Unique Prompt
 
-![UnitGen Overview](https://unitmesh.cc/uniteval/overview.png)
-
-Keep the same prompt: AutoDev <-> Unit Picker <-> UnitGen
+Keep the same prompt: AutoDev <-> UnitGen <-> UnitEval
 
 #### AutoDev prompt
 
@@ -114,8 +118,6 @@ Before Check:
 
 - FileSize: 64k
 - Complexity: 1000
-
-![Code Quality Workflow](https://unitmesh.cc/uniteval/code-quality-workflow.png)
 
 ### Extendable customize quality thresholds
 

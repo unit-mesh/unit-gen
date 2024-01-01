@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1214px" height="557px" viewBox="0 0 1214 557" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 62 (91390) - https://sketch.com -->
+    <title>Group 7</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="168" height="48"></rect>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="-1" y="-1" width="170" height="50">
+            <rect x="-1" y="-1" width="170" height="50" fill="white"></rect>
+            <use xlink:href="#path-1" fill="black"></use>
+        </mask>
+        <rect id="path-3" x="0" y="0" width="168" height="48"></rect>
+        <mask id="mask-4" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="-1" y="-1" width="170" height="50">
+            <rect x="-1" y="-1" width="170" height="50" fill="white"></rect>
+            <use xlink:href="#path-3" fill="black"></use>
+        </mask>
+        <rect id="path-5" x="0" y="0" width="168" height="48"></rect>
+        <mask id="mask-6" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="-1" y="-1" width="170" height="50">
+            <rect x="-1" y="-1" width="170" height="50" fill="white"></rect>
+            <use xlink:href="#path-5" fill="black"></use>
+        </mask>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-7">
+            <g id="Group" transform="translate(68.000000, 0.000000)">
+                <rect id="Rectangle" fill="#011C32" x="0" y="0" width="64" height="64"></rect>
+                <text id="&lt;/&gt;" font-family="Comfortaa-SemiBold, Comfortaa" font-size="24" font-weight="500" fill="#FFFFFF">
+                    <tspan x="13.244" y="40">&lt;/&gt;</tspan>
+                </text>
+            </g>
+            <text id="code-repository" font-family="Comfortaa-Regular, Comfortaa" font-size="18" font-weight="normal" fill="#011C32">
+                <tspan x="148" y="28">code</tspan>
+                <tspan x="148" y="48">repository</tspan>
+            </text>
+            <path id="Line" d="M102,196 L102,266.773 L108.192637,255.764608 L108.928029,254.457245 L111.542755,255.928029 L110.807363,257.235392 L101.807363,273.235392 L100.5,275.559593 L99.1926367,273.235392 L90.1926367,257.235392 L89.4572448,255.928029 L92.0719714,254.457245 L92.8073633,255.764608 L99,266.773 L99,196 L102,196 Z" fill="#6D7278" fill-rule="nonzero"></path>
+            <path id="Line" d="M1119.47015,102.440516 L1120.79457,104.755042 L1129.91197,120.688435 L1130.65695,121.990356 L1128.05311,123.480325 L1127.30813,122.178405 L1121.034,111.215 L1121.11015,121.474464 L1121.99996,242.488971 L1122.01099,243.98893 L1119.01107,244.010989 L1119.00004,242.511029 L1118.11023,121.496523 L1118.035,111.235 L1111.92327,122.291528 L1111.19751,123.604264 L1108.57204,122.152745 L1109.2978,120.84001 L1118.17991,104.774268 L1119.47015,102.440516 Z" fill="#6D7278" fill-rule="nonzero"></path>
+            <path id="Line" d="M101.990769,61.9908259 L101.999972,63.4907977 L102.408021,130.002903 L102.47,140.264 L108.595958,129.217711 L109.323315,127.905861 L111.947016,129.360576 L111.219658,130.672426 L102.317985,146.727339 L101.024905,149.059517 L99.7033077,146.74338 L90.6053194,130.798894 L89.8619209,129.496067 L92.4675752,128.00927 L93.2109737,129.312097 L99.47,140.282 L99.408078,130.021308 L99.0000282,63.5092023 L98.9908259,62.0092305 L101.990769,61.9908259 Z" fill="#6D7278" fill-rule="nonzero"></path>
+            <path id="Line" d="M101.5,323.5 L101.5,394.273 L107.692637,383.264608 L108.428029,381.957245 L111.042755,383.428029 L110.307363,384.735392 L101.307363,400.735392 L100,403.059593 L98.6926367,400.735392 L89.6926367,384.735392 L88.9572448,383.428029 L91.5719714,381.957245 L92.3073633,383.264608 L98.5,394.273 L98.5,323.5 L101.5,323.5 Z" fill="#6D7278" fill-rule="nonzero"></path>
+            <path id="Line" d="M540.77188,461.680806 L542.089614,462.397448 L558.21654,471.167981 L560.559179,472.442012 L558.25389,473.782441 L542.38408,483.010071 L541.087355,483.764063 L539.579372,481.170612 L540.876097,480.41662 L551.795,474.067 L541.549585,474.21373 L486.521426,474.999847 L485.021579,475.021273 L484.978727,472.021579 L486.478574,472.000153 L541.506732,471.214036 L551.752,471.067 L540.65633,465.032917 L539.338596,464.316274 L540.77188,461.680806 Z" fill="#6D7278" fill-rule="nonzero"></path>
+            <text id="(complexity,-bytes," font-family="Comfortaa-Regular, Comfortaa" font-size="18" font-weight="normal" fill="#011C32">
+                <tspan x="112" y="197"></tspan>
+                <tspan x="112" y="217" font-size="12">(complexity, bytes, tokens)</tspan>
+            </text>
+            <text id="(tokens)" font-family="Comfortaa-Regular, Comfortaa" font-size="12" font-weight="normal" fill="#011C32">
+                <tspan x="1166" y="233">(tokens)</tspan>
+            </text>
+            <rect id="Rectangle" fill="#48A178" x="0" y="277" width="200" height="48"></rect>
+            <text id="ContextStrategy" font-family="Comfortaa-Regular, Comfortaa" font-size="18" font-weight="normal" fill="#FFFFFF">
+                <tspan x="24" y="307">ContextStrategy</tspan>
+            </text>
+            <rect id="Rectangle" fill="#DA4167" x="1" y="149" width="200" height="48"></rect>
+            <text id="Pre-Quality-Threshol" font-family="Comfortaa-Regular, Comfortaa" font-size="18" font-weight="normal" fill="#FFFFFF">
+                <tspan x="49.161" y="169">Pre-Quality</tspan>
+                <tspan x="54.426" y="189">Threshold</tspan>
+            </text>
+            <rect id="Rectangle" fill="#48A178" x="0" y="405" width="200" height="48"></rect>
+            <path id="Line-2" d="M329.428029,461.957245 L330.735392,462.692637 L346.735392,471.692637 L349.059593,473 L346.735392,474.307363 L330.735392,483.307363 L329.428029,484.042755 L327.957245,481.428029 L329.264608,480.692637 L342.94,473 L329.264608,465.307363 L327.957245,464.571971 L329.428029,461.957245 Z M284.5,464.998485 L284.5,471.499 L289.998485,471.5 L289.998485,474.5 L281.5,474.5 L281.5,464.998485 L284.5,464.998485 Z M313.998485,471.5 L313.998485,474.5 L298.998485,474.5 L298.998485,471.5 L313.998485,471.5 Z M337.998485,471.5 L337.998485,474.5 L322.998485,474.5 L322.998485,471.5 L337.998485,471.5 Z M284.5,440.998485 L284.5,455.998485 L281.5,455.998485 L281.5,440.998485 L284.5,440.998485 Z M284.5,427.490882 L284.5,431.998485 L281.5,431.998485 L281.5,430.508 L272.507768,430.563617 L271.007796,430.572708 L270.989615,427.572763 L272.489587,427.563672 L282.990909,427.500028 L284.5,427.490882 Z M213.990661,427.918211 L214.008843,430.918156 L212.50887,430.927247 L200.509091,430.999972 L199.009118,431.009063 L198.990937,428.009118 L200.490909,428.000028 L212.490689,427.927302 L213.990661,427.918211 Z M237.990221,427.772759 L238.008402,430.772704 L236.50843,430.781795 L224.50865,430.854521 L223.008678,430.863611 L222.990496,427.863666 L224.490468,427.854576 L236.490248,427.78185 L237.990221,427.772759 Z M261.98978,427.627307 L262.007961,430.627252 L260.507989,430.636343 L248.508209,430.709069 L247.008237,430.718159 L246.990055,427.718215 L248.490028,427.709124 L260.489807,427.636398 L261.98978,427.627307 Z" fill="#6D7278" fill-rule="nonzero"></path>
+            <path id="Line-2" d="M284.785467,267.5 L284.785,427.499 L340.772,427.499 L329.764608,421.307363 L328.457245,420.571971 L329.928029,417.957245 L331.235392,418.692637 L347.235392,427.692637 L349.559593,429 L347.235392,430.307363 L331.235392,439.307363 L329.928029,440.042755 L328.457245,437.428029 L329.764608,436.692637 L340.775,430.499 L281.785467,430.5 L281.785,270.499 L198.5,270.5 L198.5,267.5 L284.785467,267.5 Z" fill="#6D7278" fill-rule="nonzero"></path>
+            <path id="Line-2" d="M329.428029,417.957245 L330.735392,418.692637 L346.735392,427.692637 L349.059593,429 L346.735392,430.307363 L330.735392,439.307363 L329.428029,440.042755 L327.957245,437.428029 L329.264608,436.692637 L340.275,430.499 L337.5,430.5 L337.5,427.5 L340.272,427.499 L329.264608,421.307363 L327.957245,420.571971 L329.428029,417.957245 Z M304.5,427.5 L304.5,430.5 L289.5,430.5 L289.5,427.5 L304.5,427.5 Z M328.5,427.5 L328.5,430.5 L313.5,430.5 L313.5,427.5 L328.5,427.5 Z M284.500742,411.499258 L284.500742,426.499258 L281.500742,426.499258 L281.500742,411.499258 L284.500742,411.499258 Z M284.500742,387.499258 L284.500742,402.499258 L281.500742,402.499258 L281.500742,387.499258 L284.500742,387.499258 Z M284.500742,363.499258 L284.500742,378.499258 L281.500742,378.499258 L281.500742,363.499258 L284.500742,363.499258 Z M284.500742,339.499258 L284.500742,354.499258 L281.500742,354.499258 L281.500742,339.499258 L284.500742,339.499258 Z M284.500742,315.499258 L284.500742,330.499258 L281.500742,330.499258 L281.500742,315.499258 L284.500742,315.499258 Z M284.500742,291.499258 L284.500742,306.499258 L281.500742,306.499258 L281.500742,291.499258 L284.500742,291.499258 Z M284.500742,267.499258 L284.500742,282.499258 L281.500742,282.499258 L281.500742,267.499258 L284.500742,267.499258 Z M284.500742,243.499258 L284.500742,258.499258 L281.500742,258.499258 L281.500742,243.499258 L284.500742,243.499258 Z M284.500742,219.499258 L284.500742,234.499258 L281.500742,234.499258 L281.500742,219.499258 L284.500742,219.499258 Z M284.500742,195.499258 L284.500742,210.499258 L281.500742,210.499258 L281.500742,195.499258 L284.500742,195.499258 Z M284.500742,171.499258 L284.500742,186.499258 L281.500742,186.499258 L281.500742,171.499258 L284.500742,171.499258 Z M284.500742,147.499258 L284.500742,162.499258 L281.500742,162.499258 L281.500742,147.499258 L284.500742,147.499258 Z M284.500742,123.499258 L284.500742,138.499258 L281.500742,138.499258 L281.500742,123.499258 L284.500742,123.499258 Z M284.500742,99.4992577 L284.500742,114.499258 L281.500742,114.499258 L281.500742,99.4992577 L284.500742,99.4992577 Z M284.500742,85.5 L284.500742,90.4992577 L281.500742,90.4992577 L281.5,88.499 L271.5,88.5 L271.5,85.5 L284.500742,85.5 Z M214.5,85.5 L214.5,88.5 L199.5,88.5 L199.5,85.5 L214.5,85.5 Z M238.5,85.5 L238.5,88.5 L223.5,88.5 L223.5,85.5 L238.5,85.5 Z M262.5,85.5 L262.5,88.5 L247.5,88.5 L247.5,85.5 L262.5,85.5 Z" fill="#6D7278" fill-rule="nonzero"></path>
+            <rect id="Rectangle" fill="#48A178" x="345" y="246" width="141" height="48"></rect>
+            <rect id="Rectangle" fill="#48A178" x="346" y="63" width="141" height="48"></rect>
+            <text id="Documentation" font-family="Comfortaa-Bold, Comfortaa" font-size="14" font-weight="bold" fill="#FFFFFF">
+                <tspan x="360.174" y="91">Documentation</tspan>
+            </text>
+            <text id="Completion-(CRUD-Cod" font-family="Comfortaa-Bold, Comfortaa" font-size="14" font-weight="bold" fill="#FFFFFF">
+                <tspan x="374.482" y="267">Completion</tspan>
+                <tspan x="383.74" y="282" font-size="10">(CRUD Code)</tspan>
+            </text>
+            <rect id="Rectangle" fill="#48A178" x="345" y="449" width="141" height="48"></rect>
+            <text id="TestGen" font-family="Comfortaa-Bold, Comfortaa" font-size="14" font-weight="bold" fill="#FFFFFF">
+                <tspan x="385.358" y="477">TestGen</tspan>
+            </text>
+            <text id="BuilderType" font-family="Comfortaa-Regular, Comfortaa" font-size="18" font-weight="normal" fill="#FFFFFF">
+                <tspan x="45.286" y="435">BuilderType</tspan>
+            </text>
+            <g id="Group-2" transform="translate(560.000000, 111.000000)">
+                <rect id="Rectangle" fill="#013D4F" x="0" y="0" width="168" height="48"></rect>
+                <text id="Controller" font-family="Comfortaa-Regular, Comfortaa" font-size="14" font-weight="normal" fill="#FFFFFF">
+                    <tspan x="48.435" y="30">Controller</tspan>
+                </text>
+            </g>
+            <g id="Group-2" transform="translate(768.000000, 111.000000)">
+                <rect id="Rectangle" fill="#DA4167" x="0" y="0" width="168" height="48"></rect>
+                <text id="API-Rule-Checker" font-family="Comfortaa-Regular, Comfortaa" font-size="14" font-weight="normal" fill="#FFFFFF">
+                    <tspan x="55.961" y="21">API Rule</tspan>
+                    <tspan x="54.414" y="36">Checker</tspan>
+                </text>
+            </g>
+            <g id="Group-2" stroke-dasharray="12,12" transform="translate(768.000000, 177.000000)">
+                <use id="Rectangle" stroke="#011C32" mask="url(#mask-2)" stroke-width="2" fill="#DA4167" opacity="0.5" xlink:href="#path-1"></use>
+                <text id="Service-Rule-Checker" font-family="Comfortaa-Regular, Comfortaa" font-size="14" font-weight="normal" fill="#FFFFFF">
+                    <tspan x="40.117" y="21">Service Rule</tspan>
+                    <tspan x="53.914" y="36">Checker</tspan>
+                </text>
+            </g>
+            <g id="Group-2" transform="translate(768.000000, 242.000000)">
+                <rect id="Rectangle" fill="#DA4167" x="0" y="0" width="168" height="48"></rect>
+                <text id="SQL-Rule-Checker" font-family="Comfortaa-Regular, Comfortaa" font-size="14" font-weight="normal" fill="#FFFFFF">
+                    <tspan x="51.1" y="21">SQL Rule</tspan>
+                    <tspan x="53.914" y="36">Checker</tspan>
+                </text>
+            </g>
+            <g id="Group-2" transform="translate(1036.000000, 242.000000)">
+                <rect id="Rectangle" fill="#DA4167" x="0" y="0" width="168" height="48"></rect>
+                <text id="Post-Quality-Thresho" font-family="Comfortaa-Regular, Comfortaa" font-size="14" font-weight="normal" fill="#FFFFFF">
+                    <tspan x="39.081" y="21">Post-Quality </tspan>
+                    <tspan x="46.998" y="36">Threshold</tspan>
+                </text>
+            </g>
+            <g id="Group-2" transform="translate(1026.000000, 58.000000)">
+                <rect id="Rectangle" fill="#011C32" x="0" y="0" width="168" height="48"></rect>
+                <text id="Datasets" font-family="Comfortaa-Regular, Comfortaa" font-size="14" font-weight="normal" fill="#FFFFFF">
+                    <tspan x="51.66" y="29">Datasets</tspan>
+                </text>
+            </g>
+            <g id="Group-2" stroke-dasharray="12,12" transform="translate(768.000000, 306.000000)">
+                <use id="Rectangle" stroke="#011C32" mask="url(#mask-4)" stroke-width="2" fill="#DA4167" opacity="0.5" xlink:href="#path-3"></use>
+                <text id="Exception-Rule-Check" font-family="Comfortaa-Regular, Comfortaa" font-size="14" font-weight="normal" fill="#FFFFFF">
+                    <tspan x="30.705" y="21">Exception Rule</tspan>
+                    <tspan x="54.414" y="36">Checker</tspan>
+                </text>
+            </g>
+            <g id="Group-2" transform="translate(768.000000, 368.000000)">
+                <use id="Rectangle" stroke="#011C32" mask="url(#mask-6)" stroke-width="2" fill="#DA4167" opacity="0.5" stroke-dasharray="12,12" xlink:href="#path-5"></use>
+                <text id="…" font-family="Comfortaa-Regular, Comfortaa" font-size="14" font-weight="normal" fill="#FFFFFF">
+                    <tspan x="79.579" y="29">…</tspan>
+                </text>
+            </g>
+            <g id="Group-3" transform="translate(560.000000, 177.000000)">
+                <rect id="Rectangle" fill="#013D4F" x="0" y="0" width="168" height="48"></rect>
+                <text id="Service" font-family="Comfortaa-Regular, Comfortaa" font-size="14" font-weight="normal" fill="#FFFFFF">
+                    <tspan x="58.505" y="30">Service</tspan>
+                </text>
+            </g>
+            <g id="Group-5" transform="translate(560.000000, 242.000000)">
+                <g id="Rectangle-2" transform="translate(0.000000, 0.000000)" fill="#013D4F">
+                    <rect id="Rectangle" x="0" y="0" width="168" height="48"></rect>
+                </g>
+                <text id="Repository" font-family="Comfortaa-Regular, Comfortaa" font-size="14" font-weight="normal" fill="#FFFFFF">
+                    <tspan x="46.297" y="30">Repository</tspan>
+                </text>
+            </g>
+            <g id="Group-6" transform="translate(560.000000, 305.000000)">
+                <rect id="Rectangle" fill="#013D4F" x="0" y="0" width="168" height="48"></rect>
+                <text id="Exception" font-family="Comfortaa-Regular, Comfortaa" font-size="14" font-weight="normal" fill="#FFFFFF">
+                    <tspan x="49.093" y="30">Exception</tspan>
+                </text>
+            </g>
+            <g id="Group-4" transform="translate(560.000000, 368.000000)">
+                <rect id="Rectangle" fill="#013D4F" x="0" y="0" width="168" height="48"></rect>
+                <text id="…" font-family="Comfortaa-Regular, Comfortaa" font-size="18" font-weight="normal" fill="#FFFFFF">
+                    <tspan x="80" y="30">…</tspan>
+                </text>
+            </g>
+            <g id="Group-4" transform="translate(560.000000, 449.000000)">
+                <rect id="Rectangle" fill="#CC850A" x="0" y="0" width="168" height="48"></rect>
+                <text id="Tests" font-family="Comfortaa-Regular, Comfortaa" font-size="14" font-weight="normal" fill="#FFFFFF">
+                    <tspan x="65.757" y="30">Tests</tspan>
+                </text>
+            </g>
+            <text id="--SimilarChunk---Rel" font-family="Comfortaa-Regular, Comfortaa" font-size="16" font-weight="normal" fill="#011C32">
+                <tspan x="112" y="358">- SimilarChunk</tspan>
+                <tspan x="112" y="376">- RelatedCode</tspan>
+            </text>
+            <text id="--InlineCompletion--" font-family="Comfortaa-Regular, Comfortaa" font-size="16" font-weight="normal" fill="#011C32">
+                <tspan x="2" y="484">- InlineCompletion</tspan>
+                <tspan x="2" y="502">- AfterBlockCompletion</tspan>
+                <tspan x="2" y="520">- InlineBlockCompletion</tspan>
+                <tspan x="2" y="538">- TestCodeGen</tspan>
+                <tspan x="2" y="556">- Documentation</tspan>
+            </text>
+            <text id="CodeSmell*" font-family="Comfortaa-Bold, Comfortaa" font-size="14" font-weight="bold" fill="#011C32">
+                <tspan x="617.21" y="91">CodeSmell</tspan>
+                <tspan x="695.932" y="91" font-size="18">*</tspan>
+            </text>
+            <text id="ArchGuard-Linter" font-family="Comfortaa-Bold, Comfortaa" font-size="14" font-weight="bold" fill="#011C32">
+                <tspan x="787.439" y="94">ArchGuard Linter</tspan>
+            </text>
+            <text id="TestCodeSmell*" font-family="Comfortaa-Bold, Comfortaa" font-size="14" font-weight="bold" fill="#011C32">
+                <tspan x="602.39" y="520">TestCodeSmell*</tspan>
+            </text>
+            <path id="Line-3" d="M562.487707,125.949016 L562.504878,128.615627 L562.623083,146.972806 L562.632741,148.472775 L559.632804,148.492092 L559.623145,146.992123 L559.541,134.362 L554.57848,143.319294 L487.312071,264.726958 L486.585113,266.03903 L483.96097,264.585113 L484.687929,263.273042 L551.954338,141.865377 L556.917,132.907 L546.165427,139.53582 L544.88857,140.32299 L543.31423,137.769276 L544.591087,136.982106 L560.217739,127.348429 L562.487707,125.949016 Z" fill="#6D7278" fill-rule="nonzero"></path>
+            <path id="Line-3" d="M563.571931,198.82275 L562.686981,201.338297 L556.594912,218.655534 L556.097127,220.070529 L553.267137,219.07496 L553.764922,217.659965 L557.956,205.744 L550.306103,212.456416 L487.989231,267.127574 L486.861657,268.116804 L484.883196,265.861657 L486.010769,264.872426 L548.327642,210.201269 L555.978,203.489 L543.618532,206.094612 L542.150785,206.403995 L541.532018,203.468501 L542.999765,203.159117 L560.962603,199.372766 L563.571931,198.82275 Z" fill="#6D7278" fill-rule="nonzero"></path>
+            <path id="Line-3" d="M545.023757,255.3516 L546.326089,256.095866 L562.264513,265.204469 L564.57977,266.527608 L562.246731,267.819135 L546.185895,276.710116 L544.873561,277.4366 L543.420593,274.811931 L544.732927,274.085447 L555.784,267.967 L545.523487,267.898044 L486.989799,267.499965 L485.489834,267.489764 L485.510236,264.489834 L487.010201,264.500035 L545.54389,264.898113 L555.803,264.967 L544.837558,258.70053 L543.535226,257.956264 L545.023757,255.3516 Z" fill="#6D7278" fill-rule="nonzero"></path>
+            <path id="Line-3" d="M485.813549,264.886889 L486.96333,265.850219 L549.553394,318.290543 L557.34,324.814 L552.878864,312.997855 L552.349026,311.594548 L555.155642,310.534873 L555.685479,311.93818 L562.169828,329.112382 L563.111761,331.607151 L560.490599,331.116624 L542.446292,327.73979 L540.971888,327.463869 L541.523732,324.515061 L542.998136,324.790982 L555.412,327.113 L547.626734,320.590105 L485.03667,268.149781 L483.886889,267.186451 L485.813549,264.886889 Z" fill="#6D7278" fill-rule="nonzero"></path>
+            <path id="Line-3" d="M486.516681,265.942565 L487.287058,267.229623 L554.118555,378.884093 L559.38,387.675 L559.039396,375.047601 L558.998949,373.548147 L561.997858,373.467253 L562.038305,374.966707 L562.53331,393.317592 L562.605215,395.983289 L560.289772,394.660476 L544.350067,385.554115 L543.047631,384.810032 L544.535796,382.205159 L545.838233,382.949242 L556.805,389.214 L551.544438,380.424847 L484.712942,268.770377 L483.942565,267.483319 L486.516681,265.942565 Z" fill="#6D7278" fill-rule="nonzero"></path>
+            <path id="Line-3" d="M1120,285.940407 L1121.30736,288.264608 L1130.30736,304.264608 L1131.04276,305.571971 L1128.42803,307.042755 L1127.69264,305.735392 L1121.499,294.724 L1121.5,474.5 L726.5,474.5 L726.5,471.5 L1118.499,471.5 L1118.499,294.727 L1112.30736,305.735392 L1111.57197,307.042755 L1108.95724,305.571971 L1109.69264,304.264608 L1118.69264,288.264608 L1120,285.940407 Z" fill="#6D7278" fill-rule="nonzero"></path>
+            <path id="Line-4" d="M748.428029,255.957245 L749.735392,256.692637 L765.735392,265.692637 L768.059593,267 L765.735392,268.307363 L749.735392,277.307363 L748.428029,278.042755 L746.957245,275.428029 L748.264608,274.692637 L759.273,268.5 L726.5,268.5 L726.5,265.5 L759.273,265.5 L748.264608,259.307363 L746.957245,258.571971 L748.428029,255.957245 Z" fill="#6D7278" fill-rule="nonzero"></path>
+            <path id="Line-4" d="M1016.42803,255.957245 L1017.73539,256.692637 L1033.73539,265.692637 L1036.05959,267 L1033.73539,268.307363 L1017.73539,277.307363 L1016.42803,278.042755 L1014.95724,275.428029 L1016.26461,274.692637 L1027.273,268.5 L934.5,268.5 L934.5,265.5 L1027.273,265.5 L1016.26461,259.307363 L1014.95724,258.571971 L1016.42803,255.957245 Z" fill="#6D7278" fill-rule="nonzero"></path>
+            <path id="Line-4" d="M936.330847,132.904638 L937.213104,134.117742 L1024.46312,254.08651 L1030.433,262.295 L1028.9662,249.74963 L1028.79198,248.259781 L1031.77168,247.911349 L1031.9459,249.401197 L1034.07802,267.63452 L1034.38774,270.28314 L1031.9634,269.172428 L1015.27402,261.526196 L1013.91033,260.901421 L1015.15988,258.174037 L1016.52357,258.798812 L1028.007,264.061 L1022.03691,255.851025 L934.786896,135.882258 L933.904638,134.669153 L936.330847,132.904638 Z" fill="#6D7278" fill-rule="nonzero"></path>
+            <path id="Line-4" d="M938.64486,198.908619 L939.868121,199.776739 L1020.73172,257.16381 L1029.013,263.04 L1023.61977,251.619789 L1022.97921,250.263439 L1025.69191,248.982322 L1026.33247,250.338672 L1034.17186,266.938189 L1035.31063,269.349477 L1032.65859,269.070517 L1014.40175,267.150129 L1012.90998,266.993214 L1013.22382,264.009674 L1014.71559,264.166589 L1027.276,265.487 L1018.99548,259.610331 L938.131879,202.223261 L936.908619,201.35514 L938.64486,198.908619 Z" fill="#6D7278" fill-rule="nonzero"></path>
+            <path id="Line-4" d="M1035.39401,264.772678 L1034.16816,267.140884 L1025.72931,283.443819 L1025.03976,284.775935 L1022.37553,283.396853 L1023.06507,282.064737 L1028.87,270.847 L1020.35567,276.435746 L936.822985,331.254072 L935.568913,332.077057 L933.922943,329.568913 L935.177015,328.745928 L1018.7097,273.927603 L1027.225,268.338 L1014.62384,269.201911 L1013.12735,269.304382 L1012.92241,266.31139 L1014.4189,266.20892 L1032.73358,264.954848 L1035.39401,264.772678 Z" fill="#6D7278" fill-rule="nonzero"></path>
+            <path id="Line-4" d="M1035.39401,264.772678 L1034.16816,267.140884 L1025.72931,283.443819 L1025.03976,284.775935 L1022.37553,283.396853 L1023.06507,282.064737 L1028.87,270.847 L1020.35567,276.435746 L936.822985,331.254072 L935.568913,332.077057 L933.922943,329.568913 L935.177015,328.745928 L1018.7097,273.927603 L1027.225,268.338 L1014.62384,269.201911 L1013.12735,269.304382 L1012.92241,266.31139 L1014.4189,266.20892 L1032.73358,264.954848 L1035.39401,264.772678 Z" fill="#6D7278" fill-rule="nonzero"></path>
+            <path id="Line-4" d="M748.428029,318.957245 L749.735392,319.692637 L765.735392,328.692637 L768.059593,330 L765.735392,331.307363 L749.735392,340.307363 L748.428029,341.042755 L746.957245,338.428029 L748.264608,337.692637 L759.273,331.5 L726.5,331.5 L726.5,328.5 L759.273,328.5 L748.264608,322.307363 L746.957245,321.571971 L748.428029,318.957245 Z" fill="#6D7278" fill-rule="nonzero"></path>
+            <path id="Line-4" d="M748.428029,380.957245 L749.735392,381.692637 L765.735392,390.692637 L768.059593,392 L765.735392,393.307363 L749.735392,402.307363 L748.428029,403.042755 L746.957245,400.428029 L748.264608,399.692637 L759.273,393.5 L726.5,393.5 L726.5,390.5 L759.273,390.5 L748.264608,384.307363 L746.957245,383.571971 L748.428029,380.957245 Z" fill="#6D7278" fill-rule="nonzero"></path>
+            <path id="Line-4" d="M748.428029,189.957245 L749.735392,190.692637 L765.735392,199.692637 L768.059593,201 L765.735392,202.307363 L749.735392,211.307363 L748.428029,212.042755 L746.957245,209.428029 L748.264608,208.692637 L759.273,202.5 L726.5,202.5 L726.5,199.5 L759.273,199.5 L748.264608,193.307363 L746.957245,192.571971 L748.428029,189.957245 Z" fill="#6D7278" fill-rule="nonzero"></path>
+            <path id="Line-4" d="M748.428029,123.957245 L749.735392,124.692637 L765.735392,133.692637 L768.059593,135 L765.735392,136.307363 L749.735392,145.307363 L748.428029,146.042755 L746.957245,143.428029 L748.264608,142.692637 L759.272,136.5 L726.5,136.5 L726.5,133.5 L759.275,133.5 L748.264608,127.307363 L746.957245,126.571971 L748.428029,123.957245 Z" fill="#6D7278" fill-rule="nonzero"></path>
+        </g>
+    </g>
+</svg>

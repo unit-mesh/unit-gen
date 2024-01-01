@@ -38,7 +38,13 @@ Features:
 
 ## Architecture
 
+Layered Architecture
+
 ![Architecture](architecture.svg)
+
+Workflow
+
+![UnitGen Workflow](workflow.svg)
 
 ### Design Philosophy
 
@@ -48,9 +54,7 @@ Features:
 
 ### Unique Prompt
 
-![UnitGen Overview](https://unitmesh.cc/uniteval/overview.png)
-
-Keep the same prompt: AutoDev <-> Unit Picker <-> UnitGen
+Keep the same prompt: AutoDev <-> UnitGen <-> UnitEval
 
 #### AutoDev prompt
 
