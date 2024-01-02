@@ -15,6 +15,7 @@ class RustWorker(override val context: WorkerContext) : LangWorker {
     override fun prepareJob(job: InstructionFileJob) {
         this.jobs.add(job)
         try {
+            println("RustWorker prepareJob: ${job.fileSummary.location}")
             val container = RustAnalyser().analysis(job.code, job.fileSummary.location)
             job.codeLines = job.code.lines()
             container.DataStructures.map { ds ->
