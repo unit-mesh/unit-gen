@@ -54,4 +54,27 @@ class SingleProjectCodePickerTest {
             })
         }
     }
+
+    @Test
+    fun should_handle_for_rust_test_gen() {
+        val picker = SingleProjectCodePicker(
+            InsPickerOption(
+                language = "rust",
+                url = "https://github.com/unit-mesh/edge-infer",
+                maxTokenLength = 8192,
+                codeStrategyTypes = listOf(CodeStrategyType.RELATED_CODE),
+                completionTypes = listOf(
+                    CompletionBuilderType.TEST_CODE_GEN
+                ),
+            )
+        )
+
+        val outputFile = File("test.jsonl")
+        runBlocking {
+            val output: MutableList<Instruction> = picker.execute()
+            outputFile.writeText(output.joinToString("\n") {
+                Json.encodeToString(it)
+            })
+        }
+    }
 }

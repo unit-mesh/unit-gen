@@ -95,7 +95,6 @@ class SingleProjectCodePicker(private val config: InsPickerOption) {
             )
         )
 
-
         workerManager.init(codeDir, language)
 
         val walkdirChannel = Channel<FileJob>()

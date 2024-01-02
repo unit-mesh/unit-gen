@@ -7,6 +7,7 @@ import cc.unitmesh.pick.builder.unittest.kotlin.KotlinTestCodeService
 import cc.unitmesh.pick.builder.unittest.rust.RustTestCodeService
 import cc.unitmesh.pick.builder.unittest.typescript.TypeScriptTestCodeService
 import cc.unitmesh.pick.worker.job.JobContext
+import chapi.domain.core.CodeContainer
 import chapi.domain.core.CodeDataStruct
 
 /**
@@ -23,14 +24,37 @@ import chapi.domain.core.CodeDataStruct
  */
 interface UnitTestService {
     /**
+     * For [SupportedLang.RUST] can analysis by container
+     */
+    fun isApplicable(container: CodeContainer): Boolean = false
+
+    /**
+     * For [SupportedLang.RUST], the file contains test code.
+     */
+    fun build(container: CodeContainer): List<TypedTestIns> = listOf()
+
+    /**
      * Checks if the given data structure is a test file.
      */
     fun isApplicable(dataStruct: CodeDataStruct): Boolean
 
+    /**
+     * For [SupportedLang.JAVA], [SupportedLang.KOTLIN], can analysis by dataStruct
+     */
     fun build(dataStruct: CodeDataStruct): List<TypedTestIns>
 
     companion object {
         fun lookup(codeDataStruct: CodeDataStruct, job: JobContext): List<UnitTestService> {
+            val testCodeServices = unitTestServices(job)
+            return testCodeServices.filter { it.isApplicable(codeDataStruct) }
+        }
+
+        fun lookup(codeContainer: CodeContainer, job: JobContext): List<UnitTestService> {
+            val testCodeServices = unitTestServices(job)
+            return testCodeServices.filter { it.isApplicable(codeContainer) }
+        }
+
+        private fun unitTestServices(job: JobContext): List<UnitTestService> {
             val testCodeServices = SupportedLang.all().map {
                 when (it) {
                     SupportedLang.JAVA -> JavaTestCodeService(job)
@@ -39,9 +63,7 @@ interface UnitTestService {
                     SupportedLang.RUST -> RustTestCodeService(job)
                 }
             }
-
-            return testCodeServices.filter { it.isApplicable(codeDataStruct) }
+            return testCodeServices
         }
-
     }
 }
