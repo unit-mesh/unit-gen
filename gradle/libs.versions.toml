@@ -63,6 +63,7 @@ chapi-domain = { group = "com.phodal.chapi", name = "chapi-domain", version.ref 
 chapi-java = { group = "com.phodal.chapi", name = "chapi-ast-java", version.ref = "chapi" }
 chapi-kotlin = { group = "com.phodal.chapi", name = "chapi-ast-kotlin", version.ref = "chapi" }
 chapi-typescript = { group = "com.phodal.chapi", name = "chapi-ast-typescript", version.ref = "chapi" }
+chapi-rust = { group = "com.phodal.chapi", name = "chapi-ast-rust", version.ref = "chapi" }
 
 
 # ArchGurad

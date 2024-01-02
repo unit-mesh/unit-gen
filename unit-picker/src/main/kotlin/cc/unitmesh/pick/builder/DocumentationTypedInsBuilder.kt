@@ -1,6 +1,7 @@
 package cc.unitmesh.pick.builder
 
 import cc.unitmesh.core.SupportedLang
+import cc.unitmesh.core.SupportedLang.*
 import cc.unitmesh.core.comment.DocInstruction
 import cc.unitmesh.core.completion.TypedIns
 import cc.unitmesh.core.completion.TypedInsBuilder
@@ -15,11 +16,13 @@ class DocumentationTypedInsBuilder(val context: JobContext) : TypedInsBuilder {
     override fun build(container: CodeContainer): List<TypedIns> {
         val language = context.project.language
         return when (language) {
-            SupportedLang.TYPESCRIPT -> TODO()
-            SupportedLang.JAVA -> javaCommentBuilder.build(context.job.code, container)
-            SupportedLang.KOTLIN -> {
+            JAVA -> javaCommentBuilder.build(context.job.code, container)
+            KOTLIN -> {
                 kotlinCommentBuilder.build(context.job.code, container)
             }
+
+            TYPESCRIPT -> TODO()
+            RUST -> TODO()
         }
     }
 }

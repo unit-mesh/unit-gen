@@ -4,6 +4,7 @@ import cc.unitmesh.core.SupportedLang
 import cc.unitmesh.core.unittest.TypedTestIns
 import cc.unitmesh.pick.builder.unittest.java.JavaTestCodeService
 import cc.unitmesh.pick.builder.unittest.kotlin.KotlinTestCodeService
+import cc.unitmesh.pick.builder.unittest.rust.RustTestCodeService
 import cc.unitmesh.pick.builder.unittest.typescript.TypeScriptTestCodeService
 import cc.unitmesh.pick.worker.job.JobContext
 import chapi.domain.core.CodeDataStruct
@@ -35,6 +36,7 @@ interface UnitTestService {
                     SupportedLang.JAVA -> JavaTestCodeService(job)
                     SupportedLang.TYPESCRIPT -> TypeScriptTestCodeService(job)
                     SupportedLang.KOTLIN -> KotlinTestCodeService(job)
+                    SupportedLang.RUST -> RustTestCodeService(job)
                 }
             }
 

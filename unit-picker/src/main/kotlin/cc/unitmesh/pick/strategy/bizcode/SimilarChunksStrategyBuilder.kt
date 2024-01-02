@@ -45,6 +45,7 @@ class SimilarChunksStrategyBuilder(private val context: JobContext) : CodeStrate
             SupportedLang.JAVA -> JavaSimilarChunker(context.fileTree)
             SupportedLang.KOTLIN -> JavaSimilarChunker(context.fileTree)
             SupportedLang.TYPESCRIPT -> TypeScriptSimilarChunker(context.fileTree)
+            SupportedLang.RUST -> TODO()
         }
 
         val builders = completionBuilders(context.completionBuilderTypes, context)

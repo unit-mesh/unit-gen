@@ -5,10 +5,11 @@ import org.archguard.scanner.core.sca.CompositionDependency
 
 class TestFrameworkIdentifier(val language: SupportedLang, private val dependencies: List<CompositionDependency>) {
     fun identify(): List<String> {
-        return when (language.name.lowercase()) {
-            "java" -> identifyJava()
-            "typescript" -> identifyTypescript()
-            else -> listOf()
+        return when (language) {
+            SupportedLang.JAVA -> identifyJava()
+            SupportedLang.KOTLIN -> identifyJava()
+            SupportedLang.TYPESCRIPT -> identifyTypescript()
+            SupportedLang.RUST -> TODO()
         }
     }
 

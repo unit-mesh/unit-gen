@@ -4,6 +4,7 @@ enum class SupportedLang(val extension: String) {
     JAVA("java"),
     TYPESCRIPT("ts"),
     KOTLIN("kt"),
+    RUST("rs")
     ;
 
     companion object {
@@ -12,12 +13,13 @@ enum class SupportedLang(val extension: String) {
                 "java" -> JAVA
                 "typescript" -> TYPESCRIPT
                 "kotlin" -> KOTLIN
+                "rust" -> RUST
                 else -> null
             }
         }
 
         fun all(): List<SupportedLang> {
-            return listOf(JAVA, TYPESCRIPT, KOTLIN)
+            return listOf(JAVA, TYPESCRIPT, KOTLIN, RUST)
         }
     }
 }
