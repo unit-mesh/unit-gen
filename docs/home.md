@@ -24,10 +24,10 @@ permalink: /
 
 Examples:
 
-| name          | model download                                                                                                | fine-tune                            | jupyter notebook Log                                                     |
-|---------------|---------------------------------------------------------------------------------------------------------------|--------------------------------------|--------------------------------------------------------------------------|
-| DeepSeek 6.7B | [unit-mesh/autodev-deepseek-6.7b-finetunes](https://huggingface.co/unit-mesh/autodev-deepseek-6.7b-finetunes) | [finetune.ipynb](finetunes/deepseek) | [OpenBayes](https://openbayes.com/console/phodal/containers/mzEofYrqrfc) |
-| CodeGeeX 6B   | TODO                                                                                                          | TODO                                 | TODO                                                                     |      
+| name          | model download (HuggingFace)                                              | finetune Notebook                    | model download (OpenBayes)                                                          |
+|---------------|---------------------------------------------------------------------------|--------------------------------------|-------------------------------------------------------------------------------------|
+| DeepSeek 6.7B | [unit-mesh/autodev-coder](https://huggingface.co/unit-mesh/autodev-coder) | [finetune.ipynb](finetunes/deepseek) | [AutoDev Coder](https://openbayes.com/console/phodal/models/rCmer1KQSgp/9/overview) |
+| CodeGeeX2 6B  | TODO                                                                      | TODO                                 |
 
 Features:
 
