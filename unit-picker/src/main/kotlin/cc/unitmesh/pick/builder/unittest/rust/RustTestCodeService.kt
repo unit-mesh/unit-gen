@@ -13,6 +13,7 @@ class RustTestCodeService(val job: JobContext) : UnitTestService {
     override fun isApplicable(container: CodeContainer): Boolean = job.project.language == SupportedLang.RUST
 
     override fun build(container: CodeContainer): List<TypedTestIns> {
+        val testCode = container.DataStructures.filter { it.Module == "tests" }
         return emptyList()
     }
 

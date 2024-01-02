@@ -60,7 +60,7 @@ class SingleProjectCodePickerTest {
         val picker = SingleProjectCodePicker(
             InsPickerOption(
                 language = "rust",
-                url = "https://github.com/unit-mesh/edge-infer",
+                url = "https://github.com/feakin/fklang",
                 maxTokenLength = 8192,
                 codeStrategyTypes = listOf(CodeStrategyType.RELATED_CODE),
                 completionTypes = listOf(
