@@ -7,10 +7,23 @@ import chapi.domain.core.CodeDataStruct
 import chapi.domain.core.CodeFunction
 import org.archguard.rule.core.Issue
 
+/**
+ * The `TestBadsmellAnalyser` class is responsible for analyzing code data structures and identifying various bad smells in test code.
+ * It implements the `QualityAnalyser` interface.
+ *
+ * @property thresholds A map of thresholds for different bad smells. The keys represent the types of bad smells, and the values represent the corresponding thresholds.
+ * @constructor Creates a `TestBadsmellAnalyser` instance with optional thresholds.
+ */
 class TestBadsmellAnalyser(val thresholds: Map<String, Int> = mapOf()) : QualityAnalyser {
     private val ASSERT_PARAMETER_SIZE = 2
     private val DUPLICATED_LIMIT_SIZE = 5
 
+    /**
+     * This method performs analysis on a list of test code data structures and returns a list of issues found.
+     *
+     * @param nodes The list of code data structures to be analyzed.
+     * @return A list of issues found during the analysis.
+     */
     override fun analysis(nodes: List<CodeDataStruct>): List<Issue> {
         val tbsResult = TbsResult(listOf())
         val callMethodMap = buildCallMethodMap(nodes)

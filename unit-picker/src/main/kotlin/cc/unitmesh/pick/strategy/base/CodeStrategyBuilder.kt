@@ -47,7 +47,14 @@ interface CodeStrategyBuilder {
      */
     fun build(): List<TypedIns>
 
-    fun hasIssue(node: CodeDataStruct, types: List<CodeQualityType>): Boolean {
+    /**
+     * Checks if a given code node passes the specified code quality checks.
+     *
+     * @param node The code node to be checked.
+     * @param types The list of [CodeQualityType] to be checked against.
+     * @return `true` if the code node passes all the specified code quality checks, `false` otherwise.
+     */
+    fun checkIssue(node: CodeDataStruct, types: List<CodeQualityType>): Boolean {
         return QualityAnalyser.create(types).map { analyser ->
             analyser.analysis(listOf(node))
         }.flatten().isEmpty()

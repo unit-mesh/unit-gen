@@ -34,7 +34,7 @@ class SimilarChunksStrategyBuilder(private val context: JobContext) : CodeStrate
 
         // 1. checks with rule specified in config
         val dataStructs = container.DataStructures.filter {
-            hasIssue(it, context.qualityTypes)
+            checkIssue(it, context.qualityTypes)
         }
 
         if (dataStructs.isEmpty()) {
