@@ -16,6 +16,7 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import org.archguard.scanner.analyser.count.FileJob
 import org.archguard.scanner.analyser.count.LanguageWorker
+import java.io.File
 import java.nio.file.Files
 import java.nio.file.Path
 
@@ -63,9 +64,8 @@ class SingleProjectCodePicker(private val config: InsPickerOption) {
             Files.createDirectories(tempGitDir)
         }
 
-        val codeDir = GitUtil
-            .checkoutCode(config.url, config.branch, tempGitDir, config.gitDepth)
-            .toFile().canonicalFile
+        val codeDir =
+            GitUtil.checkoutCode(config.url, config.branch, tempGitDir, config.gitDepth).toFile().canonicalFile
 
         logger.info("start walk $codeDir")
 
@@ -97,11 +97,18 @@ class SingleProjectCodePicker(private val config: InsPickerOption) {
 
         workerManager.init(codeDir, language)
 
+        return@coroutineScope instructions(codeDir, languageWorker, workerManager, language)
+    }
+
+    private suspend fun instructions(
+        codeDir: File,
+        languageWorker: LanguageWorker,
+        workerManager: WorkerManager,
+        language: SupportedLang,
+    ): MutableList<Instruction> = coroutineScope {
         val walkdirChannel = Channel<FileJob>()
         val summary = mutableListOf<Instruction>()
-
         val canRemoveComment = !config.completionTypes.contains(CompletionBuilderType.DOCUMENTATION)
-
         launch {
             launch {
                 PickDirectoryWalker(walkdirChannel).start(codeDir.toString())
@@ -120,7 +127,6 @@ class SingleProjectCodePicker(private val config: InsPickerOption) {
         }.join()
 
         logger.info("finish walk $codeDir")
-
         return@coroutineScope summary
     }
 }
