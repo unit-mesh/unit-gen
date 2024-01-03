@@ -11,6 +11,15 @@ private val CodeFunction.IfSize: Int get() = 0
 private val CodeFunction.SwitchSize: Int get() = 0
 private val CodeFunction.IfInfo: List<CodePosition> get() = listOf()
 
+/**
+ * The `BadsmellAnalyser` class is responsible for performing analysis on a list of `CodeDataStruct` objects and
+ * identifying various code smells.
+ * It implements the `QualityAnalyser` interface.
+ *
+ * @property bsThresholds The thresholds for each code smell, used for comparison during the analysis.
+ * @constructor Creates a `BadsmellAnalyser` instance with the given thresholds. If no thresholds are provided,
+ * default thresholds are used.
+ */
 class BadsmellAnalyser(thresholds: Map<String, Int> = BsThresholds().toThresholds()) : QualityAnalyser {
     private var bsThresholds = BsThresholds()
 
@@ -18,6 +27,20 @@ class BadsmellAnalyser(thresholds: Map<String, Int> = BsThresholds().toThreshold
         this.bsThresholds = bsThresholds.from(thresholds)
     }
 
+    /**
+     * This method performs analysis on a list of CodeDataStruct objects and identifies various code smells.
+     * The identified code smells include:
+     *
+     * - LongMethod: A code smell that occurs when a method is excessively long and difficult to understand or maintain.
+     * - LongParameterList: A code smell that occurs when a method has a large number of parameters, which can make the method harder to use and understand.
+     * - ComplexCondition: A code smell that occurs when a method has complex conditional statements, which can make the code harder to read and maintain.
+     * - DataClass: A code smell that occurs when a class is used only to hold data without any additional behavior or functionality.
+     * - RefusedBequest: A code smell that occurs when a subclass inherits methods or properties from a superclass that it does not need or use.
+     * - LargeClass: A code smell that occurs when a class has grown too large and contains too many responsibilities, making it difficult to understand and maintain.
+     *
+     * @param nodes The list of CodeDataStruct objects to be analyzed.
+     * @return A list of Issue objects representing the identified code smells.
+     */
     override fun analysis(nodes: List<CodeDataStruct>): List<Issue> {
         val badSmellList = mutableListOf<BadSmellModel>()
         for (node in nodes) {
@@ -48,7 +71,7 @@ class BadsmellAnalyser(thresholds: Map<String, Int> = BsThresholds().toThreshold
         return badSmellList.map { it.toIssue() }.toMutableList()
     }
 
-    fun checkConnectedGraphCall(nodes: List<CodeDataStruct>, badSmellList: MutableList<BadSmellModel>) {
+    private fun checkConnectedGraphCall(nodes: List<CodeDataStruct>, badSmellList: MutableList<BadSmellModel>) {
         val classNodes = mutableMapOf<String, List<String>>()
         val classNodeMaps = mutableMapOf<String, Boolean>()
         for (node in nodes) {
@@ -64,7 +87,7 @@ class BadsmellAnalyser(thresholds: Map<String, Int> = BsThresholds().toThreshold
         }
     }
 
-    fun CodeDataStruct.getCalledClasses(maps: Map<String, Boolean>): List<String> {
+    private fun CodeDataStruct.getCalledClasses(maps: Map<String, Boolean>): List<String> {
         val calledClassesMap = mutableMapOf<String, Boolean>()
         val calledClasses = mutableListOf<String>()
         for (methodCalled in this.FunctionCalls) {
