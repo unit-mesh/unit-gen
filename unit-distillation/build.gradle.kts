@@ -7,10 +7,14 @@ plugins {
 }
 
 dependencies {
+    implementation(projects.unitCore)
     implementation(libs.clikt)
     implementation(libs.serialization.json)
 
     implementation(libs.cf.language)
+    implementation(libs.cf.connection)
+    implementation(libs.cf.openai)
+
     implementation(libs.kaml)
 
     // Logging
