@@ -7,7 +7,7 @@ import cc.unitmesh.pick.worker.job.InstructionFileJob
 import chapi.ast.typescriptast.TypeScriptAnalyser
 import org.slf4j.Logger
 
-class TypescriptWorker(override val context: WorkerContext) : LangWorker {
+class TypescriptWorker(override val workerContext: WorkerContext) : LangWorker {
     override val jobs: MutableList<InstructionFileJob> = mutableListOf()
     override val fileTree: HashMap<String, InstructionFileJob> = hashMapOf()
     override val logger: Logger = org.slf4j.LoggerFactory.getLogger(TypescriptWorker::class.java)

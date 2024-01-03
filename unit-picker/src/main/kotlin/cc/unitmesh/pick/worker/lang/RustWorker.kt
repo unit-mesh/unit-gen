@@ -7,7 +7,7 @@ import cc.unitmesh.pick.worker.job.InstructionFileJob
 import chapi.ast.rustast.RustAnalyser
 import org.slf4j.Logger
 
-class RustWorker(override val context: WorkerContext) : LangWorker {
+class RustWorker(override val workerContext: WorkerContext) : LangWorker {
     override val jobs: MutableList<InstructionFileJob> = mutableListOf()
     override val fileTree: HashMap<String, InstructionFileJob> = hashMapOf()
     override val logger: Logger = org.slf4j.LoggerFactory.getLogger(RustWorker::class.java)

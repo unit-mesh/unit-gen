@@ -18,7 +18,7 @@ import java.io.File
  * The `start` method is responsible for starting the execution of the job processing. It processes each job in the `jobs` list
  * and writes the output to a file specified in the `pureDataFileName` property of the `context`.
  *
- * @property context The worker context associated with the LangWorker.
+ * @property workerContext The worker context associated with the LangWorker.
  * @property fileTree A hashmap representing the file tree associated with the LangWorker.
  * @property logger The logger to be used for logging.
  * @property jobs A mutable list of instruction file jobs to be processed.
@@ -29,7 +29,7 @@ import java.io.File
  * @see TypedIns
  */
 interface LangWorker {
-    val context: WorkerContext
+    val workerContext: WorkerContext
     val fileTree: HashMap<String, InstructionFileJob>
     val logger: Logger
     val jobs: MutableList<InstructionFileJob>
@@ -70,7 +70,7 @@ interface LangWorker {
      * will be returned if there are any errors.
      */
     suspend fun start(): List<TypedIns> = coroutineScope {
-        val outputFile = File(context.pureDataFileName)
+        val outputFile = File(workerContext.pureDataFileName)
         if (!outputFile.exists()) {
             try {
                 outputFile.createNewFile()
@@ -82,21 +82,9 @@ interface LangWorker {
         }
 
         val result = jobs.map { job ->
-            val jobContext = JobContext(
-                job,
-                context.qualityTypes,
-                fileTree,
-                context.insOutputConfig,
-                context.completionTypes,
-                context.maxCompletionInOneFile,
-                project = ProjectContext(
-                    language = context.project.language,
-                    compositionDependency = context.compositionDependency,
-                ),
-                context.qualityThreshold
-            )
+            val jobContext = contextFromJob(job, workerContext)
 
-            val flatten = context.codeContextStrategies.map { type ->
+            val flatten = workerContext.codeContextStrategies.map { type ->
                 type.builder(jobContext).build()
             }.flatten()
 
@@ -109,5 +97,19 @@ interface LangWorker {
 
         return@coroutineScope result
     }
+
+    fun contextFromJob(job: InstructionFileJob, workerContext: WorkerContext) = JobContext(
+        job,
+        workerContext.qualityTypes,
+        fileTree,
+        workerContext.insOutputConfig,
+        workerContext.completionTypes,
+        workerContext.maxCompletionInOneFile,
+        project = ProjectContext(
+            language = workerContext.project.language,
+            compositionDependency = workerContext.compositionDependency,
+        ),
+        workerContext.qualityThreshold
+    )
 
 }

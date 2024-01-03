@@ -64,8 +64,8 @@ class SingleProjectCodePicker(private val config: InsPickerOption) {
             Files.createDirectories(tempGitDir)
         }
 
-        val codeDir =
-            GitUtil.checkoutCode(config.url, config.branch, tempGitDir, config.gitDepth).toFile().canonicalFile
+        val checkoutCode = GitUtil.checkoutCode(config.url, config.branch, tempGitDir, config.gitDepth)
+        val codeDir = checkoutCode.toFile().canonicalFile
 
         logger.info("start walk $codeDir")
 
@@ -79,7 +79,16 @@ class SingleProjectCodePicker(private val config: InsPickerOption) {
         return@coroutineScope instructions(codeDir, languageWorker, workerManager, language)
     }
 
-    private suspend fun instructions(
+    /**
+     * This method is used to generate instructions for a given language project.
+     *
+     * @param codeDir The directory containing the Kotlin code files.
+     * @param languageWorker The language worker responsible for processing the code files.
+     * @param workerManager The manager for handling worker jobs.
+     * @param language The supported language for the project.
+     * @return A mutable list of instructions generated for the project.
+     */
+    suspend fun instructions(
         codeDir: File,
         languageWorker: LanguageWorker,
         workerManager: WorkerManager,

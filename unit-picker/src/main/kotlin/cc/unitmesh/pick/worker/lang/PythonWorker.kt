@@ -9,7 +9,7 @@ import chapi.ast.kotlinast.KotlinAnalyser
 import chapi.ast.typescriptast.TypeScriptAnalyser
 import org.slf4j.Logger
 
-class PythonWorker(override val context: WorkerContext) : LangWorker {
+class PythonWorker(override val workerContext: WorkerContext) : LangWorker {
     override val jobs: MutableList<InstructionFileJob> = mutableListOf()
 
     override val fileTree: HashMap<String, InstructionFileJob> = hashMapOf()

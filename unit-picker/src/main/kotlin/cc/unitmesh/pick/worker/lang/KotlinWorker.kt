@@ -9,7 +9,7 @@ import chapi.ast.kotlinast.KotlinAnalyser
 import chapi.parser.ParseMode
 import org.slf4j.Logger
 
-class KotlinWorker(override val context: WorkerContext) : JavaWorker(context), LangWorker {
+class KotlinWorker(override val workerContext: WorkerContext) : JavaWorker(workerContext), LangWorker {
     override val jobs: MutableList<InstructionFileJob> = mutableListOf()
 
     override val fileTree: HashMap<String, InstructionFileJob> = hashMapOf()
@@ -35,7 +35,7 @@ class KotlinWorker(override val context: WorkerContext) : JavaWorker(context), L
 
         try {
             tryAddClassToTree(job)
-            val container = if (context.completionTypes.contains(CompletionBuilderType.TEST_CODE_GEN)) {
+            val container = if (workerContext.completionTypes.contains(CompletionBuilderType.TEST_CODE_GEN)) {
                 KotlinAnalyser().analysis(job.code, job.fileSummary.location, ParseMode.Full)
             } else {
                 KotlinAnalyser().analysis(job.code, job.fileSummary.location)

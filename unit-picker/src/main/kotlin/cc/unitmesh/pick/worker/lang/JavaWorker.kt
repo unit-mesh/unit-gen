@@ -11,7 +11,7 @@ import org.slf4j.Logger
  * The JavaWorker class is an implementation of the LangWorker interface.
  * It provides functionality for handling Java based instruction file jobs.
  */
-open class JavaWorker(override val context: WorkerContext) : LangWorker {
+open class JavaWorker(override val workerContext: WorkerContext) : LangWorker {
     override val jobs: MutableList<InstructionFileJob> = mutableListOf()
     override val fileTree: HashMap<String, InstructionFileJob> = hashMapOf()
     override val logger: Logger = org.slf4j.LoggerFactory.getLogger(JavaWorker::class.java)
