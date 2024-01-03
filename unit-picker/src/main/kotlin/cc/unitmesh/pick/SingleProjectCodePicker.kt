@@ -73,28 +73,7 @@ class SingleProjectCodePicker(private val config: InsPickerOption) {
         val language = SupportedLang.from(config.language.lowercase())
             ?: throw IllegalArgumentException("unsupported language: ${config.language}")
 
-        val workerManager = WorkerManager(
-            WorkerContext(
-                config.codeStrategyTypes,
-                config.codeQualityTypes,
-                config.insOutputConfig,
-                pureDataFileName = config.pureDataFileName(),
-                config.completionTypes,
-                config.maxCompletionEachFile,
-                config.completionTypeSize,
-                qualityThreshold = InsQualityThreshold(
-                    complexity = InsQualityThreshold.MAX_COMPLEXITY,
-                    fileSize = InsQualityThreshold.MAX_FILE_SIZE,
-                    maxLineInCode = config.maxLineInCode,
-                    maxCharInCode = config.maxCharInCode,
-                    maxTokenLength = config.maxTokenLength,
-                ),
-                project = ProjectContext(
-                    language = language
-                )
-            )
-        )
-
+        val workerManager = WorkerManager(WorkerContext.fromConfig(language, config))
         workerManager.init(codeDir, language)
 
         return@coroutineScope instructions(codeDir, languageWorker, workerManager, language)
