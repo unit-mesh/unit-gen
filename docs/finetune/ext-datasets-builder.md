@@ -12,9 +12,9 @@ refactorings applied in the history of a Java project.
 
 - [kotlinRMiner](https://github.com/JetBrains-Research/kotlinRMiner) is A library that detects performed refactorings in
   changes in Kotlin code.
-- [PyRef](https://github.com/PyRef/PyRef) is a tool that automatically detect mainly method-level refactoring operations
-  in Python projects.
-- [RefactoringMiner](https://github.com/maldil/RefactoringMiner) s a Java library that can detects refactorings applied
+- [PyRef](https://github.com/PyRef/PyRef) is a tool that automatically detects mainly method-level refactoring
+  operations in Python projects.
+- [RefactoringMiner](https://github.com/maldil/RefactoringMiner) s a Java library that can detect refactorings applied
   in the commit history of a Java project.
 
 ## Merge

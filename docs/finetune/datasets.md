@@ -8,11 +8,16 @@ nav_order: 98
 ## 开源数据集
 
 
-中文数据集：
+### 中文代码数据集
 
 - https://github.com/Denilah/CoLLaMA
 - https://github.com/sahil280114/codealpaca
 
+### Math
+
+- [OpenOrca](https://huggingface.co/datasets/Open-Orca/OpenOrca)
+- [zetavg/ShareGPT-Processed](https://huggingface.co/datasets/zetavg/ShareGPT-Processed)
+- [MathInstruct](https://huggingface.co/datasets/TIGER-Lab/MathInstruct)
 
 ## 内部数据集
 
