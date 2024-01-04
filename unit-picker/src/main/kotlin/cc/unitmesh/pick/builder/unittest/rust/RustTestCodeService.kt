@@ -23,19 +23,15 @@ class RustTestCodeService(val job: JobContext) : UnitTestService {
             it.Functions.associateBy(::buildCanonicalName)
         }
 
-        val testDataStruct = container.DataStructures.filter {
-            it.Module == "tests"
-        }
-        if (testDataStruct.isEmpty()) return emptyList()
-
-        val namingStyle = testDataStruct.first().checkNamingStyle()
-        val testCode = testDataStruct.map { dataStruct ->
+        val testCode = container.DataStructures.map { dataStruct ->
             dataStruct.Functions.filter { function -> function.Annotations.any { it.Name == "test" } }
         }.flatten()
 
         if (testCode.isEmpty()) return emptyList()
 
-        val result = testCode.mapNotNull { codeFunction ->
+        val namingStyle = container.DataStructures.first().checkNamingStyle()
+
+        val result = testCode.map { codeFunction ->
             codeFunction.FunctionCalls.mapNotNull { codeCall ->
                 val canonicalName = buildCanonicalName(codeCall.NodeName, codeCall.FunctionName)
                 val underTestFunction = functionMap.firstNotNullOfOrNull { it[canonicalName] }
@@ -45,7 +41,7 @@ class RustTestCodeService(val job: JobContext) : UnitTestService {
                     BasicTestIns(
                         identifier = NodeIdentifier(
                             type = NodeType.METHOD,
-                            name = underTestFunction.Package + " Class' " + underTestFunction.Name,
+                            name = "Method " + underTestFunction.Name,
                         ),
                         language = job.project.language,
                         underTestCode = underTestFunction.Content,
