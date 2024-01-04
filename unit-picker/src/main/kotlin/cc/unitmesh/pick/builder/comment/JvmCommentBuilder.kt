@@ -8,10 +8,8 @@ import chapi.domain.core.CodePosition
 
 private const val DOC_THRESHOLD = 5
 
-class JvmCommentBuilder(
-    val language: String,
-    override val docInstruction: DocInstruction = DocInstruction.KOTLIN,
-) : CommentBuilder {
+class JvmCommentBuilder(val language: String, override val docInstruction: DocInstruction = DocInstruction.KOTLIN) :
+    CommentBuilder {
 
     override fun build(code: String, container: CodeContainer): List<TypedCommentIns> {
         val posComments = try {
@@ -65,9 +63,7 @@ class JvmCommentBuilder(
 
         val matches = pattern.findAll(code)
 
-        val comments = mutableListOf<CodeComment>()
-
-        for (match in matches) {
+        return matches.map { match ->
             val commentContent = match.value.trimIndent()
             val startLine = code.substring(0, match.range.first).count { it == '\n' } + 1
             val stopLine = code.substring(0, match.range.last).count { it == '\n' } + 1
@@ -77,12 +73,8 @@ class JvmCommentBuilder(
             val position = CodePosition(startLine, startLinePosition, stopLine, stopLinePosition)
             val content = reIndentComment(commentContent)
 
-
-            val comment = CodeComment(content, position)
-            comments.add(comment)
-        }
-
-        return comments
+            CodeComment(content, position)
+        }.toList()
     }
 
     /// Re-indent the comment to remove the leading spaces.
