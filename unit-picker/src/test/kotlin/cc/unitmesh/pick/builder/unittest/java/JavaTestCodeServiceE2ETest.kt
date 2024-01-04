@@ -145,7 +145,6 @@ public class CompanyService {
 }
 """
 
-
         val underTestContainer = JavaAnalyser().analysis(underTestCode, "CompanyService.java")
         underTestContainer.buildSourceCode(underTestCode.lines())
 

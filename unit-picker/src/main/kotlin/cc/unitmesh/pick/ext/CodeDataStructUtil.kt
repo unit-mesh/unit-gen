@@ -17,6 +17,8 @@ fun CodeContainer.buildSourceCode(codeLines: List<String>) {
                 if (annotationPos.StartLine != 0) {
                     position.StartLine = annotationPos.StartLine
                     position.StartLinePosition = annotationPos.StartLinePosition
+                } else {
+                    position.StartLine -= 2
                 }
             }
 
