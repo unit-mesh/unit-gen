@@ -17,7 +17,7 @@ clikt = "4.2.1"
 
 chocolate-factory = "0.4.5"
 
-chapi = "2.2.1"
+chapi = "2.2.2"
 archguard = "2.1.2"
 codedb = "0.1.3"
 

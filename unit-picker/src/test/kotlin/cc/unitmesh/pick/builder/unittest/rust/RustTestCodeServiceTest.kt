@@ -75,8 +75,14 @@ class RustTestCodeServiceTest {
      let result = Semantic::init_semantic(model, tokenizer_data)?;
      Ok(Arc::new(result))
 }""", build[0].underTestCode)
-        println(build[0].generatedCode)
-//        assertEquals("test_init_semantic", build[0].generatedCode)
+        assertEquals("fn test_init_semantic() {\n" +
+                "        let model = std::fs::read(\"../model/model.onnx\").unwrap();\n" +
+                "        let tokenizer_data = std::fs::read(\"../model/tokenizer.json\").unwrap();\n" +
+                "\n" +
+                "        let semantic = init_semantic(model, tokenizer_data).unwrap();\n" +
+                "        let embedding = semantic.embed(\"hello world\").unwrap();\n" +
+                "        assert_eq!(embedding.len(), 128);\n" +
+                "}", build[0].generatedCode)
     }
 
 }

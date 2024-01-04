@@ -14,8 +14,10 @@ fun CodeContainer.buildSourceCode(codeLines: List<String>) {
             val position = it.Position
             if (it.Annotations.isNotEmpty()) {
                 val annotationPos = it.Annotations.first().Position
-                position.StartLine = annotationPos.StartLine
-                position.StartLinePosition = annotationPos.StartLinePosition
+                if (annotationPos.StartLine != 0) {
+                    position.StartLine = annotationPos.StartLine
+                    position.StartLinePosition = annotationPos.StartLinePosition
+                }
             }
 
             it.Content = CodeDataStructUtil.contentByPosition(codeLines, it.Position)
