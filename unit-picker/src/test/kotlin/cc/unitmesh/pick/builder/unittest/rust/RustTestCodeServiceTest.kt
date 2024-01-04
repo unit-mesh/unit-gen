@@ -1,6 +1,8 @@
 package cc.unitmesh.pick.builder.unittest.rust;
 
 import cc.unitmesh.core.completion.CompletionBuilderType
+import cc.unitmesh.pick.builder.unittest.base.BasicTestIns
+import cc.unitmesh.pick.ext.buildSourceCode
 import cc.unitmesh.pick.option.InsOutputConfig
 import cc.unitmesh.pick.threshold.InsQualityThreshold
 import cc.unitmesh.pick.worker.job.InstructionFileJob
@@ -45,9 +47,10 @@ class RustTestCodeServiceTest {
        """.trimIndent()
 
         val container = RustAnalyser().analysis(testCode, "lib.rs")
+        container.buildSourceCode(testCode.lines())
+
         val testFileJob = InstructionFileJob(
-            FileJob(
-            ),
+            FileJob(),
             codeLines = testCode.lines(),
             code = testCode,
             container = container
@@ -64,9 +67,14 @@ class RustTestCodeServiceTest {
             insQualityThreshold = InsQualityThreshold()
         )
         val rustTestCodeService = RustTestCodeService(context)
-        val build = rustTestCodeService.build(container)
+        val build: List<BasicTestIns> = rustTestCodeService.build(container) as List<BasicTestIns>
 
-        assertEquals(0, build.size)
+        assertEquals(1, build.size)
+        assertEquals("""fn init_semantic(model: Vec<u8>, tokenizer_data: Vec<u8>) -> Result<Arc<Semantic>, SemanticError> {
+     let result = Semantic::init_semantic(model, tokenizer_data)?;
+     Ok(Arc::new(result))
+}""", build[0].underTestCode)
+//        assertEquals("test_init_semantic", build[0].generatedCode)
     }
 
 }

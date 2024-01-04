@@ -17,6 +17,7 @@ fun CodeContainer.buildSourceCode(codeLines: List<String>) {
                 position.StartLine = annotationPos.StartLine
                 position.StartLinePosition = annotationPos.StartLinePosition
             }
+
             it.Content = CodeDataStructUtil.contentByPosition(codeLines, it.Position)
         }
     }
