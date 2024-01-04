@@ -44,7 +44,7 @@ class RustTestCodeServiceTest {
                    assert_eq!(embedding.len(), 128);
                }
            }
-       """.trimIndent()
+            """.trimIndent()
 
         val container = RustAnalyser().analysis(testCode, "lib.rs")
         container.buildSourceCode(testCode.lines())
@@ -75,14 +75,16 @@ class RustTestCodeServiceTest {
      let result = Semantic::init_semantic(model, tokenizer_data)?;
      Ok(Arc::new(result))
 }""", build[0].underTestCode)
-        assertEquals("fn test_init_semantic() {\n" +
-                "        let model = std::fs::read(\"../model/model.onnx\").unwrap();\n" +
-                "        let tokenizer_data = std::fs::read(\"../model/tokenizer.json\").unwrap();\n" +
-                "\n" +
-                "        let semantic = init_semantic(model, tokenizer_data).unwrap();\n" +
-                "        let embedding = semantic.embed(\"hello world\").unwrap();\n" +
-                "        assert_eq!(embedding.len(), 128);\n" +
-                "}", build[0].generatedCode)
+        assertEquals("""#[test]
+    #[cfg_attr(feature = "ci", ignore)]
+    fn test_init_semantic() {
+        let model = std::fs::read("../model/model.onnx").unwrap();
+        let tokenizer_data = std::fs::read("../model/tokenizer.json").unwrap();
+
+        let semantic = init_semantic(model, tokenizer_data).unwrap();
+        let embedding = semantic.embed("hello world").unwrap();
+        assert_eq!(embedding.len(), 128);
+}""", build[0].generatedCode)
     }
 
 }
