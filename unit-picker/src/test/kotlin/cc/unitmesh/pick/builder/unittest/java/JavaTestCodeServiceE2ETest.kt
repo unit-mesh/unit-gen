@@ -1,4 +1,4 @@
-package cc.unitmesh.pick.builder.unittest.typescript;
+package cc.unitmesh.pick.builder.unittest.java
 
 import cc.unitmesh.core.completion.CompletionBuilderType
 import cc.unitmesh.core.unittest.TestCodeBuilderType

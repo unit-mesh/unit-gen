@@ -1,4 +1,4 @@
-package cc.unitmesh.pick.builder.unittest.typescript
+package cc.unitmesh.pick.builder.unittest.java
 
 import cc.unitmesh.pick.builder.unittest.java.JavaTestCodeService
 import cc.unitmesh.pick.worker.job.InstructionFileJob
