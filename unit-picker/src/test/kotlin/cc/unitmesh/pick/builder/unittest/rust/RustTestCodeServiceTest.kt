@@ -44,7 +44,7 @@ class RustTestCodeServiceTest {
                    assert_eq!(embedding.len(), 128);
                }
            }
-           """.trimIndent()
+       """.trimIndent()
 
         val container = RustAnalyser().analysis(testCode, "lib.rs")
         container.buildSourceCode(testCode.lines())
@@ -70,7 +70,8 @@ class RustTestCodeServiceTest {
         val build: List<BasicTestIns> = rustTestCodeService.build(container) as List<BasicTestIns>
 
         assertEquals(1, build.size)
-        assertEquals("""fn init_semantic(model: Vec<u8>, tokenizer_data: Vec<u8>) -> Result<Arc<Semantic>, SemanticError> {
+        assertEquals(
+            """fn init_semantic(model: Vec<u8>, tokenizer_data: Vec<u8>) -> Result<Arc<Semantic>, SemanticError> {
      let result = Semantic::init_semantic(model, tokenizer_data)?;
      Ok(Arc::new(result))
 }""", build[0].underTestCode)

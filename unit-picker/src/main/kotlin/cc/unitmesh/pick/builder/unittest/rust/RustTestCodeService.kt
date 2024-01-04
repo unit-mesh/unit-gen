@@ -33,7 +33,7 @@ class RustTestCodeService(val job: JobContext) : UnitTestService {
 
         val result = testCode.map { codeFunction ->
             codeFunction.FunctionCalls.mapNotNull { codeCall ->
-                val canonicalName = buildCanonicalName(codeCall.NodeName, codeCall.FunctionName)
+                val canonicalName = buildCanonicalName(codeCall.Package, codeCall.FunctionName)
                 val underTestFunction = functionMap.firstNotNullOfOrNull { it[canonicalName] }
                 if (underTestFunction == null) {
                     null
@@ -65,9 +65,9 @@ class RustTestCodeService(val job: JobContext) : UnitTestService {
         return buildCanonicalName(function.Package, function.Name)
     }
 
-    private fun buildCanonicalName(nodeName: String, funcName: String): String {
-        val node = nodeName.ifEmpty { "main" }
-        return "$node::$funcName"
+    private fun buildCanonicalName(pkgName: String, funcName: String): String {
+        val pkg = pkgName.ifEmpty { "main" }
+        return "$pkg::$funcName"
     }
 
     override fun build(dataStruct: CodeDataStruct): List<TypedTestIns> {
