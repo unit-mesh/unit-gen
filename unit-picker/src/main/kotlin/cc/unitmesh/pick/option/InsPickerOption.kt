@@ -60,7 +60,7 @@ data class InsPickerOption(
      *
      */
     val codeStrategyTypes: List<CodeStrategyType> = listOf(
-        CodeStrategyType.RELATED_CODE,
+//        CodeStrategyType.RELATED_CODE,
         CodeStrategyType.SIMILAR_CHUNKS,
     ),
     /**
@@ -70,8 +70,8 @@ data class InsPickerOption(
         CompletionBuilderType.AFTER_BLOCK_COMPLETION,
         CompletionBuilderType.IN_BLOCK_COMPLETION,
         CompletionBuilderType.INLINE_COMPLETION,
-        CompletionBuilderType.TEST_CODE_GEN,
-        CompletionBuilderType.DOCUMENTATION,
+//        CompletionBuilderType.TEST_CODE_GEN,
+//        CompletionBuilderType.DOCUMENTATION,
     ),
     /**
      * The [CodeQualityType], will be like a tree to hold the item.
