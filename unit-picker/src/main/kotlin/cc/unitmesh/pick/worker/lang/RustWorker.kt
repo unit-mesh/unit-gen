@@ -23,9 +23,7 @@ class RustWorker(override val workerContext: WorkerContext) : LangWorker {
 
                 ds.Content = CodeDataStructUtil.contentByPosition(job.codeLines, ds.Position)
                 ds.Functions.map {
-                    it.apply {
-                        it.Content = CodeDataStructUtil.contentByPosition(job.codeLines, it.Position)
-                    }
+                    it.Content = CodeDataStructUtil.contentByPosition(job.codeLines, it.Position)
                 }
             }
 

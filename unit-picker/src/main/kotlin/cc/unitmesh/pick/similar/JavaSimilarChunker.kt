@@ -57,7 +57,14 @@ class JavaSimilarChunker(private val fileTree: HashMap<String, InstructionFileJo
         return SimilarChunkContext("java", relatedCodePath, similarChunksText)
     }
 
-    private fun canonicalNameLevelJaccardSimilarity(chunks: List<String>, text: String): Map<Double, String> {
+    /**
+     * Calculates the canonical name level Jaccard similarity between a list of chunks and a given text.
+     *
+     * @param chunks The list of chunks to compare with the text.
+     * @param text The text to compare with the chunks.
+     * @return A map containing the similarity score as the key and the corresponding chunk as the value.
+     */
+    fun canonicalNameLevelJaccardSimilarity(chunks: List<String>, text: String): Map<Double, String> {
         val packageName = packageNameTokenize(text)
         return chunks.mapNotNull { chunk ->
             val chunkPackageName = packageNameTokenize(chunk)
@@ -101,7 +108,13 @@ class JavaSimilarChunker(private val fileTree: HashMap<String, InstructionFileJo
         return commonPathSegments.joinToString(".")
     }
 
-    private fun chunkedCode(code: String): List<String> {
+    /**
+     * Splits the given code into chunks of lines and returns a list of strings.
+     *
+     * @param code the code to be chunked
+     * @return a list of strings representing the chunks of code
+     */
+    fun chunkedCode(code: String): List<String> {
         return code
             .split("\n")
             .filter {

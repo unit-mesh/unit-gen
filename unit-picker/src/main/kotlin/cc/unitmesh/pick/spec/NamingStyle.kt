@@ -17,11 +17,11 @@ fun CodeDataStruct.checkNamingStyle(): String {
     )
 
     this.Functions.map {
-        // check by [CodeFunction.Name]
         val name = it.Name
         val nameStyle = when {
             name.contains("_") -> NamingStyle.SNAKE_CASE
             name.contains("-") -> NamingStyle.KEBAB_CASE
+            checkCamelCase(name) -> NamingStyle.CAMEL_CASE
             else -> NamingStyle.CAMEL_CASE
         }
 
@@ -32,4 +32,8 @@ fun CodeDataStruct.checkNamingStyle(): String {
     val maxNamingStyle = countByNaming.filter { it.value == maxCount }.keys.first()
 
     return maxNamingStyle.value
+}
+
+fun checkCamelCase(name: String): Boolean {
+    return name.matches(Regex("^[a-z][a-zA-Z0-9]*$"))
 }
