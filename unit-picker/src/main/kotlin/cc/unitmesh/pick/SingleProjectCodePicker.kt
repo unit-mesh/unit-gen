@@ -1,16 +1,14 @@
 package cc.unitmesh.pick
 
-import cc.unitmesh.pick.worker.job.InstructionFileJob
-import cc.unitmesh.pick.option.InsPickerOption
 import cc.unitmesh.core.Instruction
 import cc.unitmesh.core.SupportedLang
 import cc.unitmesh.core.completion.CompletionBuilderType
 import cc.unitmesh.pick.ext.GitUtil
 import cc.unitmesh.pick.ext.PickDirectoryWalker
-import cc.unitmesh.pick.project.ProjectContext
-import cc.unitmesh.pick.threshold.InsQualityThreshold
+import cc.unitmesh.pick.option.InsPickerOption
 import cc.unitmesh.pick.worker.WorkerContext
 import cc.unitmesh.pick.worker.WorkerManager
+import cc.unitmesh.pick.worker.job.InstructionFileJob
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch

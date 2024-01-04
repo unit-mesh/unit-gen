@@ -19,6 +19,7 @@ class RustTestCodeService(val job: JobContext) : UnitTestService {
     override fun isApplicable(container: CodeContainer): Boolean = job.project.language == SupportedLang.RUST
 
     override fun build(container: CodeContainer): List<TypedTestIns> {
+        // TODO: handle package error issues
         val functionMap = container.DataStructures.map {
             it.Functions.associateBy(::buildCanonicalName)
         }
@@ -66,7 +67,7 @@ class RustTestCodeService(val job: JobContext) : UnitTestService {
     }
 
     private fun buildCanonicalName(pkgName: String, funcName: String): String {
-        val pkg = pkgName.ifEmpty { "main" }
+        val pkg = pkgName.ifEmpty { "lib" }
         return "$pkg::$funcName"
     }
 

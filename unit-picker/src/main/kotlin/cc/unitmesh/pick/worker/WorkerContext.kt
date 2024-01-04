@@ -59,7 +59,8 @@ data class WorkerContext(
                     maxTokenLength = insPickerOption.maxTokenLength,
                 ),
                 project = ProjectContext(
-                    language = language
+                    language = language,
+                    baseDir = insPickerOption.baseDir,
                 )
             )
 
