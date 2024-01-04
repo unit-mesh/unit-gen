@@ -67,6 +67,21 @@ class SingleProjectCodePicker(private val config: InsPickerOption) {
         val checkoutCode = GitUtil.checkoutCode(config.url, config.branch, tempGitDir, config.gitDepth)
         val codeDir = checkoutCode.toFile().canonicalFile
 
+        return@coroutineScope execute(codeDir)
+    }
+
+    /**
+     * Executes the given code directory.
+     *
+     * This method walks through the specified code directory and performs the necessary operations to execute the code.
+     * It initializes a language worker and a worker manager based on the specified language in the configuration.
+     * The code directory and language are used to initialize the worker manager.
+     *
+     * @param codeDir The directory containing the code to be executed.
+     * @return A mutable list of instructions representing the execution steps.
+     * @throws IllegalArgumentException if the specified language is not supported.
+     */
+    suspend fun execute(codeDir: File): MutableList<Instruction> {
         logger.info("start walk $codeDir")
 
         val languageWorker = LanguageWorker()
@@ -76,7 +91,7 @@ class SingleProjectCodePicker(private val config: InsPickerOption) {
         val workerManager = WorkerManager(WorkerContext.fromConfig(language, config))
         workerManager.init(codeDir, language)
 
-        return@coroutineScope instructions(codeDir, languageWorker, workerManager, language)
+        return instructions(codeDir, languageWorker, workerManager, language)
     }
 
     /**

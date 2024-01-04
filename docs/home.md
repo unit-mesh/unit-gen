@@ -18,16 +18,43 @@ permalink: /
   <a href="https://central.sonatype.com/artifact/cc.unitmesh/unit-picker">
     <img src="https://img.shields.io/maven-central/v/cc.unitmesh/unit-picker"  alt="Maven"/>
   </a>
+  <a href="https://openbayes.com/console/signup?r=phodal_uVxU">
+    <img src="https://openbayes.com/img/badge-open-in-openbayes.svg" alt="Open In OpenBayes" />
+  </a>
+  <a href="https://openbayes.com/console/signup?r=phodal_uVxU">
+    <img src="https://openbayes.com/img/badge-built-with-openbayes.svg" alt="Built with OpenBayes" />
+  </a>
+  <a href="https://codecov.io/gh/unit-mesh/unit-gen">
+    <img src="https://codecov.io/gh/unit-mesh/unit-gen/branch/master/graph/badge.svg?token=nt22RX52DV" alt="codecov" />
+  </a>
 </p>
 
-> UnitGen 是一个代码微调的数据框架，可以直接从你的代码库中生成微调数据：代码补全、测试生成、文档生成等。
+> UnitGen 是一个用于生成微调代码的数据框架 —— 直接从你的代码库中生成微调数据：代码补全、测试生成、文档生成等。
 
-Examples:
+Docs: [https://gen.unitmesh.cc/](https://gen.unitmesh.cc/)
+
+Thanks to [OpenBayes](https://openbayes.com/console/signup?r=phodal_uVxU) for providing computing resources.
+
+Finetune Model Examples:
 
 | name          | model download (HuggingFace)                                              | finetune Notebook                    | model download (OpenBayes)                                                          |
 |---------------|---------------------------------------------------------------------------|--------------------------------------|-------------------------------------------------------------------------------------|
 | DeepSeek 6.7B | [unit-mesh/autodev-coder](https://huggingface.co/unit-mesh/autodev-coder) | [finetune.ipynb](finetunes/deepseek) | [AutoDev Coder](https://openbayes.com/console/phodal/models/rCmer1KQSgp/9/overview) |
-| CodeGeeX2 6B  | TODO                                                                      | TODO                                 |
+
+Language support by [Chapi](https://github.com/phodal/chapi)
+
+- supported:
+  - [x] Java
+  - [x] Kotlin
+- doing:
+  - [x] TypeScript/JavaScript
+  - [x] Rust
+- future:
+  - [ ] Go
+  - [ ] Python
+  - [ ] C/C++
+  - [ ] C#
+  - [ ] Scala
 
 Features:
 
