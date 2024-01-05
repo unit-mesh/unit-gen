@@ -114,6 +114,10 @@ data class InsPickerOption(
         return baseDir + File.separator + repoFileName() + ".jsonl"
     }
 
+    fun projectDir(): String {
+        return baseDir + File.separator + encodeFileName(url) + File.separator + encodeFileName(branch)
+    }
+
     fun repoFileName() = "${encodeFileName(url)}_${encodeFileName(branch)}_${language}.jsonl"
 
     /**

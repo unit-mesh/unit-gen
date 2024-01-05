@@ -11,6 +11,7 @@ import cc.unitmesh.quality.CodeQualityType
 import kotlinx.serialization.Serializable
 import org.archguard.scanner.core.sca.CompositionDependency
 import org.jetbrains.annotations.TestOnly
+import java.io.File
 
 @Serializable
 data class WorkerContext(
@@ -42,7 +43,7 @@ data class WorkerContext(
             )
         }
 
-        fun fromConfig(language: SupportedLang, insPickerOption: InsPickerOption): WorkerContext {
+        fun fromConfig(language: SupportedLang, insPickerOption: InsPickerOption, codeDir: File): WorkerContext {
             return WorkerContext(
                 insPickerOption.codeStrategyTypes,
                 insPickerOption.codeQualityTypes,
@@ -60,7 +61,7 @@ data class WorkerContext(
                 ),
                 project = ProjectContext(
                     language = language,
-                    baseDir = insPickerOption.baseDir,
+                    codeDir = codeDir.absolutePath
                 )
             )
 

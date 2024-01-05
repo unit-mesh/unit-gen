@@ -8,7 +8,7 @@ import org.archguard.scanner.core.sca.CompositionDependency
 data class ProjectContext(
     var language: SupportedLang = SupportedLang.JAVA,
     var compositionDependency: List<CompositionDependency> = listOf(),
-    val baseDir: String = ""
+    val codeDir: String = ""
 ) {
     var testFrameworks: List<String>
     var coreFrameworks: List<String>

@@ -86,7 +86,7 @@ class SingleProjectCodePicker(private val config: InsPickerOption) {
         val language = SupportedLang.from(config.language.lowercase())
             ?: throw IllegalArgumentException("unsupported language: ${config.language}")
 
-        val workerManager = WorkerManager(WorkerContext.fromConfig(language, config))
+        val workerManager = WorkerManager(WorkerContext.fromConfig(language, config, codeDir))
         workerManager.init(codeDir, language)
 
         return instructions(codeDir, languageWorker, workerManager, language)
