@@ -19,18 +19,25 @@ class RustWorker(override val workerContext: WorkerContext) : LangWorker {
         try {
             val container = RustAnalyser().analysis(job.code, job.fileSummary.location)
             val relativePath = Path.of(workerContext.project.codeDir).relativize(Path.of(job.fileSummary.location))
-            container.PackageName = calculatePackageName(
-                relativePath.toString().replace("/", "::").replace("\\", ".")
-            )
+            container.PackageName = container.PackageName.fixPrefix(workerContext.project.codeDir)
+            container.FullName = relativePath.toString()
 
             // update error packageName in here with a path
             job.codeLines = job.code.lines()
             container.DataStructures.map { ds ->
+                ds.FilePath = relativePath.toString()
                 ds.Imports = container.Imports
+                ds.NodeName = ds.NodeName.fixPrefix(workerContext.project.codeDir)
+                ds.Package = container.PackageName
 
                 ds.Content = CodeDataStructUtil.contentByPosition(job.codeLines, ds.Position)
                 ds.Functions.map {
+                    it.Package = it.Package.fixPrefix(workerContext.project.codeDir)
                     it.Content = CodeDataStructUtil.contentByPosition(job.codeLines, it.Position)
+                    it.FunctionCalls.map { call ->
+                        call.Package = call.Package.fixPrefix(workerContext.project.codeDir)
+                        call.NodeName = call.NodeName.fixPrefix(workerContext.project.codeDir)
+                    }
                 }
             }
 
@@ -100,4 +107,22 @@ class RustWorker(override val workerContext: WorkerContext) : LangWorker {
             return "$modulePath::$packageName"
         }
     }
+}
+
+private fun String.fixPrefix(codeDir: String): String {
+    var result = this;
+    if (this.startsWith(codeDir)) {
+        result = result.substring(codeDir.length + 1)
+    }
+
+    val pkgName = RustWorker.calculatePackageName(codeDir)
+    // codeDir remove last '/'
+    val codeDirParent = codeDir.substringBeforeLast("/")
+    val libPrefix = pkgName.removePrefix(codeDirParent)
+
+    if (this.contains(libPrefix)) {
+        result = result.substringAfter(libPrefix)
+    }
+
+    return result.removePrefix("::")
 }
