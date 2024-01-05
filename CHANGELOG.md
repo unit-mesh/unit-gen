@@ -1,4 +1,32 @@
-# [](https://github.com/unit-mesh/unit-gen/compare/v0.3.2...v) (2023-12-30)
+# [](https://github.com/unit-mesh/unit-gen/compare/v0.4.0...v) (2024-01-05)
+
+
+
+# [0.4.0](https://github.com/unit-mesh/unit-gen/compare/v0.3.3...v0.4.0) (2024-01-05)
+
+
+### Bug Fixes
+
+* **java:** add simple fix for Java stratLine issue ([b9af199](https://github.com/unit-mesh/unit-gen/commit/b9af199053f9dbbb2944cfa85abd7765dcebf695))
+
+
+### Features
+
+* **rust:** extract unit service API for Rust ([0dbe0bb](https://github.com/unit-mesh/unit-gen/commit/0dbe0bbc87f949dee721ac03d33e659645d320f3))
+* **rust:** init basedir to option for handle pacagek name ([1b502a3](https://github.com/unit-mesh/unit-gen/commit/1b502a3cfabb66266dbd4bd1ff006add7627feef))
+* **rust:** init first content challedge for test code gen ([90e1367](https://github.com/unit-mesh/unit-gen/commit/90e1367d751ef6ed9f002aa6bf6c63cb7ca7799c))
+* **rust:** init for Rust worker ([b30b1dd](https://github.com/unit-mesh/unit-gen/commit/b30b1ddb938d84eaf79e95ff8a1464ccc4ff00ec))
+* **rust:** try handle for Rust test ([3bec910](https://github.com/unit-mesh/unit-gen/commit/3bec910365f11796e0dff5f2d4ca6720a240fa3b))
+* **rust:** try to handle working path issues ([cd7419d](https://github.com/unit-mesh/unit-gen/commit/cd7419d9bfe8a2737fe9dcd56c0110c7f5dd3948))
+
+
+
+## [0.3.3](https://github.com/unit-mesh/unit-gen/compare/v0.3.2...v0.3.3) (2023-12-31)
+
+
+### Reverts
+
+* Revert "refactor: rename unit-eval to unit-sets for make sense project meaning" ([b4ade59](https://github.com/unit-mesh/unit-gen/commit/b4ade59f32171246296fd3dfaca1a4f2b7104026))
 
 
 
