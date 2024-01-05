@@ -71,7 +71,5 @@ class RustTestCodeService(val job: JobContext) : UnitTestService {
         return "$pkg::$funcName"
     }
 
-    override fun build(dataStruct: CodeDataStruct): List<TypedTestIns> {
-        return emptyList()
-    }
+    override fun build(dataStruct: CodeDataStruct): List<TypedTestIns> = emptyList()
 }
