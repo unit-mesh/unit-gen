@@ -13,10 +13,12 @@
             </g>
             <g id="Group" transform="translate(0.000000, 252.000000)">
                 <rect id="Rectangle" fill="#000000" fill-rule="nonzero" x="0" y="0.492324662" width="720" height="51.2463768"></rect>
-                <g id="Java,-TypeScript/Jav" transform="translate(78.393235, 20.826087)" fill="#FFFFFF" font-family="Comfortaa-Medium, Comfortaa" font-size="18" font-weight="400">
-                    <text id="Java,-TypeScript/JavaScript,-Kotlin,-Go,-Python,-C#,-Rust,-….">
-                        <tspan x="0.334748245" y="16.4923247">Java, TypeScript/JavaScript, Kotlin, Go, Python, C#, Rust, ….</tspan>
-                    </text>
+                <g id="Java,-TypeScript/Jav" transform="translate(78.393235, 20.826087)" fill="#FFFFFF" font-family="Comfortaa-Regular, Comfortaa" font-size="18" font-weight="normal">
+                    <g id="Java,-TypeScript/JavaScript,-Kotlin,-Go,-Python,-C#,-Rust,-….">
+                        <text>
+                            <tspan x="0.334748245" y="16.4923247">Java, TypeScript/JavaScript, Kotlin, Go, Python, C#, Rust, ….</tspan>
+                        </text>
+                    </g>
                 </g>
             </g>
             <rect id="Rectangle" fill="#6B9E78" fill-rule="nonzero" x="0" y="181" width="719" height="62"></rect>
@@ -27,7 +29,7 @@
                 <tspan x="26" y="218">Chapi</tspan>
             </text>
             <text id="ArchGuard" fill="#FFFFFF" font-family="Comfortaa-Bold, Comfortaa" font-size="18" font-weight="bold">
-                <tspan x="496" y="152">ArchGuard</tspan>
+                <tspan x="381" y="153">ArchGuard</tspan>
             </text>
             <text id="QualityChecker" fill="#FFFFFF" font-family="Comfortaa-Bold, Comfortaa" font-size="18" font-weight="bold">
                 <tspan x="474" y="93">QualityChecker</tspan>
@@ -36,12 +38,25 @@
             <text id="LanguageWorker" fill="#FFFFFF" font-family="Comfortaa-Bold, Comfortaa" font-size="18" font-weight="bold">
                 <tspan x="95" y="152">LanguageWorker</tspan>
             </text>
+            <rect id="Rectangle" fill="#DA4167" fill-rule="nonzero" x="490" y="128" width="215" height="36"></rect>
+            <text id="Arch-Linters" fill="#FFFFFF" font-family="Comfortaa-Bold, Comfortaa" font-size="16" font-weight="bold">
+                <tspan x="546.276" y="151">Arch Linters</tspan>
+            </text>
             <rect id="Rectangle" fill="#6D7278" fill-rule="nonzero" x="1" y="61" width="351" height="52"></rect>
             <text id="Context-Strategy" fill="#FFFFFF" font-family="Comfortaa-Bold, Comfortaa" font-size="18" font-weight="bold">
-                <tspan x="96" y="92">Context Strategy</tspan>
+                <tspan x="15" y="83">Context </tspan>
+                <tspan x="15" y="103">Strategy</tspan>
             </text>
-            <text id="Common-Hierarchical-Abstract-Parser-&amp;&amp;-Information" fill="#FFFFFF" font-family="Comfortaa-Medium, Comfortaa" font-size="18" font-weight="400">
+            <text id="Common-Hierarchical-Abstract-Parser-&amp;&amp;-Information" fill="#FFFFFF" font-family="Comfortaa-Regular, Comfortaa" font-size="18" font-weight="normal">
                 <tspan x="145" y="219">Common Hierarchical Abstract Parser &amp;&amp; Information</tspan>
+            </text>
+            <rect id="Rectangle" fill="#FFFFFF" fill-rule="nonzero" x="110" y="69" width="104" height="36"></rect>
+            <text id="Related" fill="#011C32" font-family="Comfortaa-Bold, Comfortaa" font-size="14" font-weight="bold">
+                <tspan x="134.679" y="92">Related</tspan>
+            </text>
+            <rect id="Rectangle" fill="#FFFFFF" fill-rule="nonzero" x="231" y="69" width="104" height="36"></rect>
+            <text id="Similar" fill="#011C32" font-family="Comfortaa-Bold, Comfortaa" font-size="14" font-weight="bold">
+                <tspan x="257.373" y="92">Similar</tspan>
             </text>
         </g>
     </g>
