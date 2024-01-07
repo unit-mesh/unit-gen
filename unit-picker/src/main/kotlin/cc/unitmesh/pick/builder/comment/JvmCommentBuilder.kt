@@ -21,12 +21,10 @@ class JvmCommentBuilder(val language: String, override val docInstruction: DocIn
             emptyList()
         }
 
-        val startLineCommentMap: Map<Int, CodeComment> = posComments
-            .filter { it.content.isNotBlank() && it.content.length >= DOC_THRESHOLD }
-            .associateBy {
-                it.position.StopLine
-            }
-
+        val startLineCommentMap: Map<Int, CodeComment> =
+            posComments.filter { it.content.isNotBlank() && it.content.length >= DOC_THRESHOLD }.associateBy {
+                    it.position.StopLine
+                }
 
         val comments = mutableListOf<TypedCommentIns>()
 
@@ -34,22 +32,14 @@ class JvmCommentBuilder(val language: String, override val docInstruction: DocIn
             val classComment = startLineCommentMap[dataStruct.Position.StartLine - 1]
             classComment?.let { comments.add(ClassCommentIns(docInstruction, dataStruct, it, language = language)) }
 
-            dataStruct.Functions
-                .filter { it.Name != "constructor" && it.Name != "PrimaryConstructor" }
-                .forEach { function ->
-                    val functionComment = startLineCommentMap[function.Position.StartLine - 1]
-                    functionComment?.let {
-                        comments.add(
-                            MethodCommentIns(
-                                docInstruction,
-                                function,
-                                it,
-                                dataStruct,
-                                language = language
-                            )
-                        )
+            val methodCommentIns =
+                dataStruct.Functions.filter { it.Name != "constructor" && it.Name != "PrimaryConstructor" }
+                    .map { function ->
+                        val functionComment = startLineCommentMap[function.Position.StartLine - 1] ?: return@map null
+                        MethodCommentIns(docInstruction, function, functionComment, dataStruct, language = language)
                     }
-                }
+
+            comments.addAll(methodCommentIns.filterNotNull())
         }
 
         return comments
@@ -84,12 +74,10 @@ class JvmCommentBuilder(val language: String, override val docInstruction: DocIn
     private fun reIndentComment(content: String): String {
         val lines = content.split("\n")
         val indent = lines[1].takeWhile { it == ' ' }
-        val linesWithoutIndent = lines
-            .map { it.removePrefix(indent) }
+        val linesWithoutIndent = lines.map { it.removePrefix(indent) }
 
         // except the first line, every line should have one leading space
-        val linesWithLeadingSpace = linesWithoutIndent
-            .mapIndexed { index, line ->
+        val linesWithLeadingSpace = linesWithoutIndent.mapIndexed { index, line ->
                 if (index == 0) {
                     line
                 } else {
