@@ -43,42 +43,10 @@ import org.archguard.scanner.core.sca.CompositionDependency
 class TestFrameworkIdentifier(val language: SupportedLang, private val dependencies: List<CompositionDependency>) {
     fun identify(): List<String> {
         return when (language) {
-            SupportedLang.JAVA -> identifyJava()
-            SupportedLang.KOTLIN -> identifyJava()
-            SupportedLang.TYPESCRIPT -> identifyTypescript()
+            SupportedLang.JAVA -> JavaFrameworkIdentifier(dependencies).testFramework()
+            SupportedLang.KOTLIN -> JavaFrameworkIdentifier(dependencies).testFramework()
+            SupportedLang.TYPESCRIPT -> TypescriptFrameworkIdentifier(dependencies).testFramework()
             SupportedLang.RUST -> TODO()
         }
-    }
-
-    private fun identifyTypescript(): List<String> {
-        val testFrameworks = dependencies
-            .filter { it.depName in testFrameworkList }
-            .map { it.depName }
-
-        return testFrameworks
-    }
-
-    // 在类中定义 testFrameworkList，使其可复用
-    companion object {
-        private val testFrameworkList = listOf(
-            "jest",
-            "mocha",
-            "jasmine",
-            "ava",
-            "tape",
-            "qunit",
-            "web-component-tester",
-            "testem",
-            "webdriverio",
-            "nightwatch",
-            "puppeteer",
-            "protractor",
-            "cypress",
-            "test"
-        )
-    }
-
-    private fun identifyJava(): List<String> {
-        return JavaFrameworkIdentifier(dependencies).testFramework()
     }
 }
