@@ -2,7 +2,7 @@ package cc.unitmesh.pick.builder.bizcode
 
 import cc.unitmesh.core.completion.CodeCompletionIns
 import cc.unitmesh.core.completion.TypedInsBuilder
-import cc.unitmesh.core.completion.CompletionBuilderType
+import cc.unitmesh.core.completion.InstructionBuilderType
 import cc.unitmesh.pick.worker.job.JobContext
 import chapi.domain.core.CodeFunction
 
@@ -19,6 +19,6 @@ class InBlockCodeTypedInsBuilder(val context: JobContext) : TypedInsBuilder {
 
         val afterCursor = context.job.codeLines.subList(position.StartLine, stopLine).joinToString("\n")
 
-        return listOf(CodeCompletionIns(beforeCursor, afterCursor, CompletionBuilderType.IN_BLOCK_COMPLETION))
+        return listOf(CodeCompletionIns(beforeCursor, afterCursor, InstructionBuilderType.IN_BLOCK_COMPLETION))
     }
 }

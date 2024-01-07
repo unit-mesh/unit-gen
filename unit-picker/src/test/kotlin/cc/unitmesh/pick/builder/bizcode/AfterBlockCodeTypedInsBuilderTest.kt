@@ -3,7 +3,7 @@ package cc.unitmesh.pick.builder.bizcode;
 import cc.unitmesh.pick.option.InsOutputConfig
 import cc.unitmesh.pick.worker.job.InstructionFileJob
 import cc.unitmesh.core.completion.CodeCompletionIns
-import cc.unitmesh.core.completion.CompletionBuilderType
+import cc.unitmesh.core.completion.InstructionBuilderType
 import cc.unitmesh.pick.threshold.InsQualityThreshold
 import cc.unitmesh.pick.worker.job.JobContext
 import chapi.domain.core.CodeFunction
@@ -47,7 +47,7 @@ class AfterBlockCodeTypedInsBuilderTest {
             CodeCompletionIns(
                 beforeCursor = codeLines.subList(0, 3).joinToString("\n"),
                 afterCursor = "// other code here",
-                completionBuilderType = CompletionBuilderType.AFTER_BLOCK_COMPLETION
+                instructionBuilderType = InstructionBuilderType.AFTER_BLOCK_COMPLETION
             )
         )
     }

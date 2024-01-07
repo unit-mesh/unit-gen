@@ -2,7 +2,7 @@ package cc.unitmesh.pick
 
 import cc.unitmesh.core.Instruction
 import cc.unitmesh.core.SupportedLang
-import cc.unitmesh.core.completion.CompletionBuilderType
+import cc.unitmesh.core.completion.InstructionBuilderType
 import cc.unitmesh.pick.ext.GitUtil
 import cc.unitmesh.pick.ext.PickDirectoryWalker
 import cc.unitmesh.pick.option.InsPickerOption
@@ -109,7 +109,7 @@ class SingleProjectCodePicker(private val config: InsPickerOption) {
     ): MutableList<Instruction> = coroutineScope {
         val walkdirChannel = Channel<FileJob>()
         val summary = mutableListOf<Instruction>()
-        val canRemoveComment = !config.completionTypes.contains(CompletionBuilderType.DOCUMENTATION)
+        val canRemoveComment = !config.instructionTypes.contains(InstructionBuilderType.DOCUMENTATION)
         launch {
             launch {
                 PickDirectoryWalker(walkdirChannel).start(codeDir.toString())

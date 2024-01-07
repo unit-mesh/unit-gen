@@ -1,6 +1,9 @@
 package cc.unitmesh.pick.builder.comment
 
-import cc.unitmesh.core.comment.*
+import cc.unitmesh.core.comment.CodeComment
+import cc.unitmesh.core.comment.CommentBuilder
+import cc.unitmesh.core.comment.DocInstruction
+import cc.unitmesh.core.comment.TypedCommentIns
 import cc.unitmesh.pick.builder.comment.ins.ClassCommentIns
 import cc.unitmesh.pick.builder.comment.ins.MethodCommentIns
 import chapi.domain.core.CodeContainer

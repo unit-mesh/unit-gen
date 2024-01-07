@@ -48,7 +48,7 @@ class SimilarChunksStrategyBuilder(private val context: JobContext) : CodeStrate
             SupportedLang.RUST -> TODO()
         }
 
-        val builders = completionBuilders(context.completionBuilderTypes, context)
+        val builders = completionBuilders(context.instructionBuilderTypes, context)
         val containerIns = builders.asSequence().map {
             it.build(container)
         }.flatten()
@@ -80,7 +80,7 @@ class SimilarChunksStrategyBuilder(private val context: JobContext) : CodeStrate
                             similarChunks = similarChunks,
                             afterCursor = it.afterCursor,
                             output = it.afterCursor,
-                            type = it.completionBuilderType
+                            type = it.instructionBuilderType
                         )
                     }
             }.flatten()

@@ -2,7 +2,7 @@ package cc.unitmesh.pick.builder.strategy;
 
 import cc.unitmesh.pick.option.InsOutputConfig
 import cc.unitmesh.pick.worker.job.InstructionFileJob
-import cc.unitmesh.core.completion.CompletionBuilderType
+import cc.unitmesh.core.completion.InstructionBuilderType
 import cc.unitmesh.pick.threshold.InsQualityThreshold
 import cc.unitmesh.pick.strategy.bizcode.SimilarChunksStrategyBuilder
 import cc.unitmesh.pick.worker.job.JobContext
@@ -44,7 +44,7 @@ public class HelloController {
             qualityTypes = listOf(CodeQualityType.JavaController),
             fileTree = hashMapOf("" to job),
             insOutputConfig = InsOutputConfig(),
-            completionBuilderTypes = listOf(CompletionBuilderType.IN_BLOCK_COMPLETION),
+            instructionBuilderTypes = listOf(InstructionBuilderType.IN_BLOCK_COMPLETION),
             maxTypedCompletionSize = 3,
             insQualityThreshold = InsQualityThreshold()
         )
@@ -92,7 +92,7 @@ public class HelloController {
                 "cc.unitmesh.testng.service.BlogService" to job
             ),
             insOutputConfig = InsOutputConfig(),
-            completionBuilderTypes = listOf(CompletionBuilderType.IN_BLOCK_COMPLETION),
+            instructionBuilderTypes = listOf(InstructionBuilderType.IN_BLOCK_COMPLETION),
             maxTypedCompletionSize = 3,
             insQualityThreshold = InsQualityThreshold()
         )

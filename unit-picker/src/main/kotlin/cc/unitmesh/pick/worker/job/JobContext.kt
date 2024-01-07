@@ -1,6 +1,6 @@
 package cc.unitmesh.pick.worker.job
 
-import cc.unitmesh.core.completion.CompletionBuilderType
+import cc.unitmesh.core.completion.InstructionBuilderType
 import cc.unitmesh.pick.option.InsOutputConfig
 import cc.unitmesh.pick.project.ProjectContext
 import cc.unitmesh.pick.threshold.InsQualityThreshold
@@ -15,7 +15,7 @@ data class JobContext(
     val qualityTypes: List<CodeQualityType>,
     val fileTree: HashMap<String, InstructionFileJob>,
     val insOutputConfig: InsOutputConfig = InsOutputConfig(),
-    val completionBuilderTypes: List<CompletionBuilderType>,
+    val instructionBuilderTypes: List<InstructionBuilderType>,
     val maxTypedCompletionSize: Int,
     val project: ProjectContext = ProjectContext(),
     val insQualityThreshold: InsQualityThreshold,
@@ -29,7 +29,7 @@ data class JobContext(
                 ),
                 qualityTypes = listOf(),
                 fileTree = fileTree,
-                completionBuilderTypes = listOf(),
+                instructionBuilderTypes = listOf(),
                 maxTypedCompletionSize = InsQualityThreshold.MAX_PROJECT_TYPED_COMPLETION_SIZE,
                 insQualityThreshold = InsQualityThreshold()
             )

@@ -1,7 +1,7 @@
 package cc.unitmesh.pick.option
 
 import cc.unitmesh.pick.strategy.CodeStrategyType
-import cc.unitmesh.core.completion.CompletionBuilderType
+import cc.unitmesh.core.completion.InstructionBuilderType
 import cc.unitmesh.pick.threshold.InsQualityThreshold
 import cc.unitmesh.quality.CodeQualityType
 import cc.unitmesh.quality.badsmell.BadsmellAnalyser
@@ -29,7 +29,7 @@ const val MAX_COMPLETION_EACH_FILE = 10
  *        Possible values are:
  *        - [CodeContextStrategy.SIMILAR_CHUNKS]: Determines the code context based on similar code chunks.
  *        - [CodeContextStrategy.RELATED_CODE]: Determines the code context based on related code.
- * @property completionTypes The types of completion builders to use. Default values are [CompletionBuilderType.AFTER_BLOCK_COMPLETION],
+ * @property instructionTypes The types of completion builders to use. Default values are [InstructionBuilderType.AFTER_BLOCK_COMPLETION],
  *        [CompletionBuilderType.IN_BLOCK_COMPLETION], [CompletionBuilderType.INLINE_COMPLETION].
  * @property codeQualityTypes The code quality types to analyze. Default value is an empty list. Possible values are:
  *        - [CodeQualityType.BadSmell]: Analyzes bad smells in the code using [BadsmellAnalyser].
@@ -64,14 +64,14 @@ data class InsPickerOption(
         CodeStrategyType.SIMILAR_CHUNKS,
     ),
     /**
-     * The [CompletionBuilderType], which will according you IDE strategy to generate the type.
+     * The [InstructionBuilderType], which will according you IDE strategy to generate the type.
      */
-    val completionTypes: List<CompletionBuilderType> = listOf(
-        CompletionBuilderType.AFTER_BLOCK_COMPLETION,
-        CompletionBuilderType.IN_BLOCK_COMPLETION,
-        CompletionBuilderType.INLINE_COMPLETION,
-        CompletionBuilderType.TEST_CODE_GEN,
-        CompletionBuilderType.DOCUMENTATION,
+    val instructionTypes: List<InstructionBuilderType> = listOf(
+        InstructionBuilderType.AFTER_BLOCK_COMPLETION,
+        InstructionBuilderType.IN_BLOCK_COMPLETION,
+        InstructionBuilderType.INLINE_COMPLETION,
+        InstructionBuilderType.TEST_CODE_GEN,
+        InstructionBuilderType.DOCUMENTATION,
     ),
     /**
      * The [CodeQualityType], will be like a tree to hold the item.
@@ -112,10 +112,6 @@ data class InsPickerOption(
 ) {
     fun pureDataFileName(): String {
         return baseDir + File.separator + repoFileName() + ".jsonl"
-    }
-
-    fun projectDir(): String {
-        return baseDir + File.separator + encodeFileName(url) + File.separator + encodeFileName(branch)
     }
 
     fun repoFileName() = "${encodeFileName(url)}_${encodeFileName(branch)}_${language}.jsonl"

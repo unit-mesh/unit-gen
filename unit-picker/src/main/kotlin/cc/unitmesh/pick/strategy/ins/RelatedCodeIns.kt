@@ -1,7 +1,7 @@
 package cc.unitmesh.pick.strategy.ins
 
 import cc.unitmesh.pick.ext.toUml
-import cc.unitmesh.core.completion.CompletionBuilderType
+import cc.unitmesh.core.completion.InstructionBuilderType
 import cc.unitmesh.core.Instruction
 import cc.unitmesh.core.completion.TypedIns
 import cc.unitmesh.pick.threshold.InsQualityThreshold
@@ -15,7 +15,7 @@ data class RelatedCodeIns(
     val beforeCursor: String,
     val relatedCode: List<CodeDataStruct>,
     val output: String,
-    override val type: CompletionBuilderType,
+    override val type: InstructionBuilderType,
 ) : TypedIns {
     override fun toString(): String {
         return Json.encodeToString(serializer(), this)

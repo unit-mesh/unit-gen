@@ -3,7 +3,7 @@ package cc.unitmesh.pick.worker
 import cc.unitmesh.core.SupportedLang
 import cc.unitmesh.pick.option.InsOutputConfig
 import cc.unitmesh.pick.strategy.CodeStrategyType
-import cc.unitmesh.core.completion.CompletionBuilderType
+import cc.unitmesh.core.completion.InstructionBuilderType
 import cc.unitmesh.pick.option.InsPickerOption
 import cc.unitmesh.pick.project.ProjectContext
 import cc.unitmesh.pick.threshold.InsQualityThreshold
@@ -19,7 +19,7 @@ data class WorkerContext(
     val qualityTypes: List<CodeQualityType>,
     val insOutputConfig: InsOutputConfig,
     val pureDataFileName: String,
-    val completionTypes: List<CompletionBuilderType>,
+    val completionTypes: List<InstructionBuilderType>,
     val maxCompletionInOneFile: Int,
     val completionTypeSize: Int,
     val qualityThreshold: InsQualityThreshold = InsQualityThreshold(),
@@ -49,7 +49,7 @@ data class WorkerContext(
                 insPickerOption.codeQualityTypes,
                 insPickerOption.insOutputConfig,
                 pureDataFileName = insPickerOption.pureDataFileName(),
-                insPickerOption.completionTypes,
+                insPickerOption.instructionTypes,
                 insPickerOption.maxCompletionEachFile,
                 insPickerOption.completionTypeSize,
                 qualityThreshold = InsQualityThreshold(

@@ -1,6 +1,6 @@
 package cc.unitmesh.pick.worker.lang
 
-import cc.unitmesh.core.completion.CompletionBuilderType
+import cc.unitmesh.core.completion.InstructionBuilderType
 import cc.unitmesh.pick.ext.buildSourceCode
 import cc.unitmesh.pick.worker.WorkerContext
 import cc.unitmesh.pick.worker.base.LangWorker
@@ -35,7 +35,7 @@ class KotlinWorker(override val workerContext: WorkerContext) : JavaWorker(worke
 
         try {
             tryAddClassToTree(job)
-            val container = if (workerContext.completionTypes.contains(CompletionBuilderType.TEST_CODE_GEN)) {
+            val container = if (workerContext.completionTypes.contains(InstructionBuilderType.TEST_CODE_GEN)) {
                 KotlinAnalyser().analysis(job.code, job.fileSummary.location, ParseMode.Full)
             } else {
                 KotlinAnalyser().analysis(job.code, job.fileSummary.location)

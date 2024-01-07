@@ -2,7 +2,7 @@ package cc.unitmesh.pick.builder.bizcode
 
 import cc.unitmesh.core.completion.CodeCompletionIns
 import cc.unitmesh.core.completion.TypedInsBuilder
-import cc.unitmesh.core.completion.CompletionBuilderType
+import cc.unitmesh.core.completion.InstructionBuilderType
 import cc.unitmesh.pick.worker.job.JobContext
 import chapi.domain.core.CodeFunction
 
@@ -49,7 +49,7 @@ class InlineCodeTypedInsBuilder(val context: JobContext) : TypedInsBuilder {
                         continue
                     }
 
-                    completions.add(CodeCompletionIns(beforeCursor, afterCursor, CompletionBuilderType.INLINE_COMPLETION))
+                    completions.add(CodeCompletionIns(beforeCursor, afterCursor, InstructionBuilderType.INLINE_COMPLETION))
                 }
             }
         }

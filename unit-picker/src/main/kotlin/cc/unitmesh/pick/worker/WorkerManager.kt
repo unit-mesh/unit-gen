@@ -2,7 +2,7 @@ package cc.unitmesh.pick.worker
 
 import cc.unitmesh.core.Instruction
 import cc.unitmesh.core.SupportedLang
-import cc.unitmesh.core.completion.CompletionBuilderType
+import cc.unitmesh.core.completion.InstructionBuilderType
 import cc.unitmesh.pick.threshold.ThresholdChecker
 import cc.unitmesh.pick.worker.base.LangWorker
 import cc.unitmesh.pick.worker.job.InstructionFileJob
@@ -115,8 +115,8 @@ class WorkerManager(private val context: WorkerContext) {
         }.flatten()
 
         // take context.completionTypeSize for each type
-        val finalList: EnumMap<CompletionBuilderType, List<Instruction>> =
-            EnumMap(CompletionBuilderType::class.java)
+        val finalList: EnumMap<InstructionBuilderType, List<Instruction>> =
+            EnumMap(InstructionBuilderType::class.java)
 
         var skipCount = 0
         // filter output by threshold

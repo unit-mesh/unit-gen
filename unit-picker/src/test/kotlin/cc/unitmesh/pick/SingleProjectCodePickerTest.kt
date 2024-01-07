@@ -1,7 +1,7 @@
 package cc.unitmesh.pick
 
 import cc.unitmesh.core.Instruction
-import cc.unitmesh.core.completion.CompletionBuilderType
+import cc.unitmesh.core.completion.InstructionBuilderType
 import cc.unitmesh.pick.option.InsPickerOption
 import cc.unitmesh.pick.strategy.CodeStrategyType
 import kotlinx.coroutines.runBlocking
@@ -40,8 +40,8 @@ class SingleProjectCodePickerTest {
                 url = root,
                 maxTokenLength = 8192,
                 codeStrategyTypes = listOf(CodeStrategyType.RELATED_CODE),
-                completionTypes = listOf(
-                    CompletionBuilderType.DOCUMENTATION, CompletionBuilderType.TEST_CODE_GEN
+                instructionTypes = listOf(
+                    InstructionBuilderType.DOCUMENTATION, InstructionBuilderType.TEST_CODE_GEN
                 ),
             )
         )
@@ -63,8 +63,8 @@ class SingleProjectCodePickerTest {
                 url = "https://github.com/unit-mesh/edge-infer",
                 maxTokenLength = 8192,
                 codeStrategyTypes = listOf(CodeStrategyType.RELATED_CODE),
-                completionTypes = listOf(
-                    CompletionBuilderType.TEST_CODE_GEN
+                instructionTypes = listOf(
+                    InstructionBuilderType.TEST_CODE_GEN
                 ),
             )
         )

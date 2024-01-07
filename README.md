@@ -52,8 +52,8 @@ Features:
 
 - Code context
   strategy: [Related code completion](https://gen.unitmesh.cc/instruction/related-code-completion), [Similar Code Completion](https://gen.unitmesh.cc/instruction/similar-code-completion)
-- Completion type: inline, block, after block
-- [Code quality](https://gen.unitmesh.cc/quality) filter and pipeline. Code smell, test smell, estimation nd more.
+- Instruction Builder type: inline, block, after block, documentation, test gen
+- [Code quality](https://gen.unitmesh.cc/quality) filter and pipeline. Code smell, test smell, estimation and more.
 
 ## Architecture
 

@@ -1,9 +1,8 @@
 package cc.unitmesh.pick.builder.unittest.java
 
-import cc.unitmesh.core.completion.CompletionBuilderType
+import cc.unitmesh.core.completion.InstructionBuilderType
 import cc.unitmesh.core.unittest.TestCodeBuilderType
 import cc.unitmesh.pick.builder.unittest.base.BasicTestIns
-import cc.unitmesh.pick.builder.unittest.java.JavaTestCodeService
 import cc.unitmesh.pick.ext.buildSourceCode
 import cc.unitmesh.pick.option.InsOutputConfig
 import cc.unitmesh.pick.threshold.InsQualityThreshold
@@ -174,7 +173,7 @@ public class CompanyService {
                 "com.rest.springbootemployee.service.CompanyServiceTest" to testFileJob,
             ),
             insOutputConfig = InsOutputConfig(),
-            completionBuilderTypes = listOf(CompletionBuilderType.TEST_CODE_GEN),
+            instructionBuilderTypes = listOf(InstructionBuilderType.TEST_CODE_GEN),
             maxTypedCompletionSize = 3,
             insQualityThreshold = InsQualityThreshold()
         )

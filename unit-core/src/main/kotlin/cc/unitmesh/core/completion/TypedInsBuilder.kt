@@ -45,7 +45,7 @@ interface TypedInsBuilder {
      * Builds a list of TypedIns objects based on the provided CodeContainer.
      * This method is suitable for file-level analysis, such as:
      *
-     * - [CompletionBuilderType.DOCUMENTATION]
+     * - [InstructionBuilderType.DOCUMENTATION]
      *
      * @param container The CodeContainer containing the data structures and functions to be analyzed.
      * @return A list of TypedIns objects representing the comments extracted from the CodeContainer.
@@ -58,7 +58,7 @@ interface TypedInsBuilder {
      * Builds a list of TypedIns objects based on the given CodeDataStruct.
      * This method is suitable for generating code related to the entire class, such as:
      *
-     * - [CompletionBuilderType.TEST_CODE_GEN]
+     * - [InstructionBuilderType.TEST_CODE_GEN]
      *
      * @param dataStruct The CodeDataStruct object representing the class to be analyzed.
      * @return A list of TypedIns objects generated based on the CodeDataStruct.
@@ -75,9 +75,9 @@ interface TypedInsBuilder {
      *
      * This method is suitable for generating code completions for inline and interline completion, such as :
      *
-     *  - [CompletionBuilderType.INLINE_COMPLETION]
-     *  - [CompletionBuilderType.IN_BLOCK_COMPLETION]
-     *  - [CompletionBuilderType.AFTER_BLOCK_COMPLETION]
+     *  - [InstructionBuilderType.INLINE_COMPLETION]
+     *  - [InstructionBuilderType.IN_BLOCK_COMPLETION]
+     *  - [InstructionBuilderType.AFTER_BLOCK_COMPLETION]
      */
     fun build(function: CodeFunction): List<CodeCompletionIns> {
         return listOf()

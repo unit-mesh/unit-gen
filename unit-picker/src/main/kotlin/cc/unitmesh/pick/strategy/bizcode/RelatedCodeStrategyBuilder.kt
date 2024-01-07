@@ -46,7 +46,7 @@ class RelatedCodeStrategyBuilder(private val context: JobContext) : CodeStrategy
         }
 
         // 3. build completion instruction
-        val builders = completionBuilders(context.completionBuilderTypes, context)
+        val builders = completionBuilders(context.instructionBuilderTypes, context)
         val containerIns = builders.asSequence().map {
             it.build(container)
         }.flatten()
@@ -71,7 +71,7 @@ class RelatedCodeStrategyBuilder(private val context: JobContext) : CodeStrategy
                             beforeCursor = it.beforeCursor,
                             relatedCode = relatedCode,
                             output = it.afterCursor,
-                            type = it.completionBuilderType
+                            type = it.instructionBuilderType
                         )
                     }.toList()
             }.flatten()

@@ -13,7 +13,7 @@ package cc.unitmesh.core.completion
  *
  * - `DOCUMENTATION`: This type generates documentation for code. It is used to generate comments and documentation for classes, methods, and variables.
  */
-enum class CompletionBuilderType {
+enum class InstructionBuilderType {
     /**
      * generate code after cursor, like text after `Blog blog = `, will be `new Blog();`
      */
