@@ -1,7 +1,7 @@
 package cc.unitmesh.pick.project
 
 import cc.unitmesh.core.SupportedLang
-import cc.unitmesh.pick.project.frameworks.SpringLibrary
+import cc.unitmesh.pick.project.library.SpringLibrary
 import cc.unitmesh.pick.project.frameworks.TestFrameworkIdentifier
 import org.archguard.scanner.core.sca.CompositionDependency
 

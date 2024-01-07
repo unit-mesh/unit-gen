@@ -1,7 +1,4 @@
-package cc.unitmesh.pick.project.frameworks
-
-data class SpringDataLibraryDescriptor(val shortText: String, val coords: List<String>)
-data class LibraryDescriptor(val shortText: String, val coords: String)
+package cc.unitmesh.pick.project.library
 
 object SpringLibrary {
     // Spring
@@ -30,23 +27,23 @@ object SpringLibrary {
     private val REDIS_MAVEN = "org.springframework.data:spring-data-redis"
 
     val SPRING_DATA = listOf(
-        SpringDataLibraryDescriptor("JPA ", listOf(JPA_MAVEN)),
-        SpringDataLibraryDescriptor("JPA SPRING BOOT", listOf(JPA_MAVEN, REACTOR_MAVEN)),
-        SpringDataLibraryDescriptor("CASSANDRA", listOf(CASSANDRA_MAVEN)),
-        SpringDataLibraryDescriptor("REACTIVE CASSANDRA", listOf(CASSANDRA_MAVEN, REACTOR_MAVEN)),
-        SpringDataLibraryDescriptor("COUCHBASE", listOf(COUCHBASE_MAVEN)),
-        SpringDataLibraryDescriptor("REACTIVE COUCHBASE", listOf(COUCHBASE_MAVEN, REACTOR_MAVEN)),
-        SpringDataLibraryDescriptor("JDBC", listOf(JDBC_MAVEN)),
-        SpringDataLibraryDescriptor("JDBC SPRING BOOT", listOf(JDBC_BOOT_MAVEN)),
-        SpringDataLibraryDescriptor("MONGO", listOf(MONGO_MAVEN)),
-        SpringDataLibraryDescriptor("MONGO SPRING BOOT", listOf(MONGO_BOOT_MAVEN)),
-        SpringDataLibraryDescriptor(
+        LibrarySet("JPA ", listOf(JPA_MAVEN)),
+        LibrarySet("JPA SPRING BOOT", listOf(JPA_MAVEN, REACTOR_MAVEN)),
+        LibrarySet("CASSANDRA", listOf(CASSANDRA_MAVEN)),
+        LibrarySet("REACTIVE CASSANDRA", listOf(CASSANDRA_MAVEN, REACTOR_MAVEN)),
+        LibrarySet("COUCHBASE", listOf(COUCHBASE_MAVEN)),
+        LibrarySet("REACTIVE COUCHBASE", listOf(COUCHBASE_MAVEN, REACTOR_MAVEN)),
+        LibrarySet("JDBC", listOf(JDBC_MAVEN)),
+        LibrarySet("JDBC SPRING BOOT", listOf(JDBC_BOOT_MAVEN)),
+        LibrarySet("MONGO", listOf(MONGO_MAVEN)),
+        LibrarySet("MONGO SPRING BOOT", listOf(MONGO_BOOT_MAVEN)),
+        LibrarySet(
             "REACTIVE MONGO",
             listOf(MONGO_MAVEN, REACTOR_MAVEN, MONGO_REACTIVE_STREAMS_MAVEN)
         ),
-        SpringDataLibraryDescriptor("NEO4J", listOf(NEO4J_MAVEN)),
-        SpringDataLibraryDescriptor("R2DBC", listOf(R2DBC_MAVEN)),
-        SpringDataLibraryDescriptor("REDIS", listOf(REDIS_MAVEN))
+        LibrarySet("NEO4J", listOf(NEO4J_MAVEN)),
+        LibrarySet("R2DBC", listOf(R2DBC_MAVEN)),
+        LibrarySet("REDIS", listOf(REDIS_MAVEN))
     )
 
     val SPRING_MVC = listOf(
