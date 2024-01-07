@@ -28,7 +28,7 @@ data class BasicTestIns(
         return Json.encodeToString(serializer(), this)
     }
 
-    override fun unique(): Instruction {
+    override fun toInstruction(): Instruction {
         val input = StringBuilder()
 
         input.append("\n###")

@@ -3,6 +3,7 @@ package cc.unitmesh.pick.worker
 import cc.unitmesh.core.Instruction
 import cc.unitmesh.core.SupportedLang
 import cc.unitmesh.core.completion.InstructionBuilderType
+import cc.unitmesh.core.completion.TypedIns
 import cc.unitmesh.pick.threshold.ThresholdChecker
 import cc.unitmesh.pick.worker.base.LangWorker
 import cc.unitmesh.pick.worker.job.InstructionFileJob
@@ -105,14 +106,7 @@ class WorkerManager(private val context: WorkerContext) {
      * @return a list of instructions after executing all workers and applying the threshold filter
      */
     suspend fun runAll(): List<Instruction> {
-        val results = workers.map { (_, worker) ->
-            try {
-                worker.start()
-            } catch (e: Exception) {
-                e.printStackTrace()
-                emptyList()
-            }
-        }.flatten()
+        val results = startWorkers()
 
         // take context.completionTypeSize for each type
         val finalList: EnumMap<InstructionBuilderType, List<Instruction>> =
@@ -121,7 +115,8 @@ class WorkerManager(private val context: WorkerContext) {
         var skipCount = 0
         // filter output by threshold
         results.mapNotNull {
-            val ins = it.unique()
+            /// Todo: add support for different template
+            val ins = it.toInstruction()
             if (thresholdChecker.isMetThreshold(ins)) {
                 finalList[it.type] = finalList[it.type]?.plus(ins) ?: listOf(ins)
             } else {
@@ -138,5 +133,27 @@ class WorkerManager(private val context: WorkerContext) {
         return finalList.keys.map {
             finalList[it]?.shuffled()?.take(context.completionTypeSize) ?: emptyList()
         }.flatten()
+    }
+
+    /**
+     * Suspends the execution and starts all the workers in the Kotlin language.
+     *
+     * This method starts all the workers defined in the `workers` map. Each worker is started by invoking its `start()` method.
+     * If any exception occurs during the start process, the exception is caught and an empty list is returned for that worker.
+     *
+     * @return a list of `TypedIns` objects representing the results of starting the workers. The list contains all the successful
+     *         results from starting the workers, and any exceptions encountered during the start process are logged and ignored.
+     *         If all workers fail to start, an empty list is returned.
+     */
+    suspend fun startWorkers(): List<TypedIns> {
+        val results = workers.map { (_, worker) ->
+            try {
+                worker.start()
+            } catch (e: Exception) {
+                e.printStackTrace()
+                emptyList()
+            }
+        }.flatten()
+        return results
     }
 }

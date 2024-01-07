@@ -102,7 +102,7 @@ public class HelloController {
 
         result.size shouldBe 3
 
-        result.first().unique().input shouldBe """
+        result.first().toInstruction().input shouldBe """
 // Similar chunk:
 ```
 // Compare this snippet from cc.unitmesh.testng.repository.BlogRepository

@@ -4,5 +4,9 @@ import cc.unitmesh.core.Instruction
 
 interface TypedIns {
     val type: InstructionBuilderType
-    fun unique(): Instruction
+
+    /**
+     * Build final instruction.
+     */
+    fun toInstruction(): Instruction
 }

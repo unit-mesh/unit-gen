@@ -20,7 +20,7 @@ data class MethodCommentIns(
 ) : TypedCommentIns() {
     override val builderLevel: CommentBuilderType = CommentBuilderType.METHOD_LEVEL
 
-    override fun unique(): Instruction {
+    override fun toInstruction(): Instruction {
         val instruction = "Write ${docInstruction.value} for given method " + function.Name + " .\n"
         val input =
             "### Current class:\n${currentDataStruct.toUml()}\n###\nCode:\n```$language\n${currentDataStruct.Content}\n```\n"

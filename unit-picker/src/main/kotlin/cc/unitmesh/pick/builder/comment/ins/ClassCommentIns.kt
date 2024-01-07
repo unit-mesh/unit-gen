@@ -17,7 +17,7 @@ data class ClassCommentIns(
 ) : TypedCommentIns() {
     override val builderLevel: CommentBuilderType = CommentBuilderType.CLASS_LEVEL
 
-    override fun unique(): Instruction {
+    override fun toInstruction(): Instruction {
         val instruction = "Write ${docInstruction.value} for given class " + dataStructure.NodeName + " .\n"
         val input = "Code:\n```$language\n" + dataStructure.Content + "\n```"
         val output = comment.content

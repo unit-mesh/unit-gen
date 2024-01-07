@@ -21,7 +21,7 @@ data class RelatedCodeIns(
         return Json.encodeToString(serializer(), this)
     }
 
-    override fun unique(): Instruction {
+    override fun toInstruction(): Instruction {
         // Related code strategy
         val relatedCode = if (relatedCode.isNotEmpty()) {
             // todo: count be similar

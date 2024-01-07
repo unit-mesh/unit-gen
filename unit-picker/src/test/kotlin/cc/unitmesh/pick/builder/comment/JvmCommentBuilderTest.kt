@@ -1,7 +1,6 @@
 package cc.unitmesh.pick.builder.comment
 
 import cc.unitmesh.core.SupportedLang
-import cc.unitmesh.quality.documentation.CodeComment
 import chapi.ast.kotlinast.KotlinAnalyser
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
@@ -70,7 +69,7 @@ class Group<T>(val name: String) {
 
         // Then
         result.size shouldBe 3
-        result[0].unique().output shouldBe """
+        result[0].toInstruction().output shouldBe """
             /**
              * A group of *members*.
              *
@@ -82,7 +81,7 @@ class Group<T>(val name: String) {
              */
         """.trimIndent()
 
-        result[1].unique().output shouldBe """
+        result[1].toInstruction().output shouldBe """
             /**
              * Adds a [member] to this group.
              * @return the new size of the group.

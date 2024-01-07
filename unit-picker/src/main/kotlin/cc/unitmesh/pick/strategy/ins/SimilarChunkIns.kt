@@ -20,7 +20,7 @@ data class SimilarChunkIns(
         return Json.encodeToString(serializer(), this)
     }
 
-    override fun unique(): Instruction {
+    override fun toInstruction(): Instruction {
         // Similar chunk strategy
         val similarChunks = if (similarChunks.isNotBlank() && similarChunks.isNotEmpty()) {
             // limit similarChunks to 30 lines
