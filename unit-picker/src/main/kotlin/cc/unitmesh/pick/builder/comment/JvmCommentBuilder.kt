@@ -14,6 +14,13 @@ private const val DOC_THRESHOLD = 5
 class JvmCommentBuilder(val language: String, override val docInstruction: DocInstruction = DocInstruction.KOTLIN) :
     CommentBuilder {
 
+    /**
+     * Builds a list of TypedCommentIns objects based on the provided code and CodeContainer.
+     *
+     * @param code The code from which to extract comments.
+     * @param container The CodeContainer containing the data structures and functions.
+     * @return A list of TypedCommentIns objects representing the extracted comments.
+     */
     override fun build(code: String, container: CodeContainer): List<TypedCommentIns> {
         val posComments = try {
             extractKdocComments(code)
@@ -70,7 +77,12 @@ class JvmCommentBuilder(val language: String, override val docInstruction: DocIn
         }.toList()
     }
 
-    /// Re-indent the comment to remove the leading spaces.
+    /**
+     * Re-indent the comment to remove the leading spaces.
+     *
+     * @param content the comment content to be re-indented
+     * @return the re-indented comment content
+     */
     private fun reIndentComment(content: String): String {
         val lines = content.split("\n")
         val indent = lines[1].takeWhile { it == ' ' }
