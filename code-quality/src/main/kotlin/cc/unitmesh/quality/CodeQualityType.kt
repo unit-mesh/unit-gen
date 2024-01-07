@@ -8,6 +8,6 @@ enum class CodeQualityType {
     TestBadSmell,
     JavaController,
     JavaRepository,
-    JavaService;
-
+    JavaService,
+    DocComment,
 }

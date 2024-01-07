@@ -1,6 +1,7 @@
 package cc.unitmesh.quality
 
 import cc.unitmesh.quality.badsmell.BadsmellAnalyser
+import cc.unitmesh.quality.documentation.DocCommentAnalyser
 import cc.unitmesh.quality.extension.JavaServiceAnalyser
 import cc.unitmesh.quality.extension.JavaRepositoryAnalyser
 import cc.unitmesh.quality.extension.JavaControllerAnalyser
@@ -10,6 +11,9 @@ import chapi.domain.core.CodeDataStruct
 import org.archguard.rule.core.Issue
 
 interface QualityAnalyser {
+    /**
+     * Normal analysis, like [CodeQualityType.BadSmell], [CodeQualityType.TestBadSmell], etc.
+     */
     fun analysis(nodes: List<CodeDataStruct>): List<Issue>
 
     companion object {
@@ -28,6 +32,7 @@ interface QualityAnalyser {
                     CodeQualityType.JavaController -> JavaControllerAnalyser(thresholds)
                     CodeQualityType.JavaRepository -> JavaRepositoryAnalyser(thresholds)
                     CodeQualityType.JavaService -> JavaServiceAnalyser(thresholds)
+                    CodeQualityType.DocComment -> return emptyList()
                 }
             }
         }
