@@ -1,6 +1,6 @@
 package cc.unitmesh.pick.ext
 
-import cc.unitmesh.pick.spec.checkNamingStyle
+import cc.unitmesh.pick.project.spec.checkNamingStyle
 import chapi.ast.javaast.JavaAnalyser
 import chapi.domain.core.CodeDataStruct
 import chapi.domain.core.CodeField

@@ -5,7 +5,7 @@ import cc.unitmesh.core.ast.NodeType
 import cc.unitmesh.core.unittest.TestCodeBuilder
 import cc.unitmesh.core.unittest.TestCodeBuilderType
 import cc.unitmesh.pick.builder.unittest.base.BasicTestIns
-import cc.unitmesh.pick.spec.checkNamingStyle
+import cc.unitmesh.pick.project.spec.checkNamingStyle
 import cc.unitmesh.pick.ext.toSourceCode
 import cc.unitmesh.pick.worker.job.JobContext
 import chapi.domain.core.CodeDataStruct

@@ -1,5 +1,6 @@
 package cc.unitmesh.pick.spec;
 
+import cc.unitmesh.pick.project.spec.checkSnakeCase
 import  org.junit.jupiter.api.Test
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue

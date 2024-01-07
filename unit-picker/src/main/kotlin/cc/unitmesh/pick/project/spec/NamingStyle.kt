@@ -1,4 +1,4 @@
-package cc.unitmesh.pick.spec
+package cc.unitmesh.pick.project.spec
 
 import chapi.domain.core.CodeDataStruct
 
