@@ -1,7 +1,7 @@
 package cc.unitmesh.pick.builder.comment
 
 import cc.unitmesh.core.SupportedLang
-import cc.unitmesh.core.comment.CodeComment
+import cc.unitmesh.quality.documentation.CodeComment
 import chapi.ast.kotlinast.KotlinAnalyser
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
@@ -37,7 +37,7 @@ class Group<T>(val name: String) {
     @Test
     fun `should extract KDoc comments when valid code provided`() {
         // When
-        val result = CodeComment.extractComments(kotlinCode, SupportedLang.KOTLIN)
+        val result = extractComments(kotlinCode, SupportedLang.KOTLIN)
 
         // Then
         result.size shouldBe 3

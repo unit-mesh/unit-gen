@@ -1,6 +1,5 @@
-package cc.unitmesh.core.comment
+package cc.unitmesh.quality.documentation
 
-import cc.unitmesh.core.SupportedLang
 import chapi.domain.core.CodePosition
 import kotlinx.serialization.Serializable
 
@@ -33,24 +32,7 @@ data class CodeComment(
             return linesWithLeadingSpace.joinToString("\n")
         }
 
-        /**
-         * Extracts the documentation comments (KDoc) from the given code.
-         *
-         * @param code the Kotlin code from which to extract the KDoc comments
-         * @return a list of pairs, where each pair contains the line number and the extracted KDoc comment
-         */
-        fun extractComments(code: String, language: SupportedLang): List<CodeComment> {
-            return when (language) {
-                SupportedLang.KOTLIN -> extractKotlinComment(code)
-                SupportedLang.JAVA -> extractKotlinComment(code)
-                else -> {
-                    println("Unsupported language: $language")
-                    emptyList()
-                }
-            }
-        }
-
-        private fun extractKotlinComment(code: String): List<CodeComment> {
+        fun extractKotlinComment(code: String): List<CodeComment> {
             val pattern = Regex("""/\*\*[^*]*\*+([^/*][^*]*\*+)*/""")
 
             val matches = pattern.findAll(code)

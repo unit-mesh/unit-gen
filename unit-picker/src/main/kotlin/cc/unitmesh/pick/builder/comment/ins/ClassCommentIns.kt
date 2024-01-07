@@ -1,16 +1,16 @@
 package cc.unitmesh.pick.builder.comment.ins
 
 import cc.unitmesh.core.Instruction
-import cc.unitmesh.core.comment.CodeComment
+import cc.unitmesh.quality.documentation.CodeComment
 import cc.unitmesh.core.comment.CommentBuilderType
-import cc.unitmesh.core.comment.DocInstruction
+import cc.unitmesh.core.comment.DocCommentInstruction
 import cc.unitmesh.core.comment.TypedCommentIns
 import chapi.domain.core.CodeDataStruct
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class ClassCommentIns(
-    val docInstruction: DocInstruction,
+    val docInstruction: DocCommentInstruction,
     val dataStructure: CodeDataStruct,
     val comment: CodeComment,
     val language: String,

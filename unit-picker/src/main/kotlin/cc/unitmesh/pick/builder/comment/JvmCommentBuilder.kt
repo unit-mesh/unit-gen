@@ -1,9 +1,9 @@
 package cc.unitmesh.pick.builder.comment
 
 import cc.unitmesh.core.SupportedLang
-import cc.unitmesh.core.comment.CodeComment
+import cc.unitmesh.quality.documentation.CodeComment
 import cc.unitmesh.core.comment.CommentBuilder
-import cc.unitmesh.core.comment.DocInstruction
+import cc.unitmesh.core.comment.DocCommentInstruction
 import cc.unitmesh.core.comment.TypedCommentIns
 import cc.unitmesh.pick.builder.comment.ins.ClassCommentIns
 import cc.unitmesh.pick.builder.comment.ins.MethodCommentIns
@@ -11,7 +11,7 @@ import chapi.domain.core.CodeContainer
 
 private const val DOC_THRESHOLD = 5
 
-class JvmCommentBuilder(val language: SupportedLang, override val docInstruction: DocInstruction = DocInstruction.KOTLIN) :
+class JvmCommentBuilder(val language: SupportedLang, override val docCommentInstruction: DocCommentInstruction = DocCommentInstruction.KOTLIN) :
     CommentBuilder {
 
     /**
@@ -23,7 +23,7 @@ class JvmCommentBuilder(val language: SupportedLang, override val docInstruction
      */
     override fun build(code: String, container: CodeContainer): List<TypedCommentIns> {
         val posComments = try {
-            CodeComment.extractComments(code, language)
+            extractComments(code, language)
         } catch (e: Exception) {
             emptyList()
         }
@@ -39,13 +39,13 @@ class JvmCommentBuilder(val language: SupportedLang, override val docInstruction
 
         container.DataStructures.forEach { dataStruct ->
             val classComment = startLineCommentMap[dataStruct.Position.StartLine - 1]
-            classComment?.let { comments.add(ClassCommentIns(docInstruction, dataStruct, it, language = language.name)) }
+            classComment?.let { comments.add(ClassCommentIns(docCommentInstruction, dataStruct, it, language = language.name)) }
 
             val methodCommentIns =
                 dataStruct.Functions.filter { it.Name != "constructor" && it.Name != "PrimaryConstructor" }
                     .map { function ->
                         val functionComment = startLineCommentMap[function.Position.StartLine - 1] ?: return@map null
-                        MethodCommentIns(docInstruction, function, functionComment, dataStruct, language = language.name)
+                        MethodCommentIns(docCommentInstruction, function, functionComment, dataStruct, language = language.name)
                     }
 
             comments.addAll(methodCommentIns.filterNotNull())
@@ -54,3 +54,4 @@ class JvmCommentBuilder(val language: SupportedLang, override val docInstruction
         return comments
     }
 }
+

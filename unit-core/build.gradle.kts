@@ -6,6 +6,7 @@ plugins {
 
 dependencies {
     implementation(libs.clikt)
+    implementation(libs.clikt)
     implementation(libs.serialization.json)
 
     implementation(libs.chapi.domain)

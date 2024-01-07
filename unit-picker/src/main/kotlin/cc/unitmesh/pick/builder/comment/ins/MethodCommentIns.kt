@@ -1,9 +1,9 @@
 package cc.unitmesh.pick.builder.comment.ins
 
 import cc.unitmesh.core.Instruction
-import cc.unitmesh.core.comment.CodeComment
+import cc.unitmesh.quality.documentation.CodeComment
 import cc.unitmesh.core.comment.CommentBuilderType
-import cc.unitmesh.core.comment.DocInstruction
+import cc.unitmesh.core.comment.DocCommentInstruction
 import cc.unitmesh.core.comment.TypedCommentIns
 import cc.unitmesh.pick.ext.toUml
 import chapi.domain.core.CodeDataStruct
@@ -12,7 +12,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class MethodCommentIns(
-    val docInstruction: DocInstruction,
+    val docInstruction: DocCommentInstruction,
     val function: CodeFunction,
     val comment: CodeComment,
     val currentDataStruct: CodeDataStruct,
