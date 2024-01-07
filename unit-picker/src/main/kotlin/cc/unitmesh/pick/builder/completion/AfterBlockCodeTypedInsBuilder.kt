@@ -1,4 +1,4 @@
-package cc.unitmesh.pick.builder.bizcode
+package cc.unitmesh.pick.builder.completion
 
 import cc.unitmesh.core.completion.CodeCompletionIns
 import cc.unitmesh.core.completion.TypedInsBuilder

@@ -1,4 +1,4 @@
-package cc.unitmesh.pick.builder
+package cc.unitmesh.pick.builder.unittest
 
 import cc.unitmesh.core.completion.CodeCompletionIns
 import cc.unitmesh.core.completion.TypedInsBuilder

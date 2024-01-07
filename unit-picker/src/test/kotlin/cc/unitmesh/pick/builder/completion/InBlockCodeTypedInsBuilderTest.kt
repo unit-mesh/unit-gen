@@ -1,4 +1,4 @@
-package cc.unitmesh.pick.builder.bizcode;
+package cc.unitmesh.pick.builder.completion;
 
 import cc.unitmesh.pick.option.InsOutputConfig
 import cc.unitmesh.pick.worker.job.InstructionFileJob

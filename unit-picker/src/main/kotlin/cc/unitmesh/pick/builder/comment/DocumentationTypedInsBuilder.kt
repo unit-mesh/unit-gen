@@ -1,6 +1,5 @@
-package cc.unitmesh.pick.builder
+package cc.unitmesh.pick.builder.comment
 
-import cc.unitmesh.core.SupportedLang
 import cc.unitmesh.core.SupportedLang.*
 import cc.unitmesh.core.comment.DocInstruction
 import cc.unitmesh.core.completion.TypedIns

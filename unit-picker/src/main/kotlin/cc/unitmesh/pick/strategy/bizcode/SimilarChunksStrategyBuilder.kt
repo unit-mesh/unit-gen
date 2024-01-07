@@ -3,7 +3,7 @@ package cc.unitmesh.pick.strategy.bizcode
 import cc.unitmesh.core.SupportedLang
 import cc.unitmesh.core.completion.TypedIns
 import cc.unitmesh.core.intelli.SimilarChunker
-import cc.unitmesh.pick.builder.completionBuilders
+import cc.unitmesh.pick.builder.instructionBuilders
 import cc.unitmesh.pick.similar.JavaSimilarChunker
 import cc.unitmesh.pick.similar.TypeScriptSimilarChunker
 import cc.unitmesh.pick.strategy.base.CodeStrategyBuilder
@@ -48,7 +48,7 @@ class SimilarChunksStrategyBuilder(private val context: JobContext) : CodeStrate
             SupportedLang.RUST -> TODO()
         }
 
-        val builders = completionBuilders(context.instructionBuilderTypes, context)
+        val builders = instructionBuilders(context.instructionBuilderTypes, context)
         val containerIns = builders.asSequence().map {
             it.build(container)
         }.flatten()
