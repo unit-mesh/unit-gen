@@ -15,7 +15,7 @@ data class CodeComment(
          * @param content the comment content to be re-indented
          * @return the re-indented comment content
          */
-        private fun reIndentComment(content: String): String {
+        fun reIndentComment(content: String): String {
             val lines = content.split("\n")
             val indent = lines[1].takeWhile { it == ' ' }
             val linesWithoutIndent = lines.map { it.removePrefix(indent) }
