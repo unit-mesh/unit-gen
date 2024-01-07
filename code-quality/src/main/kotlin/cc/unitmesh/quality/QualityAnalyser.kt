@@ -1,7 +1,6 @@
 package cc.unitmesh.quality
 
 import cc.unitmesh.quality.badsmell.BadsmellAnalyser
-import cc.unitmesh.quality.documentation.DocCommentAnalyser
 import cc.unitmesh.quality.extension.JavaServiceAnalyser
 import cc.unitmesh.quality.extension.JavaRepositoryAnalyser
 import cc.unitmesh.quality.extension.JavaControllerAnalyser

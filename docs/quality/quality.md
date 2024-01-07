@@ -8,10 +8,6 @@ permalink: /quality
 
 # Quality
 
-Overflow:
-
-![Code Quality Workflow](https://unitmesh.cc/uniteval/code-quality-workflow.png)
-
 ## QualityAnalyser
 
 ```kotlin
