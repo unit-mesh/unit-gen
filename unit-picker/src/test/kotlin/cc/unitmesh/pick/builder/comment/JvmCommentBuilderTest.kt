@@ -37,7 +37,7 @@ class Group<T>(val name: String) {
     @Test
     fun `should extract KDoc comments when valid code provided`() {
         // When
-        val result = CodeComment.extractKdocComments(kotlinCode, SupportedLang.KOTLIN)
+        val result = CodeComment.extractComments(kotlinCode, SupportedLang.KOTLIN)
 
         // Then
         result.size shouldBe 3

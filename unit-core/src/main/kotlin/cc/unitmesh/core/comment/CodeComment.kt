@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class CodeComment(
     val content: String,
-    val position: CodePosition
+    val position: CodePosition,
 ) {
     companion object {
         /**
@@ -34,12 +34,23 @@ data class CodeComment(
         }
 
         /**
-         * Extracts the Kotlin documentation comments (KDoc) from the given code.
+         * Extracts the documentation comments (KDoc) from the given code.
          *
          * @param code the Kotlin code from which to extract the KDoc comments
          * @return a list of pairs, where each pair contains the line number and the extracted KDoc comment
          */
-        fun extractKdocComments(code: String, language: SupportedLang): List<CodeComment> {
+        fun extractComments(code: String, language: SupportedLang): List<CodeComment> {
+            return when (language) {
+                SupportedLang.KOTLIN -> extractKotlinComment(code)
+                SupportedLang.JAVA -> extractKotlinComment(code)
+                else -> {
+                    println("Unsupported language: $language")
+                    emptyList()
+                }
+            }
+        }
+
+        private fun extractKotlinComment(code: String): List<CodeComment> {
             val pattern = Regex("""/\*\*[^*]*\*+([^/*][^*]*\*+)*/""")
 
             val matches = pattern.findAll(code)
@@ -52,7 +63,7 @@ data class CodeComment(
                 val stopLinePosition = match.range.last - code.lastIndexOf('\n', match.range.last) - 1
 
                 val position = CodePosition(startLine, startLinePosition, stopLine, stopLinePosition)
-                val content = Companion.reIndentComment(commentContent)
+                val content = reIndentComment(commentContent)
 
                 CodeComment(content, position)
             }.toList()

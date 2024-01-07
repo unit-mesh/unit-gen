@@ -23,10 +23,12 @@ class JvmCommentBuilder(val language: SupportedLang, override val docInstruction
      */
     override fun build(code: String, container: CodeContainer): List<TypedCommentIns> {
         val posComments = try {
-            CodeComment.extractKdocComments(code, language)
+            CodeComment.extractComments(code, language)
         } catch (e: Exception) {
             emptyList()
         }
+
+        if (posComments.isEmpty()) return emptyList()
 
         val startLineCommentMap: Map<Int, CodeComment> =
             posComments.filter { it.content.isNotBlank() && it.content.length >= DOC_THRESHOLD }.associateBy {
