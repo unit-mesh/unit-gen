@@ -5,6 +5,8 @@ import kotlinx.serialization.Serializable
 import org.archguard.scanner.analyser.count.FileJob
 import java.util.regex.Pattern
 
+typealias FileSummary = FileJob
+
 @Serializable
 class InstructionFileJob(
     var fileSummary: FileJob,
