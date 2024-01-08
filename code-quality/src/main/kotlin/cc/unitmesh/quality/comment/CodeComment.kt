@@ -3,6 +3,12 @@ package cc.unitmesh.quality.comment
 import chapi.domain.core.CodePosition
 import kotlinx.serialization.Serializable
 
+
+/**
+ * a doc must have at least 3 lines, start with /** and end with */, and have at least one line of content
+ */
+const val DOC_THRESHOLD = 3
+
 @Serializable
 data class CodeComment(
     val content: String,
@@ -32,6 +38,12 @@ data class CodeComment(
             return linesWithLeadingSpace.joinToString("\n")
         }
 
+        /**
+         * Extracts Kotlin comments from the given code and returns a list of [CodeComment] objects.
+         *
+         * @param code The Kotlin code from which to extract comments.
+         * @return A list of [CodeComment] objects representing the extracted comments.
+         */
         fun extractKotlinComment(code: String): List<CodeComment> {
             val pattern = Regex("""/\*\*[^*]*\*+([^/*][^*]*\*+)*/""")
 
@@ -49,6 +61,23 @@ data class CodeComment(
 
                 CodeComment(content, position)
             }.toList()
+        }
+
+        /**
+         * Returns a map of line numbers to code comments.
+         *
+         * This method takes a list of `CodeComment` objects and filters out any comments that are blank or have a length less than the `DOC_THRESHOLD` constant. It then associates each comment with its corresponding stop line number in the source code, resulting in a map where the keys are line numbers and the values are the associated comments.
+         *
+         * @param posComments the list of `CodeComment` objects to process
+         * @return a map of line numbers to code comments
+         */
+        fun lineCommentMap(posComments: List<CodeComment>): Map<Int, CodeComment> {
+            val startLineCommentMap: Map<Int, CodeComment> =
+                posComments.filter { it.content.isNotBlank() && it.content.length >= DOC_THRESHOLD }.associateBy {
+                    it.position.StopLine
+                }
+
+            return startLineCommentMap
         }
     }
 }
