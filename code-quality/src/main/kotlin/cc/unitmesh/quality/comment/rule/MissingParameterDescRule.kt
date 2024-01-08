@@ -35,7 +35,7 @@ class MissingParameterDescRule : CommentRule() {
         }
 
         val matchNames = matches.map { it.groupValues[1] }.toSet()
-        val nodeNames = node.Parameters.map { it.TypeType }.toSet()
+        val nodeNames = node.Parameters.map { it.TypeValue }.toSet()
 
         if (matchNames != nodeNames) {
             callback(this, IssuePosition())
