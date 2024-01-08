@@ -1,4 +1,4 @@
-package cc.unitmesh.quality.documentation
+package cc.unitmesh.quality.comment
 
 import chapi.domain.core.CodePosition
 import org.junit.jupiter.api.Assertions.assertEquals

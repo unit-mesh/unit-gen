@@ -1,4 +1,4 @@
-package cc.unitmesh.quality.documentation.rule
+package cc.unitmesh.quality.comment.rule
 
 /**
  * Parse the documentation of the code and check whether the documentation is complete.
@@ -17,6 +17,6 @@ package cc.unitmesh.quality.documentation.rule
  *
  * We can use this rule to check whether the documentation is complete.
  */
-class MissingParameterDescRule: DocRule() {
+class MissingParameterDescRule: CommentRule() {
 
 }

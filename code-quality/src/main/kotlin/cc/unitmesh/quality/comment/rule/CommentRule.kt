@@ -1,4 +1,4 @@
-package cc.unitmesh.quality.documentation.rule
+package cc.unitmesh.quality.comment.rule
 
 import chapi.domain.core.CodeDataStruct
 import chapi.domain.core.CodeFunction
@@ -6,7 +6,7 @@ import org.archguard.rule.core.IssueEmit
 import org.archguard.rule.core.Rule
 import org.archguard.rule.core.RuleContext
 
-open class DocRule : Rule() {
+open class CommentRule : Rule() {
     override fun visit(rootNode: Any, context: RuleContext, callback: IssueEmit) {
 
     }

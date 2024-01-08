@@ -1,7 +1,7 @@
 package cc.unitmesh.pick.builder.comment
 
 import cc.unitmesh.core.SupportedLang
-import cc.unitmesh.quality.documentation.CodeComment
+import cc.unitmesh.quality.comment.CodeComment
 
 /**
  * Extracts the documentation comments (KDoc) from the given code.

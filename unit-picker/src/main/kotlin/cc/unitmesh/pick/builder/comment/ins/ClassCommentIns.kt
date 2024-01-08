@@ -1,7 +1,7 @@
 package cc.unitmesh.pick.builder.comment.ins
 
 import cc.unitmesh.core.Instruction
-import cc.unitmesh.quality.documentation.CodeComment
+import cc.unitmesh.quality.comment.CodeComment
 import cc.unitmesh.core.comment.CommentBuilderType
 import cc.unitmesh.core.comment.DocCommentInstruction
 import cc.unitmesh.core.comment.TypedCommentIns
