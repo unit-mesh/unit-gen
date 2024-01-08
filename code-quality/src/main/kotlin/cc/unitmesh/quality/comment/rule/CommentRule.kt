@@ -7,11 +7,11 @@ import org.archguard.rule.core.Rule
 import org.archguard.rule.core.RuleContext
 
 open class CommentRule : Rule() {
-    fun visitRoot(node: CodeDataStruct, comment: String, context: RuleContext, callback: IssueEmit) {
+    open fun visitRoot(node: CodeDataStruct, comment: String, context: RuleContext, callback: IssueEmit) {
 
     }
 
-    fun visitFunction(node: CodeFunction, comment: String, context: RuleContext, callback: IssueEmit) {
+    open fun visitFunction(node: CodeFunction, comment: String, context: RuleContext, callback: IssueEmit) {
 
     }
 }

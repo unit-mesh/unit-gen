@@ -1,5 +1,7 @@
-<h1 align="center">UnitGen - Code Fine-tuning Data Framework</h1>
-
+<h1 align="center">UnitGen</h1>
+<p align="center">
+  <img src="docs/logo.svg" width="100" height="100" alt="Chapi Logo">
+</p>
 <p align="center">
   <a href="https://github.com/unit-mesh/unit-gen/actions/workflows/build.yml">
     <img src="https://github.com/unit-mesh/unit-gen/actions/workflows/build.yml/badge.svg" alt="CI/CD" />
