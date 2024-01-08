@@ -5,13 +5,26 @@ import cc.unitmesh.quality.extension.JavaServiceAnalyser
 import cc.unitmesh.quality.extension.JavaRepositoryAnalyser
 import cc.unitmesh.quality.extension.JavaControllerAnalyser
 import cc.unitmesh.quality.testbadsmell.TestBadsmellAnalyser
+import chapi.domain.core.CodeContainer
 
 import chapi.domain.core.CodeDataStruct
 import org.archguard.rule.core.Issue
 
 interface QualityAnalyser {
+
     /**
-     * Normal analysis, like [CodeQualityType.BadSmell], [CodeQualityType.TestBadSmell], etc.
+     * For [CodeQualityType.DocComment], we need to analysis the whole container which contains comments.
+     */
+    fun analysis(container: CodeContainer): List<Issue> {
+        return listOf()
+    }
+
+    /**
+     * Normal analysis, we only need to analysis the given nodes.
+     *
+     * - [CodeQualityType.BadSmell], [CodeQualityType.TestBadSmell]
+     * - [CodeQualityType.JavaController], [CodeQualityType.JavaRepository], [CodeQualityType.JavaService]
+     *
      */
     fun analysis(nodes: List<CodeDataStruct>): List<Issue>
 
