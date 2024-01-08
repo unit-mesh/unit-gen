@@ -7,8 +7,9 @@ class Pipeline<T> {
 
     private val filters = mutableListOf<Filter<T>>()
 
-    fun addFilter(filter: Filter<T>) {
+    fun addFilter(filter: Filter<T>): Pipeline<T> {
         filters.add(filter)
+        return this
     }
 
     fun process(data: T): Boolean {
@@ -16,7 +17,7 @@ class Pipeline<T> {
             val result = it.filter(data)
             if (!result.result) {
                 if (result.isCritical) {
-                    logger.info("not met filter: ${it.javaClass.simpleName}, reason: ${result.reason}")
+                    logger.warn("not met filter: ${it.javaClass.simpleName}, reason: ${result.reason}")
                 }
             }
 

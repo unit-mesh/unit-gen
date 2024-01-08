@@ -61,17 +61,17 @@ data class InsPickerOption(
      */
     val codeStrategyTypes: List<CodeStrategyType> = listOf(
         CodeStrategyType.RELATED_CODE,
-        CodeStrategyType.SIMILAR_CHUNKS,
+//        CodeStrategyType.SIMILAR_CHUNKS,
     ),
     /**
      * The [InstructionBuilderType], which will according you IDE strategy to generate the type.
      */
     val instructionTypes: List<InstructionBuilderType> = listOf(
         InstructionBuilderType.AFTER_BLOCK_COMPLETION,
-        InstructionBuilderType.IN_BLOCK_COMPLETION,
-        InstructionBuilderType.INLINE_COMPLETION,
-        InstructionBuilderType.TEST_CODE_GEN,
-        InstructionBuilderType.DOCUMENTATION,
+//        InstructionBuilderType.IN_BLOCK_COMPLETION,
+//        InstructionBuilderType.INLINE_COMPLETION,
+//        InstructionBuilderType.TEST_CODE_GEN,
+//        InstructionBuilderType.DOCUMENTATION,
     ),
     /**
      * The [CodeQualityType], will be like a tree to hold the item.
