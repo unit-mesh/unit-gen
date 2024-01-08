@@ -15,18 +15,20 @@ class CommentRuleVisitor(val comments: List<CodeComment>, val container: CodeCon
             ruleSets.forEach { ruleSet ->
                 ruleSet.rules.forEach { rule ->
                     val apiRule = rule as CommentRule
-                    val classComment = lineCommentMap[struct.Position.StartLine - 1] ?: return@forEach
-                    apiRule.visitRoot(struct, classComment, context, fun(rule: Rule, position: IssuePosition) {
-                        results += Issue(
-                            position,
-                            ruleId = rule.key,
-                            name = rule.name,
-                            detail = rule.description,
-                            ruleType = RuleType.CODE_SMELL,
-                            fullName = "${struct.Module}:${struct.Package}:${struct.NodeName}",
-                            source = struct.FilePath
-                        )
-                    })
+                    val classComment = lineCommentMap[struct.Position.StartLine - 1]
+                    if (classComment != null) {
+                        apiRule.visitRoot(struct, classComment, context, fun(rule: Rule, position: IssuePosition) {
+                            results += Issue(
+                                position,
+                                ruleId = rule.key,
+                                name = rule.name,
+                                detail = rule.description,
+                                ruleType = RuleType.CODE_SMELL,
+                                fullName = "${struct.Module}:${struct.Package}:${struct.NodeName}",
+                                source = struct.FilePath
+                            )
+                        })
+                    }
 
                     struct.Functions.forEach { method ->
                         val methodComment = lineCommentMap[method.Position.StartLine - 1] ?: return@forEach
