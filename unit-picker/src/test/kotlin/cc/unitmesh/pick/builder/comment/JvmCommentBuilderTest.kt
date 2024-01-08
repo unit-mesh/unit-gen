@@ -1,6 +1,7 @@
 package cc.unitmesh.pick.builder.comment
 
 import cc.unitmesh.core.SupportedLang
+import cc.unitmesh.core.comment.DocCommentToolType
 import chapi.ast.kotlinast.KotlinAnalyser
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
@@ -65,7 +66,7 @@ class Group<T>(val name: String) {
         val codeContainer = KotlinAnalyser().analysis(kotlinCode, "test.kt")
 
         // When
-        val result = JvmCommentBuilder(SupportedLang.KOTLIN).build(kotlinCode, codeContainer)
+        val result = JvmCommentBuilder(SupportedLang.KOTLIN, DocCommentToolType.KOTLIN).build(kotlinCode, codeContainer)
 
         // Then
         result.size shouldBe 3
