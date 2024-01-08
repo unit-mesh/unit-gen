@@ -1,8 +1,8 @@
 package cc.unitmesh.pick.threshold.filter
 
 import cc.unitmesh.core.SupportedLang
-import cc.unitmesh.pick.threshold.Filter
-import cc.unitmesh.pick.threshold.FilterResult
+import cc.unitmesh.pick.threshold.pipeline.Filter
+import cc.unitmesh.pick.threshold.pipeline.FilterResult
 import cc.unitmesh.pick.threshold.InsQualityThreshold
 import cc.unitmesh.pick.worker.job.FileSummary
 import org.archguard.scanner.analyser.count.LanguageService

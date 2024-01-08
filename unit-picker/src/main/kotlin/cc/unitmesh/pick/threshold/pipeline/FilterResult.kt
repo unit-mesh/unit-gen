@@ -1,4 +1,4 @@
-package cc.unitmesh.pick.threshold
+package cc.unitmesh.pick.threshold.pipeline
 
 import kotlinx.serialization.Serializable
 
@@ -8,7 +8,3 @@ data class FilterResult(
     val reason: String = "",
     val isCritical: Boolean = false,
 )
-
-interface Filter<T> {
-    fun filter(data: T): FilterResult
-}

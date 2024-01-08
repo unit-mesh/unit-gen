@@ -1,5 +1,6 @@
-package cc.unitmesh.pick.threshold
+package cc.unitmesh.pick.threshold.pipeline
 
+import cc.unitmesh.pick.threshold.ThresholdChecker
 import org.slf4j.Logger
 
 class Pipeline<T> {

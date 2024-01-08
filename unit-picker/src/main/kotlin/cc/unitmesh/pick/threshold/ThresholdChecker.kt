@@ -2,6 +2,7 @@ package cc.unitmesh.pick.threshold
 
 import cc.unitmesh.core.Instruction
 import cc.unitmesh.pick.threshold.filter.*
+import cc.unitmesh.pick.threshold.pipeline.Pipeline
 import cc.unitmesh.pick.worker.WorkerContext
 import cc.unitmesh.pick.worker.job.FileSummary
 import cc.unitmesh.pick.worker.job.InstructionFileJob
