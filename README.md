@@ -1,6 +1,6 @@
 <h1 align="center">UnitGen</h1>
 <p align="center">
-  <img src="docs/logo.svg" width="100" height="100" alt="Chapi Logo">
+  <img src="docs/logo.svg" width="160px" height="160px" alt="UnitGen Logo">
 </p>
 <p align="center">
   <a href="https://github.com/unit-mesh/unit-gen/actions/workflows/build.yml">

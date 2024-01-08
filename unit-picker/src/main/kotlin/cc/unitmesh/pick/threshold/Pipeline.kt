@@ -14,10 +14,13 @@ class Pipeline<T> {
     fun process(data: T): Boolean {
         return filters.all {
             val result = it.filter(data)
-            if (!result) {
-                logger.info("not met filter: ${it.javaClass.simpleName}")
+            if (!result.result) {
+                if (result.isCritical) {
+                    logger.info("not met filter: ${it.javaClass.simpleName}, reason: ${result.reason}")
+                }
             }
-            result
+
+            result.result
         }
     }
 }

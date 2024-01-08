@@ -67,26 +67,31 @@ class ExtensionFilter(private val qualityThreshold: InsQualityThreshold) : Filte
         language.getExtension(it.extension)
     }.toSet()
 
-    override fun filter(data: FileSummary): Boolean {
-        return supportedExtensions.contains(data.extension)
+    override fun filter(data: FileSummary): FilterResult {
+        val ext = data.extension
+        return FilterResult(supportedExtensions.contains(ext), "extension not supported: $ext")
     }
 }
 
 class ComplexityFilter(private val qualityThreshold: InsQualityThreshold) : Filter<FileSummary> {
-    override fun filter(data: FileSummary): Boolean {
-        return data.complexity <= qualityThreshold.complexity
+    override fun filter(data: FileSummary): FilterResult {
+        return FilterResult(
+            data.complexity <= qualityThreshold.complexity,
+            "complexity too high: ${data.complexity}",
+            true
+        )
     }
 }
 
 class BinaryGeneratedMinifiedFilter(qualityThreshold: InsQualityThreshold) : Filter<FileSummary> {
-    override fun filter(data: FileSummary): Boolean {
-        return !(data.binary || data.generated || data.minified)
+    override fun filter(data: FileSummary): FilterResult {
+        return FilterResult(!(data.binary || data.generated || data.minified), "binary or generated or minified", true)
     }
 }
 
 class SizeFilter(private val qualityThreshold: InsQualityThreshold) : Filter<FileSummary> {
-    override fun filter(data: FileSummary): Boolean {
-        return data.bytes <= qualityThreshold.fileSize
+    override fun filter(data: FileSummary): FilterResult {
+        return FilterResult(data.bytes <= qualityThreshold.fileSize, "file size too large: ${data.bytes}", true)
     }
 }
 
@@ -94,10 +99,14 @@ class TokenLengthFilter(private val qualityThreshold: InsQualityThreshold) : Fil
     private var registry: EncodingRegistry = Encodings.newDefaultEncodingRegistry()
     private var enc: Encoding = registry.getEncoding(EncodingType.CL100K_BASE)
 
-    override fun filter(data: FileSummary): Boolean {
+    override fun filter(data: FileSummary): FilterResult {
         val encoded = enc.encode(data.content.toString())
         val length = encoded.size
         val codeWithBuffer = 1.25
-        return length <= qualityThreshold.maxTokenLength * codeWithBuffer
+        return FilterResult(
+            length <= qualityThreshold.maxTokenLength * codeWithBuffer,
+            "token length too long: $length",
+            true
+        )
     }
 }
