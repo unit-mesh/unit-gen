@@ -8,7 +8,7 @@ import cc.unitmesh.pick.worker.job.JobContext
 import chapi.domain.core.CodeContainer
 
 class DocumentationTypedInsBuilder(val context: JobContext) : TypedInsBuilder {
-    private val kotlinCommentBuilder = JvmCommentBuilder(SupportedLang.KOTLIN)
+    private val kotlinCommentBuilder = JvmCommentBuilder(SupportedLang.KOTLIN, DocCommentToolType.KOTLIN)
     private val javaCommentBuilder = JvmCommentBuilder(SupportedLang.JAVA, DocCommentToolType.JAVA)
 
     override fun build(container: CodeContainer): List<TypedIns> {
