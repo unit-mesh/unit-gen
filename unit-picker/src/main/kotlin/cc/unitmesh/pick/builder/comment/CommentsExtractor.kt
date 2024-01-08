@@ -11,8 +11,8 @@ import cc.unitmesh.quality.comment.CodeComment
  */
 fun extractComments(code: String, language: SupportedLang): List<CodeComment> {
     return when (language) {
-        SupportedLang.KOTLIN -> CodeComment.extractKotlinComment(code)
-        SupportedLang.JAVA -> CodeComment.extractKotlinComment(code)
+        SupportedLang.KOTLIN -> CodeComment.parseComment(code)
+        SupportedLang.JAVA -> CodeComment.parseComment(code)
         else -> {
             println("Unsupported language: $language")
             emptyList()

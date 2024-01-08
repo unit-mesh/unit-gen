@@ -1,5 +1,6 @@
 package cc.unitmesh.quality.comment.rule
 
+import cc.unitmesh.quality.comment.CodeComment
 import chapi.domain.core.CodeFunction
 import org.archguard.rule.core.IssueEmit
 import org.archguard.rule.core.IssuePosition
@@ -25,8 +26,8 @@ import org.archguard.rule.core.RuleContext
 class MissingParameterDescRule : CommentRule() {
     private val pattern = Regex("""@param\s+(\w+)\s+([^@]+)""")
 
-    override fun visitFunction(node: CodeFunction, comment: String, context: RuleContext, callback: IssueEmit) {
-        val matches = pattern.findAll(comment)
+    override fun visitFunction(node: CodeFunction, comment: CodeComment, context: RuleContext, callback: IssueEmit) {
+        val matches = pattern.findAll(comment.content)
 
         val nodeSize = node.Parameters.size
 

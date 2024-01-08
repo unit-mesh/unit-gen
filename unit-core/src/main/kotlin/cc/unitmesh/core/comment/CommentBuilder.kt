@@ -22,10 +22,10 @@ import chapi.domain.core.CodeContainer
  *
  * @see CodeContainer
  * @see TypedIns
- * @see DocCommentInstruction
+ * @see DocCommentToolType
  */
 interface CommentBuilder {
     /// for generate instruction
-    val docCommentInstruction: DocCommentInstruction
+    val docCommentToolType: DocCommentToolType
     fun build(code: String, container: CodeContainer): List<TypedIns>
 }

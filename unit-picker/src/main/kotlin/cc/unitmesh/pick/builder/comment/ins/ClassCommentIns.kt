@@ -3,14 +3,14 @@ package cc.unitmesh.pick.builder.comment.ins
 import cc.unitmesh.core.Instruction
 import cc.unitmesh.quality.comment.CodeComment
 import cc.unitmesh.core.comment.CommentBuilderType
-import cc.unitmesh.core.comment.DocCommentInstruction
+import cc.unitmesh.core.comment.DocCommentToolType
 import cc.unitmesh.core.comment.TypedCommentIns
 import chapi.domain.core.CodeDataStruct
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class ClassCommentIns(
-    val docInstruction: DocCommentInstruction,
+    val docInstruction: DocCommentToolType,
     val dataStructure: CodeDataStruct,
     val comment: CodeComment,
     val language: String,

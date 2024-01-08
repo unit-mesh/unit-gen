@@ -3,16 +3,15 @@ package cc.unitmesh.pick.builder.comment
 import cc.unitmesh.core.SupportedLang
 import cc.unitmesh.quality.comment.CodeComment
 import cc.unitmesh.core.comment.CommentBuilder
-import cc.unitmesh.core.comment.DocCommentInstruction
+import cc.unitmesh.core.comment.DocCommentToolType
 import cc.unitmesh.core.comment.TypedCommentIns
 import cc.unitmesh.pick.builder.comment.ins.ClassCommentIns
 import cc.unitmesh.pick.builder.comment.ins.MethodCommentIns
-import cc.unitmesh.quality.comment.DOC_THRESHOLD
 import chapi.domain.core.CodeContainer
 
 class JvmCommentBuilder(
     val language: SupportedLang,
-    override val docCommentInstruction: DocCommentInstruction = DocCommentInstruction.KOTLIN,
+    override val docCommentToolType: DocCommentToolType,
 ) :
     CommentBuilder {
 
@@ -38,14 +37,8 @@ class JvmCommentBuilder(
         container.DataStructures.forEach { dataStruct ->
             val classComment = startLineCommentMap[dataStruct.Position.StartLine - 1]
             classComment?.let {
-                comments.add(
-                    ClassCommentIns(
-                        docCommentInstruction,
-                        dataStruct,
-                        it,
-                        language = language.name
-                    )
-                )
+                val commentIns = ClassCommentIns(docCommentToolType, dataStruct, it, language = language.name)
+                comments.add(commentIns)
             }
 
             val methodCommentIns =
@@ -53,11 +46,7 @@ class JvmCommentBuilder(
                     .map { function ->
                         val functionComment = startLineCommentMap[function.Position.StartLine - 1] ?: return@map null
                         MethodCommentIns(
-                            docCommentInstruction,
-                            function,
-                            functionComment,
-                            dataStruct,
-                            language = language.name
+                            docCommentToolType, function, functionComment, dataStruct, language = language.name
                         )
                     }
 

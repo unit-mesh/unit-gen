@@ -44,7 +44,7 @@ data class CodeComment(
          * @param code The Kotlin code from which to extract comments.
          * @return A list of [CodeComment] objects representing the extracted comments.
          */
-        fun extractKotlinComment(code: String): List<CodeComment> {
+        fun parseComment(code: String): List<CodeComment> {
             val pattern = Regex("""/\*\*[^*]*\*+([^/*][^*]*\*+)*/""")
 
             val matches = pattern.findAll(code)
@@ -78,6 +78,12 @@ data class CodeComment(
                 }
 
             return startLineCommentMap
+        }
+
+        fun fromCode(content: String): MutableMap<Int, CodeComment> {
+            val comments = parseComment(content)
+            val startLineCommentMap = lineCommentMap(comments)
+            return startLineCommentMap.toMutableMap()
         }
     }
 }

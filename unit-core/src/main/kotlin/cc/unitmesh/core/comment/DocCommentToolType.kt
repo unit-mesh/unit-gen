@@ -1,6 +1,6 @@
 package cc.unitmesh.core.comment
 
-enum class DocCommentInstruction(val value: String) {
+enum class DocCommentToolType(val value: String) {
     CPP("doxygen"),
     JAVA("javadoc"),
     JAVASCRIPT("JSDoc"),

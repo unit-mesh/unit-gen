@@ -1,6 +1,7 @@
 package cc.unitmesh.quality
 
 import cc.unitmesh.quality.badsmell.BadsmellAnalyser
+import cc.unitmesh.quality.comment.CommentAnalyser
 import cc.unitmesh.quality.extension.JavaServiceAnalyser
 import cc.unitmesh.quality.extension.JavaRepositoryAnalyser
 import cc.unitmesh.quality.extension.JavaControllerAnalyser
@@ -44,7 +45,7 @@ interface QualityAnalyser {
                     CodeQualityType.JavaController -> JavaControllerAnalyser(thresholds)
                     CodeQualityType.JavaRepository -> JavaRepositoryAnalyser(thresholds)
                     CodeQualityType.JavaService -> JavaServiceAnalyser(thresholds)
-                    CodeQualityType.DocComment -> return emptyList()
+                    CodeQualityType.DocComment -> CommentAnalyser(thresholds)
                 }
             }
         }

@@ -1,5 +1,6 @@
 package cc.unitmesh.quality.comment.rule;
 
+import cc.unitmesh.quality.comment.CodeComment
 import chapi.domain.core.CodeFunction
 import chapi.domain.core.CodeProperty
 import org.archguard.rule.core.IssueEmit
@@ -31,7 +32,8 @@ class MissingParameterDescRuleTest {
         val callback = IssueEmitCallback()
 
         // When
-        rule.visitFunction(function, comment, context, callback)
+        val parseComment = CodeComment.parseComment(comment)[0]
+        rule.visitFunction(function, parseComment, context, callback)
 
         // Then
         assertFalse(callback.hasIssue())
@@ -54,7 +56,8 @@ class MissingParameterDescRuleTest {
         val callback = IssueEmitCallback()
 
         // When
-        rule.visitFunction(function, comment, context, callback)
+        val parseComment = CodeComment.parseComment(comment)[0]
+        rule.visitFunction(function, parseComment, context, callback)
 
         // Then
         assertTrue(callback.hasIssue())
@@ -78,7 +81,8 @@ class MissingParameterDescRuleTest {
         val callback = IssueEmitCallback()
 
         // When
-        rule.visitFunction(function, comment, context, callback)
+        val parseComment = CodeComment.parseComment(comment)[0]
+        rule.visitFunction(function, parseComment, context, callback)
 
         // Then
         assertTrue(callback.hasIssue())

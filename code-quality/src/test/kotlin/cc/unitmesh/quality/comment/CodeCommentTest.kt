@@ -42,7 +42,7 @@ class CodeCommentTest {
         """.trimMargin()
 
         // When
-        val extractedComments = CodeComment.extractKotlinComment(code)
+        val extractedComments = CodeComment.parseComment(code)
 
         // Then
         val expectedComment = CodeComment(
