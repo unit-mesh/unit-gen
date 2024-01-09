@@ -46,7 +46,7 @@ class TestFrameworkIdentifier(val language: SupportedLang, private val dependenc
             SupportedLang.JAVA -> JavaFrameworkIdentifier(dependencies).testFramework()
             SupportedLang.KOTLIN -> JavaFrameworkIdentifier(dependencies).testFramework()
             SupportedLang.TYPESCRIPT -> TypescriptFrameworkIdentifier(dependencies).testFramework()
-            SupportedLang.RUST -> TODO()
+            SupportedLang.RUST -> listOf()
         }
     }
 }

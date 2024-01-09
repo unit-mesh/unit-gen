@@ -65,6 +65,8 @@ archguard-rule-core = { group = "org.archguard.scanner", name = "rule-core", ver
 archguard-rule-sql = { group = "org.archguard.scanner", name = "rule-sql", version.ref = "archguard" }
 archguard-rule-webapi = { group = "org.archguard.scanner", name = "rule-webapi", version.ref = "archguard" }
 archguard-rule-test = { group = "org.archguard.scanner", name = "rule-test", version.ref = "archguard" }
+archguard-rule-comment = { group = "org.archguard.scanner", name = "rule-comment", version.ref = "archguard" }
+
 
 archguard-feat-apicalls = { group = "org.archguard.scanner", name = "feat_apicalls", version.ref = "archguard" }
 # feat_datamap
