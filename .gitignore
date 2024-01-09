@@ -45,3 +45,4 @@ datasets
 prompt-log-*.txt
 prompt-evaluate-*.txt
 processor.yml
+recording.jsonl

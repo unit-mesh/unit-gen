@@ -2,7 +2,17 @@ package cc.unitmesh.pick.project.frameworks
 
 import org.archguard.scanner.core.sca.CompositionDependency
 
+/**
+ * The `JavaFrameworkIdentifier` class is a Kotlin implementation of the `LangFrameworkIdentifier` interface.
+ * It is responsible for identifying the test frameworks used in a Java project based on the project's dependencies.
+ *
+ * @param dependencies A list of `CompositionDependency` objects representing the project's dependencies.
+ */
 class JavaFrameworkIdentifier(private val dependencies: List<CompositionDependency>) : LangFrameworkIdentifier {
+
+    /**
+     * A map that associates Java test framework dependencies with their corresponding test framework names.
+     */
     private val javaTestFrameworkMap: Map<String, List<String>> = mapOf(
         "junit:junit" to listOf("JUnit"),
         "org.testng:testng" to listOf("testng"),
@@ -23,13 +33,21 @@ class JavaFrameworkIdentifier(private val dependencies: List<CompositionDependen
         "org.powermock:powermock-core" to listOf("powermock"),
         "io.mockk:mockk" to listOf("mockk"),
         "com.github.tomakehurst:wiremock" to listOf("wiremock"),
-        // based on https://central.sonatype.com/artifact/org.springframework.boot/spring-boot-starter-test/dependencies
         "org.springframework.boot:spring-boot-starter-test" to listOf(
             "Spring Boot Test", "Spring Test"
         )
     )
+
+    /**
+     * A list of Java framework dependencies.
+     */
     private val javaFrameworkList = javaTestFrameworkMap.keys.toList()
 
+    /**
+     * Returns a list of test frameworks used in the Java project.
+     *
+     * @return A list of test framework names.
+     */
     override fun testFramework(): List<String> {
         val testFrameworks = mutableListOf<String>()
 
