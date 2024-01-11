@@ -1,7 +1,7 @@
-<h1 align="center">UnitGen</h1>
 <p align="center">
   <img src="docs/logo.svg" width="160px" height="160px" alt="UnitGen Logo">
 </p>
+<h1 align="center">UnitGen</h1>
 <p align="center">
   <a href="https://github.com/unit-mesh/unit-gen/actions/workflows/build.yml">
     <img src="https://github.com/unit-mesh/unit-gen/actions/workflows/build.yml/badge.svg" alt="CI/CD" />
