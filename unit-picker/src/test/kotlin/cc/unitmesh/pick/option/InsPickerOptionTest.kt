@@ -16,7 +16,7 @@ class InsPickerOptionTest {
         ).pureDataFileName()
 
         // Then
-        assertEquals("datasets/https___github.com_functionaljava_functionaljava_series_5.x_java.jsonl.jsonl", result)
+        assertEquals("datasets/https___github.com_functionaljava_functionaljava_series_5.x_java.jsonl", result)
     }
 
     @Test
@@ -33,7 +33,7 @@ class InsPickerOptionTest {
         val result = insPickerOption.repoFileName()
 
         // Then
-        assertEquals("https___github.com_example_repo.git_main_java.jsonl", result)
+        assertEquals("https___github.com_example_repo.git_main_java", result)
     }
 
     @Test
