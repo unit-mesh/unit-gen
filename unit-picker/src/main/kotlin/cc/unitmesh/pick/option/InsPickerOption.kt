@@ -114,7 +114,7 @@ data class InsPickerOption(
         return baseDir + File.separator + repoFileName() + ".jsonl"
     }
 
-    fun repoFileName() = "${encodeFileName(url)}_${encodeFileName(branch)}_${language}.jsonl"
+    fun repoFileName() = "${encodeFileName(url)}_${encodeFileName(branch)}_${language}"
 
     /**
      * Encodes a given string to be used as a file name by replacing characters that are not allowed in file names.
